@@ -1,6 +1,4 @@
 import 'package:afeco/app/ui/global_widgets/custom_card_item.dart';
-import 'package:afeco/app/ui/global_widgets/custom_input.dart';
-import 'package:afeco/app/ui/global_widgets/custom_select_item.dart';
 import 'package:afeco/app/ui/global_widgets/header_custom.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
 import 'package:flutter/material.dart';

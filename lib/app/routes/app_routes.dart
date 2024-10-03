@@ -6,5 +6,5 @@
   static const LANDING = '/landing';
   static const SAVE_FOOD_FORM = '/save-food-form';
   static const TANKING = '/tanking';
-  static const MAP = '/map';
+  static const MAP_PAGE = '/map-page';
 }

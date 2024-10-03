@@ -1,5 +1,5 @@
-import '../bindings/map_binding.dart';
-import '../ui/pages/map_page/map_page.dart';
+import '../bindings/map_page_binding.dart';
+import '../ui/pages/map_page_page/map_page_page.dart';
       import '../bindings/tanking_binding.dart';
 import '../ui/pages/tanking_page/tanking_page.dart';
       import '../bindings/save_food_form_binding.dart';
@@ -58,9 +58,9 @@ class AppPages {
       transition: _defaultTransition,
     ),
     GetPage(
-      name: AppRoutes.MAP,
+      name: AppRoutes.MAP_PAGE,
       page: () => const MapPage(),
-      binding: MapBinding(),
+      binding: MapPageBinding(),
       transition: _defaultTransition,
     ), 
 ];
