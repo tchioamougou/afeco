@@ -1,4 +1,6 @@
-import '../bindings/map_page_binding.dart';
+import '../bindings/search_binding.dart';
+import '../ui/pages/search_page/search_page.dart';
+      import '../bindings/map_page_binding.dart';
 import '../ui/pages/map_page_page/map_page_page.dart';
       import '../bindings/tanking_binding.dart';
 import '../ui/pages/tanking_page/tanking_page.dart';
@@ -61,6 +63,12 @@ class AppPages {
       name: AppRoutes.MAP_PAGE,
       page: () => const MapPage(),
       binding: MapPageBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.SEARCH,
+      page: () => const SearchPage(),
+      binding: SearchBinding(),
       transition: _defaultTransition,
     ), 
 ];

@@ -7,4 +7,5 @@
   static const SAVE_FOOD_FORM = '/save-food-form';
   static const TANKING = '/tanking';
   static const MAP_PAGE = '/map-page';
+  static const SEARCH = '/search';
 }

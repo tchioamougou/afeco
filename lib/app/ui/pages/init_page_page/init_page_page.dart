@@ -38,6 +38,7 @@ class InitPagePage extends GetView<InitPageController> {
         const Text(""),
         const Text(""),
       ];
+
       Widget getBody() {
         return IndexedStack(
           index: controller.currentIndex.value,
