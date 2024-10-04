@@ -1,25 +1,25 @@
 import 'package:afeco/app/data/models/market.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:flutter/services.dart';
 
-class MapPageController extends GetxController {
-  final Rx<LatLng> _center = const LatLng(0,0).obs;
+class FindAroundController extends GetxController {
+  final Rx<LatLng> _center = const LatLng(0, 0).obs;
   LatLng get center => _center.value;
   set center(LatLng value) => _center.value = value;
-
 
   final RxDouble _zoom = 15.0.obs;
   double get zoom => _zoom.value;
   set zoom(double value) => _zoom.value = value;
 
-  List<Market> markets =<Market>[].obs;
-  List<String> withinOptions =  [ '500 m', '1 Km', '2 km', '3 km'];
+  List<Market> markets = <Market>[].obs;
+  List<String> withinOptions = ['500 m', '1 Km', '2 km', '3 km'];
   final MapController mapController = MapController();
   RxString position = 'Your current poistion'.obs;
   RxString within = '2 Km'.obs;
+
   /// initialise Location variable
   final _geolocatorPlatform = GeolocatorPlatform.instance;
   Rx<Position?> _currentPosition = Rx<Position?>(null);
@@ -28,24 +28,22 @@ class MapPageController extends GetxController {
   @override
   void onInit() async {
     // TODO: implement onInit
-     final error = await getCurrentPosition();
+    final error = await getCurrentPosition();
     super.onInit();
   }
 
   // this function is used to move use to the details of the shop
-  void goToShop(){
-
-  }
+  void goToShop() {}
 
   Future<dynamic> getCurrentPosition() async {
     try {
       final hasPermission =
-      await _geolocatorPlatform.isLocationServiceEnabled();
+          await _geolocatorPlatform.isLocationServiceEnabled();
       if (!hasPermission) {
         return Future.error('Location services are disabled.');
       }
       LocationPermission permission =
-      await _geolocatorPlatform.requestPermission();
+          await _geolocatorPlatform.requestPermission();
       if (permission == LocationPermission.denied) {
         return Future.error('Location permission denied.');
       }
@@ -64,8 +62,6 @@ class MapPageController extends GetxController {
       return Future.error(e);
     }
   }
-  void findShop(double latitude, double longitude) async {
 
-  }
-
+  void findShop(double latitude, double longitude) async {}
 }

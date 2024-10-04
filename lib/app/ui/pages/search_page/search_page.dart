@@ -2,8 +2,8 @@ import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../layouts/main/main_layout.dart';
-
 class SearchPage extends GetView<SearchController> {
   const SearchPage({Key? key}) : super(key: key);
   @override
@@ -11,11 +11,14 @@ class SearchPage extends GetView<SearchController> {
     return MainLayout(
       child: Scaffold(
         body: Padding(
-          padding: EdgeInsets.symmetric(vertical: 30),
+          padding: EdgeInsets.symmetric(vertical: 0),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                color: Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 10,vertical: 30),
                 child:Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -52,20 +55,25 @@ class SearchPage extends GetView<SearchController> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(height: 15,),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                        Container(
                          width: 150,
                            child:  Row(
                              children: [
-                               FaIcon(FontAwesomeIcons.house),
+                               FaIcon(FontAwesomeIcons.house,color: Constants.buttonColor,),
                                SizedBox(width: 15,),
                                Column(
                                  crossAxisAlignment: CrossAxisAlignment.start,
                                  children: [
-                                   Text('Home'),
-                                   Text('Marche Accacias',overflow: TextOverflow.ellipsis,)
+                                   Text('Home', style: GoogleFonts.roboto( fontWeight: FontWeight.bold),),
+                                   Container(
+                                     width: 100,
+                                     child: Text('Marche Accacias',overflow: TextOverflow.ellipsis,),
+                                   )
                                  ],
                                )
                              ],
@@ -75,13 +83,16 @@ class SearchPage extends GetView<SearchController> {
                           width: 150,
                           child:  Row(
                             children: [
-                              FaIcon(FontAwesomeIcons.house),
+                              FaIcon(FontAwesomeIcons.discord, color: Constants.buttonColor,),
                               SizedBox(width: 15,),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('Home'),
-                                  Text('Marche Accacias',overflow: TextOverflow.ellipsis,)
+                                  Text('Work', style: GoogleFonts.roboto( fontWeight: FontWeight.bold),),
+                                  Container(
+                                    width: 100,
+                                    child: Text('Marche Accacias',overflow: TextOverflow.ellipsis,),
+                                  )
                                 ],
                               )
                             ],
@@ -89,6 +100,19 @@ class SearchPage extends GetView<SearchController> {
                         )
                       ],
                     )
+                  ],
+                ),
+              ),
+              SizedBox(height: 10,),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                color: Colors.white,
+                width: MediaQuery.sizeOf(context).width,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text("Recent Search")
                   ],
                 ),
               )

@@ -7,6 +7,6 @@ class MapPageBinding implements Bindings {
   @override
   void dependencies() {
     Get.lazyPut<MapPageController>(() => MapPageController());
-        // Get.put<MapPageController>(MapPageController());
+         //Get.put<MapPageController>(MapPageController());
   }
 }

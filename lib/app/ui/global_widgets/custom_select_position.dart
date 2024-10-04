@@ -1,4 +1,4 @@
-import 'package:afeco/app/ui/global_widgets/label.dart';
+import 'package:afeco/app/ui/global_widgets/custom_input.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,14 +9,18 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomSelectPosition extends StatelessWidget {
   final String label;
   final List<String> options;
-  final String? selectedValue;
-  final ValueChanged<String> onChanged;
+  final String? withinValue;
+  final String? positionValue;
+  final ValueChanged<String> onWithinChanged;
+  final ValueChanged<String> onPositionChanged;
   const CustomSelectPosition({
     super.key,
     required this.label,
     required this.options,
-    this.selectedValue,
-    required this.onChanged,
+    this.positionValue,
+    this.withinValue,
+    required this.onPositionChanged,
+    required this.onWithinChanged
   });
 
   @override
@@ -25,7 +29,6 @@ class CustomSelectPosition extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-
         GestureDetector(
           onTap: () {
             if (options.isNotEmpty) {
@@ -60,14 +63,14 @@ class CustomSelectPosition extends StatelessWidget {
                           ),
                         ],
                       ),
-
-                      Label(title: label,),
+                      CustomInput(label: 'From', onValueChanged: onPositionChanged, hintText: 'Enter Place'),
+                      Text('Within'),
                       Column(
                         children: options.map((el) {
                           return ListTile(
-                            title: Text(el,style:(selectedValue != null && selectedValue == el)?TextStyle(fontWeight: FontWeight.w900, fontSize: 18, color: Constants.defaultHeaderColor):null ,), // Assuming options have a String representation
+                            title: Text(el,style:(withinValue != null && withinValue == el)?TextStyle(fontWeight: FontWeight.w900, fontSize: 18, color: Constants.defaultHeaderColor):null ,), // Assuming options have a String representation
                             trailing:
-                            (selectedValue != null && selectedValue == el)
+                            (withinValue != null && withinValue == el)
                                 ? Icon(
                               Icons.check_circle,
                               size: 30,
@@ -75,7 +78,7 @@ class CustomSelectPosition extends StatelessWidget {
                             )
                                 : null,
                             onTap: () {
-                              onChanged(el);
+                              onWithinChanged(el);
                               Navigator.pop(context);
                             },
                           );
@@ -98,7 +101,7 @@ class CustomSelectPosition extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text("Your current position".tr, style: GoogleFonts.poppins(color: Constants.defaultHeaderColor,fontWeight:  FontWeight.bold),)
-                  ,Text('Within 2km',style: GoogleFonts.poppins(color: Constants.defaultHeaderColor))
+                  ,Text('Within $withinValue',style: GoogleFonts.poppins(color: Constants.defaultHeaderColor))
                 ],
               ),
                  SizedBox(width: 5,),

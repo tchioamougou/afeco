@@ -21,6 +21,7 @@ class LandingPage extends GetView<LandingController> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [Text('Start saving food',style: TextStyle(fontWeight: FontWeight.w900,color: Constants.defaultHeaderColor, fontSize: 30.sp),)],

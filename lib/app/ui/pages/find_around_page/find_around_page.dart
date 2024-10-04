@@ -6,10 +6,11 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../../layouts/main/main_layout.dart';
-import '../../../controllers/map_page_controller.dart';
 
-class MapPagePage extends GetView<MapPageController> {
-  const MapPagePage({Key? key}): super(key: key);
+import '../../../controllers/find_around_controller.dart';
+
+class FindAroundPage extends GetView<FindAroundController> {
+      const FindAroundPage ({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MainLayout(
@@ -87,12 +88,12 @@ class MapPagePage extends GetView<MapPageController> {
                 child: Column(
                   children: [
                     CustomSelectPosition(
-                        label: 'my current position',
-                        options:controller.withinOptions,
-                        onWithinChanged: (val) {
-                          controller.within.value = val;
-                        },
-                        onPositionChanged: (val) {},
+                      label: 'my current position',
+                      options:controller.withinOptions,
+                      onWithinChanged: (val) {
+                        controller.within.value = val;
+                      },
+                      onPositionChanged: (val) {},
                       withinValue: controller.within.value,
 
                     ),

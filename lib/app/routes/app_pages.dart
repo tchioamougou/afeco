@@ -1,4 +1,8 @@
-import '../bindings/search_binding.dart';
+import '../bindings/offer_details_binding.dart';
+import '../ui/pages/offer_details_page/offer_details_page.dart';
+      import '../bindings/find_around_binding.dart';
+import '../ui/pages/find_around_page/find_around_page.dart';
+      import '../bindings/search_binding.dart';
 import '../ui/pages/search_page/search_page.dart';
       import '../bindings/map_page_binding.dart';
 import '../ui/pages/map_page_page/map_page_page.dart';
@@ -61,7 +65,7 @@ class AppPages {
     ),
     GetPage(
       name: AppRoutes.MAP_PAGE,
-      page: () => const MapPage(),
+      page: () => const MapPagePage(),
       binding: MapPageBinding(),
       transition: _defaultTransition,
     ),
@@ -69,6 +73,18 @@ class AppPages {
       name: AppRoutes.SEARCH,
       page: () => const SearchPage(),
       binding: SearchBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.FIND_AROUND,
+      page: () => const FindAroundPage(),
+      binding: FindAroundBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.OFFER_DETAILS,
+      page: () => const OfferDetailsPage(),
+      binding: OfferDetailsBinding(),
       transition: _defaultTransition,
     ), 
 ];

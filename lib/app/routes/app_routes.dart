@@ -8,4 +8,6 @@
   static const TANKING = '/tanking';
   static const MAP_PAGE = '/map-page';
   static const SEARCH = '/search';
+  static const FIND_AROUND = '/find-around';
+  static const OFFER_DETAILS = '/offer-details';
 }
