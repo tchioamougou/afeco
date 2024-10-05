@@ -1,5 +1,7 @@
 
+import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Label extends StatelessWidget {
   Label({required this.title});
@@ -14,7 +16,7 @@ class Label extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 18,color: Constants.defaultBorderColor),
           ),
         ],
       ),

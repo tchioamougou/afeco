@@ -1,4 +1,5 @@
 import 'package:afeco/app/controllers/find_around_controller.dart';
+import 'package:afeco/app/controllers/home_controller.dart';
 
 import 'package:afeco/app/controllers/navigation_controller.dart';
 import 'package:afeco/app/controllers/main_controller.dart';
@@ -17,6 +18,7 @@ class DependecyInjection {
     );
 
     await GetStorage.init();
+    Get.put<HomeController>(HomeController());
     Get.put<FindAroundController>(FindAroundController());
     Get.put<NavigationController>(NavigationController());
     Get.put<MainController>(MainController());

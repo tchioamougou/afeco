@@ -20,7 +20,7 @@ class HeaderCustom extends StatelessWidget {
           ),
           child:ClipRRect(
             child: Image.asset(
-              'assets/image/food-africa.webp',
+              'assets/image/planet.png',
             ),
             borderRadius: BorderRadius.circular(300),
           ) ,

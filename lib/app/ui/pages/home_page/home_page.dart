@@ -1,4 +1,6 @@
 import 'package:afeco/app/ui/global_widgets/custom_card_item.dart';
+import 'package:afeco/app/ui/global_widgets/custom_category_action.dart';
+import 'package:afeco/app/ui/global_widgets/custom_save_food_neighbourdhood_item.dart';
 import 'package:afeco/app/ui/global_widgets/header_custom.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
@@ -63,41 +65,54 @@ class HomePage extends GetView<HomeController> {
                     ],
                   ),
                 )),
+            SizedBox(
+              height: 20,
+            ),
             Container(
               decoration: BoxDecoration(
-                color: Colors.white
+                color: Colors.white,
+                borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30))
               ),
               child: Column(
                 children: [
                   Padding(
                     padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
-                    child: Label(title: 'Food in your neighborhood'),
+                    child: Label(title: 'Category'),
+                  ),
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      children: controller.quickActions.map((e)=>CustomCategoryAction(onPress: (){}, title: e['title']!,image: e['image']!,)).toList(),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                    child: Label(title: 'Food for you'),
                   ),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: List.generate(
                           10,
-                              (i) => Container(
-                            margin: EdgeInsets.symmetric(horizontal: 10),
-                            width: MediaQuery.sizeOf(context).width * 0.8,
-                            child: CustomCardItem(
-                              title: 'Penelope\'s',
-                              description: 'Baked goods',
-                              time: '17:40 - 18:00',
-                              price: '£12.00',
-                              imageUrl:
-                              'https://www.rockmatsu.org/wp-content/uploads/2022/03/The-boy-who.png',
-                              isFavorite: true,
-                              onFavoritePressed: () {
-                                // Handle favorite toggle logic here
-                              },
-                            ),
-                          )),
+                              (i) => CustomSaveFoodNeighbourdhoodItem(
+                                title: 'Penelope\'s',
+                                description: 'Baked goods',
+                                time: '17:40 - 18:00',
+                                price: '£12.00',
+                                imageUrl:
+                                'https://noahhelps.org/wp-content/uploads/2021/03/March_Meal-Prep-1030x515.jpeg',
+                                isFavorite: true,
+                                onFavoritePressed: () {
+                                  // Handle favorite toggle logic here
+                                },
+                              )),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
                     child: Label(title: 'Recommend for you'),
                   ),
                   SingleChildScrollView(
@@ -105,26 +120,22 @@ class HomePage extends GetView<HomeController> {
                     child: Row(
                       children: List.generate(
                           10,
-                              (i) => Container(
-                            margin: EdgeInsets.symmetric(horizontal: 10),
-                            width: MediaQuery.sizeOf(context).width * 0.8,
-                            child: CustomCardItem(
-                              title: 'Penelope\'s',
-                              description: 'Baked goods',
-                              time: '17:40 - 18:00',
-                              price: '£12.00',
-                              imageUrl:
-                              'https://www.rockmatsu.org/wp-content/uploads/2022/03/The-boy-who.png',
-                              isFavorite: true,
-                              onFavoritePressed: () {
-                                // Handle favorite toggle logic here
-                              },
-                            ),
-                          )),
+                              (i) =>CustomCardItem(
+                                title: 'Penelope\'s',
+                                description: 'Baked goods',
+                                time: '17:40 - 18:00',
+                                price: '£12.00',
+                                imageUrl:
+                                'https://www.rockmatsu.org/wp-content/uploads/2022/03/The-boy-who.png',
+                                isFavorite: true,
+                                onFavoritePressed: () {
+                                  // Handle favorite toggle logic here
+                                },
+                              )),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
                     child: Label(title: 'Collect Now'),
                   ),
                   SingleChildScrollView(
@@ -132,22 +143,17 @@ class HomePage extends GetView<HomeController> {
                     child: Row(
                       children: List.generate(
                           10,
-                              (i) => Container(
-                            margin: EdgeInsets.symmetric(horizontal: 10),
-                            width: MediaQuery.sizeOf(context).width * 0.8,
-                            child: CustomCardItem(
-                              title: 'Penelope\'s',
-                              description: 'Baked goods',
-                              time: '17:40 - 18:00',
-                              price: '£12.00',
-                              imageUrl:
-                              'https://www.rockmatsu.org/wp-content/uploads/2022/03/The-boy-who.png',
-                              isFavorite: true,
-                              onFavoritePressed: () {
-                                // Handle favorite toggle logic here
-                              },
-                            ),
-                          )),
+                              (i) => CustomCardItem(
+                                title: 'Penelope\'s',
+                                description: 'Baked goods',
+                                time: '17:40 - 18:00',
+                                price: '£12.00',
+                                imageUrl:'https://dovv-distribution.com/wp-content/uploads/2023/09/Djino-1-768x768.jpg',
+                                isFavorite: true,
+                                onFavoritePressed: () {
+                                  // Handle favorite toggle logic here
+                                },
+                              )),
                     ),
                   ),
                 ],
