@@ -4,7 +4,9 @@ import 'package:afeco/app/ui/global_widgets/custom_input.dart';
 import 'package:afeco/app/ui/global_widgets/custom_select_item.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../layouts/main/main_layout.dart';
 
 import '../../../controllers/save_food_form_controller.dart';
@@ -17,10 +19,21 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
       child: Stack(
         children: [
           Obx(() => Scaffold(
-                appBar: AppBar(
-                  title: Text('Save Food'),
-                  backgroundColor: Colors.white,
+            appBar: AppBar(
+                backgroundColor: Constants.defaultHeaderColor,
+                leading: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    IconButton(onPressed: (){
+                      Get.back();
+                    }, icon: FaIcon(FontAwesomeIcons.circleArrowLeft,size: 30,color: Colors.white,))
+                  ],
                 ),
+                title: Text(
+                  'Save food',
+                  style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
+                )),
                 backgroundColor: Colors.white,
                 body: Padding(
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),

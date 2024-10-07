@@ -25,7 +25,9 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton.outlined(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.back();
+                        },
                         icon: FaIcon(FontAwesomeIcons.arrowLeft),
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,

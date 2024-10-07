@@ -10,4 +10,7 @@
   static const SEARCH = '/search';
   static const FIND_AROUND = '/find-around';
   static const OFFER_DETAILS = '/offer-details';
+  static const PROFILE = '/profile';
+  static const OFFERS = '/offers';
+  static const ACCOUNT_DETAILS = '/account-details';
 }

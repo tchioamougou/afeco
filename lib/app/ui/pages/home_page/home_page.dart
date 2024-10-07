@@ -111,10 +111,12 @@ class HomePage extends GetView<HomeController> {
                               )),
                     ),
                   ),
+                  SizedBox(height: 10,),
                   Padding(
                     padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
                     child: Label(title: 'Recommend for you'),
                   ),
+                  SizedBox(height: 10,),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -134,10 +136,12 @@ class HomePage extends GetView<HomeController> {
                               )),
                     ),
                   ),
+                  SizedBox(height: 10,),
                   Padding(
                     padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
                     child: Label(title: 'Collect Now'),
                   ),
+                  SizedBox(height: 10,),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(

@@ -1,6 +1,8 @@
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/pages/find_around_page/find_around_page.dart';
 import 'package:afeco/app/ui/pages/home_page/home_page.dart';
+import 'package:afeco/app/ui/pages/offers_page/offers_page.dart';
+import 'package:afeco/app/ui/pages/profile_page/profile_page.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -35,8 +37,8 @@ class InitPagePage extends GetView<InitPageController> {
       List<Widget> pages = [
         const HomePage(),
         const FindAroundPage(),
-        const Text(""),
-        const Text(""),
+        const OffersPage(),
+        const ProfilePage(),
       ];
 
       Widget getBody() {

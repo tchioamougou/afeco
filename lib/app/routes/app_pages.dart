@@ -1,4 +1,10 @@
-import '../bindings/offer_details_binding.dart';
+import '../bindings/account_details_binding.dart';
+import '../ui/pages/account_details_page/account_details_page.dart';
+      import '../bindings/offers_binding.dart';
+import '../ui/pages/offers_page/offers_page.dart';
+      import '../bindings/profile_binding.dart';
+import '../ui/pages/profile_page/profile_page.dart';
+      import '../bindings/offer_details_binding.dart';
 import '../ui/pages/offer_details_page/offer_details_page.dart';
       import '../bindings/find_around_binding.dart';
 import '../ui/pages/find_around_page/find_around_page.dart';
@@ -85,6 +91,24 @@ class AppPages {
       name: AppRoutes.OFFER_DETAILS,
       page: () => const OfferDetailsPage(),
       binding: OfferDetailsBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.PROFILE,
+      page: () => const ProfilePage(),
+      binding: ProfileBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.OFFERS,
+      page: () => const OffersPage(),
+      binding: OffersBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.ACCOUNT_DETAILS,
+      page: () => const AccountDetailsPage(),
+      binding: AccountDetailsBinding(),
       transition: _defaultTransition,
     ), 
 ];
