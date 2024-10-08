@@ -24,9 +24,12 @@ class FoodPlanningItem extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-            padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+            margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
             height: 80,
+            decoration: BoxDecoration(
+                borderRadius: const BorderRadius.all(Radius.circular(5)),
+                color: Constants.defaultBorderColor.withOpacity(0.2)),
             child: Row(
               children: [
                 Image.asset(
@@ -48,15 +51,15 @@ class FoodPlanningItem extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(height: 5,),
+                    const SizedBox(height: 5,),
                     Row(
                       children: [
                         FaIcon(FontAwesomeIcons.telegram, size: 15, color: Constants.buttonColor,),
-                        SizedBox(width: 5,),
+                        const SizedBox(width: 5,),
                         Text('$cal Calories',),
-                        SizedBox(width: 10,),
+                        const SizedBox(width: 10,),
                         FaIcon(FontAwesomeIcons.clock, size: 15, color: Constants.buttonColor,),
-                        SizedBox(width: 5,),
+                        const SizedBox(width: 5,),
                         Text('$time Min'),
                       ],
                     )
@@ -64,9 +67,6 @@ class FoodPlanningItem extends StatelessWidget {
                 )
               ],
             ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                color: Constants.defaultBorderColor.withOpacity(0.2)),
           ),
         ],
       ),

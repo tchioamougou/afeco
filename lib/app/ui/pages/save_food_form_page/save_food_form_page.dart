@@ -12,7 +12,7 @@ import '../../layouts/main/main_layout.dart';
 import '../../../controllers/save_food_form_controller.dart';
 
 class SaveFoodFormPage extends GetView<SaveFoodFormController> {
-  const SaveFoodFormPage({Key? key}) : super(key: key);
+  const SaveFoodFormPage({super.key});
   @override
   Widget build(BuildContext context) {
     return MainLayout(
@@ -29,7 +29,7 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
                             onPressed: () {
                               Get.back();
                             },
-                            icon: FaIcon(
+                            icon: const FaIcon(
                               FontAwesomeIcons.circleArrowLeft,
                               size: 30,
                               color: Colors.white,
@@ -43,7 +43,7 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
                     )),
                 backgroundColor: Colors.white,
                 body: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                  padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                   child: Column(
                     children: [
                       CustomSelectItem(
@@ -53,7 +53,7 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
                           onChanged: (val) {
                             controller.sharing.value = val;
                           }),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       CustomInput(

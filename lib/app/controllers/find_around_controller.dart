@@ -28,7 +28,6 @@ class FindAroundController extends GetxController {
   @override
   void onInit() async {
     // TODO: implement onInit
-    final error = await getCurrentPosition();
     super.onInit();
   }
 

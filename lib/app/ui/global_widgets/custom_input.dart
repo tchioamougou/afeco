@@ -46,13 +46,13 @@ class CustomInput extends StatelessWidget {
           maxLength: maxLength,
           maxLines: 1,
           decoration: InputDecoration(
-            helper:helper!=null?Text(helper!, style: TextStyle(color: Colors.grey),):null,
+            helper:helper!=null?Text(helper!, style: const TextStyle(color: Colors.grey),):null,
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(color: Constants.defaultBorderColor, width: 1.5),
               borderRadius: BorderRadius.circular(5)
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey, width: 1.5),
+              borderSide: const BorderSide(color: Colors.grey, width: 1.5),
                 borderRadius: BorderRadius.circular(5)
             ),
             hintText: hintText,

@@ -28,37 +28,37 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                         onPressed: () {
                           Get.back();
                         },
-                        icon: FaIcon(FontAwesomeIcons.arrowLeft),
+                        icon: const FaIcon(FontAwesomeIcons.arrowLeft),
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(100),
                             ),
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 17, vertical: 15)),
                       ),
                       IconButton.outlined(
                         onPressed: () {},
-                        icon: FaIcon(FontAwesomeIcons.heart),
+                        icon: const FaIcon(FontAwesomeIcons.heart),
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(100),
                             ),
-                            padding: EdgeInsets.symmetric(
+                            padding: const EdgeInsets.symmetric(
                                 horizontal: 17, vertical: 15)),
                       ),
                     ],
                   ),
-                  padding: EdgeInsets.fromLTRB(15, 30, 15, 10),
+                  padding: const EdgeInsets.fromLTRB(15, 30, 15, 10),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 120,
                 ),
                 Container(
                   width: MediaQuery.sizeOf(context).width,
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 100),
-                  decoration: BoxDecoration(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 100),
+                  decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight: Radius.circular(20)),
@@ -66,13 +66,13 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                   ),
                   child: Column(
                     children: [
-                      SizedBox(height: 10,),
+                      const SizedBox(height: 10,),
                       Text('Fast food', style: GoogleFonts.timmana(fontWeight: FontWeight.w900, fontSize: 35,color: Constants.defaultHeaderColor),),
-                      SizedBox(height: 10,),
-                      Row(
+                      const SizedBox(height: 10,),
+                      const Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                          children: [
-                           FaIcon(FontAwesomeIcons.discourse,size: 17,),
+                           const FaIcon(FontAwesomeIcons.discourse,size: 17,),
                            SizedBox(width: 4,),
                            Text(' 500 m'),
                            SizedBox(width: 10,),
@@ -90,11 +90,11 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                            SizedBox(width: 10,),
                          ],
                       ),
-                      SizedBox(height: 20,),
-                      Divider(
+                      const SizedBox(height: 20,),
+                      const Divider(
                         height: 10,
                       ),
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -105,14 +105,14 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                           ElevatedButton(onPressed: (){}, style:ElevatedButton.styleFrom(backgroundColor: Colors.deepOrange) , child: Text('View Direction',style: GoogleFonts.poppins( fontSize: 15,color: Colors.white)))
                         ],
                       ),
-                      SizedBox(height: 20,),
+                      const SizedBox(height: 20,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text('About Food',textAlign: TextAlign.left,style: GoogleFonts.timmana( fontSize: 20,color: Constants.defaultHeaderColor,fontWeight: FontWeight.bold),),
                         ],
                       ),
-                      SizedBox(height: 10,),
+                      const SizedBox(height: 10,),
                       Text(style: GoogleFonts.poppins( fontSize: 15,color: Colors.grey),'Papier de livraison Fast Food to Go biodégradable et écologique personnalisé Sac Restaurant Takeout emballage Take Away Kraft Paper Bag'),
                     ],
                   ),

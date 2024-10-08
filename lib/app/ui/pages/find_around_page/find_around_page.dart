@@ -101,32 +101,32 @@ class FindAroundPage extends GetView<FindAroundController> {
                       children: [
                         ElevatedButton(
                           onPressed: () {},
-                          child: FaIcon(
-                            FontAwesomeIcons.filter,
-                            color: Constants.buttonColor,
-                          ),
                           style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               padding: EdgeInsets.zero),
+                          child: FaIcon(
+                            FontAwesomeIcons.filter,
+                            color: Constants.buttonColor,
+                          ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         ElevatedButton(
                           onPressed: () {
                             Get.toNamed(AppRoutes.SEARCH);
                           },
-                          child: FaIcon(
-                            Icons.search,
-                            color: Constants.buttonColor,
-                          ),
                           style: ElevatedButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
                               ),
                               padding: EdgeInsets.zero),
+                          child: FaIcon(
+                            Icons.search,
+                            color: Constants.buttonColor,
+                          ),
                         ),
                       ],
                     )

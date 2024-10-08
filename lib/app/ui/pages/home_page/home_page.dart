@@ -22,21 +22,21 @@ class HomePage extends GetView<HomeController> {
         body: SingleChildScrollView(
             child: Column(
           children: [
-            Padding(
+            const Padding(
               padding: EdgeInsets.fromLTRB(10, 35, 10, 0),
               child: HeaderCustom(),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Padding(
-                padding: EdgeInsets.fromLTRB(10, 1, 10, 0),
+                padding: const EdgeInsets.fromLTRB(10, 1, 10, 0),
                 child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                   decoration: BoxDecoration(
                       border: Border.all(
                           width: 0.1, color: Constants.defaultBorderColor),
-                      borderRadius: BorderRadius.all(Radius.circular(30))),
+                      borderRadius: const BorderRadius.all(Radius.circular(30))),
                   child: Row(
                     children: [
                       IconButton(
@@ -56,7 +56,7 @@ class HomePage extends GetView<HomeController> {
                       ),
                       Container(
                         width: MediaQuery.sizeOf(context).width * 0.7,
-                        child: TextField(
+                        child: const TextField(
                           decoration: InputDecoration(
                             border: InputBorder.none,
                             hintText: "search here",
@@ -66,18 +66,18 @@ class HomePage extends GetView<HomeController> {
                     ],
                   ),
                 )),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(30),topRight: Radius.circular(30))
               ),
               child: Column(
                 children: [
                   Padding(
-                    padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
+                    padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                     child: Label(title: 'Category'),
                   ),
                   SingleChildScrollView(
@@ -91,11 +91,11 @@ class HomePage extends GetView<HomeController> {
                       }, title: e['title']!,image: e['image']!,)).toList(),
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                    padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
                     child: Label(title: 'Food for you'),
                   ),
                   SingleChildScrollView(
@@ -117,12 +117,12 @@ class HomePage extends GetView<HomeController> {
                               )),
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                    padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
                     child: Label(title: 'Recommend for you'),
                   ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
@@ -142,12 +142,12 @@ class HomePage extends GetView<HomeController> {
                               )),
                     ),
                   ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   Padding(
-                    padding: EdgeInsets.fromLTRB(10, 0, 20, 0),
+                    padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
                     child: Label(title: 'Collect Now'),
                   ),
-                  SizedBox(height: 10,),
+                  const SizedBox(height: 10,),
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(

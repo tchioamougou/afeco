@@ -64,7 +64,7 @@ class CustomSelectPosition extends StatelessWidget {
                         ],
                       ),
                       CustomInput(label: 'From', onValueChanged: onPositionChanged, hintText: 'Enter Place'),
-                      Text('Within'),
+                      const Text('Within'),
                       Column(
                         children: options.map((el) {
                           return ListTile(
@@ -104,7 +104,7 @@ class CustomSelectPosition extends StatelessWidget {
                   ,Text('Within $withinValue',style: GoogleFonts.poppins(color: Constants.defaultHeaderColor))
                 ],
               ),
-                 SizedBox(width: 5,),
+                 const SizedBox(width: 5,),
                  FaIcon(FontAwesomeIcons.chevronDown, size: 15,color: Constants.buttonColor,)
               ],
             ),

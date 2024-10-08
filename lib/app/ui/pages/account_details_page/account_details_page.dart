@@ -1,4 +1,3 @@
-import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/header_custom.dart';
 import 'package:afeco/app/ui/pages/profile_page/custom_liststyle.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
@@ -24,7 +23,7 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
               children: [
                 IconButton(onPressed: (){
                   Get.back();
-                }, icon: FaIcon(FontAwesomeIcons.circleArrowLeft,size: 30,color: Colors.white,))
+                }, icon: const FaIcon(FontAwesomeIcons.circleArrowLeft,size: 30,color: Colors.white,))
               ],
             ),
             title: Text(
@@ -36,7 +35,7 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
                   child: HeaderCustom(),
                 ),
@@ -44,7 +43,7 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                   elevation: 30,
                   child: Container(
                     width: MediaQuery.sizeOf(context).width * 0.97,
-                    padding: EdgeInsets.fromLTRB(10, 0, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.0),
                       color: Constants.buttonColor,
@@ -56,7 +55,7 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                           children: [
                             Expanded(
                               child: Padding(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 5, vertical: 10),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -86,14 +85,14 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                                     ),
                                     ElevatedButton(
                                         onPressed: () {},
-                                        child: Text('Food Planning')),
+                                        child: const Text('Food Planning')),
                                   ],
                                 ),
                               ),
                             ),
                             Expanded(
                               child: Padding(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     horizontal: 5, vertical: 10),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,

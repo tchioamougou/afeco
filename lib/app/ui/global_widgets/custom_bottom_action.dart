@@ -20,7 +20,7 @@ class CustomBottomAction extends StatelessWidget {
       children: [
         Container(
           width:MediaQuery.sizeOf(context).width,
-          padding: EdgeInsets.symmetric(vertical:7, horizontal: 5),
+          padding: const EdgeInsets.symmetric(vertical:7, horizontal: 5),
           decoration: BoxDecoration(
             border: Border.symmetric(vertical: BorderSide.none,horizontal: BorderSide(width: 1, color: Colors.grey.withOpacity(0.5)) ),
             color: Colors.white,

@@ -5,37 +5,37 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../layouts/main/main_layout.dart';
 class SearchPage extends GetView<SearchController> {
-  const SearchPage({Key? key}) : super(key: key);
+  const SearchPage({super.key});
   @override
   Widget build(BuildContext context) {
     return MainLayout(
       child: Scaffold(
         body: Padding(
-          padding: EdgeInsets.symmetric(vertical: 0),
+          padding: const EdgeInsets.symmetric(vertical: 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
                 color: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 10,vertical: 30),
+                padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 30),
                 child:Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       decoration: BoxDecoration(
                           border: Border.all(
                               width: 2, color: Constants.defaultBorderColor),
-                          borderRadius: BorderRadius.all(Radius.circular(30))),
+                          borderRadius: const BorderRadius.all(Radius.circular(30))),
                       child: Row(
                         children: [
                           IconButton(
                             onPressed: () {
                               Get.back();
                             },
-                            icon: FaIcon(FontAwesomeIcons.arrowLeft),
+                            icon: const FaIcon(FontAwesomeIcons.arrowLeft),
                             style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(0),
@@ -44,7 +44,7 @@ class SearchPage extends GetView<SearchController> {
                           ),
                           Container(
                             width: MediaQuery.sizeOf(context).width * 0.7,
-                            child: TextField(
+                            child: const TextField(
                               decoration: InputDecoration(border: InputBorder.none,hintText: "search here"),
                             ),
                           ),
@@ -55,7 +55,7 @@ class SearchPage extends GetView<SearchController> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 15,),
+                    const SizedBox(height: 15,),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -65,14 +65,14 @@ class SearchPage extends GetView<SearchController> {
                            child:  Row(
                              children: [
                                FaIcon(FontAwesomeIcons.house,color: Constants.buttonColor,),
-                               SizedBox(width: 15,),
+                               const SizedBox(width: 15,),
                                Column(
                                  crossAxisAlignment: CrossAxisAlignment.start,
                                  children: [
                                    Text('Home', style: GoogleFonts.roboto( fontWeight: FontWeight.bold),),
                                    Container(
                                      width: 100,
-                                     child: Text('Marche Accacias',overflow: TextOverflow.ellipsis,),
+                                     child: const Text('Marche Accacias',overflow: TextOverflow.ellipsis,),
                                    )
                                  ],
                                )
@@ -84,14 +84,14 @@ class SearchPage extends GetView<SearchController> {
                           child:  Row(
                             children: [
                               FaIcon(FontAwesomeIcons.discord, color: Constants.buttonColor,),
-                              SizedBox(width: 15,),
+                              const SizedBox(width: 15,),
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text('Work', style: GoogleFonts.roboto( fontWeight: FontWeight.bold),),
                                   Container(
                                     width: 100,
-                                    child: Text('Marche Accacias',overflow: TextOverflow.ellipsis,),
+                                    child: const Text('Marche Accacias',overflow: TextOverflow.ellipsis,),
                                   )
                                 ],
                               )
@@ -103,12 +103,12 @@ class SearchPage extends GetView<SearchController> {
                   ],
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 30, horizontal: 10),
+                padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
                 color: Colors.white,
                 width: MediaQuery.sizeOf(context).width,
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [

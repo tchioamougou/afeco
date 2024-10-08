@@ -22,12 +22,12 @@ class CustomCategoryAction extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            margin: EdgeInsets.symmetric(horizontal: 5,vertical: 10),
-            padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+            margin: const EdgeInsets.symmetric(horizontal: 5,vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
             width: 70,
             height: 70,
             child: Image.asset(image),
-            decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(200)),
+            decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(200)),
                 color: Constants.defaultBorderColor.withOpacity(0.2)),
           ),
           Center(

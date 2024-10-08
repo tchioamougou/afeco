@@ -1,9 +1,6 @@
-import 'package:afeco/app/ui/global_widgets/custom_card_item.dart';
-import 'package:afeco/app/ui/global_widgets/custom_save_food_neighbourdhood_item.dart';
 import 'package:afeco/app/ui/pages/offers_page/custom_offer_item.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../../layouts/main/main_layout.dart';
@@ -19,15 +16,15 @@ class OffersPage extends GetView<OffersController> {
           body:SingleChildScrollView(child:
           Column(
             children: [
-              SizedBox(height: 40,),
+              const SizedBox(height: 40,),
               Padding(
-                  padding: EdgeInsets.fromLTRB(10, 1, 10, 0),
+                  padding: const EdgeInsets.fromLTRB(10, 1, 10, 0),
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                     decoration: BoxDecoration(
                         border: Border.all(
                             width: 0.1, color: Constants.defaultBorderColor),
-                        borderRadius: BorderRadius.all(Radius.circular(30))),
+                        borderRadius: const BorderRadius.all(Radius.circular(30))),
                     child: Row(
                       children: [
                         IconButton(
@@ -47,7 +44,7 @@ class OffersPage extends GetView<OffersController> {
                         ),
                         Container(
                           width: MediaQuery.sizeOf(context).width * 0.7,
-                          child: TextField(
+                          child: const TextField(
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "search here",
@@ -57,13 +54,13 @@ class OffersPage extends GetView<OffersController> {
                       ],
                     ),
                   )),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Column(
                 children: List.generate(
                     10,
-                        (i) => CustomOfferItem(
+                        (i) => const CustomOfferItem(
                       title: 'Penelope\'s',
                       description: 'Baked goods',
                       time: '17:40 - 18:00',

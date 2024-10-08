@@ -24,7 +24,7 @@ class FoodPlanningPage extends GetView<FoodPlannigController> {
                 children: [
                   IconButton(onPressed: (){
                     Get.back();
-                  }, icon: FaIcon(FontAwesomeIcons.circleArrowLeft,size: 30,color: Colors.white,))
+                  }, icon: const FaIcon(FontAwesomeIcons.circleArrowLeft,size: 30,color: Colors.white,))
                 ],
               ),
               title: Text(
@@ -42,7 +42,7 @@ class FoodPlanningPage extends GetView<FoodPlannigController> {
                     ),
                   ),
                 ),
-                Padding(padding: EdgeInsets.symmetric(horizontal: 10),
+                Padding(padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   children: [
                     Label(title: 'Today'),

@@ -39,20 +39,18 @@ class _AutocompleteTextFieldState extends State<AutocompleteTextField> {
             fetchSuggestions(value);
           },
         ),
-        Container(
-          child: Column(
-            children: suggestions.map((e)=>ListTile(
-              title: Text(e.properties.city),
-              onTap: () {
+        Column(
+          children: suggestions.map((e)=>ListTile(
+            title: Text(e.properties.city),
+            onTap: () {
 
-                setState(() {
-                  _controller.text = e.properties.country;
-                  widget.onChanged(e.properties);
-                });
+              setState(() {
+                _controller.text = e.properties.country;
+                widget.onChanged(e.properties);
+              });
 
-              },
-            )).toList(),
-          ),
+            },
+          )).toList(),
         ),
       ],
     );

@@ -15,7 +15,7 @@ class TankingPage extends GetView<TankingController> {
       child: Scaffold(
         body: Center(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -39,9 +39,9 @@ class TankingPage extends GetView<TankingController> {
                       color: Constants.defaultHeaderColor,
                       fontWeight: FontWeight.w900,
                     )),
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 45),
+                  padding: const EdgeInsets.symmetric(horizontal: 45),
                   child: Text(
                       'Celebrate with your friends and start saving meals togethers',
                       textAlign: TextAlign.center,
@@ -56,16 +56,16 @@ class TankingPage extends GetView<TankingController> {
                   color: Constants.defaultHeaderColor,
                   fontWeight: FontWeight.w100,
                 )),
-                SizedBox(height: 20,),
+                const SizedBox(height: 20,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     FaIcon(FontAwesomeIcons.facebook,color: Constants.buttonColor,),
-                    SizedBox(width: 20,),
+                    const SizedBox(width: 20,),
                     FaIcon(FontAwesomeIcons.telegram,color: Constants.buttonColor,),
-                    SizedBox(width: 20,),
+                    const SizedBox(width: 20,),
                     FaIcon(FontAwesomeIcons.whatsapp,color: Constants.buttonColor,),
-                    SizedBox(width: 20,),
+                    const SizedBox(width: 20,),
                     FaIcon(FontAwesomeIcons.snapchat,color: Constants.buttonColor,),
                   ],
                 )

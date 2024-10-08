@@ -50,18 +50,18 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(width: 16),
+            const SizedBox(width: 16),
             Row(
               children: [
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
                           description,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
                         SizedBox(
@@ -69,7 +69,7 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
                         ),
                         Text(
                           'Collect today: $time',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 14,
                             color: Colors.grey,
                           ),
@@ -89,7 +89,7 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
                                       fontSize: 15,
                                       color: Constants.defaultHeaderColor),
                                 ),
-                                SizedBox(width: 8),
+                                const SizedBox(width: 8),
                               ],
 
                             ),

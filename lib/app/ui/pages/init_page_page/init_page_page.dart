@@ -26,7 +26,7 @@ class InitPagePage extends GetView<InitPageController> {
                 onPressed: () {
                   Get.toNamed(AppRoutes.SAVE_FOOD_FORM);
                 },
-                child:FaIcon(FontAwesomeIcons.bowlFood,color: Colors.white,),
+                child:const FaIcon(FontAwesomeIcons.bowlFood,color: Colors.white,),
                 backgroundColor: Constants.buttonColor
               //params
             ),

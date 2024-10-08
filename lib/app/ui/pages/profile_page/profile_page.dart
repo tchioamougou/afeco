@@ -11,16 +11,16 @@ import '../../layouts/main/main_layout.dart';
 import '../../../controllers/profile_controller.dart';
 
 class ProfilePage extends GetView<ProfileController> {
-  const ProfilePage({Key? key}) : super(key: key);
+  const ProfilePage({super.key});
   @override
   Widget build(BuildContext context) {
     return MainLayout(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
             child: Column(children: [
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               Center(
                 child: Text(
                   'Your Impact',
@@ -30,20 +30,20 @@ class ProfilePage extends GetView<ProfileController> {
                       fontSize: 30.sp),
                 ),
               ),
-              SizedBox(height: 20,),
-              Row(
+              const SizedBox(height: 20,),
+              const Row(
                 children: [
                   CustomCardImp(title: 'Money saved', description: 'XAF 2000', imageUrl: ''),
                   CustomCardImp(title: 'CO2E saved', description: '20 IBS', imageUrl: '')
                 ],
               ),
-              SizedBox(height: 20,),
-              CustomCardDefault(title: 'Surprise Badge Saved', description: '23', imageUrl: 'imageUrl'),
-              SizedBox(height: 10,),
-              CustomCardDefault(title: 'Your Excess food saved', description: '23', imageUrl: 'imageUrl'),
-              SizedBox(height: 10,),
-              Divider( height: 10,thickness: 2,color: Colors.grey,),
-              SizedBox(height: 10,),
+              const SizedBox(height: 20,),
+              const CustomCardDefault(title: 'Surprise Badge Saved', description: '23', imageUrl: 'imageUrl'),
+              const SizedBox(height: 10,),
+              const CustomCardDefault(title: 'Your Excess food saved', description: '23', imageUrl: 'imageUrl'),
+              const SizedBox(height: 10,),
+              const Divider( height: 10,thickness: 2,color: Colors.grey,),
+              const SizedBox(height: 10,),
               CustomListStile(title: 'Account Details', icon: FontAwesomeIcons.user, onPress: (){
                 Get.toNamed(AppRoutes.ACCOUNT_DETAILS);
               }),

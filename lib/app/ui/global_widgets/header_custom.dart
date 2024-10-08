@@ -27,7 +27,7 @@ class HeaderCustom extends StatelessWidget {
           ) ,
         )
         ,
-        SizedBox(
+        const SizedBox(
           width: 10,
         ),
         Expanded(
@@ -69,7 +69,7 @@ class HeaderCustom extends StatelessWidget {
                 children: [
                   IconButton.outlined(
                     onPressed: () {},
-                    icon: FaIcon(
+                    icon: const FaIcon(
                       FontAwesomeIcons.bell,
                       color: Colors.white,
                       size: 25,
@@ -80,7 +80,7 @@ class HeaderCustom extends StatelessWidget {
                           borderRadius: BorderRadius.circular(100),
                         ),
                         padding:
-                        EdgeInsets.symmetric(horizontal: 17, vertical: 15)),
+                        const EdgeInsets.symmetric(horizontal: 17, vertical: 15)),
                   ),
                   Positioned(
                       top: 2,

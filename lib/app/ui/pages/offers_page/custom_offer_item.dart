@@ -73,7 +73,7 @@ class CustomOfferItem extends StatelessWidget {
                               ),
                               Text(
                                 title,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
                                     color: Colors.white),
@@ -84,18 +84,18 @@ class CustomOfferItem extends StatelessWidget {
                       ))
                 ],
               ),
-              SizedBox(width: 16),
+              const SizedBox(width: 16),
               Row(
                 children: [
                   Expanded(
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             description,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
@@ -103,7 +103,7 @@ class CustomOfferItem extends StatelessWidget {
                           ),
                           Text(
                             'Collect today: $time',
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 14,
                               color: Colors.grey,
                             ),
@@ -116,12 +116,12 @@ class CustomOfferItem extends StatelessWidget {
                             children: [
                               Text(
                                 price,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontWeight: FontWeight.w900,
                                     fontSize: 12,
                                     color: Colors.grey),
                               ),
-                              SizedBox(width: 8),
+                              const SizedBox(width: 8),
                             ],
                           ),
                           Row(
@@ -131,11 +131,11 @@ class CustomOfferItem extends StatelessWidget {
                                 children: [
                                   Icon(Icons.star,
                                       color: Constants.defaultHeaderColor),
-                                  Text('5.0'),
-                                  SizedBox(width: 4),
-                                  Text('|',style: TextStyle(fontSize: 20),),
-                                  SizedBox(width: 4),
-                                  Text('200m'),
+                                  const Text('5.0'),
+                                  const SizedBox(width: 4),
+                                  const Text('|',style: TextStyle(fontSize: 20),),
+                                  const SizedBox(width: 4),
+                                  const Text('200m'),
                                 ],
                               ),
                               Row(
@@ -147,7 +147,7 @@ class CustomOfferItem extends StatelessWidget {
                                         fontSize: 20,
                                         color: Constants.defaultHeaderColor),
                                   ),
-                                  SizedBox(width: 8),
+                                  const SizedBox(width: 8),
                                 ],
                               ),
                             ],

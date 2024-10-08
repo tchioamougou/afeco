@@ -94,7 +94,7 @@ class CustomCardItem extends StatelessWidget {
                                ),
                                Text(
                                  title,
-                                 style: TextStyle(
+                                 style: const TextStyle(
                                      fontWeight: FontWeight.bold,
                                      fontSize: 16,
                                      color: Colors.white),
@@ -105,18 +105,18 @@ class CustomCardItem extends StatelessWidget {
                        ))
                  ],
                ),
-               SizedBox(width: 16),
+               const SizedBox(width: 16),
                Row(
                  children: [
                    Expanded(
                      child: Padding(
-                       padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+                       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
                        child: Column(
                          crossAxisAlignment: CrossAxisAlignment.start,
                          children: [
                            Text(
                              description,
-                             style: TextStyle(
+                             style: const TextStyle(
                                  fontSize: 14, fontWeight: FontWeight.bold),
                            ),
                            SizedBox(
@@ -124,7 +124,7 @@ class CustomCardItem extends StatelessWidget {
                            ),
                            Text(
                              'Collect today: $time',
-                             style: TextStyle(
+                             style: const TextStyle(
                                fontSize: 14,
                                color: Colors.grey,
                              ),
@@ -137,12 +137,12 @@ class CustomCardItem extends StatelessWidget {
                              children: [
                                Text(
                                  price,
-                                 style: TextStyle(
+                                 style: const TextStyle(
                                      fontWeight: FontWeight.w900,
                                      fontSize: 12,
                                      color: Colors.grey),
                                ),
-                               SizedBox(width: 8),
+                               const SizedBox(width: 8),
                              ],
                            ),
                            Row(
@@ -152,9 +152,9 @@ class CustomCardItem extends StatelessWidget {
                                  children: [
                                    Icon(Icons.star,
                                        color: Constants.defaultHeaderColor),
-                                   Text('5.0'),
-                                   SizedBox(width: 8),
-                                   Text('200m'),
+                                   const Text('5.0'),
+                                   const SizedBox(width: 8),
+                                   const Text('200m'),
                                  ],
                                ),
                                Row(
@@ -166,7 +166,7 @@ class CustomCardItem extends StatelessWidget {
                                          fontSize: 20,
                                          color: Constants.defaultHeaderColor),
                                    ),
-                                   SizedBox(width: 8),
+                                   const SizedBox(width: 8),
                                  ],
                                ),
                              ],

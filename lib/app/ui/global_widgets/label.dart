@@ -11,7 +11,7 @@ class Label extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 5,vertical: 10),
+      padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 10),
       child: Row(
         children: [
           Text(

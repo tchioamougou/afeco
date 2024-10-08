@@ -16,7 +16,7 @@ class LandingPage extends GetView<LandingController> {
         child: Scaffold(
           backgroundColor: Colors.white,
           body: Padding(
-            padding: EdgeInsets.fromLTRB(10, 35, 10, 30),
+            padding: const EdgeInsets.fromLTRB(10, 35, 10, 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,11 +34,11 @@ class LandingPage extends GetView<LandingController> {
                 ),
                 Column(
                   children: [
-                    CustomButton(onPressed: (){}, text: 'Continue with Google', backgroundColor: Colors.blueAccent, icon: FaIcon(FontAwesomeIcons.google,color: Colors.white,)),
+                    CustomButton(onPressed: (){}, text: 'Continue with Google', backgroundColor: Colors.blueAccent, icon: const FaIcon(FontAwesomeIcons.google,color: Colors.white,)),
                     SizedBox(height: 20.h,),
                     CustomButton(onPressed: (){
                       Get.offAllNamed(AppRoutes.INIT_PAGE);
-                    }, text: 'Continue with email', backgroundColor: Constants.buttonColor,icon: Icon(Icons.email,color: Colors.white,),)
+                    }, text: 'Continue with email', backgroundColor: Constants.buttonColor,icon: const Icon(Icons.email,color: Colors.white,),)
                   ],
                 )
               ],
