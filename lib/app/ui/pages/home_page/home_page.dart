@@ -1,3 +1,4 @@
+import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_card_item.dart';
 import 'package:afeco/app/ui/global_widgets/custom_category_action.dart';
 import 'package:afeco/app/ui/global_widgets/custom_save_food_neighbourdhood_item.dart';
@@ -82,7 +83,12 @@ class HomePage extends GetView<HomeController> {
                   SingleChildScrollView(
                     scrollDirection: Axis.horizontal,
                     child: Row(
-                      children: controller.quickActions.map((e)=>CustomCategoryAction(onPress: (){}, title: e['title']!,image: e['image']!,)).toList(),
+                      children: controller.quickActions.map((e)=>CustomCategoryAction(onPress: (){
+                        print('click here');
+                        if(e['title']=='Planning'){
+                          Get.toNamed(AppRoutes.FOOD_PLANNING);
+                        }
+                      }, title: e['title']!,image: e['image']!,)).toList(),
                     ),
                   ),
                   SizedBox(

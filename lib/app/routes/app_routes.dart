@@ -13,4 +13,5 @@
   static const PROFILE = '/profile';
   static const OFFERS = '/offers';
   static const ACCOUNT_DETAILS = '/account-details';
+  static const FOOD_PLANNING = '/food-planning';
 }

@@ -50,10 +50,10 @@ class InitPagePage extends GetView<InitPageController> {
 
       Widget getFooter() {
         List<IconData> iconItems = [
-          Icons.adjust,
-          Icons.map,
-          Icons.tag,
-          Icons.person_pin
+          FontAwesomeIcons.house,
+          FontAwesomeIcons.mapLocation,
+          FontAwesomeIcons.store,
+          FontAwesomeIcons.circleUser
         ];
 
         return AnimatedBottomNavigationBar(
@@ -64,7 +64,7 @@ class InitPagePage extends GetView<InitPageController> {
           gapLocation: GapLocation.center,
           notchSmoothness: NotchSmoothness.softEdge,
           leftCornerRadius: 10,
-          iconSize: 28.sp,
+          iconSize: 22.sp,
           rightCornerRadius: 10,
           onTap: (index) {
             controller.selectedTab(index);

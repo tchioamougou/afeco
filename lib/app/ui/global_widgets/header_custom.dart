@@ -3,6 +3,7 @@ import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HeaderCustom extends StatelessWidget {
   const HeaderCustom({Key? key}) : super(key: key);
@@ -64,21 +65,29 @@ class HeaderCustom extends StatelessWidget {
           flex: 2,
           child: Column(
             children: [
-              IconButton.outlined(
-                onPressed: () {},
-                icon: FaIcon(
-                  FontAwesomeIcons.ring,
-                  color: Colors.white,
-                  size: 25,
-                ),
-                style: ElevatedButton.styleFrom(
-                    backgroundColor:Constants.defaultBorderColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(100),
+              Stack(
+                children: [
+                  IconButton.outlined(
+                    onPressed: () {},
+                    icon: FaIcon(
+                      FontAwesomeIcons.bell,
+                      color: Colors.white,
+                      size: 25,
                     ),
-                    padding:
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor:Constants.defaultBorderColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(100),
+                        ),
+                        padding:
                         EdgeInsets.symmetric(horizontal: 17, vertical: 15)),
-              ),
+                  ),
+                  Positioned(
+                      top: 2,
+                      right: 10,
+                      child: Text('20',style: GoogleFonts.poppins(fontSize: 15, color: Colors.red, fontWeight: FontWeight.bold),))
+                ],
+              )
             ],
           ),
         ),

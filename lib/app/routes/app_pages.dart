@@ -1,4 +1,6 @@
-import '../bindings/account_details_binding.dart';
+import '../bindings/food_plannig_binding.dart';
+import '../ui/pages/food_plannig_page/food_planning_page.dart';
+      import '../bindings/account_details_binding.dart';
 import '../ui/pages/account_details_page/account_details_page.dart';
       import '../bindings/offers_binding.dart';
 import '../ui/pages/offers_page/offers_page.dart';
@@ -109,6 +111,12 @@ class AppPages {
       name: AppRoutes.ACCOUNT_DETAILS,
       page: () => const AccountDetailsPage(),
       binding: AccountDetailsBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.FOOD_PLANNING,
+      page: () => const FoodPlanningPage(),
+      binding: FoodPlannigBinding(),
       transition: _defaultTransition,
     ), 
 ];

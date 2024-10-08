@@ -17,24 +17,27 @@ class CustomCategoryAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 5,vertical: 10),
-          padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-          width: 70,
-          height: 70,
-          child: Image.asset(image),
-          decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(200)),
-              color: Constants.defaultBorderColor.withOpacity(0.2)),
-        ),
-        Center(
-          child: Container(
-            width: 100,
-            child: Text(title,maxLines: 1,overflow: TextOverflow.ellipsis,textAlign: TextAlign.center, style: GoogleFonts.poppins(), ),
+    return InkWell(
+      onTap: onPress,
+      child: Column(
+        children: [
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 5,vertical: 10),
+            padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+            width: 70,
+            height: 70,
+            child: Image.asset(image),
+            decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(200)),
+                color: Constants.defaultBorderColor.withOpacity(0.2)),
           ),
-        ),
-      ],
+          Center(
+            child: Container(
+              width: 100,
+              child: Text(title,maxLines: 1,overflow: TextOverflow.ellipsis,textAlign: TextAlign.center, style: GoogleFonts.poppins(), ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

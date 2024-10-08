@@ -7,12 +7,13 @@ class CustomListStile extends StatelessWidget {
   final String title;
   final IconData icon;
   final VoidCallback onPress;
-
+  final Widget? trailing;
   const CustomListStile({
     super.key,
     required this.title,
     required this.icon,
-    required this.onPress
+    required this.onPress,
+    this.trailing
   });
 
   @override
@@ -31,6 +32,7 @@ class CustomListStile extends StatelessWidget {
             color: Constants.defaultHeaderColor,
             fontSize: 20.sp),),
         leading: FaIcon(icon, color: Constants.defaultHeaderColor,),
+        trailing:trailing,
       ),
     );
   }

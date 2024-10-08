@@ -19,21 +19,28 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
       child: Stack(
         children: [
           Obx(() => Scaffold(
-            appBar: AppBar(
-                backgroundColor: Constants.defaultHeaderColor,
-                leading: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    IconButton(onPressed: (){
-                      Get.back();
-                    }, icon: FaIcon(FontAwesomeIcons.circleArrowLeft,size: 30,color: Colors.white,))
-                  ],
-                ),
-                title: Text(
-                  'Save food',
-                  style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
-                )),
+                appBar: AppBar(
+                    backgroundColor: Constants.defaultHeaderColor,
+                    leading: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              Get.back();
+                            },
+                            icon: FaIcon(
+                              FontAwesomeIcons.circleArrowLeft,
+                              size: 30,
+                              color: Colors.white,
+                            ))
+                      ],
+                    ),
+                    title: Text(
+                      'Save food',
+                      style: GoogleFonts.poppins(
+                          fontSize: 20, color: Colors.white),
+                    )),
                 backgroundColor: Colors.white,
                 body: Padding(
                   padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
@@ -50,20 +57,26 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
                         height: 20,
                       ),
                       CustomInput(
-                        helper: 'List all the products present in your package, separate the product with ;  ',
-                          label: 'Contains',
-                          onValueChanged: (val) {
-                            controller.sharing.value = val;
-                          }, hintText: 'list of products',)
+                        helper:
+                            'List all the products present in your package, separate the product with ;  ',
+                        label: 'Contains',
+                        onValueChanged: (val) {
+                          controller.sharing.value = val;
+                        },
+                        hintText: 'list of products',
+                      )
                     ],
                   ),
                 ),
               )),
           Positioned(
               bottom: 0,
-              child: CustomBottomAction(onPressed: (){
-                Get.toNamed(AppRoutes.TANKING);
-              }, text: 'Save', backgroundColor:  Constants.buttonColor))
+              child: CustomBottomAction(
+                  onPressed: () {
+                    Get.toNamed(AppRoutes.TANKING);
+                  },
+                  text: 'Save',
+                  backgroundColor: Constants.buttonColor))
         ],
       ),
     );
