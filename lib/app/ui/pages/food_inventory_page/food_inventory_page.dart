@@ -3,6 +3,7 @@ import 'package:afeco/app/ui/global_widgets/custom_date_pick.dart';
 import 'package:afeco/app/ui/global_widgets/custom_input.dart';
 import 'package:afeco/app/ui/global_widgets/custom_select_item.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
+import 'package:afeco/app/ui/pages/food_inventory_page/food_inventory_item.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -42,7 +43,9 @@ class FoodInventoryPage extends GetView<FoodInventoryController> {
           ),
           actions: [
             CustomButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.back();
+                },
                 text: 'Update planning',
                 backgroundColor: Colors.deepOrange)
           ],
@@ -52,14 +55,7 @@ class FoodInventoryPage extends GetView<FoodInventoryController> {
             itemCount: controller.foods.length,
             itemBuilder: (context, index) {
               final aliment = controller.foods[index];
-              return ListTile(
-                title: Text(aliment.name),
-                subtitle: Text('Expire le : ${aliment.expirationDate}'),
-                trailing: IconButton(
-                  icon: Icon(Icons.delete),
-                  onPressed: () => controller.removeFood(index),
-                ),
-              );
+              return FoodInventoryItem(onDelete:(){}, foodModel: aliment, image: 'assets/image/offer.png');
             },
           );
         }),
@@ -81,22 +77,35 @@ class FoodInventoryPage extends GetView<FoodInventoryController> {
     Get.bottomSheet(
         SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Label(title: 'Add New Food'),
                 CustomInput(
-                    label: "Name", onValueChanged: (val) {}, hintText: 'Text'),
+                    defaultValue: controller.foodName.value,
+                    label: "Name", onValueChanged: (val) {
+                      controller.foodName.value=val;
+                }, hintText: 'Text'),
                 CustomInput(
                     label: "Quantity",
-                    onValueChanged: (val) {},
+                    defaultValue: controller.quantity.value,
+                    onValueChanged: (val) {
+                      controller.quantity.value=val;
+                    },
                     hintText: 'Text'),
                 CustomSelectItem(
-                    label: 'Category', options: ['Friot'], onChanged: (va) {}),
+                    label: 'Category', options: controller.foodsCategories,
+                    defaultValue: controller.category.value,
+                    onChanged: (val) {
+                  controller.category.value=val;
+                }),
                 CustomDatePick(
                     label: 'Expired Date',
-                    onValueChanged: (val) {},
+                    defaultValue:controller.expiredDate.value,
+                    onValueChanged: (val) {
+                      controller.expiredDate.value=val;
+                    },
                     hintText: "10/12/2022"),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -109,7 +118,7 @@ class FoodInventoryPage extends GetView<FoodInventoryController> {
                         backgroundColor: Colors.deepOrange),
                     CustomButton(
                         onPressed: () {
-                          Get.back();
+                         controller.addFood();
                         },
                         text: 'Save',
                         backgroundColor: Constants.buttonColor)

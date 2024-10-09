@@ -6,7 +6,8 @@ import 'package:intl/intl.dart';
 class CustomDatePick extends StatefulWidget {
   final String label;
   final bool isRequired;
-  final ValueChanged<String> onValueChanged; // Use OnValueChanged type
+  final ValueChanged<DateTime> onValueChanged;// Use OnValueChanged type
+  final DateTime? defaultValue;
   final String hintText;
 
   const CustomDatePick({
@@ -15,6 +16,7 @@ class CustomDatePick extends StatefulWidget {
     required this.onValueChanged,
     required this.hintText,
     this.isRequired = false,
+    this.defaultValue
   });
 
   @override
@@ -25,6 +27,8 @@ class _CustomDatePickState extends State<CustomDatePick> {
   @override
   Widget build(BuildContext context) {
     Rx<TextEditingController> controller =  TextEditingController().obs;
+    final f =  DateFormat('dd-MM-yyyy');
+    controller.value.text = widget.defaultValue!=null? f.format(widget.defaultValue!):"";
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -58,7 +62,7 @@ class _CustomDatePickState extends State<CustomDatePick> {
               {
                 final f =  DateFormat('dd-MM-yyyy');
                  controller.value.text = f.format(pickedDate);
-                widget.onValueChanged(controller.value.text);
+                widget.onValueChanged(pickedDate);
               }
             },
             controller: controller.value,

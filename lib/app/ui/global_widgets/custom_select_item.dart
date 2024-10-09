@@ -8,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomSelectItem extends StatelessWidget {
   final String label;
   final List<String> options;
-  final String? selectedValue;
+  final String? defaultValue;
   final String? hintText;
   final String? help;
   final ValueChanged<String> onChanged;
@@ -16,7 +16,7 @@ class CustomSelectItem extends StatelessWidget {
     super.key,
     required this.label,
     required this.options,
-    this.selectedValue,
+    this.defaultValue,
     this.hintText,
     this.help,
     required this.onChanged,
@@ -24,7 +24,8 @@ class CustomSelectItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    Rx<String?> selectedValue = defaultValue.obs;
+    return Obx(()=>Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -42,7 +43,7 @@ class CustomSelectItem extends StatelessWidget {
                 context: context,
                 builder: (context) => Padding(
                   padding:
-                      EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
+                  EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -78,23 +79,24 @@ class CustomSelectItem extends StatelessWidget {
                             title: Text(
                               el,
                               style:
-                                  (selectedValue != null && selectedValue == el)
-                                      ? TextStyle(
-                                          fontWeight: FontWeight.w900,
-                                          fontSize: 18,
-                                          color: Constants.defaultHeaderColor)
-                                      : null,
+                              (selectedValue.value != null && selectedValue.value == el)
+                                  ? TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                  fontSize: 18,
+                                  color: Constants.defaultHeaderColor)
+                                  : null,
                             ), // Assuming options have a String representation
                             trailing:
-                                (selectedValue != null && selectedValue == el)
-                                    ? Icon(
-                                        Icons.check_circle,
-                                        size: 30,
-                                        color: Constants.buttonColor,
-                                      )
-                                    : null,
+                            (selectedValue.value != null && selectedValue.value == el)
+                                ? Icon(
+                              Icons.check_circle,
+                              size: 30,
+                              color: Constants.buttonColor,
+                            )
+                                : null,
                             onTap: () {
                               onChanged(el);
+                              selectedValue.value = el;
                               Navigator.pop(context);
                             },
                           );
@@ -116,15 +118,15 @@ class CustomSelectItem extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (selectedValue != null)
+                if (selectedValue.value != null)
                   Text(
-                    selectedValue!,
-                    style: TextStyle(fontSize: 17),
+                    selectedValue.value!,
+                    style: const TextStyle(fontSize: 17),
                   )
                 else
                   Text(
                     hintText ?? '',
-                    style: TextStyle(fontSize: 17),
+                    style: const TextStyle(fontSize: 17),
                   ),
                 const Icon(Icons.arrow_drop_down)
               ],
@@ -136,6 +138,6 @@ class CustomSelectItem extends StatelessWidget {
           height: 15.h,
         ),
       ],
-    );
+    ));
   }
 }
