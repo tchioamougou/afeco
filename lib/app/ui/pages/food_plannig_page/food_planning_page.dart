@@ -1,3 +1,5 @@
+import 'package:afeco/app/routes/app_routes.dart';
+import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
 import 'package:afeco/app/ui/pages/food_plannig_page/food_planning_item.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
@@ -30,7 +32,11 @@ class FoodPlanningPage extends GetView<FoodPlannigController> {
               title: Text(
                 'Food Planning',
                 style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
-              )),
+              ),
+          actions: [CustomButton(onPressed: (){
+            Get.toNamed(AppRoutes.FOOD_INVENTORY);
+          }, text: 'Food inventory', backgroundColor: Colors.deepOrange)],
+          ),
           body:SingleChildScrollView(
             child: Column(
               children: [
@@ -45,7 +51,6 @@ class FoodPlanningPage extends GetView<FoodPlannigController> {
                 Padding(padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   children: [
-                    Label(title: 'Today'),
                     Label(title: 'Breakfast'),
                     Column(
                       children: List.generate(2, (i)=>FoodPlanningItem(onPress: (){}, title: 'Couscous sauce gombo', image: 'assets/image/save_food.png',cal: "10",time: "10",)),

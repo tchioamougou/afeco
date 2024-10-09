@@ -31,7 +31,7 @@ class CustomCardItem extends StatelessWidget {
         Get.toNamed(AppRoutes.OFFER_DETAILS);
       },
        child: Card(
-         elevation: 30,
+         elevation: 1,
          child: Container(
            width: MediaQuery.sizeOf(context).width * 0.7,
            decoration: BoxDecoration(

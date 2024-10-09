@@ -1,3 +1,4 @@
+import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/layouts/main/main_layout.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HeaderCustom extends StatelessWidget {
-  const HeaderCustom({Key? key}) : super(key: key);
+  const HeaderCustom({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +69,9 @@ class HeaderCustom extends StatelessWidget {
               Stack(
                 children: [
                   IconButton.outlined(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.NOTIFICATIONS);
+                    },
                     icon: const FaIcon(
                       FontAwesomeIcons.bell,
                       color: Colors.white,

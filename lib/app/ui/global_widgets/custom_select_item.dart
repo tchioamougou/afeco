@@ -9,14 +9,18 @@ class CustomSelectItem extends StatelessWidget {
   final String label;
   final List<String> options;
   final String? selectedValue;
+  final String? hintText;
+  final String? help;
   final ValueChanged<String> onChanged;
   const CustomSelectItem({
-    Key? key,
+    super.key,
     required this.label,
     required this.options,
     this.selectedValue,
+    this.hintText,
+    this.help,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -65,12 +69,22 @@ class CustomSelectItem extends StatelessWidget {
                           ),
                         ],
                       ),
-
-                      Label(title: label,),
+                      Label(
+                        title: label,
+                      ),
                       Column(
                         children: options.map((el) {
                           return ListTile(
-                            title: Text(el,style:(selectedValue != null && selectedValue == el)?TextStyle(fontWeight: FontWeight.w900, fontSize: 18, color: Constants.defaultHeaderColor):null ,), // Assuming options have a String representation
+                            title: Text(
+                              el,
+                              style:
+                                  (selectedValue != null && selectedValue == el)
+                                      ? TextStyle(
+                                          fontWeight: FontWeight.w900,
+                                          fontSize: 18,
+                                          color: Constants.defaultHeaderColor)
+                                      : null,
+                            ), // Assuming options have a String representation
                             trailing:
                                 (selectedValue != null && selectedValue == el)
                                     ? Icon(
@@ -96,21 +110,31 @@ class CustomSelectItem extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
               border: Border.all(color: Colors.grey),
-              color: Colors.grey.withOpacity(0.2),
+              color: Colors.grey.withOpacity(0.01),
             ),
             padding: EdgeInsets.all(15.h),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 if (selectedValue != null)
-                  Text(selectedValue!)
+                  Text(
+                    selectedValue!,
+                    style: TextStyle(fontSize: 17),
+                  )
                 else
-                  Text("Select Account".tr),
+                  Text(
+                    hintText ?? '',
+                    style: TextStyle(fontSize: 17),
+                  ),
                 const Icon(Icons.arrow_drop_down)
               ],
             ),
           ),
-        )
+        ),
+        if (help != null && help!.isNotEmpty) Text(help!,style: const TextStyle(color: Colors.grey),),
+        SizedBox(
+          height: 15.h,
+        ),
       ],
     );
   }

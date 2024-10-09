@@ -54,7 +54,7 @@ class FoodPlanningItem extends StatelessWidget {
                     const SizedBox(height: 5,),
                     Row(
                       children: [
-                        FaIcon(FontAwesomeIcons.telegram, size: 15, color: Constants.buttonColor,),
+                        FaIcon(FontAwesomeIcons.water, size: 15, color: Constants.buttonColor,),
                         const SizedBox(width: 5,),
                         Text('$cal Calories',),
                         const SizedBox(width: 10,),

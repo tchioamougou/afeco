@@ -47,6 +47,7 @@ class ProfilePage extends GetView<ProfileController> {
               CustomListStile(title: 'Account Details', icon: FontAwesomeIcons.user, onPress: (){
                 Get.toNamed(AppRoutes.ACCOUNT_DETAILS);
               }),
+              CustomListStile(title: 'Actions History', icon: FontAwesomeIcons.history, onPress: (){}),
               CustomListStile(title: 'Help Centers', icon: FontAwesomeIcons.message, onPress: (){}),
               CustomListStile(title: 'Invite Friends', icon: FontAwesomeIcons.facebookF, onPress: (){}),
               CustomListStile(title: 'Privacy', icon: FontAwesomeIcons.keybase, onPress: (){})

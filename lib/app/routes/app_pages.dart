@@ -1,4 +1,10 @@
-import '../bindings/food_plannig_binding.dart';
+import '../bindings/food_inventory_binding.dart';
+import '../ui/pages/food_inventory_page/food_inventory_page.dart';
+      import '../bindings/save_food_detail_binding.dart';
+import '../ui/pages/save_food_detail_page/save_food_detail_page.dart';
+      import '../bindings/notifications_binding.dart';
+import '../ui/pages/notifications_page/notifications_page.dart';
+      import '../bindings/food_plannig_binding.dart';
 import '../ui/pages/food_plannig_page/food_planning_page.dart';
       import '../bindings/account_details_binding.dart';
 import '../ui/pages/account_details_page/account_details_page.dart';
@@ -117,6 +123,24 @@ class AppPages {
       name: AppRoutes.FOOD_PLANNING,
       page: () => const FoodPlanningPage(),
       binding: FoodPlannigBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.NOTIFICATIONS,
+      page: () => const NotificationsPage(),
+      binding: NotificationsBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.SAVE_FOOD_DETAIL,
+      page: () => const SaveFoodDetailPage(),
+      binding: SaveFoodDetailBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.FOOD_INVENTORY,
+      page: () => const FoodInventoryPage(),
+      binding: FoodInventoryBinding(),
       transition: _defaultTransition,
     ), 
 ];

@@ -14,4 +14,7 @@
   static const OFFERS = '/offers';
   static const ACCOUNT_DETAILS = '/account-details';
   static const FOOD_PLANNING = '/food-planning';
+  static const NOTIFICATIONS = '/notifications';
+  static const SAVE_FOOD_DETAIL = '/save-food-detail';
+  static const FOOD_INVENTORY = '/food-inventory';
 }

@@ -12,7 +12,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import '../../../controllers/init_page_controller.dart';
 
 class InitPagePage extends GetView<InitPageController> {
-       InitPagePage ({Key? key}) : super(key: key);
+       InitPagePage ({super.key});
   @override
   Widget build(BuildContext context) {
     return MainLayout(

@@ -1,6 +1,8 @@
+import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/layouts/main/main_layout.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
   final String title;
@@ -25,7 +27,7 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 30,
+      elevation: 1,
       child: Container(
         width: MediaQuery.sizeOf(context).width * 0.5,
         decoration: BoxDecoration(
@@ -93,7 +95,9 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
                               ],
 
                             ),
-                            IconButton(onPressed: (){}, icon: Icon(Icons.add_circle,color: Constants.defaultBorderColor,size: 30,))
+                            IconButton(onPressed: (){
+                              Get.toNamed(AppRoutes.SAVE_FOOD_DETAIL);
+                            }, icon: Icon(Icons.add_circle,color: Constants.defaultBorderColor,size: 30,))
 
                           ],
                         )

@@ -1,3 +1,4 @@
+import 'package:afeco/app/controllers/init_page_controller.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_card_item.dart';
 import 'package:afeco/app/ui/global_widgets/custom_category_action.dart';
@@ -16,6 +17,7 @@ class HomePage extends GetView<HomeController> {
   const HomePage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    InitPageController initPageController = Get.find();
     return MainLayout(
       child: Scaffold(
         backgroundColor: Colors.grey.shade100,
@@ -84,9 +86,13 @@ class HomePage extends GetView<HomeController> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       children: controller.quickActions.map((e)=>CustomCategoryAction(onPress: (){
-                        print('click here');
                         if(e['title']=='Planning'){
                           Get.toNamed(AppRoutes.FOOD_PLANNING);
+                        }else if(e['title']=='Offers'){
+                          initPageController.selectedTab(2);
+                        }
+                        else if(e['title']=='C20 Views'){
+                          initPageController.selectedTab(3);
                         }
                       }, title: e['title']!,image: e['image']!,)).toList(),
                     ),

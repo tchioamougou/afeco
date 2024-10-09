@@ -29,7 +29,7 @@ class CustomOfferItem extends StatelessWidget {
         Get.toNamed(AppRoutes.OFFER_DETAILS);
       },
       child: Card(
-        elevation: 30,
+        elevation: 1,
         child: Container(
           width: MediaQuery.sizeOf(context).width * 0.91,
           decoration: BoxDecoration(
@@ -84,7 +84,6 @@ class CustomOfferItem extends StatelessWidget {
                       ))
                 ],
               ),
-              const SizedBox(width: 16),
               Row(
                 children: [
                   Expanded(

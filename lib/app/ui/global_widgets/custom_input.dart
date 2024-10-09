@@ -11,6 +11,7 @@ class CustomInput extends StatelessWidget {
   final TextInputType keyboardType;
   final int? maxLength;
   final String? helper;
+  final int maxLines;
 
   const CustomInput({Key? key,
     required this.label,
@@ -19,7 +20,7 @@ class CustomInput extends StatelessWidget {
     this.isRequired = false,
     this.keyboardType = TextInputType.text,
     this.maxLength,
-    this.helper
+    this.helper,this.maxLines = 1
   }) : super(key: key);
 
   @override
@@ -31,7 +32,7 @@ class CustomInput extends StatelessWidget {
           text: TextSpan(
             text:
             label,
-            style: GoogleFonts.robotoSerif(color: Colors.black, fontSize: 15),
+              style: GoogleFonts.robotoSerif(color: Colors.black, fontSize: 15),
             children: [
               TextSpan(
                   text: (isRequired) ? '*' : '',
@@ -44,16 +45,16 @@ class CustomInput extends StatelessWidget {
           onChanged: (value) => onValueChanged(value), // Pass value to onValueChanged
           keyboardType: keyboardType,
           maxLength: maxLength,
-          maxLines: 1,
+          maxLines: maxLines,
           decoration: InputDecoration(
             helper:helper!=null?Text(helper!, style: const TextStyle(color: Colors.grey),):null,
             focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Constants.defaultBorderColor, width: 1.5),
-              borderRadius: BorderRadius.circular(5)
+              borderSide: BorderSide(color: Constants.defaultBorderColor),
+              borderRadius: BorderRadius.circular(8)
             ),
             enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.grey, width: 1.5),
-                borderRadius: BorderRadius.circular(5)
+              borderSide: const BorderSide(color: Colors.grey),
+                borderRadius: BorderRadius.circular(8)
             ),
             hintText: hintText,
             filled: true,
