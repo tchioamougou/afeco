@@ -17,4 +17,5 @@
   static const NOTIFICATIONS = '/notifications';
   static const SAVE_FOOD_DETAIL = '/save-food-detail';
   static const FOOD_INVENTORY = '/food-inventory';
+  static const ONBOARDING = '/onboarding';
 }

@@ -1,4 +1,6 @@
-import '../bindings/food_inventory_binding.dart';
+import '../bindings/onboarding_binding.dart';
+import '../ui/pages/onboarding_page/onboarding_page.dart';
+      import '../bindings/food_inventory_binding.dart';
 import '../ui/pages/food_inventory_page/food_inventory_page.dart';
       import '../bindings/save_food_detail_binding.dart';
 import '../ui/pages/save_food_detail_page/save_food_detail_page.dart';
@@ -141,6 +143,12 @@ class AppPages {
       name: AppRoutes.FOOD_INVENTORY,
       page: () => const FoodInventoryPage(),
       binding: FoodInventoryBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.ONBOARDING,
+      page: () => const OnboardingPage(),
+      binding: OnboardingBinding(),
       transition: _defaultTransition,
     ), 
 ];

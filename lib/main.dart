@@ -1,4 +1,5 @@
 
+import 'package:afeco/app/data/services/first_time_service.dart';
 import 'package:afeco/app/data/services/user_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -22,9 +23,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool deviceFirstOpen = FirstTimeService.instance.isFirstTime;
     bool isLoggedIn = UserService.instance.isLogged();
 
     String getInitialRoute() {
+      if (deviceFirstOpen) {
+        return AppRoutes.ONBOARDING;
+      }else
        if (isLoggedIn) {
         return AppRoutes.INIT_PAGE;
       } else {
@@ -36,8 +41,8 @@ class MyApp extends StatelessWidget {
         return GetMaterialApp(
           title: 'EcoBit',
           debugShowCheckedModeBanner: false,
-          theme: Themes().lightTheme,
-          darkTheme: Themes().darkTheme,
+         // theme: Themes().lightTheme,
+          //darkTheme: Themes().darkTheme,
           themeMode: ThemeService.instance.themeMode,
           translations: Translation(),
           locale: const Locale('en'),
