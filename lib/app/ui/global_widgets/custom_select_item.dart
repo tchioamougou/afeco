@@ -1,3 +1,4 @@
+import 'package:afeco/app/data/models/option.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomSelectItem extends StatelessWidget {
   final String label;
-  final List<String> options;
+  final List<Option> options;
   final String? defaultValue;
   final String? hintText;
   final String? help;
@@ -25,6 +26,10 @@ class CustomSelectItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Rx<String?> selectedValue = defaultValue.obs;
+    Rx<String?> selectedLabel =''.obs;
+    if(defaultValue!=null && defaultValue!.isNotEmpty){
+      selectedLabel = options.where((e)=>e.value==defaultValue).first.label.obs;
+    }
     return Obx(()=>Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,68 +46,72 @@ class CustomSelectItem extends StatelessWidget {
             if (options.isNotEmpty) {
               showModalBottomSheet(
                 context: context,
-                builder: (context) => Padding(
-                  padding:
-                  EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 10,
-                                width: 70,
-                                child: Divider(
-                                  height: 20,
-                                  thickness: 5,
-                                  color: Constants.defaultHeaderColor,
-                                ),
+                isScrollControlled: true,
+                builder: (context) => SingleChildScrollView(
+                  child: Padding(
+                    padding:
+                    EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 10,
+                                  width: 70,
+                                  child: Divider(
+                                    height: 20,
+                                    thickness: 5,
+                                    color: Constants.defaultHeaderColor,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+                        Label(
+                          title: label,
+                        ),
+                        Column(
+                          children: options.map((el) {
+                            return ListTile(
+                              title: Text(
+                                el.label,
+                                style:
+                                (selectedValue.value != null && selectedValue.value == el.value)
+                                    ? TextStyle(
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 18,
+                                    color: Constants.defaultHeaderColor)
+                                    : null,
+                              ), // Assuming options have a String representation
+                              trailing:
+                              (selectedValue.value != null && selectedValue.value == el.value)
+                                  ? Icon(
+                                Icons.check_circle,
+                                size: 30,
+                                color: Constants.buttonColor,
                               )
-                            ],
-                          ),
-                        ],
-                      ),
-                      Label(
-                        title: label,
-                      ),
-                      Column(
-                        children: options.map((el) {
-                          return ListTile(
-                            title: Text(
-                              el,
-                              style:
-                              (selectedValue.value != null && selectedValue.value == el)
-                                  ? TextStyle(
-                                  fontWeight: FontWeight.w900,
-                                  fontSize: 18,
-                                  color: Constants.defaultHeaderColor)
                                   : null,
-                            ), // Assuming options have a String representation
-                            trailing:
-                            (selectedValue.value != null && selectedValue.value == el)
-                                ? Icon(
-                              Icons.check_circle,
-                              size: 30,
-                              color: Constants.buttonColor,
-                            )
-                                : null,
-                            onTap: () {
-                              onChanged(el);
-                              selectedValue.value = el;
-                              Navigator.pop(context);
-                            },
-                          );
-                        }).toList(),
-                      ),
-                    ],
+                              onTap: () {
+                                onChanged(el.value);
+                                selectedValue.value = el.value;
+                                selectedLabel.value = el.label;
+                                Navigator.pop(context);
+                              },
+                            );
+                          }).toList(),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               );
@@ -118,9 +127,9 @@ class CustomSelectItem extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (selectedValue.value != null)
+                if (selectedLabel.value != null)
                   Text(
-                    selectedValue.value!,
+                    selectedLabel.value!,
                     style: const TextStyle(fontSize: 17),
                   )
                 else

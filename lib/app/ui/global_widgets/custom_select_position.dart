@@ -1,4 +1,5 @@
 import 'package:afeco/app/ui/global_widgets/custom_input.dart';
+import 'package:afeco/app/ui/global_widgets/custom_location_choose.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,60 +34,11 @@ class CustomSelectPosition extends StatelessWidget {
           onTap: () {
             if (options.isNotEmpty) {
               showModalBottomSheet(
+                isScrollControlled: true,
                 context: context,
-                builder: (context) => Padding(
-                  padding:
-                  EdgeInsets.symmetric(vertical: 20.h, horizontal: 10.w),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                height: 10,
-                                width: 70,
-                                child: Divider(
-                                  height: 20,
-                                  thickness: 5,
-                                  color: Constants.defaultHeaderColor,
-                                ),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                      CustomInput(label: 'From', onValueChanged: onPositionChanged, hintText: 'Enter Place'),
-                      const Text('Within'),
-                      Column(
-                        children: options.map((el) {
-                          return ListTile(
-                            title: Text(el,style:(withinValue != null && withinValue == el)?TextStyle(fontWeight: FontWeight.w900, fontSize: 18, color: Constants.defaultHeaderColor):null ,), // Assuming options have a String representation
-                            trailing:
-                            (withinValue != null && withinValue == el)
-                                ? Icon(
-                              Icons.check_circle,
-                              size: 30,
-                              color: Constants.buttonColor,
-                            )
-                                : null,
-                            onTap: () {
-                              onWithinChanged(el);
-                              Navigator.pop(context);
-                            },
-                          );
-                        }).toList(),
-                      ),
-                    ],
-                  ),
-                ),
+                builder: (context) => CustomLocationChoose(onChange: (val){}, onClose: (){
+                  Get.back();
+                },),
               );
             }
           },

@@ -16,7 +16,7 @@ class LandingPage extends GetView<LandingController> {
         child: Scaffold(
           backgroundColor: Colors.white,
           body: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 35, 10, 30),
+            padding: const EdgeInsets.fromLTRB(10, 35, 10, 0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,11 +34,24 @@ class LandingPage extends GetView<LandingController> {
                 ),
                 Column(
                   children: [
-                    CustomButton(onPressed: (){}, text: 'Continue with Google', backgroundColor: Colors.blueAccent, icon: const FaIcon(FontAwesomeIcons.google,color: Colors.white,)),
-                    SizedBox(height: 20.h,),
                     CustomButton(onPressed: (){
                       Get.offAllNamed(AppRoutes.INIT_PAGE);
-                    }, text: 'Continue with email', backgroundColor: Constants.buttonColor,icon: const Icon(Icons.email,color: Colors.white,),)
+                    }, text: 'Continue with Google', backgroundColor: Colors.blueAccent, icon: const FaIcon(FontAwesomeIcons.google,color: Colors.white,)),
+                    SizedBox(height: 20.h,),
+                    CustomButton(onPressed: (){
+                      Get.offAllNamed(AppRoutes.SIGN_LOG);
+                    }, text: 'Continue with email', backgroundColor: Constants.buttonColor,icon: const Icon(Icons.email,color: Colors.white,),),
+                    SizedBox(height: 20.h,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('Gains from excess food', style: TextStyle(color: Colors.grey),),
+                        TextButton(onPressed: (){
+                          Get.toNamed(AppRoutes.CREATE_ACCOUNT);
+                        }, child: Text('Create a store', style: TextStyle(color: Constants.defaultHeaderColor, fontWeight: FontWeight.bold, fontSize: 15),))
+                      ],
+                    )
+
                   ],
                 )
               ],

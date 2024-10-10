@@ -1,0 +1,54 @@
+[
+  {
+    "value": "RESTAURANT",
+    "label": "Restaurant"
+  },
+  {
+    "value": "CAFE",
+    "label": "Cafeteria"
+  },
+  {
+    "value": "BUFFET_RESTAURANT",
+    "label": "Buffet"
+  },
+  {
+    "value": "TAKEAWAY_RESTAURANT",
+    "label": "Restaurant à emporter"
+  },
+  {
+    "value": "SUSHI_RESTAURANT",
+    "label": "Restaurant japonais"
+  },
+  {
+    "value": "HOTEL",
+    "label": "Hôtel"
+  },
+  {
+    "value": "BAKERY",
+    "label": "Boulangerie"
+  },
+  {
+    "value": "PASTRY_SHOP",
+    "label": "Pâtisserie"
+  },
+  {
+    "value": "SUPERMARKET",
+    "label": "Supermarché"
+  },
+  {
+    "value": "BEVERAGE_SHOP",
+    "label": "Boutique de débit de boissons"
+  },
+  {
+    "value": "BUTCHER_SHOP",
+    "label": "Boucherie"
+  },
+  {
+    "value": "FRUIT_AND_VEGETABLE_SHOP",
+    "label": "Primeur"
+  },
+  {
+    "value": "OTHER",
+    "label": "Autre"
+  }
+]

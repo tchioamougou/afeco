@@ -1,4 +1,10 @@
-import '../bindings/onboarding_binding.dart';
+import '../bindings/email_confirmation_binding.dart';
+import '../ui/pages/email_confirmation_page/email_confirmation_page.dart';
+      import '../bindings/sign_log_binding.dart';
+import '../ui/pages/sign_log_page/sign_log_page.dart';
+      import '../bindings/create_account_binding.dart';
+import '../ui/pages/create_account_page/create_account_page.dart';
+      import '../bindings/onboarding_binding.dart';
 import '../ui/pages/onboarding_page/onboarding_page.dart';
       import '../bindings/food_inventory_binding.dart';
 import '../ui/pages/food_inventory_page/food_inventory_page.dart';
@@ -149,6 +155,24 @@ class AppPages {
       name: AppRoutes.ONBOARDING,
       page: () => const OnboardingPage(),
       binding: OnboardingBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.CREATE_ACCOUNT,
+      page: () => const CreateAccountPage(),
+      binding: CreateAccountBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.SIGN_LOG,
+      page: () => const SignLogPage(),
+      binding: SignLogBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.EMAIL_CONFIRMATION,
+      page: () => const EmailConfirmationPage(),
+      binding: EmailConfirmationBinding(),
       transition: _defaultTransition,
     ), 
 ];

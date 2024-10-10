@@ -36,7 +36,6 @@ class InitPagePage extends GetView<InitPageController> {
       );
   }
       List<Widget> pages = [
-        //const CustomLocationChoose(),
         const HomePage(),
         const FindAroundPage(),
         const OffersPage(),

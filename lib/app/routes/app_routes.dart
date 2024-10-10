@@ -18,4 +18,7 @@
   static const SAVE_FOOD_DETAIL = '/save-food-detail';
   static const FOOD_INVENTORY = '/food-inventory';
   static const ONBOARDING = '/onboarding';
+  static const CREATE_ACCOUNT = '/create-account';
+  static const SIGN_LOG = '/sign-log';
+  static const EMAIL_CONFIRMATION = '/email-confirmation';
 }

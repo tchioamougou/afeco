@@ -21,6 +21,8 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Checkbox(
           activeColor: Constants.buttonColor,
@@ -32,7 +34,11 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
             widget.onChanged(isChecked);
           },
         ),
-        Text(widget.label),
+        Expanded(
+            child: Text(
+          widget.label,
+          style: TextStyle(fontSize: 16),
+        )),
       ],
     );
   }
