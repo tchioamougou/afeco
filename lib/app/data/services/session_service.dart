@@ -26,6 +26,10 @@ class SessionService {
   bool isLogged(){
     return currentSession!=null;
   }
+
+  bool isStore(){
+    return isLogged() && currentSession?.factors[0]=='phone';
+  }
   void removeSession(){
     _getStorage.remove(_storageKey);
   }

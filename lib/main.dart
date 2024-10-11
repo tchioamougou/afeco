@@ -52,7 +52,10 @@ class MyApp extends StatelessWidget {
         return AppRoutes.ONBOARDING;
       }else
        if (isLoggedIn) {
-        return AppRoutes.INIT_PAGE;
+         if(SessionService.instance.isStore()){
+           return AppRoutes.STORE_INIT;
+         }
+         return AppRoutes.INIT_PAGE;
       } else {
         return AppRoutes.LANDING;
       }

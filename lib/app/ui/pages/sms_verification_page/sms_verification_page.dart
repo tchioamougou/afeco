@@ -1,3 +1,4 @@
+import 'package:afeco/app/controllers/sms_verification_controller.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/custom_input.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
@@ -7,10 +8,9 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../layouts/main/main_layout.dart';
 
-import '../../../controllers/email_confirmation_controller.dart';
 
-class EmailConfirmationPage extends GetView<EmailConfirmationController> {
-  const EmailConfirmationPage({super.key});
+class SmsVerificationPage extends GetView<SmsVerificationController> {
+  const SmsVerificationPage({super.key});
   @override
   Widget build(BuildContext context) {
     return MainLayout(
@@ -52,11 +52,11 @@ class EmailConfirmationPage extends GetView<EmailConfirmationController> {
                             SizedBox(
                               height: 10,
                             ),
-                            Text("We sent the email to ${controller.email.value}",
+                            Text("We sent the sms to ${controller.phone.value}",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(fontSize: 18)),
                             Text(
-                                "Please check your email for the verification link. Click on the link to proceed.",
+                                "Please check your sms for the verification link. Click on the link to proceed.",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.w900)),
@@ -68,7 +68,7 @@ class EmailConfirmationPage extends GetView<EmailConfirmationController> {
                               height: 20,
                             ),
                             Text(
-                              "Alternatively, you can gig under the code contained in the email",
+                              "Alternatively, you can gig under the code contained in the sms",
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 18),
                             ),
@@ -87,7 +87,7 @@ class EmailConfirmationPage extends GetView<EmailConfirmationController> {
                               child: CustomButton(
                                 backgroundColor: Constants.buttonColor,
                                 onPressed: () {
-                                  controller.validateEmail();
+                                  controller.validatePhone();
                                 },
                                 text: 'Verify',
                               ),

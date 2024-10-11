@@ -1,4 +1,12 @@
-import '../bindings/set_location_binding.dart';
+import '../bindings/store_order_binding.dart';
+import '../ui/pages/store_order_page/store_order_page.dart';
+      import '../bindings/store_home_binding.dart';
+import '../ui/pages/store_home_page/store_home_page.dart';
+      import '../bindings/store_init_binding.dart';
+import '../ui/pages/store_init_page/store_init_page.dart';
+      import '../bindings/sms_verification_binding.dart';
+import '../ui/pages/sms_verification_page/sms_verification_page.dart';
+      import '../bindings/set_location_binding.dart';
 import '../ui/pages/set_location_page/set_location_page.dart';
       import '../bindings/email_confirmation_binding.dart';
 import '../ui/pages/email_confirmation_page/email_confirmation_page.dart';
@@ -181,6 +189,30 @@ class AppPages {
       name: AppRoutes.SET_LOCATION,
       page: () => const SetLocationPage(),
       binding: SetLocationBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.SMS_VERIFICATION,
+      page: () => const SmsVerificationPage(),
+      binding: SmsVerificationBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.STORE_INIT,
+      page: () =>  StoreInitPage(),
+      binding: StoreInitBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.STORE_HOME,
+      page: () => const StoreHomePage(),
+      binding: StoreHomeBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.STORE_ORDER,
+      page: () => const StoreOrderPage(),
+      binding: StoreOrderBinding(),
       transition: _defaultTransition,
     ), 
 ];

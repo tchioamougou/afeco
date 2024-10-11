@@ -10,4 +10,6 @@ class Constants{
 class AppWriteCollection{
   static String userCollections ="670857ac0026263f44c0";
   static String givingPackagesCollections ="67087a8a00131eeb3a6c";
+  static String storeCollections ="6708761c0014340524e3";
+
 }

@@ -1,3 +1,4 @@
+import 'package:afeco/app/ui/global_widgets/custom_address_pick.dart';
 import 'package:afeco/app/ui/global_widgets/custom_bottom_action.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/custom_input.dart';
@@ -56,10 +57,20 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                         CustomSelectItem(
                             label: 'Type of business',
                             options: controller.typeBusiness.value,
-                            onChanged: (val) {}),
+                            defaultValue: controller.typeOfBusiness.value,
+                            onChanged: (val) {
+                              controller.typeOfBusiness.value = val;
+                            }),
                         Label(title: 'Business address'),
+                        CustomAddressPick(label: 'Address', onValueChanged: (val){
+                          controller.address = val;
+                          controller.streetController.value.text =val.displayName!;
+                          controller.cityController.value.text =val.address!.city!;
+                          controller.country.value =val.address!.countryCode!;
+                          controller.postalCodeController.value.text =val.address!.postcode!;
+                        }),
                         CustomInput(
-                            controller: controller.businessController.value,
+                            controller: controller.streetController.value,
                             label: 'Street name and number',
                             onValueChanged: (val) {},
                             hintText: ''),
@@ -69,38 +80,41 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                             SizedBox(
                               width: MediaQuery.sizeOf(context).width * 0.4,
                               child: CustomInput(
-                                  controller: controller.businessController.value,
+                                  controller: controller.postalCodeController.value,
                                   label: 'Postal code',
                                   onValueChanged: (val) {},
                                   hintText: ''),
                             ),
                             SizedBox(
-                              width: 200,
+                              width:  MediaQuery.sizeOf(context).width * 0.5,
                               child: CustomInput(
-                                  controller: controller.businessController.value,
+                                  controller: controller.cityController.value,
                                   label: 'City',
                                   onValueChanged: (val) {},
                                   hintText: ''),
                             ),
                           ],
                         ),
+
                         CustomSelectItem(
                             label: 'Country',
-                            options: controller.typeBusiness.value,
+                            options: controller.countries.value,
                             onChanged: (val) {}),
                         Label(title: 'Contact information'),
                         CustomInput(
-                            controller: controller.businessController.value,
+                            controller: controller.phoneController.value,
                             label: 'Phone number',
                             onValueChanged: (val) {},
                             hintText: ''),
                         CustomInput(
-                            controller: controller.businessController.value,
+                            controller: controller.emailController.value,
                             label: 'Email',
                             onValueChanged: (val) {},
                             hintText: ''),
                         CustomButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              controller.signLog();
+                            },
                             text: 'Save',
                             backgroundColor: Constants.buttonColor)
                       ],

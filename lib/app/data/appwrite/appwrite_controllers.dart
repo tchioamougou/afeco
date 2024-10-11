@@ -23,7 +23,11 @@ class SaveFoodAppWriteController extends GetxController {
         await account.createEmailToken(userId: ID.unique(), email: email);
     userId = sessionToken.userId;
   }
-
+  Future<void> createPhone(phone) async {
+    final sessionToken =
+    await account.createPhoneToken(userId: ID.unique(), phone: phone);
+    userId = sessionToken.userId;
+  }
   Future<void> loginUser(String otp) async {
     Session ss = await account.createSession(userId: userId, secret: otp);
     SessionService.instance.currentSession = ss;
