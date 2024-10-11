@@ -1,3 +1,4 @@
+import 'package:afeco/app/ui/global_widgets/custom_address_pick.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/custom_date_pick.dart';
 import 'package:afeco/app/ui/global_widgets/custom_input.dart';
@@ -69,14 +70,6 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
 
                 ),
               )),
-          /*Positioned(
-              bottom: 0,
-              child: CustomBottomAction(
-                  onPressed: () {
-                    Get.toNamed(AppRoutes.TANKING);
-                  },
-                  text: 'Save',
-                  backgroundColor: Constants.buttonColor))*/
         ],
       ),
     );
@@ -104,11 +97,10 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
               CustomInput(
                   controller: controller.phoneController,
                   label: "Phone", onValueChanged: (val) {}, hintText: 'Phone'),
-              CustomInput(
-                  controller: controller.addressController,
-                  label: "Address",
-                  onValueChanged: (val) {},
-                  hintText: 'Address')
+
+              CustomAddressPick(label: 'Address', onValueChanged: (val){
+                controller.address = val;
+              })
             ],
           )),
       Step(
@@ -128,7 +120,7 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
                 height: 10.h,
               ),
               Column(
-                children: controller.products.value.map((e)=>ProductItem()).toList(),
+                children: controller.products.value.map((e)=>ProductItem(foodModel: e,)).toList(),
               ),
               SizedBox(
                 height: 10.h,

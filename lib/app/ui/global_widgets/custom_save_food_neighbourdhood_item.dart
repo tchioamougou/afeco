@@ -1,3 +1,4 @@
+import 'package:afeco/app/data/models/giving_package.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/layouts/main/main_layout.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
@@ -5,23 +6,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
-  final String title;
-  final String description;
-  final String time;
-  final String price;
-  final String imageUrl;
-  final bool isFavorite;
-  final VoidCallback onFavoritePressed;
+   final GivingPackage gp;
 
   const CustomSaveFoodNeighbourdhoodItem ({
     super.key,
-    required this.title,
-    required this.description,
-    required this.time,
-    required this.price,
-    required this.imageUrl,
-    required this.isFavorite,
-    required this.onFavoritePressed,
+
+    required this.gp,
   });
 
   @override
@@ -44,7 +34,7 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10)),
                   child: Image.network(
-                    imageUrl,
+                    'https://noahhelps.org/wp-content/uploads/2021/03/March_Meal-Prep-1030x515.jpeg',
                     width: MediaQuery.sizeOf(context).width*0.5,
                     height: 120,
                     fit: BoxFit.cover,
@@ -62,7 +52,9 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          description,
+                          gp.address,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(
                               fontSize: 14, fontWeight: FontWeight.bold),
                         ),
@@ -70,7 +62,7 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
                           height: 3.h,
                         ),
                         Text(
-                          'Collect today: $time',
+                          'Collect today: ${gp.availableDateStart} - ${gp.availableDateEnd}',
                           style: const TextStyle(
                             fontSize: 14,
                             color: Colors.grey,
@@ -96,7 +88,7 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
 
                             ),
                             IconButton(onPressed: (){
-                              Get.toNamed(AppRoutes.SAVE_FOOD_DETAIL);
+                              Get.toNamed(AppRoutes.SAVE_FOOD_DETAIL,arguments: gp);
                             }, icon: Icon(Icons.add_circle,color: Constants.defaultBorderColor,size: 30,))
 
                           ],

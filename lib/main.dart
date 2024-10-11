@@ -3,6 +3,7 @@ import 'package:afeco/app/data/services/first_time_service.dart';
 import 'package:afeco/app/data/services/session_service.dart';
 import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/ui/global_widgets/custom_animation.dart';
+import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -24,12 +25,12 @@ void configLoading(){
   EasyLoading.instance
     ..displayDuration = const Duration(milliseconds: 2000)
     ..indicatorType = EasyLoadingIndicatorType.fadingCircle
-    ..loadingStyle = EasyLoadingStyle.dark
+    ..loadingStyle = EasyLoadingStyle.custom
     ..indicatorSize = 45.0
     ..radius = 10.0
+    ..backgroundColor = Constants.buttonColor
     ..progressColor = Colors.yellow
-    ..backgroundColor = Colors.green
-    ..indicatorColor = Colors.yellow
+    ..indicatorColor = Colors.white
     ..textColor = Colors.yellow
     ..maskColor = Colors.blue.withOpacity(0.5)
     ..userInteractions = true

@@ -1,10 +1,13 @@
 
+import 'package:afeco/app/data/models/food_model.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
  class ProductItem extends StatelessWidget{
+  final FoodModel foodModel;
+  const ProductItem({super.key, required this.foodModel,});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -25,8 +28,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Name: Qauntityds"),
-                Text('Expiration Date')
+                Text("Name:${foodModel.name}"),
+                Text("Quantity:${foodModel.quantity}"),
+                Text('Expiration Date: ${foodModel.expirationDate}')
               ],
             ),
           ),

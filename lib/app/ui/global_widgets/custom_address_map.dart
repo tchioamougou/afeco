@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:afeco/app/data/models/market.dart';
+import 'package:afeco/app/data/models/place_model.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
 import 'package:afeco/app/ui/layouts/main/main_layout.dart';
@@ -15,22 +16,20 @@ import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 
-class CustomLocationChoose extends StatelessWidget {
+class CustomAddressMap extends StatelessWidget {
   final VoidCallback onClose;
-  final Function(LatLng) onChange;
-  final Function(int) onChangeRange;
+  final Function(PlaceModel) onChange;
 
-  const CustomLocationChoose(
-      {super.key, required this.onClose, required this.onChange, required this.onChangeRange});
+  const CustomAddressMap(
+      {super.key, required this.onClose, required this.onChange});
 
   @override
   Widget build(BuildContext context) {
-    Rx<double> rang = 2.0.obs;
     final Rx<LatLng> _center = const LatLng(51.509364, -0.128928).obs;
     final RxDouble zoom = 15.0.obs;
     RxList<Market> markets = <Market>[].obs;
     RxBool _userCurrentPosition = false.obs;
-    final Rx<LatLng> selectedValue = const LatLng(0, 0).obs;
+    final Rx<PlaceModel> selectedValue = PlaceModel().obs;
     final MapController mapController = MapController();
     return MainLayout(
       child: Obx(() =>
@@ -48,7 +47,7 @@ class CustomLocationChoose extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Choose a location to see what\'s available',
+                            'Choose address',
                             style: TextStyle(
                                 fontSize: 17,
                                 color: Constants.defaultHeaderColor,
@@ -70,12 +69,12 @@ class CustomLocationChoose extends StatelessWidget {
                       child: FlutterMap(
                           mapController: mapController,
                           options: MapOptions(
-                              onTap: (tap, val) {
+                              onTap: (tap, val) async {
                                 markets.clear();
-                                selectedValue.value = val;
+
                                 markets.add(
                                     Market(name: "location", location: val));
-                                getAddressFromCoordinates(val.latitude, val.longitude);
+                                selectedValue.value = await getAddressFromCoordinates(val.latitude, val.longitude);
                               },
                               initialCenter: _center.value,
                               initialZoom: zoom.value,
@@ -142,32 +141,8 @@ class CustomLocationChoose extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Center(
-                                  child: Label(title: 'Select a distance'),
+                                  child: Label(title: 'Address'),
                                 ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                  width: MediaQuery
-                                      .sizeOf(context)
-                                      .width * 0.82,
-                                  child: Slider(
-                                    allowedInteraction:
-                                    SliderInteraction.tapAndSlide,
-                                    //thumbColor: Colors.white,
-                                    value: rang.value,
-                                    onChanged: (va) {
-                                      rang.value = va;
-                                      onChangeRange(va.toInt());
-                                    },
-                                    min: 1,
-                                    max: 100,
-                                    activeColor: Constants.buttonColor,
-                                  ),
-                                ),
-                                Text('${rang.value.toInt()} Km'),
                               ],
                             ),
                             const SizedBox(
@@ -213,9 +188,6 @@ class CustomLocationChoose extends StatelessWidget {
                             TextButton(
                                 onPressed: () async {
                                   final position = await getCurrentPosition();
-                                  selectedValue.value =
-                                      LatLng(position.latitude,
-                                          position.longitude);
                                   markets.clear();
                                   markets.add(Market(
                                       name: "location",
@@ -223,6 +195,7 @@ class CustomLocationChoose extends StatelessWidget {
                                           position.latitude,
                                           position.longitude)));
                                   _userCurrentPosition.value = true;
+                                  selectedValue.value = await getAddressFromCoordinates(position.latitude, position.longitude);
                                 },
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -252,7 +225,7 @@ class CustomLocationChoose extends StatelessWidget {
                                 onPressed: () async {
                                   onChange(selectedValue.value);
                                 },
-                                disable: selectedValue.value.longitude == 0,
+                                disable: selectedValue.value.displayName==null,
                                 text: _userCurrentPosition.value
                                     ? 'Choose location'
                                     : 'Apply',
@@ -298,7 +271,7 @@ class CustomLocationChoose extends StatelessWidget {
     }
   }
 
-  Future<String> getAddressFromCoordinates(double lat, double lon) async {
+  Future<PlaceModel> getAddressFromCoordinates(double lat, double lon) async {
     EasyLoading.show();
     final url = Uri.parse('https://nominatim.openstreetmap.org/reverse');
     final params = {
@@ -316,12 +289,13 @@ class CustomLocationChoose extends StatelessWidget {
           url.replace(queryParameters: params), headers: headers);
       if (response.statusCode == 200) {
         final data = json.decode(response.body) as Map<String, dynamic>;
+        print(data);
         final address = data['address']?.toString();
         if (address != null) {
-          print(address);
-          return address;
+          print(data);
+          return PlaceModel.fromJson(data);
         } else {
-          return 'No address found in response';
+         return Future.error('No address found in response');
         }
       } else {
         throw Exception('Failed to fetch address: ${response.statusCode}');

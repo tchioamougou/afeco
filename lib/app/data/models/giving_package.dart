@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:afeco/app/data/models/food_model.dart';
+
 class GivingPackage {
   String users;
   String name;
@@ -68,10 +72,10 @@ class GivingPackage {
 
   factory GivingPackage.fromJson(Map<String, dynamic> json) {
     return GivingPackage(
-      users: json['users'],
+      users: json['users'].toString() ,
       name: json['name'],
-      lat: json['lat'],
-      long: json['long'],
+      lat: json['lat'].toDouble(),
+      long: json['long'].toDouble(),
       phone: json['phone'],
       email: json['email'],
       address: json['address'],
@@ -89,5 +93,8 @@ class GivingPackage {
       reservedBy: json['reservedBy'],
       shareWith: json['shareWith'],
     );
+  }
+  List<FoodModel> getFoodModels(){
+    return products.map((e)=>FoodModel.fromJson(json.decode(e) as Map<String,dynamic>)).toList();
   }
 }

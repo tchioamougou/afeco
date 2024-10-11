@@ -40,4 +40,16 @@ class SaveFoodAppWriteController extends GetxController {
   Future<Document> createDocument(String collectionId, Map<String, dynamic> data) async {
     return  await databases.createDocument(databaseId: databaseId, collectionId: collectionId, documentId: ID.unique(), data: data);
   }
+
+  Future<DocumentList> getDocuments(String collectionId,List<String> queries) async{
+    try {
+      return await databases.listDocuments(
+          databaseId:databaseId,
+          collectionId: collectionId,
+          queries: queries
+      );
+    } on AppwriteException catch(e) {
+      return Future.error(e);
+    }
+  }
 }

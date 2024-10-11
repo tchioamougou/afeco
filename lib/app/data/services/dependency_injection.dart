@@ -19,10 +19,11 @@ class DependecyInjection {
     );
 
     await GetStorage.init();
-    Get.put<HomeController>(HomeController());
     Get.put<FindAroundController>(FindAroundController());
     Get.put<NavigationController>(NavigationController());
     Get.put<MainController>(MainController());
     Get.put<SaveFoodAppWriteController>(SaveFoodAppWriteController());
+    Get.put<HomeController>(HomeController());
+
   }
 }

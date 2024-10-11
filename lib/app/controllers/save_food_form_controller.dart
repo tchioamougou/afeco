@@ -2,6 +2,7 @@ import 'package:afeco/app/data/appwrite/appwrite_controllers.dart';
 import 'package:afeco/app/data/models/food_model.dart';
 import 'package:afeco/app/data/models/giving_package.dart';
 import 'package:afeco/app/data/models/option.dart';
+import 'package:afeco/app/data/models/place_model.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:afeco/app/ui/utils/utils.dart';
@@ -60,7 +61,7 @@ class SaveFoodFormController extends GetxController {
   final TextEditingController  lastNameController = TextEditingController();
   final TextEditingController  emailController = TextEditingController();
   final TextEditingController   phoneController = TextEditingController();
-  final TextEditingController  addressController = TextEditingController();
+   PlaceModel  address = PlaceModel();
   final TextEditingController  reasonController = TextEditingController();
   RxString typePackagingSelect = "".obs;
   RxString packagingCondition = "".obs;
@@ -100,11 +101,11 @@ class SaveFoodFormController extends GetxController {
         GivingPackage gp =GivingPackage(
             users: '67085e633edbcb406690',//SessionService.instance.currentSession!.userId,
             name: '${firstNameController.value.text} ${lastNameController.value.text}',
-            lat: 00000000,
-            long: 0000000,
+            lat: double.parse(address.lat??"0"),
+            long: double.parse(address.lon??"0"),
             phone: phoneController.value.text,
             email: emailController.value.text,
-            address: addressController.value.text,
+            address: address.displayName??"",
             typeOfPackaging: typePackagingSelect.value,
             packagingCondition: packagingCondition.value,
             reasonForGiving: reasonController.value.text,
