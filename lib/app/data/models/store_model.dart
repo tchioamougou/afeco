@@ -13,7 +13,7 @@ class StoreModel {
   DateTime createdDate;
   String userId;
   double lat;
-  double lng;
+  double long;
 
   StoreModel({
     required this.businessName,
@@ -28,7 +28,7 @@ class StoreModel {
     required this.createdDate,
     required this.userId,
     required this.lat,
-    required this.lng,
+    required this.long,
   });
 
   factory StoreModel.fromJson(Map<String, dynamic> json) {
@@ -44,8 +44,8 @@ class StoreModel {
       allow: json['allow'],
       createdDate: DateTime.parse(json['createdDate']),
       userId: json['userId'],
-      lat: double.parse(json['lat']),
-      lng: double.parse(json['lng']),
+      lat: json['lat'],
+      long: json['long'],
     );
   }
 
@@ -63,12 +63,12 @@ class StoreModel {
       'createdDate': createdDate.toIso8601String(),
       'userId': userId,
       'lat': lat,
-      'lng': lng,
+      'long': long,
     };
   }
 
   @override
   String toString() {
-    return 'StoreModel{businessName: $businessName, typeBusiness: $typeBusiness, streetNameNumber: $streetNameNumber, postalCode: $postalCode, city: $city, country: $country, phoneNumber: $phoneNumber, email: $email, allow: $allow, createdDate: $createdDate, userId: $userId, lat: $lat, lng: $lng}';
+    return 'StoreModel{businessName: $businessName, typeBusiness: $typeBusiness, streetNameNumber: $streetNameNumber, postalCode: $postalCode, city: $city, country: $country, phoneNumber: $phoneNumber, email: $email, allow: $allow, createdDate: $createdDate, userId: $userId, lat: $lat, long: $long}';
   }
 }

@@ -1,3 +1,4 @@
+import 'package:afeco/app/data/models/bag_model.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/layouts/main/main_layout.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
@@ -5,23 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomCardItem extends StatelessWidget {
-  final String title;
-  final String description;
-  final String time;
-  final String price;
-  final String imageUrl;
-  final bool isFavorite;
-  final VoidCallback onFavoritePressed;
-
+  final BagRelation bg;
   const CustomCardItem({
     Key? key,
-    required this.title,
-    required this.description,
-    required this.time,
-    required this.price,
-    required this.imageUrl,
-    required this.isFavorite,
-    required this.onFavoritePressed,
+    required this.bg,
   }) : super(key: key);
 
   @override
@@ -48,7 +36,8 @@ class CustomCardItem extends StatelessWidget {
                          topLeft: Radius.circular(10),
                          topRight: Radius.circular(10)),
                      child: Image.network(
-                       imageUrl,
+                         'https://www.rockmatsu.org/wp-content/uploads/2022/03/The-boy-who.png',
+
                        width: MediaQuery.sizeOf(context).width,
                        height: 100,
                        fit: BoxFit.cover,
@@ -64,10 +53,10 @@ class CustomCardItem extends StatelessWidget {
                              children: [
                                IconButton(
                                  icon: Icon(
-                                   isFavorite ? Icons.favorite : Icons.favorite_border,
+                                   false ? Icons.favorite : Icons.favorite_border,
                                    color: Colors.red,
                                  ),
-                                 onPressed: onFavoritePressed,
+                                 onPressed: (){},
                                ),
                              ],
                            ),
@@ -86,14 +75,14 @@ class CustomCardItem extends StatelessWidget {
                                  borderRadius:
                                  const BorderRadius.all(Radius.circular(300)),
                                  child: Image.network(
-                                   imageUrl,
+                                   'https://www.rockmatsu.org/wp-content/uploads/2022/03/The-boy-who.png',
                                    width: 35,
                                    height: 35,
                                    fit: BoxFit.cover,
                                  ),
                                ),
                                Text(
-                                 title,
+                                 bg.name,
                                  style: const TextStyle(
                                      fontWeight: FontWeight.bold,
                                      fontSize: 16,
@@ -115,7 +104,7 @@ class CustomCardItem extends StatelessWidget {
                          crossAxisAlignment: CrossAxisAlignment.start,
                          children: [
                            Text(
-                             description,
+                             bg.stores.businessName,
                              style: const TextStyle(
                                  fontSize: 14, fontWeight: FontWeight.bold),
                            ),
@@ -123,7 +112,7 @@ class CustomCardItem extends StatelessWidget {
                              height: 3.h,
                            ),
                            Text(
-                             'Collect today: $time',
+                             'Collect today: ${bg.pickupDateStart}',
                              style: const TextStyle(
                                fontSize: 14,
                                color: Colors.grey,
@@ -132,19 +121,7 @@ class CustomCardItem extends StatelessWidget {
                            SizedBox(
                              height: 3.h,
                            ),
-                           Row(
-                             mainAxisAlignment: MainAxisAlignment.end,
-                             children: [
-                               Text(
-                                 price,
-                                 style: const TextStyle(
-                                     fontWeight: FontWeight.w900,
-                                     fontSize: 12,
-                                     color: Colors.grey),
-                               ),
-                               const SizedBox(width: 8),
-                             ],
-                           ),
+
                            Row(
                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                              children: [
@@ -160,7 +137,7 @@ class CustomCardItem extends StatelessWidget {
                                Row(
                                  children: [
                                    Text(
-                                     price,
+                                     "${bg.price}",
                                      style: TextStyle(
                                          fontWeight: FontWeight.w900,
                                          fontSize: 20,

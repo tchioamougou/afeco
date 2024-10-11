@@ -1,6 +1,8 @@
 
+import 'package:afeco/app/controllers/store_home_controller.dart';
 import 'package:afeco/app/data/services/first_time_service.dart';
 import 'package:afeco/app/data/services/session_service.dart';
+import 'package:afeco/app/data/services/store_service.dart';
 import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/ui/global_widgets/custom_animation.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
@@ -53,7 +55,13 @@ class MyApp extends StatelessWidget {
       }else
        if (isLoggedIn) {
          if(SessionService.instance.isStore()){
-           return AppRoutes.STORE_INIT;
+           if(StoreService.instance.isStore()){
+             Get.put<StoreHomeController>(StoreHomeController());
+             return AppRoutes.STORE_INIT;
+           }else{
+             return AppRoutes.CREATE_ACCOUNT;
+           }
+
          }
          return AppRoutes.INIT_PAGE;
       } else {

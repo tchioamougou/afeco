@@ -1,4 +1,6 @@
-import '../bindings/store_order_binding.dart';
+import '../bindings/save_binding.dart';
+import '../ui/pages/save_page/save_page.dart';
+      import '../bindings/store_order_binding.dart';
 import '../ui/pages/store_order_page/store_order_page.dart';
       import '../bindings/store_home_binding.dart';
 import '../ui/pages/store_home_page/store_home_page.dart';
@@ -213,6 +215,12 @@ class AppPages {
       name: AppRoutes.STORE_ORDER,
       page: () => const StoreOrderPage(),
       binding: StoreOrderBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.SAVE,
+      page: () => const SavePage(),
+      binding: SaveBinding(),
       transition: _defaultTransition,
     ), 
 ];

@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
    controller.getGivingPacks();
+   controller.getBags();
    super.initState();
   }
   @override
@@ -136,20 +137,9 @@ class _HomePageState extends State<HomePage> {
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
-                          children: List.generate(
-                              10,
-                                  (i) =>CustomCardItem(
-                                title: 'Penelope\'s',
-                                description: 'Baked goods',
-                                time: '17:40 - 18:00',
-                                price: '£12.00',
-                                imageUrl:
-                                'https://www.rockmatsu.org/wp-content/uploads/2022/03/The-boy-who.png',
-                                isFavorite: true,
-                                onFavoritePressed: () {
-                                  // Handle favorite toggle logic here
-                                },
-                              )),
+                          children: controller.bags.value.map(
+                                  (i) =>CustomCardItem(bg: i,
+                              )).toList(),
                         ),
                       ),
                       const SizedBox(height: 10,),
@@ -161,19 +151,9 @@ class _HomePageState extends State<HomePage> {
                       SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
-                          children: List.generate(
-                              10,
-                                  (i) => CustomCardItem(
-                                title: 'Penelope\'s',
-                                description: 'Baked goods',
-                                time: '17:40 - 18:00',
-                                price: '£12.00',
-                                imageUrl:'https://dovv-distribution.com/wp-content/uploads/2023/09/Djino-1-768x768.jpg',
-                                isFavorite: true,
-                                onFavoritePressed: () {
-                                  // Handle favorite toggle logic here
-                                },
-                              )),
+                          children: controller.bags.value.map(
+                                  (i) =>CustomCardItem(bg: i,
+                              )).toList(),
                         ),
                       ),
                     ],

@@ -26,4 +26,5 @@
   static const STORE_INIT = '/store-init';
   static const STORE_HOME = '/store-home';
   static const STORE_ORDER = '/store-order';
+  static const SAVE = '/save';
 }

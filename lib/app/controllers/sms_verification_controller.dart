@@ -22,8 +22,8 @@ class SmsVerificationController extends GetxController {
     if (codeController.value.text.isNotEmpty) {
       await EasyLoading.show();
       try {
-        await _appWriteController.loginUser(codeController.value.text);
-        _createAccountController.submitForm();
+        //await _appWriteController.loginUser(codeController.value.text);
+        await _createAccountController.submitForm();
         Get.toNamed(AppRoutes.SET_LOCATION);
       } catch (e) {
         EasyLoading.showError("An Error Occur");
