@@ -1,4 +1,3 @@
-import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/custom_checkbox.dart';
 import 'package:afeco/app/ui/global_widgets/custom_input.dart';
@@ -13,7 +12,7 @@ import '../../layouts/main/main_layout.dart';
 import '../../../controllers/sign_log_controller.dart';
 
 class SignLogPage extends GetView<SignLogController> {
-      const SignLogPage ({Key? key}) : super(key: key);
+      const SignLogPage ({super.key});
   @override
   Widget build(BuildContext context) {
     return MainLayout(
@@ -41,26 +40,34 @@ class SignLogPage extends GetView<SignLogController> {
                   fontSize: 20, color: Colors.white),
             )),
         backgroundColor: Colors.white,
-        body: SingleChildScrollView(
+        body:Obx(()=> SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Column(
               children: [
                 SizedBox(height: 20,),
-                CustomInput(label: 'Email', onValueChanged: (val){}, hintText: 'Your business name'),
-                CustomSelectItem(label: 'Country', options: [], onChanged: (val){}),
-                CustomCheckbox(label: 'I allow EcoBit to store my email address and name according to our privacy policy.', onChanged: (ba){}),
+                CustomInput(
+                    controller:controller.emailController.value,
+                    label: 'Email', hintText: 'Your business name', onValueChanged: (String value) {  },),
+                CustomSelectItem(label: 'Country', options: controller.countries, onChanged: (val){
+                  controller.country.value = val;
+                }, defaultValue: controller.country.value,),
+                CustomCheckbox(label: 'I allow EcoBit to store my email address and name according to our privacy policy.', onChanged: (val){
+                  controller.allow.value = val;
+                }),
                 SizedBox(height: 20,),
                 CustomButton(
                     onPressed: () {
-                      Get.toNamed(AppRoutes.EMAIL_CONFIRMATION);
+                      controller.signLog();
+                      //Get.toNamed(AppRoutes.EMAIL_CONFIRMATION);
                     },
                     text: 'Continue',
+                    disable: !controller.allow.value,
                     backgroundColor: Constants.buttonColor)
               ],
             ),
           ),
-        ),
+        )),
       ),
     );
   }

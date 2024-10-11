@@ -30,6 +30,8 @@ dependencies:
   latlong2: ^0.9.1
   geolocator: ^13.0.1
   weekly_calendar: ^0.1.2
+  appwrite: ^13.0.0
+  flutter_easyloading: ^3.0.5
 
 
 dev_dependencies:

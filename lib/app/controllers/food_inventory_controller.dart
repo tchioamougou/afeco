@@ -1,5 +1,6 @@
 import 'package:afeco/app/data/models/food_model.dart';
 import 'package:afeco/app/data/models/option.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 class FoodInventoryController extends GetxController {
   final List<FoodModel> foods = <FoodModel>[].obs;
@@ -11,6 +12,7 @@ class FoodInventoryController extends GetxController {
   RxString quantity = "".obs;
   RxString category = "".obs;
   Rx<DateTime> expiredDate=DateTime.now().add(const Duration(days:100 )).obs;
+  Rx<TextEditingController> emailController = TextEditingController().obs;
 
   void addFood() {
     if(foodName.isNotEmpty && quantity.isNotEmpty && category.isNotEmpty){

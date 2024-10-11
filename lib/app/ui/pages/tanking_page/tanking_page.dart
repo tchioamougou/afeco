@@ -1,3 +1,4 @@
+import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -13,6 +14,18 @@ class TankingPage extends GetView<TankingController> {
   Widget build(BuildContext context) {
     return MainLayout(
       child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          actions: [
+            IconButton(
+              onPressed: () {
+                Get.toNamed(AppRoutes.INIT_PAGE);
+              },
+              icon:  FaIcon(FontAwesomeIcons.x,color: Constants.buttonColor,),
+            ),
+          ],
+        ),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -20,6 +33,7 @@ class TankingPage extends GetView<TankingController> {
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+
                 Image.asset(
                   "assets/image/food-africa.webp",
                   height: 200,

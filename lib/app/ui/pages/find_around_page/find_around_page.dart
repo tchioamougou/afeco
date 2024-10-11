@@ -15,7 +15,7 @@ class FindAroundPage extends GetView<FindAroundController> {
   Widget build(BuildContext context) {
     return MainLayout(
       child: Scaffold(
-        body: Stack(
+        body: Obx(() => Stack(
           children: [
             // Replace this container with your Map widget
             FlutterMap(
@@ -84,85 +84,63 @@ class FindAroundPage extends GetView<FindAroundController> {
               top: 10.h,
               right: 15,
               left: 15,
-              child: Container(
-                child: Column(
-                  children: [
-                    CustomSelectPosition(
-                      label: 'my current position',
-                      options:controller.withinOptions,
-                      onWithinChanged: (val) {
-                        controller.within.value = val;
-                      },
-                      onPositionChanged: (val) {},
-                      withinValue: controller.within.value,
+              child: Column(
+                children: [
+                  CustomSelectPosition(
+                    label: 'my current position',
+                    options:controller.withinOptions,
+                    onWithinChanged: (val) {
+                      controller.within.value = val;
+                      //// Todo refresh the list of store by the all the information
+                    },
+                    onPositionChanged: (val) {
+                      //// Todo refresh the list of store by the all the information
+                      Get.back();
+                    },
+                    onClose: (){
+                      Get.back();
+                    },
+                    withinValue: controller.within.value,
 
-                    ),
-                    Row(
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              padding: EdgeInsets.zero),
-                          child: FaIcon(
-                            FontAwesomeIcons.filter,
-                            color: Constants.buttonColor,
-                          ),
+                  ),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            padding: EdgeInsets.zero),
+                        child: FaIcon(
+                          FontAwesomeIcons.filter,
+                          color: Constants.buttonColor,
                         ),
-                        const SizedBox(
-                          width: 20,
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Get.toNamed(AppRoutes.SEARCH);
+                        },
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            padding: EdgeInsets.zero),
+                        child: FaIcon(
+                          Icons.search,
+                          color: Constants.buttonColor,
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Get.toNamed(AppRoutes.SEARCH);
-                          },
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              padding: EdgeInsets.zero),
-                          child: FaIcon(
-                            Icons.search,
-                            color: Constants.buttonColor,
-                          ),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
           ],
-        ),
-        /*floatingActionButton: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              const SizedBox(height: 10),
-              FloatingActionButton(
-                backgroundColor: Colors.black,
-                onPressed: () {
-                  controller.mapController.move(controller.center, controller.zoom++);
-                },
-                child: const Icon(
-                  Icons.add,
-                  color: Colors.white,
-                ),
-              ),
-              const SizedBox(height: 10),
-              FloatingActionButton(
-                backgroundColor: Colors.black,
-                onPressed: () {
-                  controller.mapController.move(controller.center, controller.zoom--);
-                },
-                child: const Icon(
-                  Icons.remove,
-                  color: Colors.white,
-                ),
-              ),
-            ],
-          ),*/
+        ),),
       ),
     );
   }

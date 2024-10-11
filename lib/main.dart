@@ -1,7 +1,10 @@
 
 import 'package:afeco/app/data/services/first_time_service.dart';
+import 'package:afeco/app/data/services/session_service.dart';
 import 'package:afeco/app/data/services/user_service.dart';
+import 'package:afeco/app/ui/global_widgets/custom_animation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'app/data/services/dependency_injection.dart';
 import 'app/data/services/theme_service.dart';
@@ -14,8 +17,24 @@ import 'app/ui/theme/themes.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await DependecyInjection.init();
-
   runApp(const MyApp());
+  configLoading();
+}
+void configLoading(){
+  EasyLoading.instance
+    ..displayDuration = const Duration(milliseconds: 2000)
+    ..indicatorType = EasyLoadingIndicatorType.fadingCircle
+    ..loadingStyle = EasyLoadingStyle.dark
+    ..indicatorSize = 45.0
+    ..radius = 10.0
+    ..progressColor = Colors.yellow
+    ..backgroundColor = Colors.green
+    ..indicatorColor = Colors.yellow
+    ..textColor = Colors.yellow
+    ..maskColor = Colors.blue.withOpacity(0.5)
+    ..userInteractions = true
+    ..dismissOnTap = false
+  ..customAnimation = CustomAnimation();
 }
 
 class MyApp extends StatelessWidget {
@@ -24,9 +43,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     bool deviceFirstOpen = FirstTimeService.instance.isFirstTime;
-    bool isLoggedIn = UserService.instance.isLogged();
+    bool isLoggedIn = SessionService.instance.isLogged();
 
     String getInitialRoute() {
+
       if (deviceFirstOpen) {
         return AppRoutes.ONBOARDING;
       }else
@@ -50,9 +70,7 @@ class MyApp extends StatelessWidget {
           initialRoute: getInitialRoute(),
           unknownRoute: AppPages.unknownRoutePage,
           getPages: AppPages.pages,
-          builder: (_, child) {
-            return MainLayout(child: child!);
-          },
+          builder: EasyLoading.init(),
         );
       },
      //! Must change it to true if you want to use the ScreenUtil

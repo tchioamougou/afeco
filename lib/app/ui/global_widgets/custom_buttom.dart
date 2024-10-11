@@ -1,3 +1,4 @@
+import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -5,18 +6,19 @@ class CustomButton extends StatelessWidget {
   final String text;
   final Widget? icon;
   final Color backgroundColor;
-
-  const CustomButton({Key? key,
+  final bool disable;
+  const CustomButton({super.key,
     required this.onPressed,
     required this.text,
     this.icon,
     required this.backgroundColor,
-  }) : super(key: key);
+    this.disable = false
+  });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPressed,
+      onPressed:!disable? onPressed :(){},
       style: ElevatedButton.styleFrom(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(30.0),
@@ -24,7 +26,7 @@ class CustomButton extends StatelessWidget {
         ),
         elevation: 0,
         padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 20),
-        backgroundColor: backgroundColor, // Adjust background color as needed
+        backgroundColor: !disable? backgroundColor : Constants.buttonColor.withOpacity(0.1), // Adjust background color as needed
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,

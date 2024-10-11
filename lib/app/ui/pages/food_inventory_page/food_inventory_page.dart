@@ -83,13 +83,13 @@ class FoodInventoryPage extends GetView<FoodInventoryController> {
               children: [
                 Label(title: 'Add New Food'),
                 CustomInput(
-                    defaultValue: controller.foodName.value,
+                    controller: controller.emailController.value,
                     label: "Name", onValueChanged: (val) {
                       controller.foodName.value=val;
                 }, hintText: 'Text'),
                 CustomInput(
                     label: "Quantity",
-                    defaultValue: controller.quantity.value,
+                    controller: controller.emailController.value,
                     onValueChanged: (val) {
                       controller.quantity.value=val;
                     },

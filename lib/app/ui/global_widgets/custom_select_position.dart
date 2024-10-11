@@ -1,4 +1,3 @@
-import 'package:afeco/app/ui/global_widgets/custom_input.dart';
 import 'package:afeco/app/ui/global_widgets/custom_location_choose.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:latlong2/latlong.dart';
 
 class CustomSelectPosition extends StatelessWidget {
   final String label;
@@ -13,7 +13,8 @@ class CustomSelectPosition extends StatelessWidget {
   final String? withinValue;
   final String? positionValue;
   final ValueChanged<String> onWithinChanged;
-  final ValueChanged<String> onPositionChanged;
+  final ValueChanged<LatLng> onPositionChanged;
+  final VoidCallback onClose;
   const CustomSelectPosition({
     super.key,
     required this.label,
@@ -21,7 +22,8 @@ class CustomSelectPosition extends StatelessWidget {
     this.positionValue,
     this.withinValue,
     required this.onPositionChanged,
-    required this.onWithinChanged
+    required this.onWithinChanged,
+    required this.onClose
   });
 
   @override
@@ -36,8 +38,8 @@ class CustomSelectPosition extends StatelessWidget {
               showModalBottomSheet(
                 isScrollControlled: true,
                 context: context,
-                builder: (context) => CustomLocationChoose(onChange: (val){}, onClose: (){
-                  Get.back();
+                builder: (context) => CustomLocationChoose(onChange: onPositionChanged, onClose: onClose, onChangeRange: (int ) {
+                  onWithinChanged(int.toString());
                 },),
               );
             }

@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 class CustomTime extends StatelessWidget {
   final String label;
   final bool isRequired;
-  final ValueChanged<String> onValueChanged;
+  final ValueChanged<TimeOfDay> onValueChanged;
   final String hintText;
 
   const CustomTime({
@@ -50,7 +50,7 @@ class CustomTime extends StatelessWidget {
               if (pickedDate != null)
               {
                 controller.value.text = pickedDate.format(context);
-                onValueChanged(controller.value.text);
+                onValueChanged(pickedDate);
               }
             },
             controller: controller.value,

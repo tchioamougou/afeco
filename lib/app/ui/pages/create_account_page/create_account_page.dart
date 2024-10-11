@@ -13,75 +13,103 @@ import '../../layouts/main/main_layout.dart';
 import '../../../controllers/create_account_controller.dart';
 
 class CreateAccountPage extends GetView<CreateAccountController> {
-      const CreateAccountPage ({Key? key}) : super(key: key);
+  const CreateAccountPage({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-        child: Scaffold(
-          appBar: AppBar(
-              backgroundColor: Constants.defaultHeaderColor,
-              leading: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: const FaIcon(
-                        FontAwesomeIcons.circleArrowLeft,
-                        size: 30,
-                        color: Colors.white,
-                      ))
-                ],
-              ),
-              title: Text(
-                'Register your store',
-                style: GoogleFonts.poppins(
-                    fontSize: 20, color: Colors.white),
-              )),
-          backgroundColor: Colors.white,
-          body: Stack(
-            children: [
-              Obx(()=>SingleChildScrollView(
-                child: Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  child: Column(
-                    children: [
-                      Label(title: 'Information about your business'),
-                      CustomInput(label: 'Your business name', onValueChanged: (val){}, hintText: 'Your business name'),
-                      CustomSelectItem(label: 'Type of business', options: controller.typeBusiness.value, onChanged: (val){}),
-                      Label(title: 'Business address'),
-                      CustomInput(label: 'Street name and number', onValueChanged: (val){}, hintText: ''),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                         SizedBox(
-                           width: MediaQuery.sizeOf(context).width * 0.4,
-                           child:  CustomInput(label: 'Postal code', onValueChanged: (val){}, hintText: ''),
-                         ),
-                          SizedBox(
-                            width: 200,
-                              child:  CustomInput(label: 'City', onValueChanged: (val){}, hintText: ''),
-                          ),
-                        ],
-                      ),
-                      CustomSelectItem(label: 'Country', options: controller.typeBusiness.value, onChanged: (val){}),
-                      Label(title: 'Contact information'),
-                      CustomInput(label: 'Phone number', onValueChanged: (val){}, hintText: ''),
-                      CustomInput(label: 'Email', onValueChanged: (val){}, hintText: ''),
-                      CustomButton(
-                          onPressed: () {
-                          },
-                          text: 'Save',
-                          backgroundColor: Constants.buttonColor)
-                    ],
+      child: Scaffold(
+        appBar: AppBar(
+            backgroundColor: Constants.defaultHeaderColor,
+            leading: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: const FaIcon(
+                      FontAwesomeIcons.circleArrowLeft,
+                      size: 30,
+                      color: Colors.white,
+                    ))
+              ],
+            ),
+            title: Text(
+              'Register your store',
+              style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
+            )),
+        backgroundColor: Colors.white,
+        body: Stack(
+          children: [
+            Obx(() => SingleChildScrollView(
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    child: Column(
+                      children: [
+                        Label(title: 'Information about your business'),
+                        CustomInput(
+                          controller: controller.businessController.value,
+                            label: 'Your business name',
+                            onValueChanged: (val) {},
+                            hintText: 'Your business name'),
+                        CustomSelectItem(
+                            label: 'Type of business',
+                            options: controller.typeBusiness.value,
+                            onChanged: (val) {}),
+                        Label(title: 'Business address'),
+                        CustomInput(
+                            controller: controller.businessController.value,
+                            label: 'Street name and number',
+                            onValueChanged: (val) {},
+                            hintText: ''),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.sizeOf(context).width * 0.4,
+                              child: CustomInput(
+                                  controller: controller.businessController.value,
+                                  label: 'Postal code',
+                                  onValueChanged: (val) {},
+                                  hintText: ''),
+                            ),
+                            SizedBox(
+                              width: 200,
+                              child: CustomInput(
+                                  controller: controller.businessController.value,
+                                  label: 'City',
+                                  onValueChanged: (val) {},
+                                  hintText: ''),
+                            ),
+                          ],
+                        ),
+                        CustomSelectItem(
+                            label: 'Country',
+                            options: controller.typeBusiness.value,
+                            onChanged: (val) {}),
+                        Label(title: 'Contact information'),
+                        CustomInput(
+                            controller: controller.businessController.value,
+                            label: 'Phone number',
+                            onValueChanged: (val) {},
+                            hintText: ''),
+                        CustomInput(
+                            controller: controller.businessController.value,
+                            label: 'Email',
+                            onValueChanged: (val) {},
+                            hintText: ''),
+                        CustomButton(
+                            onPressed: () {},
+                            text: 'Save',
+                            backgroundColor: Constants.buttonColor)
+                      ],
+                    ),
                   ),
-                ),
-              ))
-            ],
-          ),
+                ))
+          ],
         ),
-      );
+      ),
+    );
   }
 }

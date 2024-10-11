@@ -21,4 +21,5 @@
   static const CREATE_ACCOUNT = '/create-account';
   static const SIGN_LOG = '/sign-log';
   static const EMAIL_CONFIRMATION = '/email-confirmation';
+  static const SET_LOCATION = '/set-location';
 }

@@ -1,6 +1,5 @@
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 
@@ -13,7 +12,7 @@ class CustomInput extends StatelessWidget {
   final int? maxLength;
   final String? helper;
   final int maxLines;
-  final String? defaultValue;
+ final TextEditingController controller;
   const CustomInput({super.key,
     required this.label,
     required this.onValueChanged, // Use onValueChanged instead of controller
@@ -22,13 +21,12 @@ class CustomInput extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.maxLength,
     this.helper,this.maxLines = 1,
-    this.defaultValue,
+    required this.controller,
   });
 
   @override
   Widget build(BuildContext context) {
-    Rx<TextEditingController> controller =  TextEditingController().obs;
-    controller.value.text = defaultValue??'';
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -45,9 +43,9 @@ class CustomInput extends StatelessWidget {
           ),
         ),
         const SizedBox(height: 8),
-        Obx(()=>TextField(
+        TextField(
           onChanged: (value) => onValueChanged(value),
-          controller: controller.value ,// Pass value to onValueChanged
+          controller: controller ,// Pass value to onValueChanged
           keyboardType: keyboardType,
           maxLength: maxLength,
           maxLines: maxLines,
@@ -65,7 +63,7 @@ class CustomInput extends StatelessWidget {
             filled: true,
             fillColor: Colors.white,
           ),
-        ),),
+        ),
         const SizedBox(height: 15),
       ],
     );

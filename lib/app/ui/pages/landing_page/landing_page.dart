@@ -51,7 +51,6 @@ class LandingPage extends GetView<LandingController> {
                         }, child: Text('Create a store', style: TextStyle(color: Constants.defaultHeaderColor, fontWeight: FontWeight.bold, fontSize: 15),))
                       ],
                     )
-
                   ],
                 )
               ],

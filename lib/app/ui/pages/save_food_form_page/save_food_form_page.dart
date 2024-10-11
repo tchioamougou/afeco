@@ -1,7 +1,4 @@
-import 'package:afeco/app/routes/app_routes.dart';
-import 'package:afeco/app/ui/global_widgets/custom_bottom_action.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
-import 'package:afeco/app/ui/global_widgets/custom_checkbox.dart';
 import 'package:afeco/app/ui/global_widgets/custom_date_pick.dart';
 import 'package:afeco/app/ui/global_widgets/custom_input.dart';
 import 'package:afeco/app/ui/global_widgets/custom_select_item.dart';
@@ -49,12 +46,14 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
                     )),
                 backgroundColor: Colors.white,
                 body: Stepper(
-                  controlsBuilder: (context, controller) {
+                  controlsBuilder: (context, contController) {
                     return   Row(
                       children: <Widget>[
-                        CustomButton(onPressed: controller.onStepContinue!, text: controller.currentStep==3 ? 'Save':'Continue', backgroundColor: Constants.buttonColor),
+                        CustomButton(onPressed:contController.currentStep==3?()async{
+                          await controller.submitForm();
+                        }: contController.onStepContinue!, text: contController.currentStep==3 ? 'Save':'Continue', backgroundColor: Constants.buttonColor),
                         TextButton(
-                          onPressed: controller.onStepCancel,
+                          onPressed: contController.onStepCancel,
                           child:  Text('Back'),
                         ),
                       ],
@@ -90,18 +89,23 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
           content: Column(
             children: [
               CustomInput(
+                controller: controller.firstNameController,
                   label: "First Name",
                   onValueChanged: (val) {},
                   hintText: 'First Name'),
               CustomInput(
+                  controller: controller.lastNameController,
                   label: "Last Name",
                   onValueChanged: (val) {},
                   hintText: 'Last Name'),
               CustomInput(
+                  controller: controller.emailController,
                   label: "Email", onValueChanged: (val) {}, hintText: 'Email'),
               CustomInput(
+                  controller: controller.phoneController,
                   label: "Phone", onValueChanged: (val) {}, hintText: 'Phone'),
               CustomInput(
+                  controller: controller.addressController,
                   label: "Address",
                   onValueChanged: (val) {},
                   hintText: 'Address')
@@ -124,7 +128,7 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
                 height: 10.h,
               ),
               Column(
-                children: List.generate(2, (e)=>ProductItem()),
+                children: controller.products.value.map((e)=>ProductItem()).toList(),
               ),
               SizedBox(
                 height: 10.h,
@@ -160,10 +164,12 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
                                   title: 'Add New Product',
                                 ),
                                 CustomInput(
+                                    controller: controller.typeAlimentController,
                                     label: "Food",
                                     onValueChanged: (val) {},
                                     hintText: 'Food'),
                                 CustomInput(
+                                  controller: controller.quantityController,
                                   label: "Quantity",
                                   onValueChanged: (val) {},
                                   hintText: 'Quantity',
@@ -173,6 +179,7 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
                                 CustomDatePick(
                                     label: 'Expiry date',
                                     onValueChanged: (val) {
+                                      controller.expirationDate =val;
                                     },
                                     hintText: 'Expiry date'),
                                 Row(
@@ -187,7 +194,7 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
                                         backgroundColor: Colors.deepOrange),
                                     CustomButton(
                                         onPressed: () {
-                                          Get.back();
+                                          controller.addProduct();
                                         },
                                         text: 'Save',
                                         backgroundColor: Constants.buttonColor)
@@ -208,12 +215,19 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
               CustomSelectItem(
                   label: 'Type of packaging',
                   options: controller.typePackaging,
-                  onChanged: (va) {}),
+                  defaultValue: controller.typePackagingSelect.value,
+                  onChanged: (val) {
+                    controller.typePackagingSelect.value = val;
+                  }),
               CustomSelectItem(
                   label: 'Packaging condition',
                   options: controller.packagingConditions,
-                  onChanged: (va) {}),
+                  defaultValue: controller.packagingCondition.value,
+                  onChanged: (va) {
+                    controller.packagingCondition.value = va;
+                  }),
               CustomInput(
+                controller: controller.reasonController,
                 label: 'Reason for giving',
                 onValueChanged: (va) {},
                 hintText: 'e.g. excessive purchases, diet changes, etc.',
@@ -230,14 +244,20 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
               CustomSelectItem(
                 label: 'Allergens',
                 options: controller.allergens,
-                onChanged: (va) {},
+                defaultValue: controller.allergen.value,
+                onChanged: (va) {
+                  controller.allergen.value =va;
+                },
                 hintText: 'Select value',
                 help: "Allergens in food",
               ),
               CustomSelectItem(
                 label: 'Restrictions',
                 options: controller.restrictions,
-                onChanged: (va) {},
+                defaultValue: controller.restriction.value,
+                onChanged: (va) {
+                  controller.restriction.value =va;
+                },
                 hintText: 'Select value',
                 help: "Do foodstuffs require special storage?",
               ),
@@ -252,21 +272,38 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
             CustomSelectItem(
                 label: 'Preferred recovery modes',
                 options:controller.preferredRecoveryModes,
-                onChanged: (va) {}),
+              defaultValue: controller.preferredRecoveryMode.value,
+              onChanged: (va) {
+                controller.preferredRecoveryMode.value =va;
+              },
+            ),
 
-           CustomDatePick(label: "Select availability date", onValueChanged: (val){}, hintText: '20/10/2022'),
+           CustomDatePick(label: "Select availability date",
+               defaultValue: controller.availableDate,
+               onValueChanged: (val){
+             controller.availableDate = val;
+           }, hintText: '20/10/2022'),
             Row(
               children: [
                 Expanded(
-                  child: CustomTime(label: 'Between', onValueChanged: (val){}, hintText: '09:00 PM'),
+                  child: CustomTime(label: 'Between', onValueChanged: (val){
+                    controller.betweenDate = val;
+                  }, hintText: '09:00 PM'),
                 ),
                 SizedBox(width: 16),
                 Expanded(
-                  child: CustomTime(label: 'And', onValueChanged: (val){}, hintText: '09:00 PM'),
+                  child: CustomTime(label: 'And', onValueChanged: (val){
+                    controller.betweenDate = val;
+                  }, hintText: '09:00 PM'),
                 ),
               ],
             ),
-            CustomCheckbox(label: 'Sharing with neighbors', onChanged: (val){})
+            CustomSelectItem(
+                label: 'Sharing with neighbors',
+                options:controller.shareWiths,
+                defaultValue: controller.shareWith.value,
+                onChanged: (va) { controller.shareWith.value =va;
+                }),
           ],
         ),
       ),

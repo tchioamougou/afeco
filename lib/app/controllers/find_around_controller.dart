@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
 class FindAroundController extends GetxController {
-  final Rx<LatLng> _center = const LatLng(0, 0).obs;
+  final Rx<LatLng> _center = const LatLng(51.509364, -0.128928).obs;
   LatLng get center => _center.value;
   set center(LatLng value) => _center.value = value;
 
@@ -28,6 +28,7 @@ class FindAroundController extends GetxController {
   @override
   void onInit() async {
     // TODO: implement onInit
+    getCurrentPosition();
     super.onInit();
   }
 

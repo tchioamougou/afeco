@@ -1,4 +1,6 @@
-import '../bindings/email_confirmation_binding.dart';
+import '../bindings/set_location_binding.dart';
+import '../ui/pages/set_location_page/set_location_page.dart';
+      import '../bindings/email_confirmation_binding.dart';
 import '../ui/pages/email_confirmation_page/email_confirmation_page.dart';
       import '../bindings/sign_log_binding.dart';
 import '../ui/pages/sign_log_page/sign_log_page.dart';
@@ -173,6 +175,12 @@ class AppPages {
       name: AppRoutes.EMAIL_CONFIRMATION,
       page: () => const EmailConfirmationPage(),
       binding: EmailConfirmationBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.SET_LOCATION,
+      page: () => const SetLocationPage(),
+      binding: SetLocationBinding(),
       transition: _defaultTransition,
     ), 
 ];

@@ -93,7 +93,9 @@ class MapPagePage extends GetView<MapPageController> {
                           controller.within.value = val;
                         },
                         onPositionChanged: (val) {},
-                      withinValue: controller.within.value,
+                      withinValue: controller.within.value, onClose: () {
+                          Get.back();
+                    },
 
                     ),
                     Row(
