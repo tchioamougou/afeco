@@ -94,7 +94,8 @@ class FindAroundPage extends GetView<FindAroundController> {
                       //// Todo refresh the list of store by the all the information
                     },
                     onPositionChanged: (val) {
-                      //// Todo refresh the list of store by the all the information
+                      //// Todo refresh the list of store by the all the information,
+                      controller.updateUserPosition(val);
                       Get.back();
                     },
                     onClose: (){

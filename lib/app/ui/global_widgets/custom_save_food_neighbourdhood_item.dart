@@ -1,9 +1,12 @@
 import 'package:afeco/app/data/models/giving_package.dart';
+import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/layouts/main/main_layout.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
+import 'package:afeco/app/ui/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:latlong2/latlong.dart';
 
 class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
    final GivingPackage gp;
@@ -16,6 +19,10 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, String> times =Utils.formatDates(gp.availableDateStart, gp.availableDateStart);
+    LatLng point1 = LatLng(UserService.instance.user!.lat, UserService.instance.user!.long);
+    LatLng point2 = LatLng(gp.lat, gp.long);
+    String distance = Utils.distanceToText(point1, point2);
     return Card(
       elevation: 1,
       child: Container(
@@ -61,12 +68,25 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
                         SizedBox(
                           height: 3.h,
                         ),
-                        Text(
-                          'Collect today: ${gp.availableDateStart} - ${gp.availableDateEnd}',
-                          style: const TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              'Collect Day:',
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.grey,
+                              ),
+                            ),
+                            SizedBox(width: 4.w,),
+                            Text(
+                              '${times['day']}',
+                              style:  TextStyle(
+                                  fontSize: 15,
+                                  color: Constants.defaultHeaderColor,
+                                  fontWeight: FontWeight.bold
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(
                           height: 3.h,
@@ -77,7 +97,7 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  '200 m',
+                                  '${distance}',
                                   style: TextStyle(
                                       fontWeight: FontWeight.w900,
                                       fontSize: 15,
@@ -90,7 +110,6 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
                             IconButton(onPressed: (){
                               Get.toNamed(AppRoutes.SAVE_FOOD_DETAIL,arguments: gp);
                             }, icon: Icon(Icons.add_circle,color: Constants.defaultBorderColor,size: 30,))
-
                           ],
                         )
                       ],

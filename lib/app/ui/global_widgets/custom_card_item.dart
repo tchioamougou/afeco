@@ -1,9 +1,14 @@
 import 'package:afeco/app/data/models/bag_model.dart';
+import 'package:afeco/app/data/services/session_service.dart';
+import 'package:afeco/app/data/services/store_service.dart';
+import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/layouts/main/main_layout.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
+import 'package:afeco/app/ui/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:latlong2/latlong.dart';
 
 class CustomCardItem extends StatelessWidget {
   final BagRelation bg;
@@ -14,6 +19,15 @@ class CustomCardItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Map<String, String> times =Utils.formatDates(bg.pickupDateStart, bg.pickupDateEnd);
+    LatLng point1;
+    if(SessionService.instance.isStore()){
+       point1 = LatLng(StoreService.instance.store!.lat, StoreService.instance.store!.long);
+    }else{
+      point1 = LatLng(UserService.instance.user!.lat, UserService.instance.user!.long);
+    }
+    LatLng point2 = LatLng(bg.stores.lat, bg.stores.long);
+    String distance = Utils.distanceToText(point1, point2);
     return InkWell(
       onTap: (){
         Get.toNamed(AppRoutes.OFFER_DETAILS);
@@ -111,12 +125,33 @@ class CustomCardItem extends StatelessWidget {
                            SizedBox(
                              height: 3.h,
                            ),
-                           Text(
-                             'Collect today: ${bg.pickupDateStart}',
-                             style: const TextStyle(
-                               fontSize: 14,
-                               color: Colors.grey,
-                             ),
+                           Row(
+                             children: [
+                               Text(
+                                 'Collect Day:',
+                                 style: const TextStyle(
+                                   fontSize: 14,
+                                   color: Colors.grey,
+                                 ),
+                               ),
+                               SizedBox(width: 4.w,),
+                               Text(
+                                 '${times['day']}',
+                                 style:  TextStyle(
+                                   fontSize: 15,
+                                   color: Constants.defaultHeaderColor,
+                                   fontWeight: FontWeight.bold
+                                 ),
+                               ),
+                               SizedBox(width: 4.w,),
+                               Text(
+                               '${times['time']}',
+                                 style: const TextStyle(
+                                   fontSize: 14,
+                                   color: Colors.grey,
+                                 ),
+                               ),
+                             ],
                            ),
                            SizedBox(
                              height: 3.h,
@@ -131,7 +166,7 @@ class CustomCardItem extends StatelessWidget {
                                        color: Constants.defaultHeaderColor),
                                    const Text('5.0'),
                                    const SizedBox(width: 8),
-                                   const Text('200m'),
+                                    Text('${distance}'),
                                  ],
                                ),
                                Row(

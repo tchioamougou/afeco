@@ -69,7 +69,6 @@ class CreateAccountController extends GetxController {
           long: double.parse(address.lon ?? '0'));
       Document dc = await _appWriteController.createDocument(
           AppWriteCollection.storeCollections, sm.toJson());
-      print(dc.data);
       StoreService.instance.store = StoreModel.fromJson(dc.data);
     } catch (e) {
       EasyLoading.showError("An Error Occur");
@@ -84,7 +83,7 @@ class CreateAccountController extends GetxController {
     if (phoneController.value.text.isNotEmpty) {
       await EasyLoading.show();
       try {
-        //await _appWriteController.createPhone(phoneController.value.text);
+        await _appWriteController.createPhone(phoneController.value.text);
         Get.toNamed(AppRoutes.SMS_VERIFICATION);
       } catch (e) {
         // EasyLoading.showError("An Error Occur");

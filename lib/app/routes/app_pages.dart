@@ -1,4 +1,8 @@
-import '../bindings/save_binding.dart';
+import '../bindings/store_inpact_binding.dart';
+import '../ui/pages/store_inpact_page/store_inpact_page.dart';
+      import '../bindings/store_profile_binding.dart';
+import '../ui/pages/store_profile_page/store_profile_page.dart';
+      import '../bindings/save_binding.dart';
 import '../ui/pages/save_page/save_page.dart';
       import '../bindings/store_order_binding.dart';
 import '../ui/pages/store_order_page/store_order_page.dart';
@@ -221,6 +225,18 @@ class AppPages {
       name: AppRoutes.SAVE,
       page: () => const SavePage(),
       binding: SaveBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.STORE_PROFILE,
+      page: () => const StoreProfilePage(),
+      binding: StoreProfileBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.STORE_INPACT,
+      page: () => const StoreInpactPage(),
+      binding: StoreInpactBinding(),
       transition: _defaultTransition,
     ), 
 ];

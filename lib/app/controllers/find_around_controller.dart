@@ -1,3 +1,4 @@
+import 'package:afeco/app/data/models/global_service.dart';
 import 'package:afeco/app/data/models/market.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
@@ -64,4 +65,9 @@ class FindAroundController extends GetxController {
   }
 
   void findShop(double latitude, double longitude) async {}
+
+  void updateUserPosition(LatLng po){
+    GlobalService.updateUserLocation(po);
+  }
+
 }

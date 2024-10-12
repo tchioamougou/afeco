@@ -1,6 +1,9 @@
 import 'package:afeco/app/controllers/store_init_controller.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/pages/store_home_page/store_home_page.dart';
+import 'package:afeco/app/ui/pages/store_inpact_page/store_inpact_page.dart';
+import 'package:afeco/app/ui/pages/store_order_page/store_order_page.dart';
+import 'package:afeco/app/ui/pages/store_profile_page/store_profile_page.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -34,9 +37,9 @@ class StoreInitPage extends GetView<StoreInitController> {
   }
   List<Widget> pages = [
     const StoreHomePage(),
-    const Text(''),
-    const Text(''),
-    const Text(''),
+    const StoreOrderPage(),
+    const StoreInpactPage(),
+    const StoreProfilePage(),
   ];
 
   Widget getBody() {
