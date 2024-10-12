@@ -3,6 +3,7 @@ import 'package:afeco/app/controllers/home_controller.dart';
 
 import 'package:afeco/app/controllers/navigation_controller.dart';
 import 'package:afeco/app/controllers/main_controller.dart';
+import 'package:afeco/app/controllers/offers_controller.dart';
 import 'package:afeco/app/data/appwrite/appwrite_controllers.dart';
 
 import 'package:firebase_core/firebase_core.dart';
@@ -24,6 +25,8 @@ class DependecyInjection {
     Get.put<MainController>(MainController());
     Get.put<SaveFoodAppWriteController>(SaveFoodAppWriteController());
     Get.put<HomeController>(HomeController());
+    Get.put<OffersController>(OffersController());
+
 
   }
 }

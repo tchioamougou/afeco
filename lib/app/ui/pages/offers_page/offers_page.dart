@@ -8,12 +8,25 @@ import '../../layouts/main/main_layout.dart';
 
 import '../../../controllers/offers_controller.dart';
 
-class OffersPage extends GetView<OffersController> {
+class OffersPage extends StatefulWidget {
       const OffersPage ({Key? key}) : super(key: key);
+
+  @override
+  State<OffersPage> createState() => _OffersPageState();
+}
+
+class _OffersPageState extends State<OffersPage> {
+  OffersController controller = Get.find();
+  @override
+  void initState() {
+    // TODO: implement initState
+    controller.getBags();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  MainLayout(
-        child: Scaffold(
+        child:Obx(()=> Scaffold(
           body:SingleChildScrollView(child:
           Column(
             children: [
@@ -77,26 +90,15 @@ class OffersPage extends GetView<OffersController> {
                 height: 20,
               ),
               Column(
-                children: List.generate(
-                    10,
-                        (i) => const Column(
-                          children: [
-                            SizedBox(height: 10,),
-                            CustomOfferItem(
-                              title: 'Penelope\'s',
-                              description: 'Baked goods',
-                              time: '17:40 - 18:00',
-                              price: '£12.00',
-                              imageUrl:'https://dovv-distribution.com/wp-content/uploads/2023/09/Djino-1-768x768.jpg',
-                              isFavorite: true,
-                            )
-                          ],
-                        )),
-              )
+                children:  controller.bags.value.map(
+                        (i) =>CustomOfferItem(bg: i,
+                    )).toList(),
+
+              ),
 
             ],
           ),),
-        ),
+        ),)
       );
   }
 }

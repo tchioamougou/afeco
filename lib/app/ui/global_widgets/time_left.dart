@@ -18,7 +18,10 @@ class _CountdownTimerState extends State<TimeLeft> {
   @override
   void initState() {
     super.initState();
-    _startTimer();
+    if(widget.targetDate.isAfter(DateTime.now())){
+      _startTimer();
+    }
+
   }
 
   void _startTimer() {
