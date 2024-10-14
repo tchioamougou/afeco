@@ -1,3 +1,4 @@
+import 'package:afeco/app/ui/global_widgets/custom_filter.dart';
 import 'package:afeco/app/ui/global_widgets/header_custom.dart';
 import 'package:afeco/app/ui/pages/offers_page/custom_offer_item.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
@@ -71,6 +72,11 @@ class _OffersPageState extends State<OffersPage> {
                         ),
                         IconButton(
                           onPressed: () {
+                            Get.dialog(CustomFilter(onClose: () {
+                              Get.back();
+                            },onPress: (){
+                              Get.back();
+                            },));
                           },
                           icon: FaIcon(
                             FontAwesomeIcons.sliders,

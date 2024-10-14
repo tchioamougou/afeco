@@ -4,8 +4,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Label extends StatelessWidget {
-  Label({required this.title});
+  const Label({required this.title, this.color});
   final String title;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class Label extends StatelessWidget {
         children: [
           Text(
             title,
-            style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 18,color: Constants.defaultBorderColor),
+            style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 18,color: color ?? Constants.defaultBorderColor ),
           ),
         ],
       ),

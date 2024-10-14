@@ -2,6 +2,7 @@ import 'package:afeco/app/controllers/init_page_controller.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_card_item.dart';
 import 'package:afeco/app/ui/global_widgets/custom_category_action.dart';
+import 'package:afeco/app/ui/global_widgets/custom_filter.dart';
 import 'package:afeco/app/ui/global_widgets/custom_save_food_neighbourdhood_item.dart';
 import 'package:afeco/app/ui/global_widgets/header_custom.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
@@ -49,7 +50,7 @@ class _HomePageState extends State<HomePage> {
                 Padding(
                     padding: const EdgeInsets.fromLTRB(10, 1, 10, 0),
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                       decoration: BoxDecoration(
                           border: Border.all(
                               width: 0.1, color: Constants.defaultBorderColor),
@@ -72,7 +73,7 @@ class _HomePageState extends State<HomePage> {
                                 padding: EdgeInsets.zero),
                           ),
                           Container(
-                            width: MediaQuery.sizeOf(context).width * 0.7,
+                            width: MediaQuery.sizeOf(context).width * 0.67,
                             child: const TextField(
                               decoration: InputDecoration(
                                 border: InputBorder.none,
@@ -80,6 +81,26 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
+                          IconButton(
+                            onPressed: () {
+                              Get.dialog(CustomFilter(onClose: () {
+                                Get.back();
+                              },onPress: (){
+                                Get.back();
+                              },));
+                            },
+                            icon: FaIcon(
+                              FontAwesomeIcons.sliders,
+                              color: Constants.buttonColor,
+                              size: 20,
+                            ),
+                            style: ElevatedButton.styleFrom(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(0),
+                                ),
+                                padding: EdgeInsets.zero),
+                          ),
+
                         ],
                       ),
                     )),
@@ -146,6 +167,19 @@ class _HomePageState extends State<HomePage> {
                       Padding(
                         padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
                         child: Label(title: 'Collect Now'),
+                      ),
+                      const SizedBox(height: 10,),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: controller.bags.value.map(
+                                  (i) =>CustomCardItem(bg: i,
+                              )).toList(),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
+                        child: Label(title: 'Sold out'),
                       ),
                       const SizedBox(height: 10,),
                       SingleChildScrollView(
