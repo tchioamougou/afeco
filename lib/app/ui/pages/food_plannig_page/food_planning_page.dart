@@ -13,64 +13,83 @@ import '../../layouts/main/main_layout.dart';
 import '../../../controllers/food_plannig_controller.dart';
 
 class FoodPlanningPage extends GetView<FoodPlannigController> {
-      const FoodPlanningPage ({super.key});
+  const FoodPlanningPage({super.key});
   @override
   Widget build(BuildContext context) {
-    return  MainLayout(
-        child: Scaffold(
-          appBar:  AppBar(
-              backgroundColor: Constants.defaultHeaderColor,
-              leading: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(onPressed: (){
-                    Get.back();
-                  }, icon: const FaIcon(FontAwesomeIcons.circleArrowLeft,size: 30,color: Colors.white,))
-                ],
-              ),
-              title: Text(
-                'Food Planning',
-                style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
-              ),
-          actions: [CustomButton(onPressed: (){
-            Get.toNamed(AppRoutes.FOOD_INVENTORY);
-          }, text: 'Food inventory', backgroundColor: Colors.deepOrange)],
+    return MainLayout(
+      child: Obx(() => Scaffold(
+          appBar: AppBar(
+            backgroundColor: Constants.defaultHeaderColor,
+            leading: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Get.back();
+                    },
+                    icon: const FaIcon(
+                      FontAwesomeIcons.circleArrowLeft,
+                      size: 30,
+                      color: Colors.white,
+                    ))
+              ],
+            ),
+            title: Text(
+              'Food Planning',
+              style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
+            ),
+            actions: [
+              CustomButton(
+                  onPressed: () {
+                    Get.toNamed(AppRoutes.FOOD_INVENTORY);
+                  },
+                  text: 'Food inventory',
+                  backgroundColor: Colors.deepOrange)
+            ],
           ),
-          body:SingleChildScrollView(
+          body: SingleChildScrollView(
             child: Column(
               children: [
                 Center(
                   child: WeeklyCalendar(
                     calendarStyle: CalendarStyle(
-                      locale: "en",
-                      selectedCircleColor: Constants.defaultHeaderColor
-                    ),
+                        locale: "en",
+                        selectedCircleColor: Constants.defaultHeaderColor),
                   ),
                 ),
-                Padding(padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  children: [
-                    Label(title: 'Breakfast'),
-                    Column(
-                      children: List.generate(2, (i)=>FoodPlanningItem(onPress: (){}, title: 'Couscous sauce gombo', image: 'assets/image/save_food.png',cal: "10",time: "10",)),
+                if (controller.currentMealPlan.value != null)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Column(
+                      children: controller.mealPlans[0].recipes
+                          .map((e) => Column(
+                                children: [
+                                  Label(title: '${e.mealType}'),
+                                  Column(
+                                    children: List.generate(
+                                        2,
+                                        (i) => FoodPlanningItem(
+                                              onPress: () {},
+                                              title: e.name,
+                                              image:
+                                                  'assets/image/save_food.png',
+                                              cal: "10",
+                                              time: "10",
+                                            )),
+                                  ),
+                                ],
+                              ))
+                          .toList(),
                     ),
-                    Label(title: 'Lunch'),
-                    Column(
-                      children: List.generate(2, (i)=>FoodPlanningItem(onPress: (){}, title: 'Couscous sauce gombo', image: 'assets/image/save_food.png',cal: "10",time: "10",)),
-                    ),
-                    Label(title: 'Dinner'),
-                    Column(
-                      children: List.generate(2, (i)=>FoodPlanningItem(onPress: (){}, title: 'Couscous sauce gombo', image: 'assets/image/save_food.png',cal: "10",time: "10",)),
-                    ),
-                  ],
-                ),
-                )
-
+                  )
+                else
+                  const Center(
+                    child: Text('No planing for today'),
+                  )
               ],
             ),
-          )
-        ),
-      );
+          ))),
+    );
   }
 }

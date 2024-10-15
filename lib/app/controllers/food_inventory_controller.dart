@@ -2,7 +2,7 @@ import 'package:afeco/app/data/appwrite/appwrite_controllers.dart';
 import 'package:afeco/app/data/models/food_inventory_model.dart';
 import 'package:afeco/app/data/models/food_model.dart';
 import 'package:afeco/app/data/models/option.dart';
-import 'package:afeco/app/data/models/user_model.dart';
+import 'package:afeco/app/data/services/gemini_service.dart';
 import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:appwrite/models.dart';
@@ -42,6 +42,7 @@ class FoodInventoryController extends GetxController {
       EasyLoading.dismiss();
     }
   }
+
   Future<void> addItem() async {
     await EasyLoading.show();
     try {
@@ -49,13 +50,12 @@ class FoodInventoryController extends GetxController {
           quantityController.value.text.isNotEmpty &&
           category.isNotEmpty) {
         FoodInventoryModel fd = FoodInventoryModel(
-          users: UserService.instance.user!.documentId ,
+            users: UserService.instance.user!.documentId,
             foodName: foodNameController.value.text,
             quantity: quantityController.value.text,
             expirationDate: expiredDate.value,
             category: category.value,
-          documentId: ""
-        );
+            documentId: "");
         Document dc = await _appWriteController.createDocument(
             AppWriteCollection.foodInventories, fd.toJson());
 
@@ -73,6 +73,17 @@ class FoodInventoryController extends GetxController {
 
   void removeFood(int index) {
     foods.removeAt(index);
+  }
+
+  Future<void> makePlan() async {
+    EasyLoading.show();
+    try {
+    List<MealPlan> plans = await  GeminiService.generatePlan(foods.value);
+    } catch (e) {
+      print(e);
+    } finally {
+      EasyLoading.dismiss();
+    }
   }
 
   void resetValue() {

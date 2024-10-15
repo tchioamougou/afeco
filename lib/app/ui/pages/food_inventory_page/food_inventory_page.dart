@@ -44,7 +44,7 @@ class FoodInventoryPage extends GetView<FoodInventoryController> {
           actions: [
             CustomButton(
                 onPressed: () {
-                  Get.back();
+                  controller.makePlan();
                 },
                 text: 'Update planning',
                 backgroundColor: Colors.deepOrange)
