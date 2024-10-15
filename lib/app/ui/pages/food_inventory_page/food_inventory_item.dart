@@ -1,4 +1,4 @@
-import 'package:afeco/app/data/models/food_model.dart';
+import 'package:afeco/app/data/models/food_inventory_model.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 class FoodInventoryItem extends StatelessWidget {
   final VoidCallback onDelete;
   final String image;
-  final FoodModel foodModel;
+  final FoodInventoryShow foodModel;
 
   const FoodInventoryItem({
     super.key,
@@ -44,7 +44,7 @@ class FoodInventoryItem extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Text(
-                      foodModel.name,
+                      foodModel.foodName,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,

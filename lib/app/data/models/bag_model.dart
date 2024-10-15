@@ -12,7 +12,7 @@ class Bag {
   DateTime createdDate;
   DateTime lastModifyDate;
   String stores;
-
+  String documentId;
   Bag({
     required this.name,
     required this.originalPrice,
@@ -24,6 +24,7 @@ class Bag {
     required this.createdDate,
     required this.lastModifyDate,
     required this.stores,
+    required this.documentId
   });
 
   factory Bag.fromJson(Map<String, dynamic> json) {
@@ -38,6 +39,7 @@ class Bag {
       createdDate: DateTime.parse(json['createdDate']),
       lastModifyDate: DateTime.parse(json['lastModifyDate']),
       stores: json['stores'],
+        documentId:json['documentId']
     );
   }
 
@@ -53,6 +55,7 @@ class Bag {
       'createdDate': createdDate.toIso8601String(),
       'lastModifyDate': lastModifyDate.toIso8601String(),
       'stores': stores,
+      'documentId':documentId
     };
   }
 }
@@ -70,7 +73,7 @@ class BagRelation {
   DateTime createdDate;
   DateTime lastModifyDate;
   StoreModel stores;
-
+  String documentId;
   BagRelation({
     required this.name,
     required this.originalPrice,
@@ -82,6 +85,7 @@ class BagRelation {
     required this.createdDate,
     required this.lastModifyDate,
     required this.stores,
+    required this.documentId
   });
 
   factory BagRelation.fromJson(Map<String, dynamic> json) {
@@ -96,6 +100,7 @@ class BagRelation {
       createdDate: DateTime.parse(json['createdDate']),
       lastModifyDate: DateTime.parse(json['lastModifyDate']),
       stores: StoreModel.fromJson(json['stores']),
+        documentId:json['documentId']
     );
   }
 
@@ -111,6 +116,7 @@ class BagRelation {
       'createdDate': createdDate.toIso8601String(),
       'lastModifyDate': lastModifyDate.toIso8601String(),
       'stores': stores,
+      'documentId':documentId
     };
   }
 }

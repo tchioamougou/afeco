@@ -23,6 +23,7 @@ class GivingPackage {
   String status;
   String reservedBy;
   String shareWith;
+  String documentId;
   GivingPackage({
     required this.users,
     required this.name,
@@ -44,6 +45,7 @@ class GivingPackage {
     required this.status,
     required this.reservedBy,
     required this.shareWith,
+    required this.documentId,
   });
   Map<String, dynamic> toJson() {
     return {
@@ -67,6 +69,7 @@ class GivingPackage {
       'status': status,
       'reservedBy': reservedBy,
       'shareWith': shareWith,
+      "documentId":documentId
     };
   }
 
@@ -92,6 +95,7 @@ class GivingPackage {
       status: json['status'],
       reservedBy: json['reservedBy'],
       shareWith: json['shareWith'],
+        documentId:json['documentId']
     );
   }
   List<FoodModel> getFoodModels(){

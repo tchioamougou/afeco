@@ -14,7 +14,7 @@ class StoreModel {
   String userId;
   double lat;
   double long;
-
+  String documentId;
   StoreModel({
     required this.businessName,
     required this.typeBusiness,
@@ -29,6 +29,7 @@ class StoreModel {
     required this.userId,
     required this.lat,
     required this.long,
+    required this. documentId
   });
 
   factory StoreModel.fromJson(Map<String, dynamic> json) {
@@ -46,6 +47,7 @@ class StoreModel {
       userId: json['userId'],
       lat: json['lat'],
       long: json['long'],
+        documentId:json['documentId']
     );
   }
 
@@ -64,6 +66,7 @@ class StoreModel {
       'userId': userId,
       'lat': lat,
       'long': long,
+      "documentId":documentId
     };
   }
 

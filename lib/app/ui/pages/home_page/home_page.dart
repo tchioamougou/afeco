@@ -125,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                             if(e['title']=='Planning'){
                               Get.toNamed(AppRoutes.FOOD_PLANNING);
                             }else if(e['title']=='Offers'){
-                              initPageController.selectedTab(2);
+                              Get.toNamed(AppRoutes.MY_ORDERS);
                             }
                             else if(e['title']=='C20 Views'){
                               initPageController.selectedTab(3);

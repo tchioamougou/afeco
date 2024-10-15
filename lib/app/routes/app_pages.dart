@@ -1,4 +1,6 @@
-import '../bindings/store_inpact_binding.dart';
+import '../bindings/my_orders_binding.dart';
+import '../ui/pages/my_orders_page/my_orders_page.dart';
+      import '../bindings/store_inpact_binding.dart';
 import '../ui/pages/store_inpact_page/store_inpact_page.dart';
       import '../bindings/store_profile_binding.dart';
 import '../ui/pages/store_profile_page/store_profile_page.dart';
@@ -237,6 +239,12 @@ class AppPages {
       name: AppRoutes.STORE_INPACT,
       page: () => const StoreInpactPage(),
       binding: StoreInpactBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.MY_ORDERS,
+      page: () => const MyOrdersPage(),
+      binding: MyOrdersBinding(),
       transition: _defaultTransition,
     ), 
 ];

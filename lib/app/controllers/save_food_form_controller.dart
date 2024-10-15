@@ -118,7 +118,8 @@ class SaveFoodFormController extends GetxController {
             createdDate: DateTime.now(),
             status: 'OPEN',
             reservedBy: '',
-            shareWith: shareWith.value
+            shareWith: shareWith.value,
+          documentId: ""
         );
         await _appWriteController.createDocument(AppWriteCollection.givingPackagesCollections,gp.toJson() );
         Get.offAllNamed(AppRoutes.TANKING);

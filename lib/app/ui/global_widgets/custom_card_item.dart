@@ -14,9 +14,9 @@ import 'package:latlong2/latlong.dart';
 class CustomCardItem extends StatelessWidget {
   final BagRelation bg;
   const CustomCardItem({
-    Key? key,
+    super.key,
     required this.bg,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -107,7 +107,7 @@ class CustomCardItem extends StatelessWidget {
                       child: Tag(
                         backgroundColor: Constants.buttonColor.withOpacity(0.2),
                         color: Colors.yellow,
-                        content: '${bg.quantity} left',
+                        content: '${bg.rest} left',
                       ))
                 ],
               ),

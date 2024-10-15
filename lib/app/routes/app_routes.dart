@@ -29,4 +29,5 @@
   static const SAVE = '/save';
   static const STORE_PROFILE = '/store-profile';
   static const STORE_INPACT = '/store-inpact';
+  static const MY_ORDERS = '/my-orders';
 }

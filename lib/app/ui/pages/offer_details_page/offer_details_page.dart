@@ -1,4 +1,3 @@
-import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_bottom_action.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
@@ -85,6 +84,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                   SizedBox(height: 15,),
                   CustomButton(
                       onPressed: () {
+                        controller.createOrder();
                         Get.back();
                       },
                       text: 'Reserve',
