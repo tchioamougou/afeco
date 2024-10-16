@@ -1,6 +1,7 @@
 import 'package:afeco/app/data/appwrite/appwrite_controllers.dart';
 import 'package:afeco/app/data/models/order_model.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
+import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,9 @@ class MyOrdersController extends GetxController {
     EasyLoading.show();
     try {
       DocumentList dls = await _appWriteController
-          .getDocuments(AppWriteCollection.bagOrderCollections, []);
+          .getDocuments(AppWriteCollection.bagOrderCollections, [
+        Query.notEqual("status", OrderStatus.closed.name)
+      ]);
       bags.value =
           dls.documents.map((e) => OrderShowModel.fromJson(e.data)).toList();
     } catch (e) {

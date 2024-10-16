@@ -34,7 +34,7 @@ class OfferDetailsController extends GetxController {
     await EasyLoading.show();
     try {
       OrderModel om = OrderModel(
-          status: 'Open',
+          status: OrderStatus.payed.name,
           documentId: "",
           bags: bag.value!.documentId,
           price: bag.value!.price,

@@ -5,6 +5,7 @@ class Constants{
   static Color buttonColor =const Color.fromRGBO(17,77,77,1);
   static Color defaultHeaderColor =const Color.fromRGBO(17,77,77,1);
   static Color defaultBorderColor= const Color.fromRGBO(17,77,77,1);
+
 }
 
 class AppWriteCollection{
@@ -22,3 +23,5 @@ class AppWriteBucket{
   static String profileBucket ="670943f5001abc09a533";
   static String urlBucket='https://cloud.appwrite.io/v1/storage/buckets/670943f5001abc09a533/files/fileId/view?project=save-food&project=save-food&mode=admin';
 }
+
+enum OrderStatus { payed, closed, cancel }

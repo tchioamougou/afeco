@@ -33,7 +33,7 @@ class _StoreHomePageState extends State<StoreHomePage> {
               ),
               const SizedBox(height: 10,),
               Expanded(child: GridView.count(
-                crossAxisCount: 3 ,
+                crossAxisCount: 2 ,
                 childAspectRatio: 1.1,
                 children: controller.bags.value.map ((index){
                   return Container(
