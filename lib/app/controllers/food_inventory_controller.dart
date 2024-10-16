@@ -1,3 +1,4 @@
+import 'package:afeco/app/controllers/food_plannig_controller.dart';
 import 'package:afeco/app/data/appwrite/appwrite_controllers.dart';
 import 'package:afeco/app/data/models/food_inventory_model.dart';
 import 'package:afeco/app/data/models/food_model.dart';
@@ -13,6 +14,8 @@ import 'package:get/get.dart';
 class FoodInventoryController extends GetxController {
   final RxList<FoodInventoryShow> foods = <FoodInventoryShow>[].obs;
   final SaveFoodAppWriteController _appWriteController = Get.find();
+  final FoodPlannigController _foodPlannigController = Get.find();
+
   List<Option> foodsCategories = [
     Option(value: "NEIGHBORHOOD", label: "Neighbourhood"),
     Option(value: "FOOD_BANK", label: "Food bank"),
@@ -79,6 +82,8 @@ class FoodInventoryController extends GetxController {
     EasyLoading.show();
     try {
     List<MealPlan> plans = await  GeminiService.generatePlan(foods.value);
+    await _foodPlannigController.save(plans);
+   // Get.back();
     } catch (e) {
       print(e);
     } finally {

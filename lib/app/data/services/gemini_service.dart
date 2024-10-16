@@ -28,7 +28,8 @@ class GeminiService {
         Adapt to a given period: Depending on the quantity of food available.
         Propose precise quantities: For each food in each meal.
         ${ingredients.map((e)=>e.toJson().toString())}
-        
+        mealType will alway be: dinnrr launch breakfast.. each days contains 3 recipes for each meattype
+        a the planing is for 1 week  from tomorrow to the seven others days 
         
         .return data in this format
             [ {

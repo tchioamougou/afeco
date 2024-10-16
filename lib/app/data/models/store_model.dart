@@ -15,40 +15,38 @@ class StoreModel {
   double lat;
   double long;
   String documentId;
-  StoreModel({
-    required this.businessName,
-    required this.typeBusiness,
-    required this.streetNameNumber,
-    required this.postalCode,
-    required this.city,
-    required this.country,
-    required this.phoneNumber,
-    required this.email,
-    required this.allow,
-    required this.createdDate,
-    required this.userId,
-    required this.lat,
-    required this.long,
-    required this. documentId
-  });
+  StoreModel(
+      {required this.businessName,
+      required this.typeBusiness,
+      required this.streetNameNumber,
+      required this.postalCode,
+      required this.city,
+      required this.country,
+      required this.phoneNumber,
+      required this.email,
+      required this.allow,
+      required this.createdDate,
+      required this.userId,
+      required this.lat,
+      required this.long,
+      required this.documentId});
 
   factory StoreModel.fromJson(Map<String, dynamic> json) {
     return StoreModel(
-      businessName: json['businessName'],
-      typeBusiness: json['typeBusiness'],
-      streetNameNumber: json['streetNameNumber'],
-      postalCode: json['postalCode'],
-      city: json['city'],
-      country: json['country'],
-      phoneNumber: json['phoneNumber'],
-      email: json['email'],
-      allow: json['allow'],
-      createdDate: DateTime.parse(json['createdDate']),
-      userId: json['userId'],
-      lat: json['lat'],
-      long: json['long'],
-        documentId:json['documentId']
-    );
+        businessName: json['businessName'],
+        typeBusiness: json['typeBusiness'],
+        streetNameNumber: json['streetNameNumber'],
+        postalCode: json['postalCode'],
+        city: json['city'],
+        country: json['country'],
+        phoneNumber: json['phoneNumber'],
+        email: json['email'],
+        allow: json['allow'],
+        createdDate: DateTime.parse(json['createdDate']),
+        userId: json['userId'],
+        lat: json['lat'],
+        long: json['long'],
+        documentId: json['documentId']??"");
   }
 
   Map<String, dynamic> toJson() {
@@ -66,7 +64,7 @@ class StoreModel {
       'userId': userId,
       'lat': lat,
       'long': long,
-      "documentId":documentId
+      "documentId": documentId
     };
   }
 

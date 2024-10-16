@@ -1,75 +1,126 @@
+import 'package:afeco/app/data/models/food_inventory_model.dart';
+import 'package:afeco/app/data/models/food_model.dart';
+import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
+import 'package:afeco/app/ui/global_widgets/label.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:get/get.dart';
 
 class FoodPlanningItem extends StatelessWidget {
-  final VoidCallback onPress;
-  final String image;
-  final String title;
-  final String cal;
-  final String time;
+  final Recipe rcp;
 
   const FoodPlanningItem({
     super.key,
-    required this.onPress,
-    required this.title,
-    required this.image, required this.cal, required this.time,
+    required this.rcp,
   });
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: onPress,
-      child: Column(
-        children: [
-          Container(
-            margin: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
-            padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-            height: 80,
-            decoration: BoxDecoration(
-                borderRadius: const BorderRadius.all(Radius.circular(5)),
-                color: Constants.defaultBorderColor.withOpacity(0.2)),
-            child: Row(
-              children: [
-                Image.asset(
-                  image,
-                  height: 70,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Center(
-                      child: Container(
-                        child: Text(
-                          title,
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins( fontWeight: FontWeight.bold,),
+    return Card(
+      elevation: 10,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+        decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            color: Colors.white),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Label(title: rcp.name),
+            const SizedBox(height: 5,),
+            Container(
+              decoration: BoxDecoration(
+                  border: Border(
+                      top: BorderSide(
+                          color: Constants.buttonColor
+                              .withOpacity(0.3),
+                          width: 1),
+                      bottom: BorderSide(
+                          color: Constants.buttonColor
+                              .withOpacity(0.3),
+                          width: 1))),
+              child: ListTile(
+                dense: true,
+                onTap: () {
+                  Get.dialog(
+                      barrierDismissible: false,
+                      AlertDialog(
+                        content: Container(
+                          height: 250,
+                          child: Column(
+                            children: [
+                              FaIcon(
+                                FontAwesomeIcons.bowlFood,
+                                color: Constants.buttonColor,
+                                size: 70,
+                              ),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              Label(title: 'Ingredients'),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                  textAlign: TextAlign.justify,
+                                  ingredientsListToString(rcp.ingredients)
+                              )                                  ],
+                          ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 5,),
-                    Row(
-                      children: [
-                        FaIcon(FontAwesomeIcons.water, size: 15, color: Constants.buttonColor,),
-                        const SizedBox(width: 5,),
-                        Text('$cal Calories',),
-                        const SizedBox(width: 10,),
-                        FaIcon(FontAwesomeIcons.clock, size: 15, color: Constants.buttonColor,),
-                        const SizedBox(width: 5,),
-                        Text('$time Min'),
-                      ],
-                    )
-                  ],
-                )
-              ],
+                        actions: [
+                          CustomButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              text: 'Got it!',
+                              backgroundColor:
+                              Constants.buttonColor)
+                        ],
+                        insetPadding: EdgeInsets.symmetric(
+                            horizontal: 10),
+                      ));
+                },
+                leading: FaIcon(
+                  Icons.location_on_outlined,
+                  color: Constants.buttonColor,
+                ),
+                title: Text(
+                  "Ingredients & allergens",
+                  style: TextStyle(
+                      color: Constants.defaultHeaderColor,
+                      fontSize: 17),
+                ),
+                trailing: Icon(
+                  Icons.chevron_right,
+                  color: Constants.buttonColor,
+                ),
+              ),
             ),
-          ),
-        ],
+            const Label(title: "Instructions"),
+            Padding(padding: EdgeInsets.symmetric(horizontal: 5), child:  Text(rcp.instructions, style: TextStyle(fontSize: 15, color: Colors.grey),),
+            )
+          ],
+        ),
       ),
     );
+  }
+  String ingredientsListToString(List<FoodModel> ingredients) {
+    List<String> ingredientStrings = [];
+
+    for (var ingredient in ingredients) {
+      String ingredientString = '';
+
+      if (ingredient.quantity.isNotEmpty) {
+        ingredientString += '${ingredient.quantity} ';
+      }
+
+      ingredientString += ingredient.name;
+
+      ingredientStrings.add(ingredientString);
+    }
+
+    return ingredientStrings.join(', ');
   }
 }

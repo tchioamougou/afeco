@@ -1,5 +1,6 @@
 
 import 'package:afeco/app/controllers/store_home_controller.dart';
+import 'package:afeco/app/controllers/store_order_controller.dart';
 import 'package:afeco/app/controllers/store_profile_controller.dart';
 import 'package:afeco/app/data/services/first_time_service.dart';
 import 'package:afeco/app/data/services/session_service.dart';
@@ -59,6 +60,7 @@ class MyApp extends StatelessWidget {
            if(StoreService.instance.isStore()){
              Get.put<StoreHomeController>(StoreHomeController());
              Get.put<StoreProfileController>(StoreProfileController());
+             Get.put<StoreOrderController>(StoreOrderController());
              return AppRoutes.STORE_INIT;
            }else{
              return AppRoutes.CREATE_ACCOUNT;

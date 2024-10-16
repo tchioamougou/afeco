@@ -1,21 +1,15 @@
 import 'package:afeco/app/controllers/save_controller.dart';
-import 'package:afeco/app/ui/global_widgets/custom_address_pick.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/custom_date_pick.dart';
 import 'package:afeco/app/ui/global_widgets/custom_input.dart';
-import 'package:afeco/app/ui/global_widgets/custom_select_item.dart';
 import 'package:afeco/app/ui/global_widgets/custom_time.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
-import 'package:afeco/app/ui/pages/save_food_form_page/product_item.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../layouts/main/main_layout.dart';
-
-import '../../../controllers/save_food_form_controller.dart';
-
 class SavePage extends GetView<SaveController> {
   const SavePage({super.key});
   @override

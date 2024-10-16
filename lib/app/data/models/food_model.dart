@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class FoodModel {
   String name;
   String quantity;
@@ -71,10 +73,14 @@ class MealPlan {
   });
 
   factory MealPlan.fromJson(Map<String, dynamic> json) => MealPlan(
-    date: DateTime.parse(json['date']),
+    date:json['date']!=null? DateTime.parse(json['date']): DateTime.now(),
     recipes: List<Recipe>.from(json['recipes'].map((x) => Recipe.fromJson(x))),
   );
 
+  factory MealPlan.fromJsonC(Map<String, dynamic> json) => MealPlan(
+    date:json['date']!=null? DateTime.parse(json['date']): DateTime.now(),
+    recipes: List<Recipe>.from(json['recipes'].map((x) => Recipe.fromJson(jsonDecode(x)))),
+  );
   Map<String, dynamic> toJson() => {
     'date': date.toIso8601String(),
     'recipes': List<dynamic>.from(recipes.map((x) => x.toJson())),

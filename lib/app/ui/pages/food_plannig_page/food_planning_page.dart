@@ -51,32 +51,28 @@ class FoodPlanningPage extends GetView<FoodPlannigController> {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                Center(
+                Container(
+                  width: MediaQuery.sizeOf(context).width,
                   child: WeeklyCalendar(
                     calendarStyle: CalendarStyle(
                         locale: "en",
                         selectedCircleColor: Constants.defaultHeaderColor),
+                    onChangedSelectedDate: (date) {
+                      controller.selectedDate.value = date;
+                      controller.selectDayPlan();
+                    },
                   ),
                 ),
                 if (controller.currentMealPlan.value != null)
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: Column(
-                      children: controller.mealPlans[0].recipes
+                      children: controller.currentMealPlan.value!.recipes
                           .map((e) => Column(
                                 children: [
-                                  Label(title: '${e.mealType}'),
-                                  Column(
-                                    children: List.generate(
-                                        2,
-                                        (i) => FoodPlanningItem(
-                                              onPress: () {},
-                                              title: e.name,
-                                              image:
-                                                  'assets/image/save_food.png',
-                                              cal: "10",
-                                              time: "10",
-                                            )),
+                                  Label(title: e.mealType.name.toUpperCase()),
+                                  FoodPlanningItem(
+                                    rcp: e,
                                   ),
                                 ],
                               ))

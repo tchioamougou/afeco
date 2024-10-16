@@ -27,8 +27,8 @@ class StoreInitPage extends GetView<StoreInitController> {
               onPressed: () {
                 Get.toNamed(AppRoutes.SAVE);
               },
-              child:const FaIcon(FontAwesomeIcons.plus,color: Colors.white,),
-              backgroundColor: Constants.buttonColor
+              backgroundColor: Constants.buttonColor,
+              child:const FaIcon(FontAwesomeIcons.plus,color: Colors.white,)
             //params
           ),
           floatingActionButtonLocation:

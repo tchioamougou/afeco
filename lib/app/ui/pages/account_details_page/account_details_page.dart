@@ -1,3 +1,4 @@
+import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/header_custom.dart';
 import 'package:afeco/app/ui/pages/profile_page/custom_liststyle.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
@@ -6,7 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../layouts/main/main_layout.dart';
-
+import 'package:app_settings/app_settings.dart';
 import '../../../controllers/account_details_controller.dart';
 
 class AccountDetailsPage extends GetView<AccountDetailsController> {
@@ -84,7 +85,9 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                                       height: 10.h,
                                     ),
                                     ElevatedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Get.toNamed(AppRoutes.FOOD_PLANNING);
+                                        },
                                         child: const Text('Food Planning')),
                                   ],
                                 ),
@@ -123,17 +126,23 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                     title: 'Notification',
                     icon: FontAwesomeIcons.bell,
                     trailing:  FaIcon(FontAwesomeIcons.chevronRight, color: Constants.defaultHeaderColor,),
-                    onPress: () {}),
+                    onPress: () {
+                      AppSettings.openAppSettings(type: AppSettingsType.notification);
+                    }),
                 CustomListStile(
                     title: 'Position',
                     icon: FontAwesomeIcons.mapLocation,
                     trailing:  FaIcon(FontAwesomeIcons.chevronRight, color: Constants.defaultHeaderColor,),
-                    onPress: () {}),
+                    onPress: () {
+                      AppSettings.openAppSettings(type: AppSettingsType.location);
+                    }),
                 CustomListStile(
                     title: 'Security',
                     icon: FontAwesomeIcons.key,
                     trailing:  FaIcon(FontAwesomeIcons.chevronRight, color: Constants.defaultHeaderColor,),
-                    onPress: () {}),
+                    onPress: () {
+                      AppSettings.openAppSettings(type: AppSettingsType.security);
+                    }),
                 CustomListStile(
                     title: 'Language',
                     icon: FontAwesomeIcons.globe,
