@@ -1,9 +1,7 @@
 import 'package:afeco/app/routes/app_routes.dart';
-import 'package:afeco/app/ui/pages/profile_page/custom_card_default.dart';
-import 'package:afeco/app/ui/pages/profile_page/custom_card_imp.dart';
 import 'package:afeco/app/ui/pages/profile_page/custom_liststyle.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:afeco/app/ui/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -27,6 +25,14 @@ class StoreProfilePage extends GetView<StoreProfileController> {
                   children: [
                     Column(
                       children: [
+                        if(controller.store.value!=null && controller.store.value!.profileCoverId.isNotEmpty)
+                          Image.network(
+                            Utils.imageLoader(controller.store.value!.profileCoverId),
+                            fit: BoxFit.fitWidth,
+                            height: 200,
+                            width: MediaQuery.sizeOf(context).width,
+                          )
+                          else
                         Image.asset(
                           'assets/image/offer.png',
                           fit: BoxFit.fitWidth,
@@ -38,18 +44,39 @@ class StoreProfilePage extends GetView<StoreProfileController> {
                     Positioned(
                         bottom: 10,
                         left: 20,
-                        child: Container(
-                          width: 70,
-                          height: 70,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(300),
-                              border: Border.all(
-                                  color: Constants.defaultBorderColor, width: 1)),
-                          child: ClipRRect(
-                            child: Image.asset(
-                              'assets/image/planet.png',
+                        child: InkWell(
+                          onTap: (){
+                            controller.openFileLogo();
+                          },
+                          child: Container(
+                            width: 70,
+                            height: 70,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(300),
+                                border: Border.all(
+                                    color: Constants.defaultBorderColor, width: 1)),
+                            child: 
+                            
+                            Column(
+                              children: [
+                                if(controller.store.value!=null && controller.store.value!.profileLogoId.isNotEmpty)
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(300),
+                                    child: Image.network(
+                                      Utils.imageLoader(controller.store.value!.profileLogoId, ),
+                                      height: 65,
+                                      width: 60,
+                                    ),
+                                  )
+                                else
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(300),
+                                  child: Image.asset(
+                                    'assets/image/planet.png',
+                                  ),
+                                ),
+                              ],
                             ),
-                            borderRadius: BorderRadius.circular(300),
                           ),
                         )),
                     Positioned(
@@ -57,14 +84,7 @@ class StoreProfilePage extends GetView<StoreProfileController> {
                       right: 10,
                       child: IconButton(
                         onPressed: () async {
-
-                          final file = await  controller.imageService.pickImageFromGallery();
-                          if (file != null) {
-                            // setState(() {
-                            //   fileResponse = file;
-                            // });
-                           // fileResponse(file);
-                          }
+                        controller.openFile();
                         },
                         icon: const FaIcon(FontAwesomeIcons.photoFilm,size: 25, color: Colors.white,),
 

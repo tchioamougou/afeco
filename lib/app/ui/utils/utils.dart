@@ -1,3 +1,4 @@
+import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:math' as math;
@@ -77,5 +78,8 @@ class Utils{
       // Retourner la distance en mètres
       return '${va} m';
     }
+  }
+  static String imageLoader(fileId){
+    return AppWriteBucket.urlBucket.replaceAll("fileId", fileId);
   }
 }

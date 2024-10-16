@@ -67,8 +67,9 @@ class CreateAccountController extends GetxController {
           userId: SessionService.instance.currentSession!.userId,
           lat: double.parse(address.lat ?? '0'),
           long: double.parse(address.lon ?? '0'),
-          documentId: ""
-      );
+          documentId: "",
+          profileCoverId: "",
+          profileLogoId: "");
       Document dc = await _appWriteController.createDocument(
           AppWriteCollection.storeCollections, sm.toJson());
       StoreService.instance.store = StoreModel.fromJson(dc.data);

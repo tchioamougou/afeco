@@ -15,21 +15,26 @@ class StoreModel {
   double lat;
   double long;
   String documentId;
-  StoreModel(
-      {required this.businessName,
-      required this.typeBusiness,
-      required this.streetNameNumber,
-      required this.postalCode,
-      required this.city,
-      required this.country,
-      required this.phoneNumber,
-      required this.email,
-      required this.allow,
-      required this.createdDate,
-      required this.userId,
-      required this.lat,
-      required this.long,
-      required this.documentId});
+  String profileCoverId;
+  String profileLogoId;
+  StoreModel({
+    required this.businessName,
+    required this.typeBusiness,
+    required this.streetNameNumber,
+    required this.postalCode,
+    required this.city,
+    required this.country,
+    required this.phoneNumber,
+    required this.email,
+    required this.allow,
+    required this.createdDate,
+    required this.userId,
+    required this.lat,
+    required this.long,
+    required this.documentId,
+    required this.profileCoverId,
+    required this.profileLogoId,
+  });
 
   factory StoreModel.fromJson(Map<String, dynamic> json) {
     return StoreModel(
@@ -46,7 +51,11 @@ class StoreModel {
         userId: json['userId'],
         lat: json['lat'],
         long: json['long'],
-        documentId: json['documentId']??"");
+        documentId: json['documentId'] ?? "",
+        profileCoverId: json['profileCoverId'] ?? "",
+        profileLogoId: json['profileLogoId'] ?? ""
+
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -64,7 +73,9 @@ class StoreModel {
       'userId': userId,
       'lat': lat,
       'long': long,
-      "documentId": documentId
+      "documentId": documentId,
+      "profileCoverId": profileCoverId,
+      "profileLogoId": profileLogoId,
     };
   }
 

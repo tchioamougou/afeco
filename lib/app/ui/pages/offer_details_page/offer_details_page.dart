@@ -6,6 +6,7 @@ import 'package:afeco/app/ui/global_widgets/quantity_selector.dart';
 import 'package:afeco/app/ui/global_widgets/tag.dart';
 import 'package:afeco/app/ui/global_widgets/time_left.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
+import 'package:afeco/app/ui/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -145,8 +146,8 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                 children: [
                                   Column(
                                     children: [
-                                      Image.asset(
-                                        'assets/image/6_bnkz5f8.jpg',
+                                      Image.network(
+                                  Utils.imageLoader(controller.bag.value!.stores.profileCoverId),
                                         fit: BoxFit.fitWidth,
                                         height: 200,
                                         width: MediaQuery.sizeOf(context).width,
@@ -250,8 +251,8 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                                         .defaultBorderColor,
                                                     width: 1)),
                                             child: ClipRRect(
-                                              child: Image.asset(
-                                                'assets/image/planet.png',
+                                              child: Image.network(
+                                                  Utils.imageLoader(controller.bag.value!.stores.profileLogoId),
                                               ),
                                               borderRadius:
                                                   BorderRadius.circular(300),

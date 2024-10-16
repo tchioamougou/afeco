@@ -5,7 +5,6 @@ import 'package:afeco/app/controllers/store_profile_controller.dart';
 import 'package:afeco/app/data/services/first_time_service.dart';
 import 'package:afeco/app/data/services/session_service.dart';
 import 'package:afeco/app/data/services/store_service.dart';
-import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/ui/global_widgets/custom_animation.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +16,6 @@ import 'app/data/services/translations_service.dart';
 import 'app/routes/app_pages.dart';
 import 'app/routes/app_routes.dart';
 import 'app/ui/layouts/main/main_layout.dart';
-import 'app/ui/theme/themes.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -15,5 +15,10 @@ class AppWriteCollection{
   static String bagOrderCollections ="670d8c120016e44c7ba4";
   static String foodInventories ="670daa4800315d542ca3";
   static String mealPlanCollection='670e07220006629e1425';
+}
 
+
+class AppWriteBucket{
+  static String profileBucket ="670943f5001abc09a533";
+  static String urlBucket='https://cloud.appwrite.io/v1/storage/buckets/670943f5001abc09a533/files/fileId/view?project=save-food&project=save-food&mode=admin';
 }

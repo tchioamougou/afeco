@@ -54,7 +54,7 @@ class CustomCardItem extends StatelessWidget {
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10)),
                     child: Image.network(
-                      'https://www.rockmatsu.org/wp-content/uploads/2022/03/The-boy-who.png',
+                        Utils.imageLoader(bg.stores.profileCoverId),
                       width: MediaQuery.sizeOf(context).width,
                       height: 100,
                       fit: BoxFit.cover,
@@ -84,7 +84,7 @@ class CustomCardItem extends StatelessWidget {
                                 borderRadius: const BorderRadius.all(
                                     Radius.circular(300)),
                                 child: Image.network(
-                                  'https://www.rockmatsu.org/wp-content/uploads/2022/03/The-boy-who.png',
+                                  Utils.imageLoader(bg.stores.profileLogoId),
                                   width: 35,
                                   height: 35,
                                   fit: BoxFit.cover,
