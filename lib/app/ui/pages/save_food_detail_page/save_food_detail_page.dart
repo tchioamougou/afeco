@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:afeco/app/controllers/save_food_detail_controller.dart';
+import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/ui/global_widgets/custom_bottom_action.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
@@ -11,6 +14,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 import '../../layouts/main/main_layout.dart';
 
 class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
@@ -267,7 +271,35 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                       if(controller.reserved.value)
                         CustomBottomAction(
                             onPressed: () {
+                              Get.defaultDialog(
+                                  title: 'Scan the QRCode',
+                                  titleStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Constants.defaultHeaderColor),
+                                  content:Column(
+                                    children: [
+                                      Text("When the store scan This QRCODE That means to recieved the package", textAlign: TextAlign.center,),
+                                      SizedBox(height: 10,),
+                                      Container(
+                                        height: 400,
+                                        width: 250,
+                                        child:  QrImageView(
+                                          data: jsonEncode({'user':UserService.instance.user!.documentId,"packageId":controller.gp.value!.documentId}),
+                                          version: QrVersions.auto,
+                                          size: 200.0,
+                                          //embeddedImage: AssetImage("assets/image/save_food.png"),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  actions: [
+                                    CustomButton(onPressed: (){
+                                      Get.back();
+                                    }, text: 'Confirm', backgroundColor: Constants.buttonColor),
+                                    CustomButton(onPressed: (){
+                                      Get.back();
+                                    }, text: 'Back', backgroundColor: Constants.buttonColor)
+                                  ]
 
+                              );
                             },
                             text: 'Collect',
                             backgroundColor: Constants.buttonColor)
