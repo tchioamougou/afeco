@@ -24,6 +24,7 @@ class GivingPackage {
   String reservedBy;
   String shareWith;
   String documentId;
+  String imageId;
   GivingPackage({
     required this.users,
     required this.name,
@@ -46,6 +47,7 @@ class GivingPackage {
     required this.reservedBy,
     required this.shareWith,
     required this.documentId,
+    required this.imageId,
   });
   Map<String, dynamic> toJson() {
     return {
@@ -69,36 +71,40 @@ class GivingPackage {
       'status': status,
       'reservedBy': reservedBy,
       'shareWith': shareWith,
-      "documentId":documentId
+      "documentId": documentId,
+      "imageId": imageId
     };
   }
 
   factory GivingPackage.fromJson(Map<String, dynamic> json) {
     return GivingPackage(
-      users: json['users'].toString() ,
-      name: json['name'],
-      lat: json['lat'].toDouble(),
-      long: json['long'].toDouble(),
-      phone: json['phone'],
-      email: json['email'],
-      address: json['address'],
-      typeOfPackaging: json['typeOfPackaging'],
-      packagingCondition: json['packagingCondition'],
-      reasonForGiving: json['reasonForGiving'],
-      products: List<String>.from(json['products']),
-      allergens: List<String>.from(json['allergens']),
-      restrictions: List<String>.from(json['restrictions']),
-      preferredRecoveryModes: json['preferredRecoveryModes'],
-      availableDateStart: DateTime.parse(json['availableDateStart']),
-      availableDateEnd: DateTime.parse(json['availableDateEnd']),
-      createdDate: DateTime.parse(json['createdDate']),
-      status: json['status'],
-      reservedBy: json['reservedBy'],
-      shareWith: json['shareWith'],
-        documentId:json['documentId']
+        users: json['users'].toString(),
+        name: json['name'],
+        lat: json['lat'].toDouble(),
+        long: json['long'].toDouble(),
+        phone: json['phone'],
+        email: json['email'],
+        address: json['address'],
+        typeOfPackaging: json['typeOfPackaging'],
+        packagingCondition: json['packagingCondition'],
+        reasonForGiving: json['reasonForGiving'],
+        products: List<String>.from(json['products']),
+        allergens: List<String>.from(json['allergens']),
+        restrictions: List<String>.from(json['restrictions']),
+        preferredRecoveryModes: json['preferredRecoveryModes'],
+        availableDateStart: DateTime.parse(json['availableDateStart']),
+        availableDateEnd: DateTime.parse(json['availableDateEnd']),
+        createdDate: DateTime.parse(json['createdDate']),
+        status: json['status'],
+        reservedBy: json['reservedBy'],
+        shareWith: json['shareWith'],
+        documentId: json['documentId'],
+        imageId: json['imageId'],
     );
   }
-  List<FoodModel> getFoodModels(){
-    return products.map((e)=>FoodModel.fromJson(json.decode(e) as Map<String,dynamic>)).toList();
+  List<FoodModel> getFoodModels() {
+    return products
+        .map((e) => FoodModel.fromJson(json.decode(e) as Map<String, dynamic>))
+        .toList();
   }
 }

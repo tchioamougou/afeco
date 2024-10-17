@@ -55,4 +55,11 @@ class FoodPlannigController extends GetxController {
       currentMealPlan.value = Rx<MealPlan?>(null).value;
     }
   }
+
+  @override
+  void dispose() async{
+    // TODO: implement dispose
+   await EasyLoading.dismiss();
+    super.dispose();
+  }
 }

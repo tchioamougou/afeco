@@ -78,7 +78,7 @@ class MyApp extends StatelessWidget {
           //darkTheme: Themes().darkTheme,
           themeMode: ThemeService.instance.themeMode,
           translations: Translation(),
-          locale: const Locale('en'),
+          locale: Get.locale,
           fallbackLocale: const Locale('en'),
           initialRoute: getInitialRoute(),
           unknownRoute: AppPages.unknownRoutePage,

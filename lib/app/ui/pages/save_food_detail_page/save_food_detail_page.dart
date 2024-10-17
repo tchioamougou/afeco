@@ -1,9 +1,11 @@
 import 'package:afeco/app/controllers/save_food_detail_controller.dart';
-import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_bottom_action.dart';
+import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
 import 'package:afeco/app/ui/global_widgets/position_display.dart';
+import 'package:afeco/app/ui/global_widgets/tag.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
+import 'package:afeco/app/ui/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
@@ -24,48 +26,112 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                   body: SingleChildScrollView(
                     child: Column(
                       children: [
-                        Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        SizedBox(
+                          height: 200,
+                          child: Stack(
                             children: [
-                              IconButton.outlined(
-                                onPressed: () {
-                                  Get.back();
-                                },
-                                icon: const FaIcon(FontAwesomeIcons.arrowLeft),
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(100),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 17, vertical: 15)),
+                              Column(
+                                children: [
+                                  Image.network(
+                                    Utils.imageLoader(controller.gp.value!.imageId),
+                                    fit: BoxFit.fitWidth,
+                                    height: 200,
+                                    width: MediaQuery.sizeOf(context).width,
+                                  )
+                                ],
                               ),
-                              IconButton.outlined(
-                                onPressed: () {},
-                                icon: const FaIcon(FontAwesomeIcons.heart),
-                                style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(100),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 17, vertical: 15)),
+                              Positioned(
+                                child: Container(
+                                  padding: const EdgeInsets.fromLTRB(
+                                      5, 30, 5, 5),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      IconButton(
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        icon: const FaIcon(
+                                            Icons.arrow_back_ios_new),
+                                        style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.white
+                                                .withOpacity(0.6),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                              BorderRadius.circular(
+                                                  100),
+                                            ),
+                                            padding:
+                                            const EdgeInsets.symmetric(
+                                                horizontal: 10,
+                                                vertical: 9)),
+                                      ),
+                                      Row(
+                                        children: [
+                                          IconButton(
+                                            onPressed: () {},
+                                            icon: const FaIcon(Icons.share),
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors
+                                                    .white
+                                                    .withOpacity(0.6),
+                                                shape:
+                                                RoundedRectangleBorder(
+                                                  borderRadius:
+                                                  BorderRadius.circular(
+                                                      100),
+                                                ),
+                                                padding: const EdgeInsets
+                                                    .symmetric(
+                                                    horizontal: 10,
+                                                    vertical: 9)),
+                                          ),
+                                          IconButton(
+                                            onPressed: () {},
+                                            icon: const FaIcon(
+                                                Icons.favorite_border),
+                                            style: ElevatedButton.styleFrom(
+                                                backgroundColor: Colors
+                                                    .white
+                                                    .withOpacity(0.6),
+                                                shape:
+                                                RoundedRectangleBorder(
+                                                  borderRadius:
+                                                  BorderRadius.circular(
+                                                      100),
+                                                ),
+                                                padding: const EdgeInsets
+                                                    .symmetric(
+                                                    horizontal: 10,
+                                                    vertical: 9)),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
+                              Positioned(
+                                right: 10,
+                                bottom: 10,
+                                child: Tag(
+                                  content: 'Ending soon',
+                                  color: Colors.red,
+                                  backgroundColor: Colors.red.shade200,
+                                ),
+                              ),
+
                             ],
                           ),
-                          padding: const EdgeInsets.fromLTRB(15, 30, 15, 10),
-                        ),
-                        const SizedBox(
-                          height: 120,
                         ),
                         Container(
                           width: MediaQuery.sizeOf(context).width,
-                          padding: const EdgeInsets.fromLTRB(10, 100, 10, 100),
+                          padding: const EdgeInsets.fromLTRB(10, 1, 10, 100),
                           decoration: const BoxDecoration(
                             borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                topRight: Radius.circular(20)),
+                                topLeft: Radius.circular(0),
+                                topRight: Radius.circular(0)),
                             color: Colors.white,
                           ),
                           child: Column(
@@ -83,49 +149,65 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                               const SizedBox(
                                 height: 5,
                               ),
-                              Text(
-                                'Collection Period: ${controller.gp.value?.availableDateStart} - ${controller.gp.value?.availableDateEnd}',
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              Text(
-                                '${controller.gp.value?.address}',
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                  fontSize: 15,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              const Divider(
-                                height: 10,
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    'Thank Saving Food',
-                                    style: GoogleFonts.sassyFrass(
-                                        fontSize: 40,
-                                        color: Colors.deepOrangeAccent,
-                                        fontWeight: FontWeight.w900),
+                                  Icon(
+                                    Icons.lock_clock,
+                                    size: 20,
+                                    color: Constants.buttonColor,
                                   ),
-                                  ElevatedButton(
-                                      onPressed: () {},
-                                      style: ElevatedButton.styleFrom(
-                                          backgroundColor: Colors.deepOrange),
-                                      child: Text('View Direction',
-                                          style: GoogleFonts.poppins(
-                                              fontSize: 15, color: Colors.white)))
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    'Pick up: ${controller.times['time']}',
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Tag(
+                                    content: '${controller.times['day']}',
+                                    color: Colors.white,
+                                    backgroundColor:
+                                        Constants.defaultHeaderColor,
+                                  ),
                                 ],
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Container(
+                                decoration: BoxDecoration(
+                                    border: Border(
+                                        top: BorderSide(
+                                            color: Constants.buttonColor
+                                                .withOpacity(0.3),
+                                            width: 1),
+                                        bottom: BorderSide(
+                                            color: Constants.buttonColor
+                                                .withOpacity(0.3),
+                                            width: 1))),
+                                child: ListTile(
+                                  onTap: () {},
+                                  leading: FaIcon(
+                                    Icons.location_on_outlined,
+                                    color: Constants.buttonColor,
+                                  ),
+                                  title: Text(
+                                    '${controller.gp.value?.address}',
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyle(
+                                        color: Constants.defaultHeaderColor,
+                                        fontSize: 17),
+                                  ),
+                                  subtitle:
+                                      Text('More information about the store'),
+                                  trailing: Icon(
+                                    Icons.chevron_right,
+                                    color: Constants.buttonColor,
+                                  ),
+                                ),
                               ),
                               const SizedBox(
                                 height: 20,
@@ -133,14 +215,7 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    'About Content',
-                                    textAlign: TextAlign.left,
-                                    style: GoogleFonts.timmana(
-                                        fontSize: 20,
-                                        color: Constants.defaultHeaderColor,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                                  Label(title: "About Content"),
                                 ],
                               ),
                               const SizedBox(
@@ -151,43 +226,121 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                                   style: GoogleFonts.poppins(
                                       fontSize: 15, color: Colors.grey),
                                   '${controller.gp.value?.products}'),
-                              Label(title: 'Address'),
-                              PositionDisplay(pos: LatLng(controller.gp.value!.lat,controller.gp.value!.long), title: "Here")
 
+                              Container(
+                                  decoration: BoxDecoration(),
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                        vertical: 10, horizontal: 0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Label(title: 'What you need to now'),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                            'The store will provide packaging for your food, but we encourage you to bring your own bag to carry it home in'),
+                                      ],
+                                    ),
+                                  )),
+                              Label(title: 'Address'),
+                              PositionDisplay(
+                                  pos: LatLng(controller.gp.value!.lat,
+                                      controller.gp.value!.long),
+                                  title: "Here")
                             ],
                           ),
                         ),
-
                       ],
                     ),
                   ),
                 ),
-              Positioned(
-                top: 55,
-                left: 70,
-                child: Container(
-                  height: 250,
-                  width: 250,
-                  child: ClipRRect(
-                    child: Image.network(
-                        'https://image.made-in-china.com/202f0j00mkHVMhqWZvYE/Custom-Eco-Friendly-Biodegradable-Brown-Fast-Food-to-Go-Delivery-Paper-Bag-Restaurant-Takeout-Packaging-Take-Away-Kraft-Paper-Bag.webp'),
-                    borderRadius: const BorderRadius.all(Radius.circular(300)),
-                  ),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(300),
-                      color: Colors.grey.shade100,
-                      border: Border.all(
-                          width: 4, color: Constants.defaultBorderColor)),
-                ),
-              ),
+
               Positioned(
                   bottom: 0,
-                  child: CustomBottomAction(
-                      onPressed: () {
-                        Get.toNamed(AppRoutes.TANKING);
-                      },
-                      text: 'Reserve',
-                      backgroundColor: Constants.buttonColor))
+                  child: Column(
+                    children: [
+                      if(controller.reserved.value)
+                        CustomBottomAction(
+                            onPressed: () {
+
+                            },
+                            text: 'Collect',
+                            backgroundColor: Constants.buttonColor)
+                      else
+                      CustomBottomAction(
+                          onPressed: () {
+                            Get.dialog(
+                                barrierDismissible: false,
+                                AlertDialog(
+                                  backgroundColor: Colors.white,
+                                  title: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.center,
+                                    children: [
+                                      Label(
+                                          title: 'What you have to know')
+                                    ],
+                                  ),
+                                  content: Container(
+                                    height: 150,
+                                    child: Column(
+                                      children: [
+                                        Text(
+                                          'Your surprise Bags is a surprise',
+                                          style: TextStyle(
+                                              fontWeight:
+                                              FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        Text(
+                                            textAlign: TextAlign.justify,
+                                            "We wish we could tell you what exactly will be in your Surprise Bag - but it's always a surprise! The store wil fill it with a selection of their unsold items. if you have a question abouy allergens or ingredients, please ask to the store."),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: [
+                                    CustomButton(
+                                        onPressed: () {
+                                          controller.reserve();
+                                          Get.back();
+                                        },
+                                        text: 'Got it!',
+                                        backgroundColor:
+                                        Constants.buttonColor),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.center,
+                                      children: [
+                                        TextButton(
+                                            onPressed: () {
+                                              Get.back();
+                                            },
+                                            child: Text(
+                                              'Back',
+                                              style: TextStyle(
+                                                  color: Constants
+                                                      .defaultHeaderColor,
+                                                  fontWeight:
+                                                  FontWeight.bold),
+                                            ))
+                                      ],
+                                    )
+                                  ],
+                                  insetPadding: EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                ));
+                          },
+                          text: 'Reserve',
+                          backgroundColor: Constants.buttonColor),
+                    ],
+                  ))
             ],
           )),
     );

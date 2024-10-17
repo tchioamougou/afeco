@@ -25,3 +25,6 @@ class AppWriteBucket{
 }
 
 enum OrderStatus { payed, closed, cancel }
+enum GivingPackageStatus{
+  open, reserved,closed,canceled
+}

@@ -1,3 +1,4 @@
+import 'package:afeco/app/ui/global_widgets/custom_app_bar.dart';
 import 'package:afeco/app/ui/pages/my_orders_page/my_order_item.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -15,28 +16,7 @@ class MyOrdersPage extends GetView<MyOrdersController> {
     return  MainLayout(
         child: Scaffold(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-              backgroundColor: Constants.defaultHeaderColor,
-              leading: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      icon: const FaIcon(
-                        FontAwesomeIcons.circleArrowLeft,
-                        size: 30,
-                        color: Colors.white,
-                      ))
-                ],
-              ),
-              title: Text(
-                'My Orders',
-                style: GoogleFonts.poppins(
-                    fontSize: 20, color: Colors.white),
-              )),
+          appBar: CustomAppBar(title: 'My Orders'.tr,),
           body:Obx(() => SingleChildScrollView(
             child:  Padding(
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),

@@ -3,6 +3,8 @@ import 'package:afeco/app/data/models/food_model.dart';
 import 'package:afeco/app/data/models/giving_package.dart';
 import 'package:afeco/app/data/models/option.dart';
 import 'package:afeco/app/data/models/place_model.dart';
+import 'package:afeco/app/data/services/image_service.dart';
+import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:afeco/app/ui/utils/utils.dart';
@@ -11,6 +13,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
 class SaveFoodFormController extends GetxController {
+  final ImageService imageService = ImageService();
   final SaveFoodAppWriteController _appWriteController = Get.find();
   List<Option> sharingPlaces = [
     Option(value: "NEIGHBORHOOD", label: "Neighbourhood"),
@@ -42,7 +45,9 @@ class SaveFoodFormController extends GetxController {
 
   List<Option> preferredRecoveryModes = [
     Option(value: "HOME_COLLECTION", label: "Home collection"),
-    Option(value: "DROP_OFF_AT_A_COLLECTION_POINT", label: "Drop-off at a collection point"),
+    Option(
+        value: "DROP_OFF_AT_A_COLLECTION_POINT",
+        label: "Drop-off at a collection point"),
   ];
   List<Option> shareWiths = [
     Option(value: "NEIGHBORS", label: "Neighbors"),
@@ -57,19 +62,19 @@ class SaveFoodFormController extends GetxController {
 
   final TextEditingController typeAlimentController = TextEditingController();
   final TextEditingController quantityController = TextEditingController();
-  final TextEditingController  firstNameController = TextEditingController();
-  final TextEditingController  lastNameController = TextEditingController();
-  final TextEditingController  emailController = TextEditingController();
-  final TextEditingController   phoneController = TextEditingController();
-   PlaceModel  address = PlaceModel();
-  final TextEditingController  reasonController = TextEditingController();
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  PlaceModel address = PlaceModel();
+  final TextEditingController reasonController = TextEditingController();
   RxString typePackagingSelect = "".obs;
   RxString packagingCondition = "".obs;
   RxString allergen = "".obs;
   RxString restriction = "".obs;
   RxString preferredRecoveryMode = "".obs;
   RxString shareWith = "".obs;
-
+  RxString packageFile = "".obs;
 
   RxInt currentStep = 0.obs;
   bool isSharingWithNeighbors = false;
@@ -90,45 +95,66 @@ class SaveFoodFormController extends GetxController {
     }
   }
 
-  void addProduct(){
-    products.add(FoodModel(name: typeAlimentController.value.text, quantity: quantityController.value.text, expirationDate: expirationDate, category: 'category'));
+  void addProduct() {
+    products.add(FoodModel(
+        name: typeAlimentController.value.text,
+        quantity: quantityController.value.text,
+        expirationDate: expirationDate,
+        category: 'category'));
     Get.back();
   }
+
   // Méthode pour soumettre le formulaire
   Future<void> submitForm() async {
-      await EasyLoading.show();
-      try {
-        GivingPackage gp =GivingPackage(
-            users: '67085e633edbcb406690',//SessionService.instance.currentSession!.userId,
-            name: '${firstNameController.value.text} ${lastNameController.value.text}',
-            lat: double.parse(address.lat??"0"),
-            long: double.parse(address.lon??"0"),
-            phone: phoneController.value.text,
-            email: emailController.value.text,
-            address: address.displayName??"",
-            typeOfPackaging: typePackagingSelect.value,
-            packagingCondition: packagingCondition.value,
-            reasonForGiving: reasonController.value.text,
-            products: products.map((e)=>e.toJson().toString()).toList(),
-            allergens: [allergen.value],
-            restrictions: [restriction.value],
-            preferredRecoveryModes:preferredRecoveryMode.value,
-            availableDateStart: Utils.setDateTime(availableDate, betweenDate),
-            availableDateEnd: Utils.setDateTime(availableDate, toDate),
-            createdDate: DateTime.now(),
-            status: 'OPEN',
-            reservedBy: '',
-            shareWith: shareWith.value,
-          documentId: ""
-        );
-        await _appWriteController.createDocument(AppWriteCollection.givingPackagesCollections,gp.toJson() );
-        Get.offAllNamed(AppRoutes.TANKING);
-      } catch (e) {
-        EasyLoading.showError("An Error Occur");
-        print(e);
-      } finally {
-        EasyLoading.dismiss();
-      }
-    }
+    await EasyLoading.show();
+    try {
+      String id = await _appWriteController.createFile(packageFile.value,
+          '${lastNameController.value.text.trim().removeAllWhitespace}_package');
 
+      GivingPackage gp = GivingPackage(
+          users: UserService.instance.user!
+              .documentId, //SessionService.instance.currentSession!.userId,
+          name:
+              '${firstNameController.value.text} ${lastNameController.value.text}',
+          lat: double.parse(address.lat ?? "0"),
+          long: double.parse(address.lon ?? "0"),
+          phone: phoneController.value.text,
+          email: UserService.instance.user!.email,
+          address: address.displayName ?? "",
+          typeOfPackaging: typePackagingSelect.value,
+          packagingCondition: packagingCondition.value,
+          reasonForGiving: reasonController.value.text,
+          products: products.map((e) => e.toJson().toString()).toList(),
+          allergens: [allergen.value],
+          restrictions: [restriction.value],
+          preferredRecoveryModes: preferredRecoveryMode.value,
+          availableDateStart: Utils.setDateTime(availableDate, betweenDate),
+          availableDateEnd: Utils.setDateTime(availableDate, toDate),
+          createdDate: DateTime.now(),
+          status: GivingPackageStatus.open.name,
+          reservedBy: '',
+          shareWith: shareWith.value,
+          documentId: "",
+          imageId: id);
+      await _appWriteController.createDocument(
+          AppWriteCollection.givingPackagesCollections, gp.toJson());
+      Get.offAllNamed(AppRoutes.TANKING);
+    } catch (e) {
+      EasyLoading.showError("An Error Occur");
+      print(e);
+    } finally {
+      EasyLoading.dismiss();
+    }
+  }
+
+  Future<void> openGallery() async {
+    try {
+      final file = await imageService.pickImageFromGallery();
+      if (file != null) {
+        packageFile.value = file.path;
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 }

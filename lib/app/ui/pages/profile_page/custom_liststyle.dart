@@ -8,12 +8,14 @@ class CustomListStile extends StatelessWidget {
   final IconData icon;
   final VoidCallback onPress;
   final Widget? trailing;
+  final Widget? subtitle;
   const CustomListStile({
     super.key,
     required this.title,
     required this.icon,
     required this.onPress,
-    this.trailing
+    this.trailing,
+    this.subtitle
   });
 
   @override
@@ -27,6 +29,7 @@ class CustomListStile extends StatelessWidget {
       child: ListTile(
         dense: false,
         onTap: onPress,
+        subtitle: subtitle,
         title: Text(title,style: TextStyle(
             fontWeight: FontWeight.w900,
             color: Constants.defaultHeaderColor,

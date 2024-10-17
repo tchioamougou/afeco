@@ -24,7 +24,7 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
     LatLng point2 = LatLng(gp.lat, gp.long);
     String distance = Utils.distanceToText(point1, point2);
     return Card(
-      elevation: 1,
+      elevation: 3,
       child: Container(
         width: MediaQuery.sizeOf(context).width * 0.5,
         decoration: BoxDecoration(
@@ -41,7 +41,7 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
                       topLeft: Radius.circular(10),
                       topRight: Radius.circular(10)),
                   child: Image.network(
-                    'https://noahhelps.org/wp-content/uploads/2021/03/March_Meal-Prep-1030x515.jpeg',
+                    Utils.imageLoader(gp.imageId),
                     width: MediaQuery.sizeOf(context).width*0.5,
                     height: 120,
                     fit: BoxFit.cover,
@@ -59,7 +59,7 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          gp.address,
+                          gp.name,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(

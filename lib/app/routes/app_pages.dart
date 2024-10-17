@@ -1,4 +1,6 @@
-import '../bindings/my_orders_binding.dart';
+import '../bindings/language_binding.dart';
+import '../ui/pages/language_page/language_page.dart';
+      import '../bindings/my_orders_binding.dart';
 import '../ui/pages/my_orders_page/my_orders_page.dart';
       import '../bindings/store_inpact_binding.dart';
 import '../ui/pages/store_inpact_page/store_inpact_page.dart';
@@ -245,6 +247,12 @@ class AppPages {
       name: AppRoutes.MY_ORDERS,
       page: () => const MyOrdersPage(),
       binding: MyOrdersBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.LANGUAGE,
+      page: () => const LanguagePage(),
+      binding: LanguageBinding(),
       transition: _defaultTransition,
     ), 
 ];

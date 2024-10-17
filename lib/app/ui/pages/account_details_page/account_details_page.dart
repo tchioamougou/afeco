@@ -1,4 +1,6 @@
+import 'package:afeco/app/data/services/language_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
+import 'package:afeco/app/ui/global_widgets/custom_app_bar.dart';
 import 'package:afeco/app/ui/global_widgets/header_custom.dart';
 import 'package:afeco/app/ui/pages/profile_page/custom_liststyle.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
@@ -16,21 +18,7 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
   Widget build(BuildContext context) {
     return MainLayout(
       child: Scaffold(
-        appBar: AppBar(
-            backgroundColor: Constants.defaultHeaderColor,
-            leading: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(onPressed: (){
-                  Get.back();
-                }, icon: const FaIcon(FontAwesomeIcons.circleArrowLeft,size: 30,color: Colors.white,))
-              ],
-            ),
-            title: Text(
-              'Account Details',
-              style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
-            )),
+        appBar: CustomAppBar(title: 'Account Details'.tr,),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -147,7 +135,10 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                     title: 'Language',
                     icon: FontAwesomeIcons.globe,
                     trailing:  FaIcon(FontAwesomeIcons.chevronRight, color: Constants.defaultHeaderColor,),
-                    onPress: () {}),
+                    subtitle: Text(LanguageService.instance.language.name.tr),
+                    onPress: () {
+                      Get.toNamed(AppRoutes.LANGUAGE);
+                    }),
                 CustomListStile(
                     title: 'Dark Mode',
                     icon: FontAwesomeIcons.eye,
