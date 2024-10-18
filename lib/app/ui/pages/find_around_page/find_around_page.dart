@@ -92,7 +92,7 @@ class FindAroundPage extends GetView<FindAroundController> {
                       label: 'my current position',
                       options: controller.withinOptions,
                       onWithinChanged: (val) {
-                        controller.within.value = val;
+                        controller.distance.value = val;
                         //// Todo refresh the list of store by the all the information
                       },
                       onPositionChanged: (val) {

@@ -12,7 +12,7 @@ class CustomSelectPosition extends StatelessWidget {
   final List<String> options;
   final String? withinValue;
   final String? positionValue;
-  final ValueChanged<String> onWithinChanged;
+  final ValueChanged<int> onWithinChanged;
   final ValueChanged<LatLng> onPositionChanged;
   final VoidCallback onClose;
   const CustomSelectPosition({
@@ -39,7 +39,7 @@ class CustomSelectPosition extends StatelessWidget {
                 isScrollControlled: true,
                 context: context,
                 builder: (context) => CustomLocationChoose(onChange: onPositionChanged, onClose: onClose, onChangeRange: (int ) {
-                  onWithinChanged(int.toString());
+                  onWithinChanged(int);
                 },),
               );
             }

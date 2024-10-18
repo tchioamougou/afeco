@@ -1,6 +1,7 @@
 import 'package:afeco/app/data/appwrite/appwrite_controllers.dart';
 import 'package:afeco/app/data/models/bag_model.dart';
 import 'package:afeco/app/data/models/giving_package.dart';
+import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -16,7 +17,7 @@ class HomeController extends GetxController {
   RxList<GivingPackage> givingPackages = <GivingPackage>[].obs;
   SaveFoodAppWriteController _appWriteController = Get.find();
   RxList<BagRelation> bags = <BagRelation>[].obs;
-
+  RxBool hasPosition = (UserService.instance.user!.lat==0||UserService.instance.user!.long==0).obs;
   @override
   void onInit() {
     // TODO: implement onInit

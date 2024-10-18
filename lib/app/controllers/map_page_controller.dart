@@ -20,6 +20,7 @@ class MapPageController extends GetxController {
   final MapController mapController = MapController();
   RxString position = 'Your current poistion'.obs;
   RxString within = '2 Km'.obs;
+  RxInt distance =0.obs;
   /// initialise Location variable
   final _geolocatorPlatform = GeolocatorPlatform.instance;
   Rx<Position?> _currentPosition = Rx<Position?>(null);

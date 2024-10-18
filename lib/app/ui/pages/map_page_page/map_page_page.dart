@@ -90,7 +90,7 @@ class MapPagePage extends GetView<MapPageController> {
                         label: 'my current position',
                         options:controller.withinOptions,
                         onWithinChanged: (val) {
-                          controller.within.value = val;
+                          controller.distance.value = val;
                         },
                         onPositionChanged: (val) {},
                       withinValue: controller.within.value, onClose: () {

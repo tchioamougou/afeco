@@ -20,6 +20,7 @@ class FindAroundController extends GetxController {
   final MapController mapController = MapController();
   RxString position = 'Your current poistion'.obs;
   RxString within = '2 Km'.obs;
+  RxInt distance = 0.obs;
 
   /// initialise Location variable
   final _geolocatorPlatform = GeolocatorPlatform.instance;
@@ -67,7 +68,7 @@ class FindAroundController extends GetxController {
   void findShop(double latitude, double longitude) async {}
 
   void updateUserPosition(LatLng po){
-    GlobalService.updateUserLocation(po);
+    GlobalService.updateUserLocation(po,distance.value);
   }
 
 }

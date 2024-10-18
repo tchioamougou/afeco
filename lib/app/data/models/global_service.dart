@@ -10,10 +10,11 @@ SaveFoodAppWriteController _appWriteController = Get.find();
 class GlobalService extends GetxService{
 
   /// this function is used to User Location
-  static Future<void> updateUserLocation(LatLng pos) async {
+  static Future<void> updateUserLocation(LatLng pos,int distance) async {
     Document dc = await _appWriteController.updateDocument(AppWriteCollection.userCollections, UserService.instance.user!.documentId, {
       "long":pos.longitude,
-      "lat":pos.latitude
+      "lat":pos.latitude,
+      "distance":distance
     });
 
     print(dc.data);
