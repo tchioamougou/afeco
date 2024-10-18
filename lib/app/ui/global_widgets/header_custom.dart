@@ -1,31 +1,52 @@
-import 'package:afeco/app/routes/app_routes.dart';
+import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/ui/layouts/main/main_layout.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HeaderCustom extends StatelessWidget {
-  const HeaderCustom({super.key});
+  final Icon icon;
+  final VoidCallback onPress;
+  const HeaderCustom({super.key, required this.icon, required this.onPress});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          width: 70,
-          height: 70,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(300),
-            border: Border.all(color: Constants.defaultBorderColor,width: 1)
-          ),
-          child:ClipRRect(
-            child: Image.asset(
-              'assets/image/planet.png',
+        InkWell(
+          onTap: (){
+            Get.defaultDialog(
+              backgroundColor: Constants.buttonColor,
+              title: '',
+              content: Container(
+                child: Column(
+                   children: List.generate(10, (index){
+                     return Container(
+                       child:IconButton(
+                         icon: icon,
+                         onPressed: (){},
+                       ),
+                     );
+                   }).toList(),
+                ),
+              )
+            );
+          },
+          child: Container(
+            width: 70,
+            height: 70,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(300),
+                border: Border.all(color: Constants.defaultBorderColor,width: 1)
             ),
-            borderRadius: BorderRadius.circular(300),
-          ) ,
+            child:ClipRRect(
+              child: Image.asset(
+                'assets/image/planet.png',
+              ),
+              borderRadius: BorderRadius.circular(300),
+            ) ,
+          ),
         )
         ,
         const SizedBox(
@@ -39,7 +60,7 @@ class HeaderCustom extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    'Hi!,Styves'.tr,
+                    'Hi!,${UserService.instance.user!.name}'.tr,
                     style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
@@ -69,14 +90,8 @@ class HeaderCustom extends StatelessWidget {
               Stack(
                 children: [
                   IconButton.outlined(
-                    onPressed: () {
-                      Get.toNamed(AppRoutes.NOTIFICATIONS);
-                    },
-                    icon: const FaIcon(
-                      FontAwesomeIcons.bell,
-                      color: Colors.white,
-                      size: 25,
-                    ),
+                    onPressed: onPress,
+                    icon: icon,
                     style: ElevatedButton.styleFrom(
                         backgroundColor:Constants.defaultBorderColor,
                         shape: RoundedRectangleBorder(
@@ -86,9 +101,16 @@ class HeaderCustom extends StatelessWidget {
                         const EdgeInsets.symmetric(horizontal: 17, vertical: 15)),
                   ),
                   Positioned(
-                      top: 2,
+                      top: 5,
                       right: 10,
-                      child: Text('20',style: GoogleFonts.poppins(fontSize: 15, color: Colors.red, fontWeight: FontWeight.bold),))
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(300),
+                          color: Colors.white,
+
+                        ),
+                        child: Text('20',style: GoogleFonts.poppins(fontSize: 14, color: Colors.red, fontWeight: FontWeight.bold),),
+                      ))
                 ],
               )
             ],

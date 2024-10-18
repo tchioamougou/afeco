@@ -24,10 +24,6 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
-                  child: HeaderCustom(),
-                ),
                 Card(
                   elevation: 30,
                   child: Container(

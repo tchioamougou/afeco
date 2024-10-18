@@ -1,5 +1,5 @@
 // ignore_for_file: constant_identifier_names
-  class AppRoutes {
+class AppRoutes {
   static const HOME = '/';
   static const UNKNOWN = '/404';
   static const INIT_PAGE = '/init-page';
@@ -31,4 +31,5 @@
   static const STORE_INPACT = '/store-inpact';
   static const MY_ORDERS = '/my-orders';
   static const LANGUAGE = '/language';
+  static const MY_SAVE_FOOD = '/my-save-food';
 }

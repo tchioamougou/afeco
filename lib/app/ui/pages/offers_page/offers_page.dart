@@ -1,3 +1,4 @@
+import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_filter.dart';
 import 'package:afeco/app/ui/global_widgets/header_custom.dart';
 import 'package:afeco/app/ui/pages/offers_page/custom_offer_item.dart';
@@ -31,9 +32,15 @@ class _OffersPageState extends State<OffersPage> {
           body:SingleChildScrollView(child:
           Column(
             children: [
-              const Padding(
+               Padding(
                 padding: EdgeInsets.fromLTRB(10, 35, 10, 0),
-                child: HeaderCustom(),
+                child: HeaderCustom(icon:  Icon(
+                  FontAwesomeIcons.basketShopping,
+                  color: Colors.white,
+                  size: 25,
+                ),onPress: (){
+                  Get.toNamed(AppRoutes.MY_ORDERS);
+                },),
               ),
               const SizedBox(height: 20,),
               Padding(

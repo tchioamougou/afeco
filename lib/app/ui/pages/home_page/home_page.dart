@@ -41,9 +41,15 @@ class _HomePageState extends State<HomePage> {
             body: SingleChildScrollView(
                 child: Column(
               children: [
-                const Padding(
+                 Padding(
                   padding: EdgeInsets.fromLTRB(10, 35, 10, 0),
-                  child: HeaderCustom(),
+                  child: HeaderCustom(icon:  Icon(
+                    FontAwesomeIcons.bell,
+                    color: Colors.white,
+                    size: 25,
+                  ),onPress: (){
+                    Get.toNamed(AppRoutes.NOTIFICATIONS);
+                  },),
                 ),
                 const SizedBox(
                   height: 20,
@@ -136,6 +142,8 @@ class _HomePageState extends State<HomePage> {
                                         Get.toNamed(AppRoutes.MY_ORDERS);
                                       } else if (e['title'] == 'C20 Views') {
                                         initPageController.selectedTab(3);
+                                      }else{
+                                        Get.toNamed(AppRoutes.MY_SAVE_FOOD);
                                       }
                                     },
                                     title: e['title']!,

@@ -1,4 +1,3 @@
-
 import 'package:afeco/app/controllers/sign_log_controller.dart';
 import 'package:afeco/app/data/appwrite/appwrite_controllers.dart';
 import 'package:afeco/app/data/models/user_model.dart';
@@ -11,6 +10,7 @@ import 'package:appwrite/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+
 class EmailConfirmationController extends GetxController {
   Rx<TextEditingController> codeController = TextEditingController().obs;
   SignLogController _signLogController = Get.find();
@@ -30,17 +30,17 @@ class EmailConfirmationController extends GetxController {
         await _appWriteController.loginUser(codeController.value.text);
         DocumentList dls = await _appWriteController
             .getDocuments(AppWriteCollection.bagsCollections, [
-          Query.equal("userId", [SessionService.instance.currentSession!.userId])
+          Query.equal(
+              "userId", [SessionService.instance.currentSession!.userId])
         ]);
 
-        if(dls.total >0){
+        if (dls.total > 0) {
           UserService.instance.user = UserModel.fromJson(dls.documents[0].data);
-        }
-        else{
+        } else {
           UserModel um = UserModel(
               userId: SessionService.instance.currentSession!.userId,
               name: '',
-              countryCode:SessionService.instance.currentSession!.countryCode,
+              countryCode: SessionService.instance.currentSession!.countryCode,
               countryName: SessionService.instance.currentSession!.countryName,
               allow: true,
               email: _signLogController.emailController.value.text,
@@ -48,14 +48,16 @@ class EmailConfirmationController extends GetxController {
               acceptNotification: false,
               lat: 0.0,
               long: 0.0,
-              documentId: ""
-          );
-          Document dc = await _appWriteController.createDocument(AppWriteCollection.userCollections,
-              um.toJson());
+              documentId: "",
+              bagsSaved: 0,
+              carboneImpact: 0,
+              excessFoodSaved: 0,
+              moneySaved: 0);
+          Document dc = await _appWriteController.createDocument(
+              AppWriteCollection.userCollections, um.toJson());
           UserService.instance.user = UserModel.fromJson(dc.data);
           Get.toNamed(AppRoutes.SET_LOCATION);
         }
-
       } catch (e) {
         EasyLoading.showError("An Error Occur");
         print(e);

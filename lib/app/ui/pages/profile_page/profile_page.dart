@@ -1,3 +1,4 @@
+import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/pages/profile_page/custom_card_default.dart';
 import 'package:afeco/app/ui/pages/profile_page/custom_card_imp.dart';
@@ -31,16 +32,16 @@ class ProfilePage extends GetView<ProfileController> {
                 ),
               ),
               const SizedBox(height: 20,),
-              const Row(
+               Row(
                 children: [
-                  CustomCardImp(title: 'Money saved', description: 'XAF 2000', imageUrl: ''),
-                  CustomCardImp(title: 'CO2E saved', description: '20 IBS', imageUrl: '')
+                  CustomCardImp(title: 'Money saved', description: 'XAF ${UserService.instance.user!.moneySaved}', imageUrl: ''),
+                  CustomCardImp(title: 'CO2E saved', description: '${UserService.instance.user!.carboneImpact} IBS', imageUrl: '')
                 ],
               ),
               const SizedBox(height: 20,),
-              const CustomCardDefault(title: 'Surprise Badge Saved', description: '23', imageUrl: 'imageUrl'),
+               CustomCardDefault(title: 'Bags Saved', description: '${UserService.instance.user!.bagsSaved}', imageUrl: 'imageUrl'),
               const SizedBox(height: 10,),
-              const CustomCardDefault(title: 'Your Excess food saved', description: '23', imageUrl: 'imageUrl'),
+               CustomCardDefault(title: 'Your Excess food saved', description: '${UserService.instance.user!.excessFoodSaved}', imageUrl: 'imageUrl'),
               const SizedBox(height: 10,),
               const Divider( height: 10,thickness: 2,color: Colors.grey,),
               const SizedBox(height: 10,),
