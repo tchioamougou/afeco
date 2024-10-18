@@ -347,7 +347,7 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
               ],
             ),
             CustomSelectItem(
-                label: 'Sharing with neighbors',
+                label: 'Sharing with',
                 options: controller.shareWiths,
                 defaultValue: controller.shareWith.value,
                 onChanged: (va) {

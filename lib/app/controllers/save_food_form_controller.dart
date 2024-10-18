@@ -51,6 +51,8 @@ class SaveFoodFormController extends GetxController {
   ];
   List<Option> shareWiths = [
     Option(value: "NEIGHBORS", label: "Neighbors"),
+    Option(value: "CAMEROON_ALIMENTARY_BANK", label: "Bank Aliment du cameroun"),
+
   ];
   RxString sharing = 'Neighbourhood'.obs;
   final _formKey = GlobalKey<FormState>();

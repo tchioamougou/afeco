@@ -45,7 +45,9 @@ class DonateWidget extends StatelessWidget {
                     bottom: 5,
                     right: 5,
                     child: ElevatedButton(
-                      onPressed: (){},
+                      onPressed: (){
+                        Get.toNamed(AppRoutes.DONATION);
+                      },
 
                       child: Text('Donate', style: TextStyle(color: Constants.defaultHeaderColor),),
 

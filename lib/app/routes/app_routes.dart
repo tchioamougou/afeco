@@ -32,4 +32,5 @@ class AppRoutes {
   static const MY_ORDERS = '/my-orders';
   static const LANGUAGE = '/language';
   static const MY_SAVE_FOOD = '/my-save-food';
+  static const DONATION = '/donation';
 }

@@ -1,4 +1,6 @@
-import '../bindings/my_save_food_binding.dart';
+import '../bindings/donation_binding.dart';
+import '../ui/pages/donation_page/donation_page.dart';
+      import '../bindings/my_save_food_binding.dart';
 import '../ui/pages/my_save_food_page/my_save_food_page.dart';
       import '../bindings/language_binding.dart';
 import '../ui/pages/language_page/language_page.dart';
@@ -261,6 +263,12 @@ class AppPages {
       name: AppRoutes.MY_SAVE_FOOD,
       page: () => const MySaveFoodPage(),
       binding: MySaveFoodBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.DONATION,
+      page: () => const DonationPage(),
+      binding: DonationBinding(),
       transition: _defaultTransition,
     ), 
 ];
