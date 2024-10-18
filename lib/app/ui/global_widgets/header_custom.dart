@@ -2,36 +2,53 @@ import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/ui/layouts/main/main_layout.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class HeaderCustom extends StatelessWidget {
   final Icon icon;
   final VoidCallback onPress;
-  const HeaderCustom({super.key, required this.icon, required this.onPress});
-
+   HeaderCustom({super.key, required this.icon, required this.onPress});
+  final List<String> profileIcons =['user',"heat",'face-smile',"solid-face-smile","sun","user-secret","nmug-saucer"];
   @override
   Widget build(BuildContext context) {
+
     return Row(
       children: [
         InkWell(
           onTap: (){
-            Get.defaultDialog(
-              backgroundColor: Constants.buttonColor,
-              title: '',
-              content: Container(
-                child: Column(
-                   children: List.generate(10, (index){
-                     return Container(
-                       child:IconButton(
-                         icon: icon,
-                         onPressed: (){},
-                       ),
-                     );
-                   }).toList(),
+            Get.dialog(
+              barrierDismissible: false,
+              AlertDialog(
+                backgroundColor: Constants.buttonColor,
+                title: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(onPressed: (){
+                      Get.back();
+                    }, icon: Icon(Icons.close,color: Colors.white,))
+                  ],
+                ),
+                content:Container(
+                  width: double.maxFinite,
+                  child: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      childAspectRatio: 1.0,
+                    ),
+                    itemCount: profileIcons.length,
+                    itemBuilder: (context, index) {
+                      return IconButton(
+                        onPressed: (){},
+                        icon: Icon(FontAwesomeIcons.arrowPointer,color: Colors.white,),
+                      );
+                    },
+                  ),
                 ),
               )
-            );
+              )
+             ;
           },
           child: Container(
             width: 70,
