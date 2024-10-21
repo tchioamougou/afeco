@@ -1,6 +1,5 @@
 import 'package:afeco/app/ui/global_widgets/custom_bottom_action.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
-import 'package:afeco/app/ui/global_widgets/label.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -175,121 +174,130 @@ class DonationPage extends GetView<DonationController> {
                             CustomBottomAction(
                                 onPressed: () {
                                   Get.bottomSheet(
-                                      Container(
-                                    width: MediaQuery.sizeOf(context).width,
-                                     decoration: BoxDecoration(
-                                       color: Colors.white,
-                                      borderRadius: BorderRadius.only(topRight: Radius.circular(10),topLeft: Radius.circular(10))
-,                                     ),
-                                    padding: EdgeInsets.symmetric(horizontal: 10 , vertical: 10),
+                                     Obx(()=> Container(
+                                       width: MediaQuery.sizeOf(context).width,
+                                       decoration: BoxDecoration(
+                                         color: Colors.white,
+                                         borderRadius: BorderRadius.only(topRight: Radius.circular(10),topLeft: Radius.circular(10))
+                                         ,                                     ),
+                                       padding: EdgeInsets.symmetric(horizontal: 10 , vertical: 10),
 
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        InkWell(
-                                            onTap: () {
-                                              Get.back();
-                                            },
-                                            child: Icon(Icons.arrow_back)),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                           ClipRRect(
-                                             child: Image.asset('assets/image/img.png', height: 50,),
-                                             borderRadius: BorderRadius.circular(300),
+                                       child: Column(
+                                         crossAxisAlignment:
+                                         CrossAxisAlignment.start,
+                                         children: [
+                                           InkWell(
+                                               onTap: () {
+                                                 Get.back();
+                                               },
+                                               child: Icon(Icons.arrow_back)),
+                                           SizedBox(
+                                             height: 10,
                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          children: [
-                                            Text('Banque du cameroun',style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 20)),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Divider(),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text("Donation Amount".toUpperCase()),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            CustomFilterBtn(
-                                                title: '1000',
-                                                onChange: (val) {}),
-                                            CustomFilterBtn(
-                                                title: '2000',
-                                                onChange: (val) {}),
-                                            CustomFilterBtn(
-                                                title: '3000',
-                                                onChange: (val) {})
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 20,
-                                        ),
-                                        Text('Payment method'.toUpperCase(), style: GoogleFonts.roboto(),),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        InkWell(
-                                            onTap: () {
-                                              //  Get.back();
-                                            },
-                                            child: Row(
-                                              children: [
-                                                Icon(
-                                                  Icons.add,
-                                                  color: Constants.defaultHeaderColor,
-                                                ),
-                                                Text(
-                                                  'Select a payment method',
-                                                  style: TextStyle(
-                                                      color: Constants.defaultHeaderColor,
-                                                      fontWeight: FontWeight.normal),
-                                                )
-                                              ],
-                                            )),
-                                        SizedBox(height: 20,),
-                                        Container(
-                                          decoration: BoxDecoration(
-                                              color: Colors.grey.shade300,
-                                              borderRadius: BorderRadius.circular(10)),
-                                          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                                          child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Text(
-                                                'Total'.toUpperCase(),
-                                                style:
-                                                TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
-                                              ),
-                                              Text(
-                                                '3000',
-                                                style:
-                                                TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                        SizedBox(height: 15,),
-                                        CustomButton(onPressed: (){
-                                          Get.back();
-                                        }, text: 'Donate Now', backgroundColor: Constants.defaultBorderColor)
-                                      ],
-                                    ),
-                                  ));
+                                           Row(
+                                             mainAxisAlignment: MainAxisAlignment.center,
+                                             children: [
+                                               ClipRRect(
+                                                 child: Image.asset('assets/image/img.png', height: 50,),
+                                                 borderRadius: BorderRadius.circular(300),
+                                               ),
+                                             ],
+                                           ),
+                                           Row(
+                                             mainAxisAlignment: MainAxisAlignment.center,
+                                             children: [
+                                               Text('Banque du cameroun',style: GoogleFonts.roboto(fontWeight: FontWeight.bold, fontSize: 20)),
+                                             ],
+                                           ),
+                                           SizedBox(
+                                             height: 10,
+                                           ),
+                                           Divider(),
+                                           SizedBox(
+                                             height: 10,
+                                           ),
+                                           Text("Donation Amount".toUpperCase()),
+                                           SizedBox(
+                                             height: 10,
+                                           ),
+                                           Row(
+                                             mainAxisAlignment:
+                                             MainAxisAlignment.spaceBetween,
+                                             children: [
+                                               CustomFilterBtn(
+                                                   title: '1000',
+                                                   isSelected: controller.price.value==1000.00,
+                                                   onChange: (val) {
+                                                     controller.price.value=1000.00;
+                                                   }),
+                                               CustomFilterBtn(
+                                                   title: '2000',
+                                                   isSelected: controller.price.value==2000.00,
+                                                   onChange: (val) {
+                                                     controller.price.value=2000.00;
+                                                   }),
+                                               CustomFilterBtn(
+                                                   title: '3000',
+                                                   isSelected: controller.price.value==3000.00,
+                                                   onChange: (val) {
+                                                     controller.price.value=3000.00;
+                                                   })
+                                             ],
+                                           ),
+                                           SizedBox(
+                                             height: 20,
+                                           ),
+                                           Text('Payment method'.toUpperCase(), style: GoogleFonts.roboto(),),
+                                           SizedBox(
+                                             height: 10,
+                                           ),
+                                           InkWell(
+                                               onTap: () {
+                                                 //  Get.back();
+                                               },
+                                               child: Row(
+                                                 children: [
+                                                   Icon(
+                                                     Icons.add,
+                                                     color: Constants.defaultHeaderColor,
+                                                   ),
+                                                   Text(
+                                                     'Select a payment method',
+                                                     style: TextStyle(
+                                                         color: Constants.defaultHeaderColor,
+                                                         fontWeight: FontWeight.normal),
+                                                   )
+                                                 ],
+                                               )),
+                                           SizedBox(height: 20,),
+                                           Container(
+                                             decoration: BoxDecoration(
+                                                 color: Colors.grey.shade300,
+                                                 borderRadius: BorderRadius.circular(10)),
+                                             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                                             child: Row(
+                                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                               children: [
+                                                 Text(
+                                                   'Total'.toUpperCase(),
+                                                   style:
+                                                   TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
+                                                 ),
+                                                 Text(
+                                                   '${controller.price.value}',
+                                                   style:
+                                                   TextStyle(fontWeight: FontWeight.w900, fontSize: 16),
+                                                 )
+                                               ],
+                                             ),
+                                           ),
+                                           SizedBox(height: 15,),
+                                           CustomButton(onPressed: (){
+                                            controller.donateNow();
+                                           }, text: 'Donate Now', backgroundColor: Constants.defaultBorderColor)
+                                         ],
+                                       ),
+                                     )));
                                 },
                                 text: 'Donate',
                                 backgroundColor: Constants.buttonColor)
@@ -335,7 +343,7 @@ class _CustomFilterBtnState extends State<CustomFilterBtn> {
         child: InkWell(
             onTap: () {
               setState(() {
-                widget.isSelected = !widget.isSelected;
+               widget.isSelected = !widget.isSelected;
                 widget.onChange(widget.isSelected);
               });
             },

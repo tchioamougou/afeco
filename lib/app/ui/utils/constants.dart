@@ -1,11 +1,15 @@
 import 'dart:ui';
 
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+
 
 class Constants{
   static Color buttonColor =const Color.fromRGBO(17,77,77,1);
   static Color defaultHeaderColor =const Color.fromRGBO(17,77,77,1);
   static Color defaultBorderColor= const Color.fromRGBO(17,77,77,1);
-
+  static String? cinetApiKey = dotenv.env['CINET_API_KEY'];
+  static String? cinetSiteId = dotenv.env['CINET_SITE_ID'];
+  static String? cinetNotifyUrl = dotenv.env['CINET_NOTIFY_URL'];
 }
 
 class AppWriteCollection{

@@ -9,6 +9,7 @@ import 'package:afeco/app/data/services/language_service.dart';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:afeco/app/../firebase_options.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -22,6 +23,7 @@ class DependecyInjection {
 
     await GetStorage.init();
     await LanguageService.instance.initLanguage();
+    await dotenv.load();
     Get.put<FindAroundController>(FindAroundController());
     Get.put<NavigationController>(NavigationController());
     Get.put<MainController>(MainController());

@@ -82,4 +82,19 @@ class Utils{
   static String imageLoader(fileId){
     return AppWriteBucket.urlBucket.replaceAll("fileId", fileId);
   }
+  static String generateTransactionID() {
+    const prefix = 'SF_';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    const length = 15 - prefix.length;
+
+    var transactionID = prefix;
+    var random = math.Random();
+
+    for (var i = 0; i < length; i++) {
+      var randomIndex = random.nextInt(characters.length);
+      transactionID += characters[randomIndex];
+    }
+
+    return transactionID;
+  }
 }

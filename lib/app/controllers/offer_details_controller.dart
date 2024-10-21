@@ -1,10 +1,12 @@
 import 'package:afeco/app/data/appwrite/appwrite_controllers.dart';
 import 'package:afeco/app/data/models/bag_model.dart';
 import 'package:afeco/app/data/models/order_model.dart';
+import 'package:afeco/app/data/services/cinet_pay_service.dart';
 import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:afeco/app/ui/utils/utils.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
@@ -32,6 +34,7 @@ class OfferDetailsController extends GetxController {
 
   Future<void> createOrder() async {
     await EasyLoading.show();
+
     try {
       OrderModel om = OrderModel(
           status: OrderStatus.payed.name,
@@ -41,11 +44,29 @@ class OfferDetailsController extends GetxController {
           quantity: selectQuantity.value,
           unitePrice: bag.value!.price,
           users: UserService.instance.user!.documentId);
-      await _appWriteController.createDocument(
-          AppWriteCollection.bagOrderCollections, om.toJson());
-      await _appWriteController.updateDocument(
-          AppWriteCollection.bagsCollections, bag.value!.documentId, {'rest': (bag.value!.rest - selectQuantity.value)});
-      Get.offAllNamed(AppRoutes.TANKING);
+      bool isError = await CinetPayService.handleCinetPayPayment(
+          om.price * om.quantity, 'Description');
+
+      if (isError) {
+        Get.showSnackbar(
+          GetSnackBar(
+            title: 'Payment failled',
+            message:
+                'We\'re sorry, but your payment could not be processed at this time. Please check your payment details and try again. If the problem persists, please contact our customer support for assistance.',
+            icon: const Icon(Icons.error),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      } else {
+        await _appWriteController.createDocument(
+            AppWriteCollection.bagOrderCollections, om.toJson());
+        await _appWriteController.updateDocument(
+            AppWriteCollection.bagsCollections,
+            bag.value!.documentId,
+            {'rest': (bag.value!.rest - selectQuantity.value)});
+        Get.offAllNamed(AppRoutes.TANKING);
+      }
     } catch (e) {
       EasyLoading.showError("An Error Occur");
       print(e);

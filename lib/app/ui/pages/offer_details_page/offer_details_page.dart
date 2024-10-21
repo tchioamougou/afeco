@@ -82,7 +82,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                       Text('Only ${controller.bag.value!.rest} Left',  style: GoogleFonts.poppins(fontSize: 30, color: Colors.orange,fontWeight: FontWeight.w900),),
                     ],
                   ),
-                  SizedBox(height: 15,),
+                  const SizedBox(height: 15,),
                   CustomButton(
                       onPressed: () {
                         controller.createOrder();
@@ -115,7 +115,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('By reserving this meal you agree to Save Food'),
+                        const Text('By reserving this meal you agree to Save Food'),
                         TextButton(onPressed: (){}, child: Text('Terms & conditions',style: TextStyle(fontWeight: FontWeight.bold,color: Constants.defaultHeaderColor),))
                       ],
                     ),
