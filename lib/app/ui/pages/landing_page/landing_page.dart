@@ -9,7 +9,7 @@ import '../../layouts/main/main_layout.dart';
 import '../../../controllers/landing_controller.dart';
 
 class LandingPage extends GetView<LandingController> {
-      const LandingPage ({Key? key}) : super(key: key);
+      const LandingPage ({super.key});
   @override
   Widget build(BuildContext context) {
     return  MainLayout(
@@ -24,7 +24,7 @@ class LandingPage extends GetView<LandingController> {
 
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [Text('Start saving food',style: TextStyle(fontWeight: FontWeight.w900,color: Constants.defaultHeaderColor, fontSize: 30.sp),)],
+                  children: [Text('startSavingFood'.tr,style: TextStyle(fontWeight: FontWeight.w900,color: Constants.defaultHeaderColor, fontSize: 30.sp),)],
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -36,19 +36,19 @@ class LandingPage extends GetView<LandingController> {
                   children: [
                     CustomButton(onPressed: (){
                       Get.offAllNamed(AppRoutes.INIT_PAGE);
-                    }, text: 'Continue with Google', backgroundColor: Colors.blueAccent, icon: const FaIcon(FontAwesomeIcons.google,color: Colors.white,)),
+                    }, text: 'continueWithGoogle'.tr, backgroundColor: Colors.blueAccent, icon: const FaIcon(FontAwesomeIcons.google,color: Colors.white,)),
                     SizedBox(height: 20.h,),
                     CustomButton(onPressed: (){
                       Get.offAllNamed(AppRoutes.SIGN_LOG);
-                    }, text: 'Continue with email', backgroundColor: Constants.buttonColor,icon: const Icon(Icons.email,color: Colors.white,),),
+                    }, text: 'continueWithEmail'.tr, backgroundColor: Constants.buttonColor,icon: const Icon(Icons.email,color: Colors.white,),),
                     SizedBox(height: 20.h,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('Gains from excess food', style: TextStyle(color: Colors.grey),),
+                        Text('gainsFromExcessFood'.tr, style: TextStyle(color: Colors.grey),),
                         TextButton(onPressed: (){
                           Get.toNamed(AppRoutes.CREATE_ACCOUNT);
-                        }, child: Text('Create a store', style: TextStyle(color: Constants.defaultHeaderColor, fontWeight: FontWeight.bold, fontSize: 15),))
+                        }, child: Text('createStore'.tr, style: TextStyle(color: Constants.defaultHeaderColor, fontWeight: FontWeight.bold, fontSize: 15),))
                       ],
                     )
                   ],

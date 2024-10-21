@@ -10,10 +10,10 @@ import 'package:latlong2/latlong.dart';
 
 class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
    final GivingPackage gp;
-
+    final double?width;
   const CustomSaveFoodNeighbourdhoodItem ({
     super.key,
-
+  this.width,
     required this.gp,
   });
 
@@ -26,7 +26,7 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
     return Card(
       elevation: 3,
       child: Container(
-        width: MediaQuery.sizeOf(context).width * 0.5,
+        width: MediaQuery.sizeOf(context).width * (width!=null ? width!:0.5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
           color: Colors.white,
@@ -42,7 +42,7 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
                       topRight: Radius.circular(10)),
                   child: Image.network(
                     Utils.imageLoader(gp.imageId),
-                    width: MediaQuery.sizeOf(context).width*0.5,
+                    width: MediaQuery.sizeOf(context).width * (width!=null ? width!:0.5),
                     height: 120,
                     fit: BoxFit.cover,
                   ),

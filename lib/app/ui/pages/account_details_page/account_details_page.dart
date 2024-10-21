@@ -1,24 +1,22 @@
 import 'package:afeco/app/data/services/language_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_app_bar.dart';
-import 'package:afeco/app/ui/global_widgets/header_custom.dart';
 import 'package:afeco/app/ui/pages/profile_page/custom_liststyle.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../layouts/main/main_layout.dart';
 import 'package:app_settings/app_settings.dart';
 import '../../../controllers/account_details_controller.dart';
 
 class AccountDetailsPage extends GetView<AccountDetailsController> {
-  const AccountDetailsPage({Key? key}) : super(key: key);
+  const AccountDetailsPage({super.key});
   @override
   Widget build(BuildContext context) {
     return MainLayout(
       child: Scaffold(
-        appBar: CustomAppBar(title: 'Account Details'.tr,),
+        appBar: CustomAppBar(title: 'accountDetails'.tr,),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -46,7 +44,7 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "You're an hero",
+                                      "youAreHero".tr,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontWeight: FontWeight.w900,
@@ -58,7 +56,7 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                                     ),
                                     Center(
                                       child: Text(
-                                        "tweaks than implement major changes to an existing app.",
+                                        "accountDetailsCardDetails".tr,
                                         style: TextStyle(
                                             fontWeight: FontWeight.w900,
                                             color: Colors.white,
@@ -72,7 +70,7 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                                         onPressed: () {
                                           Get.toNamed(AppRoutes.FOOD_PLANNING);
                                         },
-                                        child: const Text('Food Planning')),
+                                        child:  Text('foodPlanning'.tr)),
                                   ],
                                 ),
                               ),
@@ -102,33 +100,33 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                   ),
                 ),
                 CustomListStile(
-                    title: 'Profile',
+                    title: 'Profile'.tr,
                     icon: FontAwesomeIcons.user,
                     trailing:  FaIcon(FontAwesomeIcons.chevronRight, color: Constants.defaultHeaderColor,),
                     onPress: () {}),
                 CustomListStile(
-                    title: 'Notification',
+                    title: 'notification'.tr,
                     icon: FontAwesomeIcons.bell,
                     trailing:  FaIcon(FontAwesomeIcons.chevronRight, color: Constants.defaultHeaderColor,),
                     onPress: () {
                       AppSettings.openAppSettings(type: AppSettingsType.notification);
                     }),
                 CustomListStile(
-                    title: 'Position',
+                    title: 'position'.tr,
                     icon: FontAwesomeIcons.mapLocation,
                     trailing:  FaIcon(FontAwesomeIcons.chevronRight, color: Constants.defaultHeaderColor,),
                     onPress: () {
                       AppSettings.openAppSettings(type: AppSettingsType.location);
                     }),
                 CustomListStile(
-                    title: 'Security',
+                    title: 'security'.tr,
                     icon: FontAwesomeIcons.key,
                     trailing:  FaIcon(FontAwesomeIcons.chevronRight, color: Constants.defaultHeaderColor,),
                     onPress: () {
                       AppSettings.openAppSettings(type: AppSettingsType.security);
                     }),
                 CustomListStile(
-                    title: 'Language',
+                    title: 'language'.tr,
                     icon: FontAwesomeIcons.globe,
                     trailing:  FaIcon(FontAwesomeIcons.chevronRight, color: Constants.defaultHeaderColor,),
                     subtitle: Text(LanguageService.instance.language.name.tr),
@@ -136,12 +134,12 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                       Get.toNamed(AppRoutes.LANGUAGE);
                     }),
                 CustomListStile(
-                    title: 'Dark Mode',
+                    title: 'darkMode'.tr,
                     icon: FontAwesomeIcons.eye,
                     trailing:  FaIcon(FontAwesomeIcons.toggleOff, color: Constants.defaultHeaderColor,),
                     onPress: () {}),
                 CustomListStile(
-                    title: 'Logout', icon: FontAwesomeIcons.close, onPress: () {})
+                    title: 'Logout'.tr, icon: FontAwesomeIcons.close, onPress: () {})
               ],
             ),
           ),

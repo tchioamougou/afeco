@@ -11,7 +11,7 @@ import '../../layouts/main/main_layout.dart';
 import '../../../controllers/offers_controller.dart';
 
 class OffersPage extends StatefulWidget {
-      const OffersPage ({Key? key}) : super(key: key);
+  const OffersPage({super.key});
 
   @override
   State<OffersPage> createState() => _OffersPageState();
@@ -25,32 +25,41 @@ class _OffersPageState extends State<OffersPage> {
     controller.getBags();
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
-    return  MainLayout(
-        child:Obx(()=> Scaffold(
-          body:SingleChildScrollView(child:
-          Column(
+    return MainLayout(
+        child: Obx(
+      () => Scaffold(
+        body: SingleChildScrollView(
+          child: Column(
             children: [
-               Padding(
-                padding: EdgeInsets.fromLTRB(10, 35, 10, 0),
-                child: HeaderCustom(icon:  Icon(
-                  FontAwesomeIcons.basketShopping,
-                  color: Colors.white,
-                  size: 25,
-                ),onPress: (){
-                  Get.toNamed(AppRoutes.MY_ORDERS);
-                },),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(10, 35, 10, 0),
+                child: HeaderCustom(
+                  icon: const Icon(
+                    FontAwesomeIcons.basketShopping,
+                    color: Colors.white,
+                    size: 25,
+                  ),
+                  onPress: () {
+                    Get.toNamed(AppRoutes.MY_ORDERS);
+                  },
+                ),
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               Padding(
                   padding: const EdgeInsets.fromLTRB(10, 1, 10, 0),
                   child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
                     decoration: BoxDecoration(
                         border: Border.all(
                             width: 0.1, color: Constants.defaultBorderColor),
-                        borderRadius: const BorderRadius.all(Radius.circular(30))),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(30))),
                     child: Row(
                       children: [
                         IconButton(
@@ -68,22 +77,25 @@ class _OffersPageState extends State<OffersPage> {
                               ),
                               padding: EdgeInsets.zero),
                         ),
-                        Container(
+                        SizedBox(
                           width: MediaQuery.sizeOf(context).width * 0.67,
-                          child: const TextField(
+                          child:  TextField(
                             decoration: InputDecoration(
                               border: InputBorder.none,
-                              hintText: "search here",
+                              hintText: "searchHere".tr,
                             ),
                           ),
                         ),
                         IconButton(
                           onPressed: () {
-                            Get.dialog(CustomFilter(onClose: () {
-                              Get.back();
-                            },onPress: (){
-                              Get.back();
-                            },));
+                            Get.dialog(CustomFilter(
+                              onClose: () {
+                                Get.back();
+                              },
+                              onPress: () {
+                                Get.back();
+                              },
+                            ));
                           },
                           icon: FaIcon(
                             FontAwesomeIcons.sliders,
@@ -103,15 +115,16 @@ class _OffersPageState extends State<OffersPage> {
                 height: 20,
               ),
               Column(
-                children:  controller.bags.value.map(
-                        (i) =>CustomOfferItem(bg: i,
-                    )).toList(),
-
+                children: controller.bags.value
+                    .map((i) => CustomOfferItem(
+                          bg: i,
+                        ))
+                    .toList(),
               ),
-
             ],
-          ),),
-        ),)
-      );
+          ),
+        ),
+      ),
+    ));
   }
 }

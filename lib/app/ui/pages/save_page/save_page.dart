@@ -48,27 +48,27 @@ class SavePage extends GetView<SaveController> {
                 ),
                 child: Column(
                   children: [
-                    Label(title: 'New surprise bag for your customer'),
+                    Label(title: 'newSurpriseBagForCustomer'.tr),
                     CustomInput(
-                        label: 'Original Price',
+                        label: 'originalPrice'.tr,
                         onValueChanged: (va) {},
                         hintText: '',
                         controller: controller.originalPriceController.value,
                         keyboardType: TextInputType.number),
                     CustomInput(
-                        label: 'New Price',
+                        label: 'newPrice'.tr,
                         onValueChanged: (va) {},
                         hintText: '',
                         controller: controller.newPriceController.value,
                         keyboardType: TextInputType.number),
                     CustomInput(
-                        label: 'Number of Bag',
+                        label: 'numberOfBag'.tr,
                         onValueChanged: (va) {},
                         hintText: '',
                         controller: controller.quantityPriceController.value,
                         keyboardType: TextInputType.number),
                     CustomDatePick(
-                        label: 'PickUp Date',
+                        label: 'pickUpDate'.tr,
                         defaultValue: controller.pickupDate.value,
                         onValueChanged: (val) {
                           controller.pickupDate.value = val;
@@ -80,7 +80,7 @@ class SavePage extends GetView<SaveController> {
                         Container(
                           width: MediaQuery.sizeOf(context).width * 0.45,
                           child: CustomTime(
-                              label: 'From',
+                              label: 'from'.tr,
                               onValueChanged: (val) {
                                 controller.pickupDateFrom.value = val;
                               },
@@ -89,7 +89,7 @@ class SavePage extends GetView<SaveController> {
                         Container(
                           width: MediaQuery.sizeOf(context).width * 0.45,
                           child: CustomTime(
-                              label: 'to',
+                              label: 'to'.tr,
                               onValueChanged: (val) {
                                 controller.pickupDateTo.value = val;
                               },
@@ -101,7 +101,7 @@ class SavePage extends GetView<SaveController> {
                         onPressed: () {
                           controller.addNewSurprise();
                         },
-                        text: 'Save',
+                        text: 'save'.tr,
                         backgroundColor: Constants.buttonColor)
                   ],
                 ),

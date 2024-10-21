@@ -15,7 +15,7 @@ class LanguagePage extends GetView<LanguageController> {
     return MainLayout(
         child: Scaffold(
             appBar: CustomAppBar(
-              title: 'Language'.tr,
+              title: 'language'.tr,
             ),
             body: SingleChildScrollView(
               child: Column(

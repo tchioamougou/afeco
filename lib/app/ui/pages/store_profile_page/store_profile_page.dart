@@ -98,13 +98,13 @@ class StoreProfilePage extends GetView<StoreProfileController> {
               Padding(padding: EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 children: [
-                  CustomListStile(title: 'Account Details', icon: FontAwesomeIcons.user, onPress: (){
+                  CustomListStile(title: 'accountDetails'.tr, icon: FontAwesomeIcons.user, onPress: (){
                     Get.toNamed(AppRoutes.ACCOUNT_DETAILS);
                   }),
                   CustomListStile(title: 'Actions History', icon: FontAwesomeIcons.history, onPress: (){}),
-                  CustomListStile(title: 'Help Centers', icon: FontAwesomeIcons.message, onPress: (){}),
-                  CustomListStile(title: 'Invite Friends', icon: FontAwesomeIcons.facebookF, onPress: (){}),
-                  CustomListStile(title: 'Privacy', icon: FontAwesomeIcons.keybase, onPress: (){})
+                  CustomListStile(title: 'actionsHistory'.tr, icon: FontAwesomeIcons.message, onPress: (){}),
+                  CustomListStile(title: 'inviteFriends'.tr, icon: FontAwesomeIcons.facebookF, onPress: (){}),
+                  CustomListStile(title: 'privacy'.tr, icon: FontAwesomeIcons.keybase, onPress: (){})
                 ],
               ),
               )

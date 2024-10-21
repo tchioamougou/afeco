@@ -24,7 +24,7 @@ class ProfilePage extends GetView<ProfileController> {
               const SizedBox(height: 20,),
               Center(
                 child: Text(
-                  'Your Impact',
+                  'yourImpact'.tr,
                   style: TextStyle(
                       fontWeight: FontWeight.w900,
                       color: Constants.defaultHeaderColor,
@@ -34,24 +34,24 @@ class ProfilePage extends GetView<ProfileController> {
               const SizedBox(height: 20,),
                Row(
                 children: [
-                  CustomCardImp(title: 'Money saved', description: 'XAF ${UserService.instance.user!.moneySaved}', imageUrl: ''),
-                  CustomCardImp(title: 'CO2E saved', description: '${UserService.instance.user!.carboneImpact} IBS', imageUrl: '')
+                  CustomCardImp(title: 'moneySaved'.tr, description: 'XAF ${UserService.instance.user!.moneySaved}', imageUrl: ''),
+                  CustomCardImp(title: 'co2Saved'.tr, description: '${UserService.instance.user!.carboneImpact} IBS', imageUrl: '')
                 ],
               ),
               const SizedBox(height: 20,),
-               CustomCardDefault(title: 'Bags Saved', description: '${UserService.instance.user!.bagsSaved}', imageUrl: 'imageUrl'),
+               CustomCardDefault(title: 'bagsSaved'.tr, description: '${UserService.instance.user!.bagsSaved}', imageUrl: 'imageUrl'),
               const SizedBox(height: 10,),
-               CustomCardDefault(title: 'Your Excess food saved', description: '${UserService.instance.user!.excessFoodSaved}', imageUrl: 'imageUrl'),
+               CustomCardDefault(title: 'yourExcessFoodSaved'.tr, description: '${UserService.instance.user!.excessFoodSaved}', imageUrl: 'imageUrl'),
               const SizedBox(height: 10,),
               const Divider( height: 10,thickness: 2,color: Colors.grey,),
               const SizedBox(height: 10,),
-              CustomListStile(title: 'Account Details', icon: FontAwesomeIcons.user, onPress: (){
+              CustomListStile(title: 'accountDetails'.tr, icon: FontAwesomeIcons.user, onPress: (){
                 Get.toNamed(AppRoutes.ACCOUNT_DETAILS);
               }),
-              CustomListStile(title: 'Actions History', icon: FontAwesomeIcons.history, onPress: (){}),
-              CustomListStile(title: 'Help Centers', icon: FontAwesomeIcons.message, onPress: (){}),
-              CustomListStile(title: 'Invite Friends', icon: FontAwesomeIcons.facebookF, onPress: (){}),
-              CustomListStile(title: 'Privacy', icon: FontAwesomeIcons.keybase, onPress: (){})
+              CustomListStile(title: 'Actions History'.tr, icon: FontAwesomeIcons.history, onPress: (){}),
+              CustomListStile(title: 'helpsCenter'.tr, icon: FontAwesomeIcons.message, onPress: (){}),
+              CustomListStile(title: 'inviteFriends'.tr, icon: FontAwesomeIcons.facebookF, onPress: (){}),
+              CustomListStile(title: 'privacy'.tr, icon: FontAwesomeIcons.keybase, onPress: (){})
             ]),
           ),
         ),

@@ -26,7 +26,9 @@ class CustomCategoryAction extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
             width: 70,
             height: 70,
-            child: Image.asset(image),
+            child: ClipRRect(
+              child: Image.asset(image, height: 100,width: 50,fit: BoxFit.cover,),
+            ),
             decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(200)),
                 color: Constants.defaultBorderColor.withOpacity(0.2)),
           ),

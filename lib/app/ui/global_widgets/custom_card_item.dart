@@ -13,10 +13,8 @@ import 'package:latlong2/latlong.dart';
 
 class CustomCardItem extends StatelessWidget {
   final BagRelation bg;
-  const CustomCardItem({
-    super.key,
-    required this.bg,
-  });
+  final double? width;
+  const CustomCardItem({super.key, required this.bg, this.width});
 
   @override
   Widget build(BuildContext context) {
@@ -34,12 +32,13 @@ class CustomCardItem extends StatelessWidget {
     String distance = Utils.distanceToText(point1, point2);
     return InkWell(
       onTap: () {
-        Get.toNamed(AppRoutes.OFFER_DETAILS, arguments: bg );
+        Get.toNamed(AppRoutes.OFFER_DETAILS, arguments: bg);
       },
       child: Card(
         elevation: 1,
         child: Container(
-          width: MediaQuery.sizeOf(context).width * 0.7,
+          width:
+              MediaQuery.sizeOf(context).width * (width != null ? width! : 0.7),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10.0),
             color: Colors.white,
@@ -54,14 +53,14 @@ class CustomCardItem extends StatelessWidget {
                         topLeft: Radius.circular(10),
                         topRight: Radius.circular(10)),
                     child: Image.network(
-                        Utils.imageLoader(bg.stores.profileCoverId),
+                      Utils.imageLoader(bg.stores.profileCoverId),
                       width: MediaQuery.sizeOf(context).width,
                       height: 100,
                       fit: BoxFit.cover,
                     ),
                   ),
                   Positioned(
-                    top: 0,
+                      top: 0,
                       right: 0,
                       child: IconButton(
                         icon: Icon(
@@ -69,8 +68,7 @@ class CustomCardItem extends StatelessWidget {
                           color: Colors.grey,
                         ),
                         onPressed: () {},
-                      )
-                  ),
+                      )),
                   Positioned(
                       bottom: 5,
                       left: 5,
@@ -121,8 +119,7 @@ class CustomCardItem extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            bg.name
-                            ,
+                            bg.name,
                             style: const TextStyle(
                                 fontSize: 14, fontWeight: FontWeight.bold),
                           ),
@@ -141,7 +138,10 @@ class CustomCardItem extends StatelessWidget {
                               SizedBox(
                                 width: 5.w,
                               ),
-                              Tag(content: '${times['day']}', color: Colors.white, backgroundColor: Constants.buttonColor),
+                              Tag(
+                                  content: '${times['day']}',
+                                  color: Colors.white,
+                                  backgroundColor: Constants.buttonColor),
                               SizedBox(
                                 width: 4.w,
                               ),

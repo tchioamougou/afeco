@@ -13,65 +13,68 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import '../../../controllers/init_page_controller.dart';
 
 class InitPagePage extends GetView<InitPageController> {
-       InitPagePage ({super.key});
+  InitPagePage({super.key});
   @override
   Widget build(BuildContext context) {
     return MainLayout(
-        child: Obx(()=>Scaffold(
-            backgroundColor: Colors.white,
-            body: getBody(),
-            bottomNavigationBar: getFooter(),
-            floatingActionButton: FloatingActionButton(
-                shape: const CircleBorder(),
-                elevation: 0,
-                onPressed: () {
-                  Get.toNamed(AppRoutes.SAVE_FOOD_FORM);
-                },
-                child:const FaIcon(FontAwesomeIcons.bowlFood,color: Colors.white,),
-                backgroundColor: Constants.buttonColor
+      child: Obx(() => Scaffold(
+          backgroundColor: Colors.white,
+          body: getBody(),
+          bottomNavigationBar: getFooter(),
+          floatingActionButton: FloatingActionButton(
+              shape: const CircleBorder(),
+              elevation: 0,
+              onPressed: () {
+                Get.toNamed(AppRoutes.SAVE_FOOD_FORM);
+              },
+              backgroundColor: Constants.buttonColor,
+              child: const FaIcon(
+                FontAwesomeIcons.bowlFood,
+                color: Colors.white,
+              )
               //params
-            ),
-            floatingActionButtonLocation:
-            FloatingActionButtonLocation.centerDocked)),
-      );
+              ),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerDocked)),
+    );
   }
-      List<Widget> pages = [
-        const HomePage(),
-        const FindAroundPage(),
-        const OffersPage(),
-        const ProfilePage(),
-      ];
 
-      Widget getBody() {
-        return IndexedStack(
-          index: controller.currentIndex.value,
-          children: pages,
-        );
-      }
+  final List<Widget> pages = [
+    const HomePage(),
+    const FindAroundPage(),
+    const OffersPage(),
+    const ProfilePage(),
+  ];
 
-      Widget getFooter() {
-        List<IconData> iconItems = [
-          FontAwesomeIcons.house,
-          FontAwesomeIcons.mapLocation,
-          FontAwesomeIcons.store,
-          FontAwesomeIcons.circleUser
-        ];
+  Widget getBody() {
+    return IndexedStack(
+      index: controller.currentIndex.value,
+      children: pages,
+    );
+  }
 
-        return AnimatedBottomNavigationBar(
-          activeColor: Constants.buttonColor,
-          inactiveColor: Colors.black.withOpacity(0.5),
-          icons: iconItems,
-          activeIndex: controller.currentIndex.value,
-          gapLocation: GapLocation.center,
-          notchSmoothness: NotchSmoothness.softEdge,
-          leftCornerRadius: 10,
-          iconSize: 22.sp,
-          rightCornerRadius: 10,
-          onTap: (index) {
-            controller.selectedTab(index);
-          },
-          //other params
-        );
-      }
+  Widget getFooter() {
+    List<IconData> iconItems = [
+      FontAwesomeIcons.house,
+      FontAwesomeIcons.mapLocation,
+      FontAwesomeIcons.store,
+      FontAwesomeIcons.circleUser
+    ];
 
+    return AnimatedBottomNavigationBar(
+      activeColor: Constants.buttonColor,
+      inactiveColor: Colors.black.withOpacity(0.5),
+      icons: iconItems,
+      activeIndex: controller.currentIndex.value,
+      gapLocation: GapLocation.center,
+      notchSmoothness: NotchSmoothness.softEdge,
+      leftCornerRadius: 10,
+      iconSize: 22.sp,
+      rightCornerRadius: 10,
+      onTap: (index) {
+        controller.selectedTab(index);
+      },
+      //other params
+    );
+  }
 }

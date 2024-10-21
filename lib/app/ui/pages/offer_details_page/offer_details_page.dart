@@ -23,107 +23,128 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
     Get.bottomSheet(
         backgroundColor: Colors.white,
         isDismissible: false,
-
-        Obx(()=>Container(
-          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
-          child: Stack(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+        Obx(() => Container(
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+              child: Stack(
                 children: [
-                  Text('Payment method'.toUpperCase()),
-                  TextButton(
-                      onPressed: () {
-                        //  Get.back();
-                      },
-                      child: Row(
-                        children: [
-                          Icon(
-                            Icons.add,
-                            color: Constants.defaultHeaderColor,
-                          ),
-                          Text(
-                            'Select a payment method',
-                            style: TextStyle(
-                                color: Constants.defaultHeaderColor,
-                                fontWeight: FontWeight.bold),
-                          )
-                        ],
-                      )),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey.shade300,
-                        borderRadius: BorderRadius.circular(10)),
-                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Total'.toUpperCase(),
-                          style:
-                          TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
-                        ),
-                        Text(
-                          '${controller.bag.value!.price * controller.selectQuantity.value}',
-                          style:
-                          TextStyle(fontWeight: FontWeight.w900, fontSize: 20),
-                        )
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 15,),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      QuantitySelector(initialQuantity: 1,minValue: 1, maxValue: controller.bag.value!.rest, onQuantityChanged: (val){
-                        controller.selectQuantity.value = val;
-                      }),
-                      Text('Only ${controller.bag.value!.rest} Left',  style: GoogleFonts.poppins(fontSize: 30, color: Colors.orange,fontWeight: FontWeight.w900),),
-                    ],
-                  ),
-                  const SizedBox(height: 15,),
-                  CustomButton(
-                      onPressed: () {
-                        controller.createOrder();
-                        Get.back();
-                      },
-                      text: 'Reserve',
-                      backgroundColor: Constants.buttonColor),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                      Text('paymentMethod'.tr.toUpperCase()),
                       TextButton(
                           onPressed: () {
+                            //  Get.back();
+                          },
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.add,
+                                color: Constants.defaultHeaderColor,
+                              ),
+                              Text(
+                                'selectPaymentMethod'.tr,
+                                style: TextStyle(
+                                    color: Constants.defaultHeaderColor,
+                                    fontWeight: FontWeight.bold),
+                              )
+                            ],
+                          )),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Colors.grey.shade300,
+                            borderRadius: BorderRadius.circular(10)),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              'total'.toUpperCase(),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w900, fontSize: 20),
+                            ),
+                            Text(
+                              '${controller.bag.value!.price * controller.selectQuantity.value}',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w900, fontSize: 20),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          QuantitySelector(
+                              initialQuantity: 1,
+                              minValue: 1,
+                              maxValue: controller.bag.value!.rest,
+                              onQuantityChanged: (val) {
+                                controller.selectQuantity.value = val;
+                              }),
+                          Text(
+                            'Only ${controller.bag.value!.rest} Left',
+                            style: GoogleFonts.poppins(
+                                fontSize: 30,
+                                color: Colors.orange,
+                                fontWeight: FontWeight.w900),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      CustomButton(
+                          onPressed: () {
+                            controller.createOrder();
                             Get.back();
                           },
-                          child: Text(
-                            'Back',
-                            style: TextStyle(
-                                color: Constants.defaultHeaderColor,
-                                fontWeight: FontWeight.bold),
-                          ))
+                          text: 'reserve'.tr,
+                          backgroundColor: Constants.buttonColor),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          TextButton(
+                              onPressed: () {
+                                Get.back();
+                              },
+                              child: Text(
+                                'back'.tr,
+                                style: TextStyle(
+                                    color: Constants.defaultHeaderColor,
+                                    fontWeight: FontWeight.bold),
+                              ))
+                        ],
+                      )
                     ],
-                  )
+                  ),
+                  Positioned(
+                      bottom: 0,
+                      child: Container(
+                        width: MediaQuery.sizeOf(Get.context!).width,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                             Text(
+                                'termsNotify'.tr),
+                            TextButton(
+                                onPressed: () {},
+                                child: Text(
+                                  'termsAndConditions'.tr,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      color: Constants.defaultHeaderColor),
+                                ))
+                          ],
+                        ),
+                      ))
                 ],
               ),
-              Positioned(
-                  bottom: 0,
-                  child: Container(
-                    width: MediaQuery.sizeOf(Get.context!).width,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Text('By reserving this meal you agree to Save Food'),
-                        TextButton(onPressed: (){}, child: Text('Terms & conditions',style: TextStyle(fontWeight: FontWeight.bold,color: Constants.defaultHeaderColor),))
-                      ],
-                    ),
-                  ))
-              
-            ],
-          ),
-        )));
+            )));
   }
 
   @override
@@ -147,7 +168,8 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                   Column(
                                     children: [
                                       Image.network(
-                                  Utils.imageLoader(controller.bag.value!.stores.profileCoverId),
+                                        Utils.imageLoader(controller
+                                            .bag.value!.stores.profileCoverId),
                                         fit: BoxFit.fitWidth,
                                         height: 200,
                                         width: MediaQuery.sizeOf(context).width,
@@ -230,7 +252,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                     right: 10,
                                     bottom: 10,
                                     child: Tag(
-                                      content: 'Ending soon',
+                                      content: 'endingSoon'.tr,
                                       color: Colors.red,
                                       backgroundColor: Colors.red.shade200,
                                     ),
@@ -252,7 +274,11 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                                     width: 1)),
                                             child: ClipRRect(
                                               child: Image.network(
-                                                  Utils.imageLoader(controller.bag.value!.stores.profileLogoId),
+                                                Utils.imageLoader(controller
+                                                    .bag
+                                                    .value!
+                                                    .stores
+                                                    .profileLogoId),
                                               ),
                                               borderRadius:
                                                   BorderRadius.circular(300),
@@ -275,7 +301,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 10),
                               child: Row(
                                 mainAxisAlignment:
@@ -341,7 +367,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                             width: 5,
                                           ),
                                           Text(
-                                            'Pick up: ${controller.times['time']}',
+                                            '${"pickUp".tr}: ${controller.times['time']}',
                                           ),
                                           SizedBox(
                                             width: 5,
@@ -405,8 +431,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                       color: Constants.defaultHeaderColor,
                                       fontSize: 17),
                                 ),
-                                subtitle:
-                                    Text('More information about the store'),
+                                subtitle: Text('moreAboutStore'.tr),
                                 trailing: Icon(
                                   Icons.chevron_right,
                                   color: Constants.buttonColor,
@@ -421,7 +446,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    'What you could get',
+                                    'whatYouCouldGet'.tr,
                                     textAlign: TextAlign.left,
                                     style: TextStyle(
                                         fontSize: 15,
@@ -437,8 +462,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                         height: 100,
                                       ),
                                       Expanded(
-                                          child: Text(
-                                              "It's a surprise! When you buy a Suprise Bag, il will be filled with the delicious food that the store has left at the end of the day."))
+                                          child: Text("surpriseBagMessage".tr))
                                     ],
                                   )
                                 ],
@@ -474,7 +498,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                                 height: 30,
                                               ),
                                               Text(
-                                                "Your surprise Bags is a surprise",
+                                                "surpriseIsSurprise".tr,
                                                 style: TextStyle(
                                                     fontWeight:
                                                         FontWeight.bold),
@@ -484,7 +508,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                               ),
                                               Text(
                                                   textAlign: TextAlign.justify,
-                                                  "We wish we could tell you what exactly will be in your Surprise Bag - but it's always a surprise! The store wil fill it with a selection of their unsold items. if you have a question abouy allergens or ingredients, please ask to the store."),
+                                                  "preventReserveMessage".tr),
                                             ],
                                           ),
                                         ),
@@ -493,7 +517,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                               onPressed: () {
                                                 Get.back();
                                               },
-                                              text: 'Got it!',
+                                              text: 'gotIt'.tr,
                                               backgroundColor:
                                                   Constants.buttonColor)
                                         ],
@@ -506,7 +530,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                   color: Constants.buttonColor,
                                 ),
                                 title: Text(
-                                  "Ingredients & allergens",
+                                  "ingredientsAndAllergens".tr,
                                   style: TextStyle(
                                       color: Constants.defaultHeaderColor,
                                       fontSize: 17),
@@ -537,7 +561,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'What others pleople are saying',
+                                      'whatOtherSay'.tr,
                                       textAlign: TextAlign.left,
                                       style: TextStyle(
                                           fontSize: 15,
@@ -570,7 +594,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'What you need to now',
+                                        'whatYouNeedToKnow'.tr,
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                             fontSize: 15,
@@ -579,16 +603,15 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                       SizedBox(
                                         height: 10,
                                       ),
-                                      Text(
-                                          'The store will provide packaging for your food, but we encourage you to bring your own bag to carry it home in'),
+                                      Text('whatYouNeedToKnowAlert'.tr),
                                     ],
                                   ),
                                 )),
-                            Label(title: 'Address'),
+                            Label(title: 'address'.tr),
                             PositionDisplay(
                                 pos: LatLng(controller.bag.value!.stores.lat,
                                     controller.bag.value!.stores.long),
-                                title: "Here")
+                                title: "here".tr)
                           ],
                         ),
                       ),
@@ -668,7 +691,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                             horizontal: 10),
                                       ));
                                 },
-                                text: 'Reserve',
+                                text: 'reserve'.tr,
                                 backgroundColor: Constants.buttonColor)
                           ],
                         ))

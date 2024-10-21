@@ -29,13 +29,18 @@ class EmailConfirmationController extends GetxController {
       try {
         await _appWriteController.loginUser(codeController.value.text);
         DocumentList dls = await _appWriteController
-            .getDocuments(AppWriteCollection.bagsCollections, [
+            .getDocuments(AppWriteCollection.userCollections, [
           Query.equal(
               "userId", [SessionService.instance.currentSession!.userId])
         ]);
 
         if (dls.total > 0) {
           UserService.instance.user = UserModel.fromJson(dls.documents[0].data);
+          if(UserService.instance.user!.long!=0 && UserService.instance.user!.lat!=0){
+            Get.offAllNamed(AppRoutes.INIT_PAGE);
+          }else{
+            Get.offAllNamed(AppRoutes.SET_LOCATION);
+          }
         } else {
           UserModel um = UserModel(
               userId: SessionService.instance.currentSession!.userId,
@@ -56,7 +61,7 @@ class EmailConfirmationController extends GetxController {
           Document dc = await _appWriteController.createDocument(
               AppWriteCollection.userCollections, um.toJson());
           UserService.instance.user = UserModel.fromJson(dc.data);
-          Get.toNamed(AppRoutes.SET_LOCATION);
+          Get.offAllNamed(AppRoutes.SET_LOCATION);
         }
       } catch (e) {
         EasyLoading.showError("An Error Occur");

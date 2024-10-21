@@ -45,7 +45,7 @@ class OfferDetailsController extends GetxController {
           unitePrice: bag.value!.price,
           users: UserService.instance.user!.documentId);
       bool isError = await CinetPayService.handleCinetPayPayment(
-          om.price * om.quantity, 'Description');
+          (om.price * om.quantity).toInt(), 'Description');
 
       if (isError) {
         Get.showSnackbar(

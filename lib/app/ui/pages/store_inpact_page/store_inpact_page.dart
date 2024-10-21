@@ -23,7 +23,7 @@ class StoreInpactPage extends GetView<ProfileController> {
               const SizedBox(height: 20,),
               Center(
                 child: Text(
-                  'Your Impact',
+                  'yourImpact'.tr,
                   style: TextStyle(
                       fontWeight: FontWeight.w900,
                       color: Constants.defaultHeaderColor,
@@ -31,16 +31,16 @@ class StoreInpactPage extends GetView<ProfileController> {
                 ),
               ),
               const SizedBox(height: 20,),
-              const Row(
+               Row(
                 children: [
-                  CustomCardImp(title: 'Money saved', description: 'XAF 2000', imageUrl: ''),
-                  CustomCardImp(title: 'CO2E saved', description: '20 IBS', imageUrl: '')
+                  CustomCardImp(title: 'moneySaved'.tr, description: 'XAF 2000', imageUrl: ''),
+                  CustomCardImp(title: 'co2Saved'.tr, description: '20 IBS', imageUrl: '')
                 ],
               ),
               const SizedBox(height: 20,),
-              const CustomCardDefault(title: 'Surprise Badge Saved', description: '23', imageUrl: 'imageUrl'),
+               CustomCardDefault(title: 'surpriseBagSaved'.tr, description: '0', imageUrl: 'imageUrl'),
               const SizedBox(height: 10,),
-              const CustomCardDefault(title: 'Your Excess food saved', description: '23', imageUrl: 'imageUrl'),
+               CustomCardDefault(title: 'yourExcessFoodSaved'.tr, description: '0', imageUrl: 'imageUrl'),
               const SizedBox(height: 10,),
             ]),
           ),

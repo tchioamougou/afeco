@@ -12,7 +12,7 @@ import '../../layouts/main/main_layout.dart';
 import '../../../controllers/sign_log_controller.dart';
 
 class SignLogPage extends GetView<SignLogController> {
-      const SignLogPage ({super.key});
+  const SignLogPage({super.key});
   @override
   Widget build(BuildContext context) {
     return MainLayout(
@@ -35,39 +35,53 @@ class SignLogPage extends GetView<SignLogController> {
               ],
             ),
             title: Text(
-              'Sign up or Login',
-              style: GoogleFonts.poppins(
-                  fontSize: 20, color: Colors.white),
+              'siglogTitle'.tr,
+              style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
             )),
         backgroundColor: Colors.white,
-        body:Obx(()=> SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            child: Column(
-              children: [
-                SizedBox(height: 20,),
-                CustomInput(
-                    controller:controller.emailController.value,
-                    label: 'Email', hintText: 'Your business name', onValueChanged: (String value) {  },),
-                CustomSelectItem(label: 'Country', options: controller.countries, onChanged: (val){
-                  controller.country.value = val;
-                }, defaultValue: controller.country.value,),
-                CustomCheckbox(label: 'I allow EcoBit to store my email address and name according to our privacy policy.', onChanged: (val){
-                  controller.allow.value = val;
-                }),
-                SizedBox(height: 20,),
-                CustomButton(
-                    onPressed: () {
-                      controller.signLog();
-                      //Get.toNamed(AppRoutes.EMAIL_CONFIRMATION);
-                    },
-                    text: 'Continue',
-                    disable: !controller.allow.value,
-                    backgroundColor: Constants.buttonColor)
-              ],
-            ),
-          ),
-        )),
+        body: Obx(() => SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 20,
+                    ),
+                    CustomInput(
+                      controller: controller.emailController.value,
+                      label: 'email'.tr,
+                      hintText: 'email',
+                      onValueChanged: (String value) {},
+                    ),
+                    CustomSelectItem(
+                      label: 'country'.tr,
+                      options: controller.countries,
+                      onChanged: (val) {
+                        controller.country.value = val;
+                      },
+                      defaultValue: controller.country.value,
+                    ),
+                    CustomCheckbox(
+                        label:
+                            'allowEmailMessage'.tr,
+                        onChanged: (val) {
+                          controller.allow.value = val;
+                        }),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    CustomButton(
+                        onPressed: () {
+                          controller.signLog();
+                          //Get.toNamed(AppRoutes.EMAIL_CONFIRMATION);
+                        },
+                        text: 'continue'.tr,
+                        disable: !controller.allow.value,
+                        backgroundColor: Constants.buttonColor)
+                  ],
+                ),
+              ),
+            )),
       ),
     );
   }

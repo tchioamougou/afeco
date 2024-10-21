@@ -8,23 +8,23 @@ import '../../layouts/main/main_layout.dart';
 
 
 class MySaveFoodPage extends GetView<MySaveFoodController> {
-  const MySaveFoodPage ({Key? key}) : super(key: key);
+  const MySaveFoodPage ({super.key});
   @override
   Widget build(BuildContext context) {
     return  MainLayout(
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: CustomAppBar(title: 'My Bags'.tr,),
+        appBar: CustomAppBar(title: 'myBags'.tr,),
         body:Obx(() => SingleChildScrollView(
           child:  Padding(
             padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
             child: Column(
               children: [
-                Label(title: 'My reserved bags'),
+                Label(title: 'myReservedBack'.tr),
                 Column(
                   children: controller.bags.map((e)=>CustomSaveFoodNeighbourdhoodItem(gp: e)).toList(),
                 ),
-                Label(title: 'My Giving Back'),
+                Label(title: 'myGivingBack'.tr),
                 Column(
                   children: controller.bags.map((e)=>CustomSaveFoodNeighbourdhoodItem(gp: e)).toList(),
                 )

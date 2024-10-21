@@ -43,6 +43,8 @@ dependencies:
   device_info_plus: ^10.1.2
   cinetpay: ^1.0.7
   flutter_dotenv: ^5.2.1
+  flutter_native_splash: ^2.4.1
+  flutter_launcher_icons: ^0.14.1
 
 
 dev_dependencies:

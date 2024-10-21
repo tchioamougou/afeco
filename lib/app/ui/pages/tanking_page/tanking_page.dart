@@ -40,13 +40,13 @@ class TankingPage extends GetView<TankingController> {
                   width: 300,
                 ),
                 Text(
-                  'Thank you!',
+                  'thankYou'.tr,
                   style: GoogleFonts.sassyFrass(
                       fontSize: 60,
                       color: Colors.deepOrangeAccent,
                       fontWeight: FontWeight.w900),
                 ),
-                Text('You Just Saved a meal From being wasted'.toUpperCase(),
+                Text('thankYouTitle'.tr.toUpperCase(),
                     textAlign: TextAlign.center,
                     style: GoogleFonts.sansita(
                       fontSize: 25,
@@ -57,7 +57,7 @@ class TankingPage extends GetView<TankingController> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 45),
                   child: Text(
-                      'Celebrate with your friends and start saving meals togethers',
+                      'thankYouShareMessage'.tr,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.sansita(
                         fontSize: 17,
@@ -65,7 +65,7 @@ class TankingPage extends GetView<TankingController> {
                         fontWeight: FontWeight.w100,
                       )),
                 ),
-                Text('#ecobite',style: GoogleFonts.sansita(
+                Text('#SaveFood',style: GoogleFonts.sansita(
                   fontSize: 17,
                   color: Constants.defaultHeaderColor,
                   fontWeight: FontWeight.w100,

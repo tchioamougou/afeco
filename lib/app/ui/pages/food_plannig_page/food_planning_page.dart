@@ -36,7 +36,7 @@ class FoodPlanningPage extends GetView<FoodPlannigController> {
               ],
             ),
             title: Text(
-              'Food Planning',
+              'foodPlanning'.tr,
               style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
             ),
             actions: [
@@ -44,7 +44,7 @@ class FoodPlanningPage extends GetView<FoodPlannigController> {
                   onPressed: () {
                     Get.toNamed(AppRoutes.FOOD_INVENTORY);
                   },
-                  text: 'Food inventory',
+                  text: 'foodInventory'.tr,
                   backgroundColor: Colors.deepOrange)
             ],
           ),
@@ -80,8 +80,8 @@ class FoodPlanningPage extends GetView<FoodPlannigController> {
                     ),
                   )
                 else
-                  const Center(
-                    child: Text('No planing for today'),
+                  Center(
+                    child: Text('noPlanningForToday'.tr),
                   )
               ],
             ),

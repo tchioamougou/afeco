@@ -38,7 +38,7 @@ class FoodInventoryPage extends GetView<FoodInventoryController> {
             ],
           ),
           title: Text(
-            'Food inventory',
+            'foodInventory'.tr,
             style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
           ),
           actions: [
@@ -46,7 +46,7 @@ class FoodInventoryPage extends GetView<FoodInventoryController> {
                 onPressed: () {
                   controller.makePlan();
                 },
-                text: 'Update planning',
+                text: 'updatePlanning'.tr,
                 backgroundColor: Colors.deepOrange)
           ],
         ),
@@ -66,11 +66,11 @@ class FoodInventoryPage extends GetView<FoodInventoryController> {
           onPressed: () {
             _showDialogueAddFood();
           },
+          backgroundColor: Constants.buttonColor,
           child: Icon(
             Icons.add,
             color: Colors.white,
           ),
-          backgroundColor: Constants.buttonColor,
         ),
       ),
     );
@@ -84,30 +84,30 @@ class FoodInventoryPage extends GetView<FoodInventoryController> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                const Label(title: 'Add New Food'),
+                 Label(title: 'addNewFood'.tr),
                 CustomInput(
                     controller: controller.foodNameController.value,
-                    label: "Name",
+                    label: "name".tr,
                     onValueChanged: (val) {
                       controller.foodNameController.value.text = val;
                     },
-                    hintText: 'Text'),
+                    hintText: 'name'.tr),
                 CustomInput(
-                    label: "Quantity",
+                    label: "quantity".tr,
                     controller: controller.quantityController.value,
                     onValueChanged: (val) {
                       controller.quantityController.value.text = val;
                     },
-                    hintText: 'Text'),
+                    hintText: '0'),
                 CustomSelectItem(
-                    label: 'Category',
+                    label: 'category'.tr,
                     options: controller.foodsCategories,
                     defaultValue: controller.category.value,
                     onChanged: (val) {
                       controller.category.value = val;
                     }),
                 CustomDatePick(
-                    label: 'Expired Date',
+                    label: 'expiredDate'.tr,
                     defaultValue: controller.expiredDate.value,
                     onValueChanged: (val) {
                       controller.expiredDate.value = val;
@@ -120,13 +120,13 @@ class FoodInventoryPage extends GetView<FoodInventoryController> {
                         onPressed: () {
                           Get.back();
                         },
-                        text: 'Cancel',
+                        text: 'cancel'.tr,
                         backgroundColor: Colors.deepOrange),
                     CustomButton(
                         onPressed: () {
                           controller.addItem();
                         },
-                        text: 'Save',
+                        text: 'save'.tr,
                         backgroundColor: Constants.buttonColor)
                   ],
                 )

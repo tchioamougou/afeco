@@ -8,7 +8,7 @@ class DonationController extends GetxController {
 
   Future<void> donateNow() async {
     bool isError =
-        await CinetPayService.handleCinetPayPayment(price.value, 'Description');
+        await CinetPayService.handleCinetPayPayment(price.value.toInt(), 'Description');
     if (isError) {
       Get.showSnackbar(
         GetSnackBar(

@@ -102,7 +102,7 @@ class MyOrderItem extends StatelessWidget {
                   width: 5,
                 ),
                 Text(
-                  'Pick up: ${times['time']}',
+                  '${"pickUp".tr}: ${times['time']}',
                 ),
                 SizedBox(
                   width: 5,
@@ -119,7 +119,7 @@ class MyOrderItem extends StatelessWidget {
               CustomButton(onPressed: (){
                 // here is to try to get the user information package
                 scanQR();
-              }, text: 'Checkout', backgroundColor: Constants.buttonColor)
+              }, text: 'checkout'.tr, backgroundColor: Constants.buttonColor)
             else
 
             CustomButton(onPressed: (){
@@ -153,7 +153,7 @@ class MyOrderItem extends StatelessWidget {
                 ]
 
               );
-            }, text: 'Collect Now', backgroundColor: Constants.buttonColor)
+            }, text: 'collectNow'.tr, backgroundColor: Constants.buttonColor)
           ],
         ),
       ),

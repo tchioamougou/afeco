@@ -1,4 +1,3 @@
-import 'package:afeco/app/data/models/food_inventory_model.dart';
 import 'package:afeco/app/data/models/food_model.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
@@ -29,17 +28,17 @@ class FoodPlanningItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Label(title: rcp.name),
-            const SizedBox(height: 5,),
+            const SizedBox(
+              height: 5,
+            ),
             Container(
               decoration: BoxDecoration(
                   border: Border(
                       top: BorderSide(
-                          color: Constants.buttonColor
-                              .withOpacity(0.3),
+                          color: Constants.buttonColor.withOpacity(0.3),
                           width: 1),
                       bottom: BorderSide(
-                          color: Constants.buttonColor
-                              .withOpacity(0.3),
+                          color: Constants.buttonColor.withOpacity(0.3),
                           width: 1))),
               child: ListTile(
                 dense: true,
@@ -59,14 +58,14 @@ class FoodPlanningItem extends StatelessWidget {
                               SizedBox(
                                 height: 30,
                               ),
-                              Label(title: 'Ingredients'),
+                              Label(title: 'ingredients'.tr),
                               SizedBox(
                                 height: 10,
                               ),
                               Text(
                                   textAlign: TextAlign.justify,
-                                  ingredientsListToString(rcp.ingredients)
-                              )                                  ],
+                                  ingredientsListToString(rcp.ingredients))
+                            ],
                           ),
                         ),
                         actions: [
@@ -74,12 +73,11 @@ class FoodPlanningItem extends StatelessWidget {
                               onPressed: () {
                                 Get.back();
                               },
-                              text: 'Got it!',
-                              backgroundColor:
-                              Constants.buttonColor)
+                              text: 'gotIt'.tr,
+                              backgroundColor: Constants.buttonColor)
                         ],
-                        insetPadding: EdgeInsets.symmetric(
-                            horizontal: 10),
+                        insetPadding:
+                            const EdgeInsets.symmetric(horizontal: 10),
                       ));
                 },
                 leading: FaIcon(
@@ -87,10 +85,9 @@ class FoodPlanningItem extends StatelessWidget {
                   color: Constants.buttonColor,
                 ),
                 title: Text(
-                  "Ingredients & allergens",
+                  "ingredientsAndAllergens".tr,
                   style: TextStyle(
-                      color: Constants.defaultHeaderColor,
-                      fontSize: 17),
+                      color: Constants.defaultHeaderColor, fontSize: 17),
                 ),
                 trailing: Icon(
                   Icons.chevron_right,
@@ -98,14 +95,20 @@ class FoodPlanningItem extends StatelessWidget {
                 ),
               ),
             ),
-            const Label(title: "Instructions"),
-            Padding(padding: EdgeInsets.symmetric(horizontal: 5), child:  Text(rcp.instructions, style: TextStyle(fontSize: 15, color: Colors.grey),),
+            Label(title: "instructions".tr),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              child: Text(
+                rcp.instructions,
+                style: TextStyle(fontSize: 15, color: Colors.grey),
+              ),
             )
           ],
         ),
       ),
     );
   }
+
   String ingredientsListToString(List<FoodModel> ingredients) {
     List<String> ingredientStrings = [];
 

@@ -29,7 +29,7 @@ class _StoreHomePageState extends State<StoreHomePage> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
-                child: Label(title: 'Collect Now'),
+                child: Label(title: 'Product in store'),
               ),
               const SizedBox(height: 10,),
               Expanded(child: GridView.count(

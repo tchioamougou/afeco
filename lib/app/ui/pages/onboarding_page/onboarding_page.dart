@@ -9,7 +9,7 @@ import '../../layouts/main/main_layout.dart';
 import '../../../controllers/onboarding_controller.dart';
 
 class OnboardingPage extends GetView<OnboardingController> {
-  const OnboardingPage({Key? key}) : super(key: key);
+  const OnboardingPage({super.key});
   @override
   Widget build(BuildContext context) {
     return MainLayout(
@@ -22,26 +22,25 @@ class OnboardingPage extends GetView<OnboardingController> {
                 children: [
                   Expanded(
                       child: PageView.builder(
-                          itemCount: demo_data.length,
+                          itemCount: demoData.length,
                           controller: controller.pageController,
                           onPageChanged: (index) {
                             controller.pageIndex.value = index;
                           },
                           itemBuilder: (context, index) => OnBoardingContent(
-                                image: demo_data[index].image,
-                                title: demo_data[index].title,
-                                description: demo_data[index].description,
+                                image: demoData[index].image,
+                                title: demoData[index].title,
+                                description: demoData[index].description,
                               ))),
                   Row(
                     children: [
                       ...List.generate(
-                          demo_data.length,
+                          demoData.length,
                           (index) => DotIndicator(
                                 isActive: index == controller.pageIndex.value,
                               )),
                       const Spacer(),
-                      if (controller.pageIndex.value ==
-                          demo_data.length - 1)
+                      if (controller.pageIndex.value == demoData.length - 1)
                         ElevatedButton(
                             onPressed: () {
                               FirstTimeService.instance.isFirstTime = false;
@@ -49,19 +48,21 @@ class OnboardingPage extends GetView<OnboardingController> {
                             },
                             style: ElevatedButton.styleFrom(
                                 backgroundColor: Constants.buttonColor),
-                            child: Text('Got it', style: TextStyle(color: Colors.white),)
-                        )
+                            child: Text(
+                              'gotIt'.tr,
+                              style: const TextStyle(color: Colors.white),
+                            ))
                       else
-                      SizedBox(
-                        height: 70.h,
-                        width: 70.w,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+                        SizedBox(
+                          height: 70.h,
+                          width: 70.w,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
                               ElevatedButton(
                                 onPressed: () {
                                   if (controller.pageIndex.value ==
-                                      demo_data.length - 1) {
+                                      demoData.length - 1) {
                                     Get.offAllNamed(AppRoutes.LANDING);
                                   } else {
                                     controller.pageController.nextPage(
@@ -79,9 +80,9 @@ class OnboardingPage extends GetView<OnboardingController> {
                                   size: 19.sp,
                                 ),
                               )
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
                     ],
                   )
                 ],
@@ -96,11 +97,10 @@ class OnBoardingContent extends StatelessWidget {
   final String image, title, description;
 
   const OnBoardingContent(
-      {Key? key,
+      {super.key,
       required this.image,
       required this.title,
-      required this.description})
-      : super(key: key);
+      required this.description});
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -119,13 +119,13 @@ class OnBoardingContent extends StatelessWidget {
               color: Constants.defaultHeaderColor,
               fontSize: 20),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Text(
           description,
           textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.grey),
+          style: const TextStyle(color: Colors.grey),
         ),
         const Spacer(),
       ],
@@ -139,27 +139,23 @@ class OnBoard {
       {required this.image, required this.title, required this.description});
 }
 
-final List<OnBoard> demo_data = [
+final List<OnBoard> demoData = [
   OnBoard(
       image: 'assets/image/img.png',
-      title: 'Act for a better world, one bite at a time.',
-      description:
-          'Reduce food waste, help the less fortunate and save money. With our app, give your food a second life and track your positive impact on the planet.'),
+      title: 'onBoard1_title'.tr,
+      description: 'onBoard1_description'.tr),
   OnBoard(
       image: 'assets/image/img.png',
-      title: 'Join the anti-gaspi community!',
-      description:
-          'Share your surplus, recover fresh produce at reduced prices and support associations. Together, let\'s build a more sustainable future.'),
+      title: 'onBoard2_title'.tr,
+      description: 'onBoard2_description'.tr),
   OnBoard(
       image: 'assets/image/img.png',
-      title: 'Simplify your life and feed the planet',
-      description:
-          'A few clicks are all it takes to fight food waste. Discover recipes, share your surplus and track your impact in real time.'),
+      title: 'onBoard3_title'.tr,
+      description: 'onBoard3_description'.tr),
   OnBoard(
       image: 'assets/image/img.png',
-      title: 'Save time, money and do good',
-      description:
-          'Avoid waste, find new recipes and support solidarity projects. Our app accompanies you on a daily basis for more responsible consumption.'),
+      title: 'onBoard4_title'.tr,
+      description: 'onBoard4_description'.tr),
 ];
 
 class DotIndicator extends StatelessWidget {

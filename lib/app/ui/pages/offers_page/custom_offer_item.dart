@@ -107,7 +107,7 @@ class CustomOfferItem extends StatelessWidget {
                       child: Tag(
                         backgroundColor: Constants.buttonColor.withOpacity(0.2),
                         color: Colors.yellow,
-                        content: '${bg.quantity} left',
+                        content: '${bg.quantity} ${"left".tr}',
                       ))
                 ],
               ),
@@ -131,8 +131,8 @@ class CustomOfferItem extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              const Text(
-                                'Pick up:',
+                               Text(
+                                '${"pickUp".tr}:',
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: Colors.grey,
@@ -166,7 +166,7 @@ class CustomOfferItem extends StatelessWidget {
                                       color: Constants.defaultHeaderColor),
                                   const Text('5.0'),
                                   const SizedBox(width: 8),
-                                  Text('${distance}'),
+                                  Text(distance),
                                 ],
                               ),
                               Row(

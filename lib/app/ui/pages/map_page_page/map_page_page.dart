@@ -9,7 +9,7 @@ import '../../layouts/main/main_layout.dart';
 import '../../../controllers/map_page_controller.dart';
 
 class MapPagePage extends GetView<MapPageController> {
-  const MapPagePage({Key? key}): super(key: key);
+  const MapPagePage({super.key});
   @override
   Widget build(BuildContext context) {
     return MainLayout(
@@ -83,56 +83,54 @@ class MapPagePage extends GetView<MapPageController> {
               top: 10.h,
               right: 15,
               left: 15,
-              child: Container(
-                child: Column(
-                  children: [
-                    CustomSelectPosition(
-                        label: 'my current position',
-                        options:controller.withinOptions,
-                        onWithinChanged: (val) {
-                          controller.distance.value = val;
-                        },
-                        onPositionChanged: (val) {},
-                      withinValue: controller.within.value, onClose: () {
-                          Get.back();
-                    },
+              child: Column(
+                children: [
+                  CustomSelectPosition(
+                      label: 'myCurrentPosition'.tr,
+                      options:controller.withinOptions,
+                      onWithinChanged: (val) {
+                        controller.distance.value = val;
+                      },
+                      onPositionChanged: (val) {},
+                    withinValue: controller.within.value, onClose: () {
+                        Get.back();
+                  },
 
-                    ),
-                    Row(
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: FaIcon(
-                            FontAwesomeIcons.filter,
-                            color: Constants.buttonColor,
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              padding: EdgeInsets.zero),
+                  ),
+                  Row(
+                    children: [
+                      ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            padding: EdgeInsets.zero),
+                        child: FaIcon(
+                          FontAwesomeIcons.filter,
+                          color: Constants.buttonColor,
                         ),
-                        SizedBox(
-                          width: 20,
+                      ),
+                      const SizedBox(
+                        width: 20,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          Get.toNamed(AppRoutes.SEARCH);
+                        },
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            padding: EdgeInsets.zero),
+                        child: FaIcon(
+                          Icons.search,
+                          color: Constants.buttonColor,
                         ),
-                        ElevatedButton(
-                          onPressed: () {
-                            Get.toNamed(AppRoutes.SEARCH);
-                          },
-                          child: FaIcon(
-                            Icons.search,
-                            color: Constants.buttonColor,
-                          ),
-                          style: ElevatedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5),
-                              ),
-                              padding: EdgeInsets.zero),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
           ],

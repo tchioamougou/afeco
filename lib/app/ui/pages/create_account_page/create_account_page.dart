@@ -13,7 +13,7 @@ import '../../layouts/main/main_layout.dart';
 import '../../../controllers/create_account_controller.dart';
 
 class CreateAccountPage extends GetView<CreateAccountController> {
-  const CreateAccountPage({Key? key}) : super(key: key);
+  const CreateAccountPage({super.key});
   @override
   Widget build(BuildContext context) {
     return MainLayout(
@@ -36,7 +36,7 @@ class CreateAccountPage extends GetView<CreateAccountController> {
               ],
             ),
             title: Text(
-              'Register your store',
+              'registerStoreTitle'.tr,
               style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
             )),
         backgroundColor: Colors.white,
@@ -47,21 +47,21 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     child: Column(
                       children: [
-                        Label(title: 'Information about your business'),
+                        Label(title: 'registerStoreInformationStore'.tr),
                         CustomInput(
                           controller: controller.businessController.value,
-                            label: 'Your business name',
+                            label: 'yourBusinessName'.tr,
                             onValueChanged: (val) {},
-                            hintText: 'Your business name'),
+                            hintText: 'yourBusinessName'.tr),
                         CustomSelectItem(
-                            label: 'Type of business',
+                            label: 'typeOfBusiness'.tr,
                             options: controller.typeBusiness.value,
                             defaultValue: controller.typeOfBusiness.value,
                             onChanged: (val) {
                               controller.typeOfBusiness.value = val;
                             }),
-                        Label(title: 'Business address'),
-                        CustomAddressPick(label: 'Address', onValueChanged: (val){
+                        Label(title: 'businessAddress'.tr),
+                        CustomAddressPick(label: 'address'.tr, onValueChanged: (val){
                           controller.address = val;
                           controller.streetController.value.text =val.displayName!;
                           controller.cityController.value.text =val.address!.city!;
@@ -70,7 +70,7 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                         }),
                         CustomInput(
                             controller: controller.streetController.value,
-                            label: 'Street name and number',
+                            label: 'streetName'.tr,
                             onValueChanged: (val) {},
                             hintText: ''),
                         Row(
@@ -80,7 +80,7 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                               width: MediaQuery.sizeOf(context).width * 0.4,
                               child: CustomInput(
                                   controller: controller.postalCodeController.value,
-                                  label: 'Postal code',
+                                  label: 'postalCode'.tr,
                                   onValueChanged: (val) {},
                                   hintText: ''),
                             ),
@@ -88,7 +88,7 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                               width:  MediaQuery.sizeOf(context).width * 0.5,
                               child: CustomInput(
                                   controller: controller.cityController.value,
-                                  label: 'City',
+                                  label: 'city'.tr,
                                   onValueChanged: (val) {},
                                   hintText: ''),
                             ),
@@ -96,25 +96,25 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                         ),
 
                         CustomSelectItem(
-                            label: 'Country',
+                            label: 'country'.tr,
                             options: controller.countries.value,
                             onChanged: (val) {}),
-                        Label(title: 'Contact information'),
+                        Label(title: 'contactInformation'.tr),
                         CustomInput(
                             controller: controller.phoneController.value,
-                            label: 'Phone number',
+                            label: 'phoneNumber'.tr,
                             onValueChanged: (val) {},
                             hintText: ''),
                         CustomInput(
                             controller: controller.emailController.value,
-                            label: 'Email',
+                            label: 'email'.tr,
                             onValueChanged: (val) {},
                             hintText: ''),
                         CustomButton(
                             onPressed: () {
                               controller.signLog();
                             },
-                            text: 'Save',
+                            text: 'continue'.tr,
                             backgroundColor: Constants.buttonColor)
                       ],
                     ),

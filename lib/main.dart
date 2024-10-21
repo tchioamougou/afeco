@@ -9,6 +9,7 @@ import 'package:afeco/app/ui/global_widgets/custom_animation.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get/get.dart';
 import 'app/data/services/dependency_injection.dart';
 import 'app/data/services/theme_service.dart';
@@ -18,10 +19,13 @@ import 'app/routes/app_routes.dart';
 import 'app/ui/layouts/main/main_layout.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  WidgetsBinding widgetsBinding =  WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await DependecyInjection.init();
   runApp(const MyApp());
   configLoading();
+  FlutterNativeSplash.remove();
+
 }
 void configLoading(){
   EasyLoading.instance

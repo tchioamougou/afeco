@@ -3,6 +3,7 @@ import 'package:afeco/app/data/models/food_model.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 
  class ProductItem extends StatelessWidget{
   final FoodModel foodModel;
@@ -12,7 +13,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.sizeOf(context).width*0.8,
-      margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+      margin: const EdgeInsets.fromLTRB(0, 10, 0, 10),
       padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
@@ -28,9 +29,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("Name:${foodModel.name}"),
-                Text("Quantity:${foodModel.quantity}"),
-                Text('Expiration Date: ${foodModel.expirationDate}')
+                Text("${"name".tr}:${foodModel.name}"),
+                Text("${"quantity".tr}:${foodModel.quantity}"),
+                Text('${"expirationDate".tr}: ${foodModel.expirationDate}')
               ],
             ),
           ),

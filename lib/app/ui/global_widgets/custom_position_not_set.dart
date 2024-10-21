@@ -13,48 +13,58 @@ class CustomPositionNotSet extends StatelessWidget {
   Widget build(BuildContext context) {
    int distance = 0;
    LatLng posi = LatLng(0, 0);
-    return Container(
-      padding: EdgeInsets.symmetric(horizontal: 20 , vertical: 20),
-      color: Colors.white,
-      child: Column(
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Image.asset(
-            'assets/image/position.png',
-            height: 100,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text('Nessuna posizione selectionata',
-              style: TextStyle(
-                fontWeight: FontWeight.w900,
-                color: Constants.defaultBorderColor,
-              )),
-          SizedBox(
-            height: 10,
-          ),
-          Text('facci sapere dove vorresti salvare cibo invenduto',
-              style: TextStyle()),
-          SizedBox(
-            height: 10,
-          ),
-          SizedBox(
-            width: 300,
-            child: CustomButton(onPressed: (){
-                showModalBottomSheet(
-                  isScrollControlled: true,
-                  context: context,
-                  builder: (context) => CustomLocationChoose(onChange: (onPositionChanged) async{
-                    await GlobalService.updateUserLocation(posi, distance);
-                    Get.back();
-                  }, onClose: (){
-                    Get.back();
-                  }, onChangeRange: (int ) {
-                    distance=int;
-                  },),
-                );
+          Container(
+            padding: EdgeInsets.symmetric(horizontal: 20 , vertical: 20),
+            width: MediaQuery.sizeOf(context).width,
+            color: Colors.white,
+            child: Column(
+              children: [
+                Image.asset(
+                  'assets/image/position.png',
+                  height: 100,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Text('Nessuna posizione selectionata',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w900,
+                      color: Constants.defaultBorderColor,
+                    )),
+                SizedBox(
+                  height: 10,
+                ),
+                Text('facci sapere dove vorresti salvare cibo invenduto',
+                    style: TextStyle()),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  width: 300,
+                  child: CustomButton(onPressed: (){
+                    showModalBottomSheet(
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (context) => CustomLocationChoose(onChange: (onPositionChanged) async{
+                        await GlobalService.updateUserLocation(posi, distance);
+                        Get.back();
+                      }, onClose: (){
+                        Get.back();
+                      }, onChangeRange: (int ) {
+                        distance=int;
+                      },),
+                    );
 
-            }, text: 'Scegli la posizione', backgroundColor: Constants.buttonColor),
+                  }, text: 'Scegli la posizione', backgroundColor: Constants.buttonColor),
+                )
+              ],
+            ),
           )
         ],
       ),

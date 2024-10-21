@@ -44,8 +44,8 @@ class SearchPage extends GetView<SearchController> {
                           ),
                           Container(
                             width: MediaQuery.sizeOf(context).width * 0.7,
-                            child: const TextField(
-                              decoration: InputDecoration(border: InputBorder.none,hintText: "search here"),
+                            child:  TextField(
+                              decoration: InputDecoration(border: InputBorder.none,hintText: "searchHere".tr),
                             ),
                           ),
                           FaIcon(

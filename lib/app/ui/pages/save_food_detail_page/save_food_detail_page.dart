@@ -37,7 +37,8 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                               Column(
                                 children: [
                                   Image.network(
-                                    Utils.imageLoader(controller.gp.value!.imageId),
+                                    Utils.imageLoader(
+                                        controller.gp.value!.imageId),
                                     fit: BoxFit.fitWidth,
                                     height: 200,
                                     width: MediaQuery.sizeOf(context).width,
@@ -46,11 +47,11 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                               ),
                               Positioned(
                                 child: Container(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      5, 30, 5, 5),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(5, 30, 5, 5),
                                   child: Row(
                                     mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       IconButton(
                                         onPressed: () {
@@ -59,17 +60,14 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                                         icon: const FaIcon(
                                             Icons.arrow_back_ios_new),
                                         style: ElevatedButton.styleFrom(
-                                            backgroundColor: Colors.white
-                                                .withOpacity(0.6),
+                                            backgroundColor:
+                                                Colors.white.withOpacity(0.6),
                                             shape: RoundedRectangleBorder(
                                               borderRadius:
-                                              BorderRadius.circular(
-                                                  100),
+                                                  BorderRadius.circular(100),
                                             ),
-                                            padding:
-                                            const EdgeInsets.symmetric(
-                                                horizontal: 10,
-                                                vertical: 9)),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10, vertical: 9)),
                                       ),
                                       Row(
                                         children: [
@@ -77,38 +75,34 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                                             onPressed: () {},
                                             icon: const FaIcon(Icons.share),
                                             style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors
-                                                    .white
+                                                backgroundColor: Colors.white
                                                     .withOpacity(0.6),
-                                                shape:
-                                                RoundedRectangleBorder(
+                                                shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                  BorderRadius.circular(
-                                                      100),
+                                                      BorderRadius.circular(
+                                                          100),
                                                 ),
-                                                padding: const EdgeInsets
-                                                    .symmetric(
-                                                    horizontal: 10,
-                                                    vertical: 9)),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10,
+                                                        vertical: 9)),
                                           ),
                                           IconButton(
                                             onPressed: () {},
                                             icon: const FaIcon(
                                                 Icons.favorite_border),
                                             style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors
-                                                    .white
+                                                backgroundColor: Colors.white
                                                     .withOpacity(0.6),
-                                                shape:
-                                                RoundedRectangleBorder(
+                                                shape: RoundedRectangleBorder(
                                                   borderRadius:
-                                                  BorderRadius.circular(
-                                                      100),
+                                                      BorderRadius.circular(
+                                                          100),
                                                 ),
-                                                padding: const EdgeInsets
-                                                    .symmetric(
-                                                    horizontal: 10,
-                                                    vertical: 9)),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10,
+                                                        vertical: 9)),
                                           )
                                         ],
                                       ),
@@ -120,12 +114,11 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                                 right: 10,
                                 bottom: 10,
                                 child: Tag(
-                                  content: 'Ending soon',
+                                  content: 'endingSoon'.tr,
                                   color: Colors.red,
                                   backgroundColor: Colors.red.shade200,
                                 ),
                               ),
-
                             ],
                           ),
                         ),
@@ -160,13 +153,13 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                                     size: 20,
                                     color: Constants.buttonColor,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 5,
                                   ),
                                   Text(
-                                    'Pick up: ${controller.times['time']}',
+                                    '${"pickUp".tr}: ${controller.times['time']}',
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 5,
                                   ),
                                   Tag(
@@ -205,8 +198,7 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                                         color: Constants.defaultHeaderColor,
                                         fontSize: 17),
                                   ),
-                                  subtitle:
-                                      Text('More information about the store'),
+                                  subtitle: Text('moreAboutStore'.tr),
                                   trailing: Icon(
                                     Icons.chevron_right,
                                     color: Constants.buttonColor,
@@ -219,7 +211,7 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Label(title: "About Content"),
+                                  Label(title: "aboutContent".tr),
                                 ],
                               ),
                               const SizedBox(
@@ -232,9 +224,9 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                                   '${controller.gp.value?.products}'),
 
                               Container(
-                                  decoration: BoxDecoration(),
+                                  decoration: const BoxDecoration(),
                                   child: Padding(
-                                    padding: EdgeInsets.symmetric(
+                                    padding: const EdgeInsets.symmetric(
                                         vertical: 10, horizontal: 0),
                                     child: Column(
                                       mainAxisAlignment:
@@ -242,20 +234,19 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Label(title: 'What you need to now'),
-                                        SizedBox(
+                                        Label(title: 'whatYouNeedToKnow'.tr),
+                                        const SizedBox(
                                           height: 10,
                                         ),
-                                        Text(
-                                            'The store will provide packaging for your food, but we encourage you to bring your own bag to carry it home in'),
+                                        Text('whatYouNeedToKnowAlert'.tr),
                                       ],
                                     ),
                                   )),
-                              Label(title: 'Address'),
+                              Label(title: 'address'.tr),
                               PositionDisplay(
                                   pos: LatLng(controller.gp.value!.lat,
                                       controller.gp.value!.long),
-                                  title: "Here")
+                                  title: "here".tr)
                             ],
                           ),
                         ),
@@ -263,26 +254,38 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                     ),
                   ),
                 ),
-
               Positioned(
                   bottom: 0,
                   child: Column(
                     children: [
-                      if(controller.reserved.value)
+                      if (controller.reserved.value)
                         CustomBottomAction(
                             onPressed: () {
                               Get.defaultDialog(
-                                  title: 'Scan the QRCode',
-                                  titleStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Constants.defaultHeaderColor),
-                                  content:Column(
+                                  title: 'scanQrCode',
+                                  titleStyle: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Constants.defaultHeaderColor),
+                                  content: Column(
                                     children: [
-                                      Text("When the store scan This QRCODE That means to recieved the package", textAlign: TextAlign.center,),
-                                      SizedBox(height: 10,),
+                                      Text(
+                                        "qrCodeScanTitle".tr,
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
                                       Container(
                                         height: 400,
                                         width: 250,
-                                        child:  QrImageView(
-                                          data: jsonEncode({'user':UserService.instance.user!.documentId,"packageId":controller.gp.value!.documentId}),
+                                        child: QrImageView(
+                                          data: jsonEncode({
+                                            'user': UserService
+                                                .instance.user!.documentId,
+                                            "packageId":
+                                                controller.gp.value!.documentId
+                                          }),
                                           version: QrVersions.auto,
                                           size: 200.0,
                                           //embeddedImage: AssetImage("assets/image/save_food.png"),
@@ -291,86 +294,88 @@ class SaveFoodDetailPage extends GetView<SaveFoodDetailController> {
                                     ],
                                   ),
                                   actions: [
-                                    CustomButton(onPressed: (){
-                                      Get.back();
-                                    }, text: 'Confirm', backgroundColor: Constants.buttonColor),
-                                    CustomButton(onPressed: (){
-                                      Get.back();
-                                    }, text: 'Back', backgroundColor: Constants.buttonColor)
-                                  ]
-
-                              );
-                            },
-                            text: 'Collect',
-                            backgroundColor: Constants.buttonColor)
-                      else
-                      CustomBottomAction(
-                          onPressed: () {
-                            Get.dialog(
-                                barrierDismissible: false,
-                                AlertDialog(
-                                  backgroundColor: Colors.white,
-                                  title: Row(
-                                    mainAxisAlignment:
-                                    MainAxisAlignment.center,
-                                    children: [
-                                      Label(
-                                          title: 'What you have to know')
-                                    ],
-                                  ),
-                                  content: Container(
-                                    height: 150,
-                                    child: Column(
-                                      children: [
-                                        Text(
-                                          'Your surprise Bags is a surprise',
-                                          style: TextStyle(
-                                              fontWeight:
-                                              FontWeight.bold),
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        Text(
-                                            textAlign: TextAlign.justify,
-                                            "We wish we could tell you what exactly will be in your Surprise Bag - but it's always a surprise! The store wil fill it with a selection of their unsold items. if you have a question abouy allergens or ingredients, please ask to the store."),
-                                      ],
-                                    ),
-                                  ),
-                                  actions: [
                                     CustomButton(
                                         onPressed: () {
-                                          controller.reserve();
                                           Get.back();
                                         },
-                                        text: 'Got it!',
-                                        backgroundColor:
-                                        Constants.buttonColor),
-                                    Row(
+                                        text: 'confirm'.tr,
+                                        backgroundColor: Constants.buttonColor),
+                                    CustomButton(
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        text: 'back'.tr,
+                                        backgroundColor: Colors.transparent)
+                                  ]);
+                            },
+                            text: 'collect'.tr,
+                            backgroundColor: Constants.buttonColor)
+                      else
+                        CustomBottomAction(
+                            onPressed: () {
+                              Get.dialog(
+                                  barrierDismissible: false,
+                                  AlertDialog(
+                                    backgroundColor: Colors.white,
+                                    title: Row(
                                       mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                       children: [
-                                        TextButton(
-                                            onPressed: () {
-                                              Get.back();
-                                            },
-                                            child: Text(
-                                              'Back',
-                                              style: TextStyle(
-                                                  color: Constants
-                                                      .defaultHeaderColor,
-                                                  fontWeight:
-                                                  FontWeight.bold),
-                                            ))
+                                        Label(title: 'whatYouNeedToKnow'.tr)
                                       ],
-                                    )
-                                  ],
-                                  insetPadding: EdgeInsets.symmetric(
-                                      horizontal: 10),
-                                ));
-                          },
-                          text: 'Reserve',
-                          backgroundColor: Constants.buttonColor),
+                                    ),
+                                    content: Container(
+                                      height: 150,
+                                      child: Column(
+                                        children: [
+                                          Text(
+                                            'surpriseIsSurprise'.tr,
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          Text(
+                                              textAlign: TextAlign.justify,
+                                              "preventReserveMessage".tr),
+                                        ],
+                                      ),
+                                    ),
+                                    actions: [
+                                      CustomButton(
+                                          onPressed: () {
+                                            controller.reserve();
+                                            Get.back();
+                                          },
+                                          text: 'gotIt'.tr,
+                                          backgroundColor:
+                                              Constants.buttonColor),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          TextButton(
+                                              onPressed: () {
+                                                Get.back();
+                                              },
+                                              child: Text(
+                                                'back'.tr,
+                                                style: TextStyle(
+                                                    color: Constants
+                                                        .defaultHeaderColor,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ))
+                                        ],
+                                      )
+                                    ],
+                                    insetPadding:
+                                        const EdgeInsets.symmetric(horizontal: 10),
+                                  ));
+                            },
+                            text: 'reserve'.tr,
+                            backgroundColor: Constants.buttonColor),
                     ],
                   ))
             ],

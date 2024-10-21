@@ -17,13 +17,13 @@ class StoreOrderPage extends GetView<StoreOrderController> {
           appBar: AppBar(
               backgroundColor: Constants.defaultHeaderColor,
               title: Text(
-                'Order Received',
+                'orderReceived'.tr,
                 style: GoogleFonts.poppins(
                     fontSize: 20, color: Colors.white),
               )),
           body:Obx(() => SingleChildScrollView(
             child:  Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
               child: Column(
                 children: controller.bags.map((e)=>MyOrderItem(osm: e,)).toList(),
               ),

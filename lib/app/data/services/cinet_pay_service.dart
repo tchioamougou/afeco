@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 class CinetPayService extends GetxService {
   static Future<bool> handleCinetPayPayment(
-    double amount,
+    int amount,
     String description,
   ) async {
     bool isError = true;
@@ -18,15 +18,15 @@ class CinetPayService extends GetxService {
         titleBackgroundColor: Constants.defaultHeaderColor,
         configData: <String, dynamic>{
           'apikey': Constants.cinetApiKey,
-          'site_id': int.parse(Constants.cinetSiteId ?? '0'),
+         'site_id': int.parse(Constants.cinetSiteId ?? '0'),
           'notify_url': Constants.cinetNotifyUrl
         },
         paymentData: <String, dynamic>{
           'transaction_id': Utils.generateTransactionID(),
-          'amount': amount,
+          'amount': 1000,
           'currency': 'XAF',
           'channels': 'ALL',
-          'description': description
+          'description': 'information abpit idr'
         },
         waitResponse: (response) {
           isError = false;

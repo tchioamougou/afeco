@@ -33,7 +33,7 @@ class SmsVerificationPage extends GetView<SmsVerificationController> {
               ],
             ),
             title: Text(
-              'Control your email',
+              'smsControlTitle'.tr,
               style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
             )),
         backgroundColor: Colors.white,
@@ -44,33 +44,33 @@ class SmsVerificationPage extends GetView<SmsVerificationController> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 25),
+                    padding: const EdgeInsets.symmetric(horizontal: 25),
                     child: Center(
                         child: Column(
                           children: [
                             Image.asset('assets/image/img.png', height: 150,),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
-                            Text("We sent the sms to ${controller.phone.value}",
+                            Text("${"weSentSms".tr} ${controller.phone.value}",
                                 textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 18)),
+                                style: const TextStyle(fontSize: 18)),
                             Text(
-                                "Please check your sms for the verification link. Click on the link to proceed.",
+                                "checkSmsMessage".tr,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.w900)),
-                            SizedBox(
+                            const SizedBox(
                               height: 20,
                             ),
-                            Divider(),
-                            SizedBox(
+                            const Divider(),
+                            const SizedBox(
                               height: 20,
                             ),
                             Text(
-                              "Alternatively, you can gig under the code contained in the sms",
+                              "smsAlternativeMessage".tr,
                               textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 18),
+                              style: const TextStyle(fontSize: 18),
                             ),
                             Container(
                               width: MediaQuery.sizeOf(context).width * 0.4,
@@ -89,13 +89,13 @@ class SmsVerificationPage extends GetView<SmsVerificationController> {
                                 onPressed: () {
                                   controller.validatePhone();
                                 },
-                                text: 'Verify',
+                                text: 'verify'.tr,
                               ),
                             )
                           ],
                         )),
                   ),
-                  SizedBox(height: 400,),
+                  const SizedBox(height: 400,),
 
                 ],
               ),
@@ -108,13 +108,13 @@ class SmsVerificationPage extends GetView<SmsVerificationController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Haven't you received an email yet?"),
+                      Text("notReceiveSms".tr),
                       TextButton(
                         onPressed: () {
 
                         },
                         child: Text(
-                          'Click here',
+                          'clickHere'.tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Constants.buttonColor),

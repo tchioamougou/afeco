@@ -1,7 +1,4 @@
-import 'dart:ffi';
-
 import 'package:afeco/app/controllers/init_page_controller.dart';
-import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_card_item.dart';
 import 'package:afeco/app/ui/global_widgets/custom_category_action.dart';
@@ -40,25 +37,29 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     InitPageController initPageController = Get.find();
     return MainLayout(
-      child: Obx(() => Scaffold(
+      child: Obx(() {
+        if (!controller.hasPosition.value) {
+          return const CustomPositionNotSet();
+        } else {
+          return Scaffold(
             backgroundColor: Colors.grey.shade100,
             body: SingleChildScrollView(
                 child: Column(
               children: [
-                if(!controller.hasPosition.value)
-                CustomPositionNotSet()
-                else
                 Column(
                   children: [
                     Padding(
-                      padding: EdgeInsets.fromLTRB(10, 35, 10, 0),
-                      child: HeaderCustom(icon:  Icon(
-                        FontAwesomeIcons.bell,
-                        color: Colors.white,
-                        size: 25,
-                      ),onPress: (){
-                        Get.toNamed(AppRoutes.NOTIFICATIONS);
-                      },),
+                      padding: const EdgeInsets.fromLTRB(10, 35, 10, 0),
+                      child: HeaderCustom(
+                        icon: const Icon(
+                          FontAwesomeIcons.bell,
+                          color: Colors.white,
+                          size: 25,
+                        ),
+                        onPress: () {
+                          Get.toNamed(AppRoutes.NOTIFICATIONS);
+                        },
+                      ),
                     ),
                     const SizedBox(
                       height: 20,
@@ -70,7 +71,8 @@ class _HomePageState extends State<HomePage> {
                               horizontal: 5, vertical: 5),
                           decoration: BoxDecoration(
                               border: Border.all(
-                                  width: 0.1, color: Constants.defaultBorderColor),
+                                  width: 0.1,
+                                  color: Constants.defaultBorderColor),
                               borderRadius:
                                   const BorderRadius.all(Radius.circular(30))),
                           child: Row(
@@ -90,12 +92,12 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     padding: EdgeInsets.zero),
                               ),
-                              Container(
+                              SizedBox(
                                 width: MediaQuery.sizeOf(context).width * 0.67,
-                                child: const TextField(
+                                child: TextField(
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
-                                    hintText: "search here",
+                                    hintText: "searchHere".tr,
                                   ),
                                 ),
                               ),
@@ -129,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     Container(
                       decoration: const BoxDecoration(
-                          // color: Colors.white,
+                          color: Colors.white,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(30),
                               topRight: Radius.circular(30))),
@@ -137,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            child: Label(title: 'Category'),
+                            child: Label(title: 'categories'.tr),
                           ),
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
@@ -146,12 +148,14 @@ class _HomePageState extends State<HomePage> {
                                   .map((e) => CustomCategoryAction(
                                         onPress: () {
                                           if (e['title'] == 'Planning') {
-                                            Get.toNamed(AppRoutes.FOOD_PLANNING);
-                                          } else if (e['title'] == 'Offers') {
+                                            Get.toNamed(
+                                                AppRoutes.FOOD_PLANNING);
+                                          } else if (e['title'] == 'Orders') {
                                             Get.toNamed(AppRoutes.MY_ORDERS);
-                                          } else if (e['title'] == 'C20 Views') {
+                                          } else if (e['title'] ==
+                                              'C20 Views') {
                                             initPageController.selectedTab(3);
-                                          }else{
+                                          } else {
                                             Get.toNamed(AppRoutes.MY_SAVE_FOOD);
                                           }
                                         },
@@ -165,20 +169,15 @@ class _HomePageState extends State<HomePage> {
                             height: 20,
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
+                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Label(title: 'Food for you'),
-                                TextButton.icon(
-                                    onPressed: () {},
-                                    icon: Icon(Icons.chevron_right,color: Constants.defaultHeaderColor),
-                                    iconAlignment: IconAlignment.end,
-                                    label: Text(
-                                      'See all',
-                                      style: TextStyle(
-                                          color: Constants.defaultHeaderColor),
-                                    ))
+                                Label(title: 'forYou'.tr),
+                                SeeAll(onPress: () {
+                                  controller.viewAllNei(
+                                      'forYou'.tr, controller.givingPackages);
+                                })
                               ],
                             ),
                           ),
@@ -196,8 +195,17 @@ class _HomePageState extends State<HomePage> {
                             height: 10,
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
-                            child: Label(title: 'Recommend for you'),
+                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Label(title: 'recommendForYou'.tr),
+                                SeeAll(onPress: () {
+                                  controller.viewAll(
+                                      'recommendForYou'.tr, controller.bags);
+                                })
+                              ],
+                            ),
                           ),
                           const SizedBox(
                             height: 10,
@@ -216,8 +224,17 @@ class _HomePageState extends State<HomePage> {
                             height: 10,
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
-                            child: Label(title: 'Collect Now'),
+                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Label(title: 'collectNow'.tr),
+                                SeeAll(onPress: () {
+                                  controller.viewAll(
+                                      'collectNow'.tr, controller.bags);
+                                })
+                              ],
+                            ),
                           ),
                           const SizedBox(
                             height: 10,
@@ -232,10 +249,19 @@ class _HomePageState extends State<HomePage> {
                                   .toList(),
                             ),
                           ),
-                          DonateWidget(),
+                          const DonateWidget(),
                           Padding(
                             padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
-                            child: Label(title: 'Sold out'),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Label(title: 'soldOut'.tr),
+                                SeeAll(onPress: () {
+                                  controller.viewAll(
+                                      'soldOut'.tr, controller.bags);
+                                })
+                              ],
+                            ),
                           ),
                           const SizedBox(
                             height: 10,
@@ -243,7 +269,7 @@ class _HomePageState extends State<HomePage> {
                           SingleChildScrollView(
                             scrollDirection: Axis.horizontal,
                             child: Row(
-                              children: controller.bags.value
+                              children: controller.bags
                                   .map((i) => CustomCardItem(
                                         bg: i,
                                       ))
@@ -257,7 +283,32 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             )),
-          )),
+          );
+        }
+      }),
+    );
+  }
+}
+
+class SeeAll extends StatelessWidget {
+  const SeeAll({super.key, required this.onPress});
+  final VoidCallback onPress;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onPress,
+      child: Row(
+        children: [
+          Text(
+            'seeAll'.tr,
+            style: TextStyle(
+                color: Constants.defaultHeaderColor,
+                fontWeight: FontWeight.bold),
+          ),
+          Icon(Icons.chevron_right, color: Constants.defaultHeaderColor)
+        ],
+      ),
     );
   }
 }

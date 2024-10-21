@@ -2,6 +2,7 @@ import 'package:afeco/app/data/models/food_inventory_model.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -55,9 +56,9 @@ class FoodInventoryItem extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Categories: ${foodModel.category}',),
+                        Text('${'categories'.tr}: ${foodModel.category}',),
                         const SizedBox(width: 5,),
-                        Text('Expired at: ${f.format(foodModel.expirationDate)}'),
+                        Text('${'expiredAt'.tr}: ${f.format(foodModel.expirationDate)}'),
                       ],
                     )
                   ],

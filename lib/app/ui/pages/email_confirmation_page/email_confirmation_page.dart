@@ -33,7 +33,7 @@ class EmailConfirmationPage extends GetView<EmailConfirmationController> {
               ],
             ),
             title: Text(
-              'Control your email',
+              'controlYourEmail'.tr,
               style: GoogleFonts.poppins(fontSize: 20, color: Colors.white),
             )),
         backgroundColor: Colors.white,
@@ -52,11 +52,11 @@ class EmailConfirmationPage extends GetView<EmailConfirmationController> {
                             SizedBox(
                               height: 10,
                             ),
-                            Text("We sent the email to ${controller.email.value}",
+                            Text("${"weSentEmail".tr} ${controller.email.value}",
                                 textAlign: TextAlign.center,
                                 style: TextStyle(fontSize: 18)),
                             Text(
-                                "Please check your email for the verification link. Click on the link to proceed.",
+                                "checkEmailCodeMessage".tr,
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     fontSize: 15, fontWeight: FontWeight.w900)),
@@ -68,7 +68,7 @@ class EmailConfirmationPage extends GetView<EmailConfirmationController> {
                               height: 20,
                             ),
                             Text(
-                              "Alternatively, you can gig under the code contained in the email",
+                              "emailAlternative".tr,
                               textAlign: TextAlign.center,
                               style: TextStyle(fontSize: 18),
                             ),
@@ -89,7 +89,7 @@ class EmailConfirmationPage extends GetView<EmailConfirmationController> {
                                 onPressed: () {
                                   controller.validateEmail();
                                 },
-                                text: 'Verify',
+                                text: 'verify'.tr,
                               ),
                             )
                           ],
@@ -108,13 +108,13 @@ class EmailConfirmationPage extends GetView<EmailConfirmationController> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Haven't you received an email yet?"),
+                      Text("emailNotReceiveMessage".tr),
                       TextButton(
                         onPressed: () {
 
                         },
                         child: Text(
-                          'Click here',
+                          'clickHere'.tr,
                           style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Constants.buttonColor),

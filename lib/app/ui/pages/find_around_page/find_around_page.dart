@@ -89,7 +89,7 @@ class FindAroundPage extends GetView<FindAroundController> {
                 child: Column(
                   children: [
                     CustomSelectPosition(
-                      label: 'my current position',
+                      label: 'myCurrentPosition'.tr,
                       options: controller.withinOptions,
                       onWithinChanged: (val) {
                         controller.distance.value = val;
