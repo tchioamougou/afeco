@@ -32,3 +32,6 @@ enum OrderStatus { payed, closed, cancel }
 enum GivingPackageStatus{
   open, reserved,closed,canceled
 }
+enum BagStatus{
+  available, soldOut,canceled
+}

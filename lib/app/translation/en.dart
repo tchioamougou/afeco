@@ -153,5 +153,8 @@ const Map<String, String> en = {
   "orderReceived":"Order Received",
   "thankYou":"Thank you!",
   'thankYouTitle':"You Just Saved a meal From being wasted",
-  "thankYouShareMessage":"Celebrate with your friends and start saving meals togethers"
+  "thankYouShareMessage":"Celebrate with your friends and start saving meals togethers",
+  "paymentFailed":"Payment failed",
+  "paymentFailedMessage":" We're sorry, but your payment could not be processed at this time. Please check your payment details and try again. If the problem persists, please contact our customer support for assistance.",
+  "ended":"Ended",
 };

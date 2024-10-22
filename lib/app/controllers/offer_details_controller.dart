@@ -33,7 +33,6 @@ class OfferDetailsController extends GetxController {
   }
 
   Future<void> createOrder() async {
-    await EasyLoading.show();
 
     try {
       OrderModel om = OrderModel(
@@ -50,21 +49,25 @@ class OfferDetailsController extends GetxController {
       if (isError) {
         Get.showSnackbar(
           GetSnackBar(
-            title: 'Payment failled',
-            message:
-                'We\'re sorry, but your payment could not be processed at this time. Please check your payment details and try again. If the problem persists, please contact our customer support for assistance.',
+            title: 'paymentFailed'.tr,
+            message: 'paymentFailedMessage'.tr,
             icon: const Icon(Icons.error),
             backgroundColor: Colors.red,
             duration: const Duration(seconds: 5),
           ),
         );
       } else {
+        await EasyLoading.show();
         await _appWriteController.createDocument(
             AppWriteCollection.bagOrderCollections, om.toJson());
+
+        /// here wa have to calculate the items elements remaining and if it's zero change status to sold out.
+        int res = (bag.value!.rest - selectQuantity.value);
         await _appWriteController.updateDocument(
-            AppWriteCollection.bagsCollections,
-            bag.value!.documentId,
-            {'rest': (bag.value!.rest - selectQuantity.value)});
+            AppWriteCollection.bagsCollections, bag.value!.documentId, {
+          'rest': res,
+          "status": res == 0 ? BagStatus.soldOut.name : bag.value!.status
+        });
         Get.offAllNamed(AppRoutes.TANKING);
       }
     } catch (e) {

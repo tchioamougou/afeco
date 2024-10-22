@@ -1,4 +1,5 @@
 import 'package:afeco/app/controllers/init_page_controller.dart';
+import 'package:afeco/app/data/services/filter_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_card_item.dart';
 import 'package:afeco/app/ui/global_widgets/custom_category_action.dart';
@@ -30,6 +31,9 @@ class _HomePageState extends State<HomePage> {
     // TODO: implement initState
     controller.getGivingPacks();
     controller.getBags();
+    if (FilterService.instance.filter.showSoldHow) {
+      controller.getBagsSoldOut();
+    }
     super.initState();
   }
 
@@ -250,32 +254,39 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ),
                           const DonateWidget(),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 20, 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          if (FilterService.instance.filter.showSoldHow)
+                            Column(
                               children: [
-                                Label(title: 'soldOut'.tr),
-                                SeeAll(onPress: () {
-                                  controller.viewAll(
-                                      'soldOut'.tr, controller.bags);
-                                })
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(10, 0, 20, 0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Label(title: 'soldOut'.tr),
+                                      SeeAll(onPress: () {
+                                        controller.viewAll(
+                                            'soldOut'.tr, controller.soldOuts);
+                                      })
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: controller.soldOuts
+                                        .map((i) => CustomCardItem(
+                                              bg: i,
+                                            ))
+                                        .toList(),
+                                  ),
+                                ),
                               ],
                             ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: controller.bags
-                                  .map((i) => CustomCardItem(
-                                        bg: i,
-                                      ))
-                                  .toList(),
-                            ),
-                          ),
                         ],
                       ),
                     ),

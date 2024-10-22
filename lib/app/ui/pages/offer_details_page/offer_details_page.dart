@@ -129,8 +129,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                             Text(
-                                'termsNotify'.tr),
+                            Text('termsNotify'.tr),
                             TextButton(
                                 onPressed: () {},
                                 child: Text(
@@ -248,15 +247,27 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                       ),
                                     ),
                                   ),
-                                  Positioned(
-                                    right: 10,
-                                    bottom: 10,
-                                    child: Tag(
-                                      content: 'endingSoon'.tr,
-                                      color: Colors.red,
-                                      backgroundColor: Colors.red.shade200,
+                                  if (controller.bag.value!.status ==
+                                      BagStatus.soldOut.name)
+                                    Positioned(
+                                      right: 10,
+                                      bottom: 10,
+                                      child: Tag(
+                                        content: 'ended'.tr,
+                                        color: Constants.defaultHeaderColor,
+                                        backgroundColor: Colors.grey,
+                                      ),
+                                    )
+                                  else
+                                    Positioned(
+                                      right: 10,
+                                      bottom: 10,
+                                      child: Tag(
+                                        content: 'endingSoon'.tr,
+                                        color: Colors.red,
+                                        backgroundColor: Colors.red.shade200,
+                                      ),
                                     ),
-                                  ),
                                   Positioned(
                                       bottom: 10,
                                       left: 10,
@@ -626,73 +637,83 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                               TimeLeft(
                                   targetDate:
                                       controller.bag.value!.pickupDateEnd),
-                            CustomBottomAction(
-                                onPressed: () {
-                                  Get.dialog(
-                                      barrierDismissible: false,
-                                      AlertDialog(
-                                        backgroundColor: Colors.white,
-                                        title: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Label(
-                                                title: 'What you have to know')
-                                          ],
-                                        ),
-                                        content: Container(
-                                          height: 150,
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                'Your surprise Bags is a surprise',
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.bold),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Text(
-                                                  textAlign: TextAlign.justify,
-                                                  "We wish we could tell you what exactly will be in your Surprise Bag - but it's always a surprise! The store wil fill it with a selection of their unsold items. if you have a question abouy allergens or ingredients, please ask to the store."),
-                                            ],
-                                          ),
-                                        ),
-                                        actions: [
-                                          CustomButton(
-                                              onPressed: () {
-                                                Get.back();
-                                                initPayment();
-                                              },
-                                              text: 'Got it!',
-                                              backgroundColor:
-                                                  Constants.buttonColor),
-                                          Row(
+                            if (controller.bag.value!.status ==
+                                BagStatus.soldOut.name)
+                              CustomBottomAction(
+                                  onPressed: () {},
+                                  text: 'soldOut'.tr,
+                                  backgroundColor:
+                                      Constants.buttonColor.withOpacity(0.2))
+                            else
+                              CustomBottomAction(
+                                  onPressed: () {
+                                    Get.dialog(
+                                        barrierDismissible: false,
+                                        AlertDialog(
+                                          backgroundColor: Colors.white,
+                                          title: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              TextButton(
-                                                  onPressed: () {
-                                                    Get.back();
-                                                  },
-                                                  child: Text(
-                                                    'Back',
-                                                    style: TextStyle(
-                                                        color: Constants
-                                                            .defaultHeaderColor,
-                                                        fontWeight:
-                                                            FontWeight.bold),
-                                                  ))
+                                              Label(
+                                                  title:
+                                                      'What you have to know')
                                             ],
-                                          )
-                                        ],
-                                        insetPadding: EdgeInsets.symmetric(
-                                            horizontal: 10),
-                                      ));
-                                },
-                                text: 'reserve'.tr,
-                                backgroundColor: Constants.buttonColor)
+                                          ),
+                                          content: Container(
+                                            height: 150,
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  'Your surprise Bags is a surprise',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                SizedBox(
+                                                  height: 10,
+                                                ),
+                                                Text(
+                                                    textAlign:
+                                                        TextAlign.justify,
+                                                    "We wish we could tell you what exactly will be in your Surprise Bag - but it's always a surprise! The store wil fill it with a selection of their unsold items. if you have a question abouy allergens or ingredients, please ask to the store."),
+                                              ],
+                                            ),
+                                          ),
+                                          actions: [
+                                            CustomButton(
+                                                onPressed: () {
+                                                  Get.back();
+                                                  initPayment();
+                                                },
+                                                text: 'Got it!',
+                                                backgroundColor:
+                                                    Constants.buttonColor),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                TextButton(
+                                                    onPressed: () {
+                                                      Get.back();
+                                                    },
+                                                    child: Text(
+                                                      'Back',
+                                                      style: TextStyle(
+                                                          color: Constants
+                                                              .defaultHeaderColor,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ))
+                                              ],
+                                            )
+                                          ],
+                                          insetPadding: EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                        ));
+                                  },
+                                  text: 'reserve'.tr,
+                                  backgroundColor: Constants.buttonColor)
                           ],
                         ))
                 ],

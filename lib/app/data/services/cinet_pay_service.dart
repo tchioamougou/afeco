@@ -1,6 +1,6 @@
+import 'package:afeco/app/ui/global_widgets/cinetpays/cinet_pay_checkout.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:afeco/app/ui/utils/utils.dart';
-import 'package:cinetpay/cinetpay.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -10,7 +10,6 @@ class CinetPayService extends GetxService {
     String description,
   ) async {
     bool isError = true;
-    print("Constants.cinetApiKey ${Constants.cinetApiKey}");
     await Get.to(() => CinetPayCheckout(
         title: 'Save Food',
         titleStyle: const TextStyle(
@@ -18,7 +17,7 @@ class CinetPayService extends GetxService {
         titleBackgroundColor: Constants.defaultHeaderColor,
         configData: <String, dynamic>{
           'apikey': Constants.cinetApiKey,
-         'site_id': int.parse(Constants.cinetSiteId ?? '0'),
+         'site_id': int.parse(Constants.cinetSiteId!),
           'notify_url': Constants.cinetNotifyUrl
         },
         paymentData: <String, dynamic>{
@@ -30,11 +29,8 @@ class CinetPayService extends GetxService {
         },
         waitResponse: (response) {
           isError = false;
-          print('this is the response: $response');
         },
         onError: (error) {
-          print('error $error');
-          isError = true;
           Get.back();
         }));
     return isError;

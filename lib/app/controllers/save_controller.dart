@@ -36,6 +36,7 @@ class SaveController extends GetxController {
         lastModifyDate: DateTime.now(),
         stores: StoreService.instance.store!.documentId,
         documentId: "",
+        status: BagStatus.available.name
       );
       await _appWriteController.createDocument(
           AppWriteCollection.bagsCollections, gp.toJson());

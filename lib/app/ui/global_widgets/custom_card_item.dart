@@ -141,7 +141,7 @@ class CustomCardItem extends StatelessWidget {
                               Tag(
                                   content: '${times['day']}',
                                   color: Colors.white,
-                                  backgroundColor: Constants.buttonColor),
+                                  backgroundColor:bg.status==BagStatus.soldOut.name?Colors.grey: Constants.buttonColor),
                               SizedBox(
                                 width: 4.w,
                               ),

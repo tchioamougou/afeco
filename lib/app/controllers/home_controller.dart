@@ -6,6 +6,7 @@ import 'package:afeco/app/ui/global_widgets/custom_app_bar.dart';
 import 'package:afeco/app/ui/global_widgets/custom_card_item.dart';
 import 'package:afeco/app/ui/global_widgets/custom_save_food_neighbourdhood_item.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
+import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -21,6 +22,7 @@ class HomeController extends GetxController {
   RxList<GivingPackage> givingPackages = <GivingPackage>[].obs;
   SaveFoodAppWriteController _appWriteController = Get.find();
   RxList<BagRelation> bags = <BagRelation>[].obs;
+  RxList<BagRelation> soldOuts = <BagRelation>[].obs;
   RxBool hasPosition = true.obs;
   @override
   void onInit() {
@@ -29,7 +31,6 @@ class HomeController extends GetxController {
         ? (UserService.instance.user!.lat != 0 &&
             UserService.instance.user!.long != 0)
         : true;
-    print(UserService.instance.user!.toJson());
     super.onInit();
   }
 
@@ -37,8 +38,25 @@ class HomeController extends GetxController {
     EasyLoading.show();
     try {
       DocumentList dls = await _appWriteController
-          .getDocuments(AppWriteCollection.bagsCollections, []);
+          .getDocuments(AppWriteCollection.bagsCollections, [
+        Query.equal('status', BagStatus.available.name)
+      ]);
       bags.value =
+          dls.documents.map((e) => BagRelation.fromJson(e.data)).toList();
+    } catch (e) {
+      print(e);
+    } finally {
+      EasyLoading.dismiss();
+    }
+  }
+  Future<void> getBagsSoldOut() async {
+    EasyLoading.show();
+    try {
+      DocumentList dls = await _appWriteController
+          .getDocuments(AppWriteCollection.bagsCollections, [
+            Query.equal('status', BagStatus.soldOut.name)
+      ]);
+      soldOuts.value =
           dls.documents.map((e) => BagRelation.fromJson(e.data)).toList();
     } catch (e) {
       print(e);

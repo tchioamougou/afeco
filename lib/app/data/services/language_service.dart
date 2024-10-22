@@ -32,7 +32,13 @@ class LanguageService extends GetxService{
   }
 
   String getLanguageName(String languageCode) {
-    return languages.where((i)=>i.code==languageCode).first.name; // Replace with actual logic
+    List<LanguageModel> listLan = languages.where((i)=>i.code==languageCode).toList();
+    if(listLan.isNotEmpty){
+      return listLan.first.name;
+    }else{
+      return "en";
+    }
+     // Replace with actual logic
   }
 
   Future<void> initLanguage() async {
