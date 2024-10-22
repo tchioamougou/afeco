@@ -18,7 +18,7 @@ class Label extends StatelessWidget {
           Text(
             title,
             style: GoogleFonts.poppins(fontWeight: FontWeight.bold, fontSize: 18,color: color ?? Constants.defaultBorderColor ),
-          ),
+          )
         ],
       ),
     );

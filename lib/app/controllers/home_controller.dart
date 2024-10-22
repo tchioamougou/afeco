@@ -31,6 +31,7 @@ class HomeController extends GetxController {
         ? (UserService.instance.user!.lat != 0 &&
             UserService.instance.user!.long != 0)
         : true;
+    print(UserService.instance.user!.toJson());
     super.onInit();
   }
 

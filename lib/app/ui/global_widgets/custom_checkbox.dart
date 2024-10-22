@@ -22,7 +22,7 @@ class _CustomCheckboxState extends State<CustomCheckbox> {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Checkbox(
           activeColor: Constants.buttonColor,

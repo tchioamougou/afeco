@@ -43,7 +43,7 @@ class SavePage extends GetView<SaveController> {
               backgroundColor: Colors.white,
               body: Padding(
                 padding: EdgeInsets.symmetric(
-                  horizontal: 20,
+                  horizontal: 10,
                   vertical: 20,
                 ),
                 child: Column(

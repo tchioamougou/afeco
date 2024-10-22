@@ -33,4 +33,5 @@ class AppRoutes {
   static const LANGUAGE = '/language';
   static const MY_SAVE_FOOD = '/my-save-food';
   static const DONATION = '/donation';
+  static const STORE_LOGIN = '/store-login';
 }

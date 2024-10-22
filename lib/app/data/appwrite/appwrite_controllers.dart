@@ -1,4 +1,8 @@
+import 'package:afeco/app/data/services/filter_service.dart';
+import 'package:afeco/app/data/services/language_service.dart';
 import 'package:afeco/app/data/services/session_service.dart';
+import 'package:afeco/app/data/services/store_service.dart';
+import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
@@ -27,6 +31,23 @@ class SaveFoodAppWriteController extends GetxController {
     userId = sessionToken.userId;
   }
 
+  Future<User> createStoreAccount(
+      String email, String password, String name) async {
+    User user = await account.create(
+        userId: 'Store_${ID.unique()}',
+        email: email,
+        password: password,
+        name: name);
+    await createEmailSession(user.email, password);
+    return user;
+  }
+
+  Future<void> createEmailSession(String email, String password) async {
+    Session ss = await account.createEmailPasswordSession(
+        email: email, password: password);
+    SessionService.instance.currentSession = ss;
+  }
+
   Future<void> createPhone(phone) async {
     final sessionToken =
         await account.createPhoneToken(userId: ID.unique(), phone: phone);
@@ -44,6 +65,16 @@ class SaveFoodAppWriteController extends GetxController {
       await account.deleteSession(
           sessionId: SessionService.instance.currentSession!.$id);
     }
+    FilterService.instance.removeUser();
+    LanguageService.instance.removeLanguage();
+    SessionService.instance.removeSession();
+    StoreService.instance.removeStore();
+    UserService.instance.removeUser();
+  }
+
+  Future<void> sendEmailVerificationCode() async {
+    await account.createVerification(url: 'https://localhost:8080' // url
+        );
   }
 
   Future<Document> createDocument(
@@ -85,6 +116,7 @@ class SaveFoodAppWriteController extends GetxController {
     );
     return fl.$id;
   }
+
   Future<String> deleteFile(String fileId) async {
     File fl = await storage.deleteFile(
       bucketId: AppWriteBucket.profileBucket,
@@ -92,4 +124,19 @@ class SaveFoodAppWriteController extends GetxController {
     );
     return fl.$id;
   }
+}
+
+Future logoutUser() async {
+  if (SessionService.instance.currentSession != null) {
+    try {
+      await account.deleteSession(
+          sessionId: SessionService.instance.currentSession!.$id);
+    } catch (e) {
+      print(e);
+    }
+  }
+  FilterService.instance.removeUser();
+  SessionService.instance.removeSession();
+  StoreService.instance.removeStore();
+  UserService.instance.removeUser();
 }

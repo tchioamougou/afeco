@@ -12,9 +12,9 @@ import 'package:latlong2/latlong.dart';
 class PositionDisplay extends StatelessWidget {
   final LatLng pos;
   final String title;
-
+  final double height;
   const PositionDisplay(
-      {super.key, required this.pos, required this.title});
+      {super.key, required this.pos, required this.title, this.height=300});
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,7 @@ class PositionDisplay extends StatelessWidget {
     return MainLayout(
       child: Obx(() =>
           Container(
-            height: 300,
+            height: height,
             child: FlutterMap(
                 mapController: mapController,
                 options: MapOptions(

@@ -3,6 +3,7 @@ import 'package:afeco/app/data/models/order_model.dart';
 import 'package:afeco/app/data/services/store_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
+import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
@@ -22,7 +23,9 @@ class StoreOrderController extends GetxController {
     EasyLoading.show();
     try {
       DocumentList dls = await _appWriteController
-          .getDocuments(AppWriteCollection.bagOrderCollections, []);
+          .getDocuments(AppWriteCollection.bagOrderCollections, [
+            Query.equal('stores', StoreService.instance.store!.documentId)
+      ]);
       bags.value =
           dls.documents.map((e) => OrderShowModel.fromJson(e.data)).toList();
     } catch (e) {

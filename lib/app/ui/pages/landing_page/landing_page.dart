@@ -35,12 +35,16 @@ class LandingPage extends GetView<LandingController> {
                 Column(
                   children: [
                     CustomButton(onPressed: (){
-                      Get.offAllNamed(AppRoutes.INIT_PAGE);
+                      Get.toNamed(AppRoutes.INIT_PAGE);
                     }, text: 'continueWithGoogle'.tr, backgroundColor: Colors.blueAccent, icon: const FaIcon(FontAwesomeIcons.google,color: Colors.white,)),
                     SizedBox(height: 20.h,),
                     CustomButton(onPressed: (){
-                      Get.offAllNamed(AppRoutes.SIGN_LOG);
+                      Get.toNamed(AppRoutes.SIGN_LOG);
                     }, text: 'continueWithEmail'.tr, backgroundColor: Constants.buttonColor,icon: const Icon(Icons.email,color: Colors.white,),),
+                    SizedBox(height: 20.h,),
+                    CustomButton(onPressed: (){
+                      Get.toNamed(AppRoutes.STORE_LOGIN);
+                    }, text: 'Continue as Store'.tr, backgroundColor: Constants.buttonColor,icon: const Icon(Icons.store,color: Colors.white,),),
                     SizedBox(height: 20.h,),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

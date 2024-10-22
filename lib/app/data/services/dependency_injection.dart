@@ -23,6 +23,7 @@ class DependecyInjection {
 
     await GetStorage.init();
     await LanguageService.instance.initLanguage();
+    //await logoutUser();
     await dotenv.load();
     Get.put<FindAroundController>(FindAroundController());
     Get.put<NavigationController>(NavigationController());

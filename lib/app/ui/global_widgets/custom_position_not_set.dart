@@ -7,7 +7,8 @@ import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
 class CustomPositionNotSet extends StatelessWidget {
-  const CustomPositionNotSet({super.key});
+  final VoidCallback refresh;
+  const CustomPositionNotSet({super.key, required this.refresh});
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,9 @@ class CustomPositionNotSet extends StatelessWidget {
                       isScrollControlled: true,
                       context: context,
                       builder: (context) => CustomLocationChoose(onChange: (onPositionChanged) async{
+                        posi = onPositionChanged;
                         await GlobalService.updateUserLocation(posi, distance);
+                        refresh();
                         Get.back();
                       }, onClose: (){
                         Get.back();

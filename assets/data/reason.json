@@ -1,0 +1,23 @@
+[
+  {
+    "value": "brand_store_image",
+    "label": "Augmenter la visibilité de votre commerce"
+  },
+  {
+    "value":"new_customer",
+    "label": "Attirer des nouveaux clients"
+  },
+  {
+    "value":"revenue",
+    "label": "Générer des revenus supplémentaires"
+  },
+  {
+    "value":"less_food_waste",
+    "label": "Réduire le gaspillage alimentaire"
+  },
+  {
+    "value":"other",
+    "label": "Autre"
+  }
+
+]

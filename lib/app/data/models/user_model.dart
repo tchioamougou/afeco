@@ -45,7 +45,7 @@ class UserModel {
         lat: double.parse('${json['lat']}'),
         long: double.parse('${json['long']}'),
         documentId: json['documentId'],
-        moneySaved: json['moneySaved'] ?? 0,
+        moneySaved: double.parse('${json['moneySaved']??0}'),
         carboneImpact: json['carboneImpact'] ?? 0,
         bagsSaved: json['bagsSaved'] ?? 0,
         excessFoodSaved: json['excessFoodSaved'] ?? 0,

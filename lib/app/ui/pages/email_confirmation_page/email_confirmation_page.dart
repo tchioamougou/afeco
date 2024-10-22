@@ -47,56 +47,59 @@ class EmailConfirmationPage extends GetView<EmailConfirmationController> {
                     padding: EdgeInsets.symmetric(horizontal: 25),
                     child: Center(
                         child: Column(
-                          children: [
-                            Image.asset('assets/image/img.png', height: 150,),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Text("${"weSentEmail".tr} ${controller.email.value}",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 18)),
-                            Text(
-                                "checkEmailCodeMessage".tr,
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    fontSize: 15, fontWeight: FontWeight.w900)),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Divider(),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            Text(
-                              "emailAlternative".tr,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 18),
-                            ),
-                            Container(
-                              width: MediaQuery.sizeOf(context).width * 0.4,
-                              child: CustomInput(
-                                controller: controller.codeController.value,
-                                label: '',
-                                onValueChanged: (val) {},
-                                hintText: '',
-                                keyboardType: TextInputType.number,
-                              ),
-                            ),
-                            Container(
-                              width: MediaQuery.sizeOf(context).width * 0.4,
-                              child: CustomButton(
-                                backgroundColor: Constants.buttonColor,
-                                onPressed: () {
-                                  controller.validateEmail();
-                                },
-                                text: 'verify'.tr,
-                              ),
-                            )
-                          ],
-                        )),
+                      children: [
+                        Image.asset(
+                          'assets/image/img.png',
+                          height: 150,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text("${"weSentEmail".tr} ${controller.email.value}",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 18)),
+                        Text("checkEmailCodeMessage".tr,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 15, fontWeight: FontWeight.w900)),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Divider(),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          "emailAlternative".tr,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        Container(
+                          width: MediaQuery.sizeOf(context).width * 0.4,
+                          child: CustomInput(
+                            controller: controller.codeController.value,
+                            label: '',
+                            onValueChanged: (val) {},
+                            hintText: '',
+                            keyboardType: TextInputType.number,
+                          ),
+                        ),
+                        Container(
+                          width: MediaQuery.sizeOf(context).width * 0.4,
+                          child: CustomButton(
+                            backgroundColor: Constants.buttonColor,
+                            onPressed: () {
+                              controller.validateEmail();
+                            },
+                            text: 'verify'.tr,
+                          ),
+                        )
+                      ],
+                    )),
                   ),
-                  SizedBox(height: 400,),
-
+                  SizedBox(
+                    height: 400,
+                  ),
                 ],
               ),
             ),
@@ -111,7 +114,7 @@ class EmailConfirmationPage extends GetView<EmailConfirmationController> {
                       Text("emailNotReceiveMessage".tr),
                       TextButton(
                         onPressed: () {
-
+                          controller.resendEmail();
                         },
                         child: Text(
                           'clickHere'.tr,

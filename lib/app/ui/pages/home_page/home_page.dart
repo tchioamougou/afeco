@@ -43,7 +43,12 @@ class _HomePageState extends State<HomePage> {
     return MainLayout(
       child: Obx(() {
         if (!controller.hasPosition.value) {
-          return const CustomPositionNotSet();
+          return  CustomPositionNotSet(
+            refresh: (){
+              Get.delete<HomeController>();
+              Get.put(HomeController());
+            },
+          );
         } else {
           return Scaffold(
             backgroundColor: Colors.grey.shade100,

@@ -17,6 +17,7 @@ class StoreModel {
   String documentId;
   String profileCoverId;
   String profileLogoId;
+  List<String>raisonOfJoining;
   StoreModel({
     required this.businessName,
     required this.typeBusiness,
@@ -34,6 +35,7 @@ class StoreModel {
     required this.documentId,
     required this.profileCoverId,
     required this.profileLogoId,
+    required this.raisonOfJoining
   });
 
   factory StoreModel.fromJson(Map<String, dynamic> json) {
@@ -53,8 +55,8 @@ class StoreModel {
         long: json['long'],
         documentId: json['documentId'] ?? "",
         profileCoverId: json['profileCoverId'] ?? "",
-        profileLogoId: json['profileLogoId'] ?? ""
-
+        profileLogoId: json['profileLogoId'] ?? "",
+        raisonOfJoining: List<String>.from(json['raisonOfJoining']),
     );
   }
 
@@ -76,6 +78,7 @@ class StoreModel {
       "documentId": documentId,
       "profileCoverId": profileCoverId,
       "profileLogoId": profileLogoId,
+      "raisonOfJoining":raisonOfJoining
     };
   }
 

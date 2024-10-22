@@ -35,7 +35,6 @@ class SmsVerificationController extends GetxController {
         if(dls.total >0){
           StoreService.instance.store = StoreModel.fromJson(dls.documents[0].data);
         }else{
-          await _createAccountController.submitForm();
         }
         Get.toNamed(AppRoutes.SET_LOCATION);
       } catch (e) {

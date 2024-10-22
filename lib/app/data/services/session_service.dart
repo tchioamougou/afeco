@@ -27,7 +27,7 @@ class SessionService {
   }
 
   bool isStore(){
-    return isLogged() && currentSession?.factors[0]=='phone';
+    return isLogged() && currentSession!.userId.contains('Store');
   }
   void removeSession(){
     _getStorage.remove(_storageKey);

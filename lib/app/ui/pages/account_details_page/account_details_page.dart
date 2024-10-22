@@ -1,9 +1,11 @@
+import 'package:afeco/app/data/appwrite/appwrite_controllers.dart';
 import 'package:afeco/app/data/services/language_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_app_bar.dart';
 import 'package:afeco/app/ui/pages/profile_page/custom_liststyle.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../../layouts/main/main_layout.dart';
@@ -139,7 +141,17 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                     trailing:  FaIcon(FontAwesomeIcons.toggleOff, color: Constants.defaultHeaderColor,),
                     onPress: () {}),
                 CustomListStile(
-                    title: 'Logout'.tr, icon: FontAwesomeIcons.close, onPress: () {})
+                    title: 'Logout'.tr, icon: FontAwesomeIcons.close, onPress: () async{
+                 try{
+                   EasyLoading.show();
+                   await logoutUser();
+                   EasyLoading.dismiss();
+                   Get.offAllNamed(AppRoutes.LANDING);
+                 }catch(e){
+                   EasyLoading.dismiss();
+                    print(e);
+                 }
+                })
               ],
             ),
           ),

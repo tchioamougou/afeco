@@ -1,3 +1,5 @@
+import 'package:afeco/app/routes/app_routes.dart';
+import 'package:afeco/app/ui/global_widgets/no_elements/custom_no_element.dart';
 import 'package:afeco/app/ui/pages/my_orders_page/my_order_item.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -21,14 +23,24 @@ class StoreOrderPage extends GetView<StoreOrderController> {
                 style: GoogleFonts.poppins(
                     fontSize: 20, color: Colors.white),
               )),
-          body:Obx(() => SingleChildScrollView(
-            child:  Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              child: Column(
-                children: controller.bags.map((e)=>MyOrderItem(osm: e,)).toList(),
-              ),
-            ),
-          ),),
+          body:Obx((){
+            if(controller.bags.isNotEmpty)
+             {
+               return SingleChildScrollView(
+                 child:  Padding(
+                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                   child: Column(
+                     children: controller.bags.map((e)=>MyOrderItem(osm: e,)).toList(),
+                   ),
+                 ),
+               );
+             }
+            else{
+              return CustomNoElement(image: 'assets/image/position.png', title: "No Order received for the moment", description: "Description", actionLabel: "Add New Food", onPress: (){
+                Get.toNamed(AppRoutes.SAVE);
+              });
+            }
+          }),
         ),
       );
   }

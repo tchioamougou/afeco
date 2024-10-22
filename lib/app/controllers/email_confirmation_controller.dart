@@ -13,8 +13,8 @@ import 'package:get/get.dart';
 
 class EmailConfirmationController extends GetxController {
   Rx<TextEditingController> codeController = TextEditingController().obs;
-  SignLogController _signLogController = Get.find();
-  SaveFoodAppWriteController _appWriteController = Get.find();
+  final SignLogController _signLogController = Get.find();
+  final SaveFoodAppWriteController _appWriteController = Get.find();
   RxString email = ''.obs;
   @override
   void onInit() {
@@ -35,6 +35,7 @@ class EmailConfirmationController extends GetxController {
         ]);
 
         if (dls.total > 0) {
+          print(dls.documents[0].data.toString());
           UserService.instance.user = UserModel.fromJson(dls.documents[0].data);
           if(UserService.instance.user!.long!=0 && UserService.instance.user!.lat!=0){
             Get.offAllNamed(AppRoutes.INIT_PAGE);
@@ -64,11 +65,17 @@ class EmailConfirmationController extends GetxController {
           Get.offAllNamed(AppRoutes.SET_LOCATION);
         }
       } catch (e) {
+        logoutUser();
         EasyLoading.showError("An Error Occur");
         print(e);
       } finally {
         EasyLoading.dismiss();
       }
     }
+  }
+  Future<void> resendEmail() async {
+    EasyLoading.show();
+    await _appWriteController.createEmail(_signLogController.emailController.value.text);
+    EasyLoading.dismiss();
   }
 }
