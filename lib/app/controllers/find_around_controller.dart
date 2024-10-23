@@ -1,6 +1,9 @@
 import 'package:afeco/app/data/models/global_service.dart';
 import 'package:afeco/app/data/models/market.dart';
+import 'package:afeco/app/data/models/place_model.dart';
+import 'package:afeco/app/data/services/find_in_service.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -11,26 +14,27 @@ class FindAroundController extends GetxController {
   LatLng get center => _center.value;
   set center(LatLng value) => _center.value = value;
 
-  final RxDouble _zoom = 15.0.obs;
+  final RxDouble _zoom = 18.0.obs;
   double get zoom => _zoom.value;
   set zoom(double value) => _zoom.value = value;
 
   List<Market> markets = <Market>[].obs;
-  List<String> withinOptions = ['500 m', '1 Km', '2 km', '3 km'];
   final MapController mapController = MapController();
   RxString position = 'Your current poistion'.obs;
-  RxString within = '2 Km'.obs;
-  RxInt distance = 0.obs;
 
   /// initialise Location variable
   final _geolocatorPlatform = GeolocatorPlatform.instance;
   Rx<Position?> _currentPosition = Rx<Position?>(null);
-
+  Rx<PlaceModel> currentPlace =  FindInService.instance.findIn.obs;
   Position? get currentPosition => _currentPosition.value;
   @override
   void onInit() async {
     // TODO: implement onInit
+    if(currentPlace.value.lon!=null && currentPlace.value.lon!.isNotEmpty){
+      _center.value =  LatLng(double.parse(currentPlace.value.lat??'0.0'), double.parse(currentPlace.value.lon??'0.0'));
+    }
     getCurrentPosition();
+
     super.onInit();
   }
 
@@ -67,8 +71,19 @@ class FindAroundController extends GetxController {
 
   void findShop(double latitude, double longitude) async {}
 
-  void updateUserPosition(LatLng po){
-    GlobalService.updateUserLocation(po,distance.value);
+  void updateUserPosition(PlaceModel pl)async{
+    EasyLoading.show();
+    try{
+      FindInService.instance.findIn = pl;
+      currentPlace.value =pl;
+      await GlobalService.updateUserLocation(LatLng(double.parse(pl.lat??'0.0'), double.parse(pl.lon??'0.0')),pl.distance??2);
+      mapController.move(LatLng(double.parse(pl.lat??'0.0'), double.parse(pl.lon??'0.0')), 18);
+    }catch(e){
+      //
+    }
+    finally{
+      EasyLoading.dismiss();
+    }
   }
 
 }

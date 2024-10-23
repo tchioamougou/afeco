@@ -52,8 +52,6 @@ import '../ui/pages/offer_details_page/offer_details_page.dart';
 import '../ui/pages/find_around_page/find_around_page.dart';
       import '../bindings/search_binding.dart';
 import '../ui/pages/search_page/search_page.dart';
-      import '../bindings/map_page_binding.dart';
-import '../ui/pages/map_page_page/map_page_page.dart';
       import '../bindings/tanking_binding.dart';
 import '../ui/pages/tanking_page/tanking_page.dart';
       import '../bindings/save_food_form_binding.dart';
@@ -109,12 +107,6 @@ class AppPages {
       name: AppRoutes.TANKING,
       page: () => const TankingPage(),
       binding: TankingBinding(),
-      transition: _defaultTransition,
-    ),
-    GetPage(
-      name: AppRoutes.MAP_PAGE,
-      page: () => const MapPagePage(),
-      binding: MapPageBinding(),
       transition: _defaultTransition,
     ),
     GetPage(

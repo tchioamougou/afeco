@@ -13,7 +13,7 @@ class PlaceModel {
   final String? name;
   final String? displayName;
   final Address? address;
-
+   int? distance;
   PlaceModel({
     this.placeId,
     this.licence,
@@ -29,6 +29,7 @@ class PlaceModel {
     this.name,
     this.displayName,
     this.address,
+    this.distance,
   });
 
   factory PlaceModel.fromJson(Map<String, dynamic> json) => PlaceModel(
@@ -46,6 +47,7 @@ class PlaceModel {
     name: json['name'] as String?,
     displayName: json['display_name'] as String?,
     address: json['address'] != null ? Address.fromJson(json['address'] as Map<String, dynamic>) : null,
+      distance:json['distance']??0
   );
 
   Map<String, dynamic> toJson() => {
@@ -63,6 +65,7 @@ class PlaceModel {
     'name': name,
     'display_name': displayName,
     'address': address?.toJson(),
+    'distance':distance
   };
 }
 

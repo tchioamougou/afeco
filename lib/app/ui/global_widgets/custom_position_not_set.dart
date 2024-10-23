@@ -1,4 +1,5 @@
 import 'package:afeco/app/data/models/global_service.dart';
+import 'package:afeco/app/data/services/find_in_service.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/custom_location_choose.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
@@ -13,7 +14,6 @@ class CustomPositionNotSet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
    int distance = 0;
-   LatLng posi = LatLng(0, 0);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -53,14 +53,12 @@ class CustomPositionNotSet extends StatelessWidget {
                       isScrollControlled: true,
                       context: context,
                       builder: (context) => CustomLocationChoose(onChange: (onPositionChanged) async{
-                        posi = onPositionChanged;
-                        await GlobalService.updateUserLocation(posi, distance);
+                        FindInService.instance.findIn = onPositionChanged;
+                        await GlobalService.updateUserLocation(LatLng(double.parse(onPositionChanged.lat!), double.parse(onPositionChanged.lon!)), onPositionChanged.distance??0);
                         refresh();
                         Get.back();
                       }, onClose: (){
                         Get.back();
-                      }, onChangeRange: (int ) {
-                        distance=int;
                       },),
                     );
 

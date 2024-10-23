@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:afeco/app/data/services/find_in_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_filter.dart';
 import 'package:afeco/app/ui/global_widgets/custom_select_position.dart';
@@ -89,21 +92,14 @@ class FindAroundPage extends GetView<FindAroundController> {
                 child: Column(
                   children: [
                     CustomSelectPosition(
-                      label: 'myCurrentPosition'.tr,
-                      options: controller.withinOptions,
-                      onWithinChanged: (val) {
-                        controller.distance.value = val;
-                        //// Todo refresh the list of store by the all the information
-                      },
-                      onPositionChanged: (val) {
+                      onChanged: (val) {
                         //// Todo refresh the list of store by the all the information,
                         controller.updateUserPosition(val);
                         Get.back();
                       },
                       onClose: () {
                         Get.back();
-                      },
-                      withinValue: controller.within.value,
+                      }, placeModel:controller.currentPlace.value,
                     ),
                     Row(
                       children: [
