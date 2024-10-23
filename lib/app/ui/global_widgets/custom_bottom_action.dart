@@ -7,12 +7,12 @@ class CustomBottomAction extends StatelessWidget {
   final Widget? icon;
   final Color backgroundColor;
 
-  const CustomBottomAction({Key? key,
+  const CustomBottomAction({super.key,
     required this.onPressed,
     required this.text,
     this.icon,
     required this.backgroundColor,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -37,7 +37,7 @@ class FindAroundPage extends GetView<FindAroundController> {
                       userAgentPackageName: 'com.example.app',
                     ),
                     MarkerLayer(
-                        markers: controller.markets
+                        markers: controller.markets.value
                             .map(
                               (market) => Marker(
                                 width: 80.0,
@@ -62,7 +62,6 @@ class FindAroundPage extends GetView<FindAroundController> {
                                     else
                                       Column(
                                         children: [
-                                          Text(market.name),
                                           IconButton(
                                               onPressed: () {
                                                 controller.goToShop();
@@ -71,11 +70,12 @@ class FindAroundPage extends GetView<FindAroundController> {
                                               tooltip: market.name,
                                               hoverColor: Colors.red,
                                               highlightColor:
-                                                  Colors.deepPurpleAccent,
+                                              Constants.buttonColor.withOpacity(0.2),
                                               color: Colors.black,
-                                              icon: const Icon(
+                                              icon:  Icon(
                                                 Icons.location_on_rounded,
                                                 size: 40,
+                                                color: Constants.buttonColor,
                                               ))
                                         ],
                                       )

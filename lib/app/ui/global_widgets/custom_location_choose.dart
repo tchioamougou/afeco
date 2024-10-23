@@ -20,12 +20,14 @@ class CustomLocationChoose extends StatefulWidget {
   final PlaceModel? defaultValue;
   final VoidCallback onClose;
   final Function(PlaceModel) onChange;
+  final bool showDistance;
 
   const CustomLocationChoose({
     super.key,
     required this.onClose,
     required this.onChange,
     this.defaultValue,
+    this.showDistance = true
   });
 
   @override
@@ -47,7 +49,7 @@ class _CustomLocationChooseState extends State<CustomLocationChoose> {
   @override
   void initState() {
     super.initState();
-    if (widget.defaultValue != null && widget.defaultValue!.lon!.isNotEmpty) {
+    if (widget.defaultValue != null && widget.defaultValue!.lon!=null &&  widget.defaultValue!.lon!.isNotEmpty) {
       selectedValue.value = widget.defaultValue!;
       searchController.text = selectedValue.value.displayName ?? "";
       rang.value = selectedValue.value.distance!.toDouble();
@@ -74,7 +76,7 @@ class _CustomLocationChooseState extends State<CustomLocationChoose> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              'Choose a location to see what\'s available',
+                              'choosePositionTitle'.tr,
                               style: TextStyle(
                                   fontSize: 17,
                                   color: Constants.defaultHeaderColor,
@@ -163,14 +165,16 @@ class _CustomLocationChooseState extends State<CustomLocationChoose> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
+                        if(widget.showDistance)
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Center(
-                              child: Label(title: 'Select a distance'),
+                              child: Label(title: 'selectDistance'.tr),
                             ),
                           ],
                         ),
+                        if(widget.showDistance)
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -220,6 +224,7 @@ class _CustomLocationChooseState extends State<CustomLocationChoose> {
                                   Constants.buttonColor.withOpacity(0.2)),
                             );
                           },
+                          viewBackgroundColor: Colors.white,
                           suggestionsBuilder: (BuildContext context,
                               SearchController controller) {
                             return address.value.map((e) => ListTile(
@@ -231,7 +236,7 @@ class _CustomLocationChooseState extends State<CustomLocationChoose> {
                                         double.parse(e.lon!));
                                     markets.clear();
                                     markets.add(Market(
-                                        name: "you", location: position));
+                                        name: "${selectedValue.value.name}", location: position));
                                     controller.closeView(e.displayName);
                                     mapController.move(position, 18);
                                     mapController.rotateAroundPoint(26);
@@ -287,7 +292,7 @@ class _CustomLocationChooseState extends State<CustomLocationChoose> {
                                   width: 5,
                                 ),
                                 Text(
-                                  'Use my current location',
+                                  'useMyCurrentPosition'.tr,
                                   style: TextStyle(
                                       color: Constants.defaultHeaderColor,
                                       fontSize: 18,
@@ -302,12 +307,13 @@ class _CustomLocationChooseState extends State<CustomLocationChoose> {
                             onPressed: () async {
                               print(
                                   'this is the selected value ${selectedValue.value}');
+                              selectedValue.value.distance = rang.toInt();
                               widget.onChange(selectedValue.value);
                             },
                             disable: selectedValue.value.lon == null,
                             text: _userCurrentPosition.value
-                                ? 'Choose location'
-                                : 'Apply',
+                                ? 'chooseLocation'.tr
+                                : 'apply'.tr,
                             backgroundColor: Constants.buttonColor)
                       ],
                     ),
@@ -325,15 +331,15 @@ class _CustomLocationChooseState extends State<CustomLocationChoose> {
           await _geolocatorPlatform.isLocationServiceEnabled();
       if (!hasPermission) {
         EasyLoading.dismiss();
-        EasyLoading.showError('Location services are disabled.');
-        return Future.error('Location services are disabled.');
+        EasyLoading.showError('locationServiceDisabled'.tr);
+        return Future.error('locationServiceDisabled'.tr);
       }
       LocationPermission permission =
           await _geolocatorPlatform.requestPermission();
       if (permission == LocationPermission.denied) {
         EasyLoading.dismiss();
-        EasyLoading.showError('Location permission denied.');
-        return Future.error('Location permission denied.');
+        EasyLoading.showError('locationPermissionDenied'.tr);
+        return Future.error('locationPermissionDenied'.tr);
       }
       final position = await _geolocatorPlatform.getCurrentPosition();
       EasyLoading.dismiss();
@@ -374,7 +380,7 @@ class _CustomLocationChooseState extends State<CustomLocationChoose> {
           print(data);
           return PlaceModel.fromJson(data);
         } else {
-          return Future.error('No address found in response');
+          return Future.error('noAddressFound'.tr);
         }
       } else {
         throw Exception('Failed to fetch address: ${response.statusCode}');

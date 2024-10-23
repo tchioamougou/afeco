@@ -3,6 +3,7 @@ import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/custom_checkbox.dart';
 import 'package:afeco/app/ui/global_widgets/custom_input.dart';
 import 'package:afeco/app/ui/global_widgets/custom_select_item.dart';
+import 'package:afeco/app/ui/global_widgets/inputs/custom_input_password.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
 import 'package:afeco/app/ui/global_widgets/position_display.dart';
 import 'package:afeco/app/ui/global_widgets/tag.dart';
@@ -49,7 +50,7 @@ class CreateAccountPage extends GetView<CreateAccountController> {
           children: [
             Obx(() => SingleChildScrollView(
                   child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     child: Column(
                       children: [
                         if (controller.index.value == 0)
@@ -72,14 +73,15 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                               Label(title: 'businessAddress'.tr),
                               CustomAddressPick(
                                   label: 'address'.tr,
+                                  defaultValue: controller.address,
                                   onValueChanged: (val) {
                                     controller.address = val;
                                     controller.streetController.value.text =
                                         val.displayName!;
                                     controller.cityController.value.text =
                                         val.address!.city!;
-                                    controller.country.value =
-                                        val.address!.countryCode!;
+                                    /* controller.country.value =
+                                        val.address!.countryCode!;*/
                                     controller.postalCodeController.value.text =
                                         val.address!.postcode!;
                                   }),
@@ -117,7 +119,10 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                               CustomSelectItem(
                                   label: 'country'.tr,
                                   options: controller.countries.value,
-                                  onChanged: (val) {}),
+                                  defaultValue: controller.country.value,
+                                  onChanged: (val) {
+                                    controller.country.value = val;
+                                  }),
                               Label(title: 'contactInformation'.tr),
                               CustomInput(
                                   controller: controller.phoneController.value,
@@ -127,7 +132,8 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                                   hintText: ''),
                               CustomButton(
                                   onPressed: () {
-                                    if(controller.verifyBusinessInformation()){
+                                    if (controller
+                                        .verifyBusinessInformation()) {
                                       controller.index.value = 1;
                                     }
                                   },
@@ -144,10 +150,9 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                                   onPressed: () {
                                     controller.index.value--;
                                   },
-                                  icon: Icon(Icons.arrow_back)),
+                                  icon: const Icon(Icons.arrow_back)),
                               Text(
-                                'Vérifiez les infromation realtives a votre commerce'
-                                    .tr,
+                                'createAccountStep2Title'.tr,
                                 style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
@@ -157,7 +162,7 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                                 color: Colors.white,
                                 elevation: 10,
                                 child: Container(
-                                  padding: EdgeInsets.all(5),
+                                  padding: const EdgeInsets.all(5),
                                   child: Column(
                                     children: [
                                       PositionDisplay(
@@ -168,20 +173,23 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                                               double.parse(
                                                   controller.address.lon!)),
                                           title: "here".tr),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 5,
                                       ),
                                       Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(
-                                            controller
-                                                .businessController.value.text,
-                                            style: GoogleFonts.poppins(
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 17,
-                                                color: Colors.black87),
+                                          Expanded(
+
+                                            child: Text(
+                                              controller
+                                                  .businessController.value.text,
+                                              style: GoogleFonts.poppins(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15,
+                                                  color: Colors.black87),
+                                            ),
                                           ),
                                           Tag(
                                               content: controller
@@ -191,7 +199,7 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                                                   Constants.buttonColor)
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 5,
                                       ),
                                       Text(controller.address.displayName!)
@@ -199,27 +207,25 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Text(
-                                'Pourquoi souhaitez-vous rejoindes Save Food ?'
-                                    .tr,
+                                'createAccountStep2reason'.tr,
                                 textAlign: TextAlign.center,
                                 style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 15,
                                     color: Constants.defaultBorderColor),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'vous pouvez choisir jusqu à deux options.'
-                                        .tr,
+                                    'createAccountStep2reasonExplication'.tr,
                                     textAlign: TextAlign.center,
                                     style: GoogleFonts.poppins(
                                       fontSize: 15,
@@ -227,7 +233,7 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                                   ),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 5,
                               ),
                               ...controller.raisonJoinedSaveFoodOptions
@@ -249,7 +255,7 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                                             .contains(e.value)
                                             .obs,
                                       )),
-                              SizedBox(
+                              const SizedBox(
                                 height: 15,
                               ),
                               CustomButton(
@@ -275,15 +281,15 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                                   onPressed: () {
                                     controller.index.value--;
                                   },
-                                  icon: Icon(Icons.arrow_back)),
+                                  icon: const Icon(Icons.arrow_back)),
                               Text(
-                                'Ajouter vos information de connexion'.tr,
+                                'createAccountStep3Title'.tr,
                                 style: GoogleFonts.poppins(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 18,
                                     color: Constants.defaultBorderColor),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 10,
                               ),
                               Row(
@@ -291,8 +297,7 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                                 children: [
                                   Expanded(
                                       child: Text(
-                                    'Vous aurew besoin de votre addresse e-mail pour vous connecter a votre compte'
-                                        .tr,
+                                    'createAccountStep3Description'.tr,
                                     textAlign: TextAlign.center,
                                     style: GoogleFonts.poppins(
                                       fontSize: 15,
@@ -300,7 +305,7 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                                   )),
                                 ],
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 15,
                               ),
                               CustomInput(
@@ -309,31 +314,29 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                                   keyboardType: TextInputType.emailAddress,
                                   onValueChanged: (val) {},
                                   hintText: ''),
-                              CustomInput(
-                                  controller: controller.passwordController.value,
-                                  keyboardType: TextInputType.visiblePassword,
-                                  label: 'Password'.tr,
+                              CustomInputPassword(
+                                  controller:
+                                      controller.passwordController.value,
+                                  label: 'password'.tr,
                                   onValueChanged: (val) {},
                                   hintText: ''),
-                              CustomInput(
-                                  controller: controller.confirmPasswordController.value,
-                                  label: 'Confirm Password'.tr,
-                                  keyboardType: TextInputType.visiblePassword,
+                              CustomInputPassword(
+                                  controller: controller
+                                      .confirmPasswordController.value,
+                                  label: 'confirmPassword'.tr,
                                   onValueChanged: (val) {},
                                   hintText: ''),
                               CustomCheckbox(
-                                  label:
-                                      "J'accepte de recevoir les news letters et information de SaveFood par e-mail,sms et notification push, je peux me désincrire )  tout moment"
-                                          .tr,
+                                  label: "allowStoreMessage".tr,
                                   onChanged: (val) {
                                     controller.allow.value = val;
                                   }),
-                              SizedBox(
+                              const SizedBox(
                                 height: 20,
                               ),
                               CustomButton(
                                   onPressed: () {
-                                    if(controller.verifyConnectionInfo()){
+                                    if (controller.verifyConnectionInfo()) {
                                       controller.signLog();
                                     }
                                   },
@@ -365,8 +368,8 @@ class checkBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => Container(
           width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-          margin: EdgeInsets.symmetric(vertical: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+          margin: const EdgeInsets.symmetric(vertical: 10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2),
               color: isChecked.value ? Constants.defaultHeaderColor : null,

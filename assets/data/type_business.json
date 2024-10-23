@@ -13,42 +13,42 @@
   },
   {
     "value": "TAKEAWAY_RESTAURANT",
-    "label": "Restaurant à emporter"
+    "label": "Takeaway Restaurant"
   },
   {
     "value": "SUSHI_RESTAURANT",
-    "label": "Restaurant japonais"
+    "label": "Japanese Restaurant"
   },
   {
     "value": "HOTEL",
-    "label": "Hôtel"
+    "label": "Hotel"
   },
   {
     "value": "BAKERY",
-    "label": "Boulangerie"
+    "label": "Bakery"
   },
   {
     "value": "PASTRY_SHOP",
-    "label": "Pâtisserie"
+    "label": "Pastry Shop"
   },
   {
     "value": "SUPERMARKET",
-    "label": "Supermarché"
+    "label": "Supermarket"
   },
   {
     "value": "BEVERAGE_SHOP",
-    "label": "Boutique de débit de boissons"
+    "label": "Beverage Store"
   },
   {
     "value": "BUTCHER_SHOP",
-    "label": "Boucherie"
+    "label": "Butcher Shop"
   },
   {
     "value": "FRUIT_AND_VEGETABLE_SHOP",
-    "label": "Primeur"
+    "label": "Greengrocer"
   },
   {
     "value": "OTHER",
-    "label": "Autre"
+    "label": "Other"
   }
 ]

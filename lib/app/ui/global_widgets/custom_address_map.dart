@@ -47,7 +47,7 @@ class CustomAddressMap extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            'Choose address',
+                            'chooseAddress'.tr,
                             style: TextStyle(
                                 fontSize: 17,
                                 color: Constants.defaultHeaderColor,
@@ -96,7 +96,6 @@ class CustomAddressMap extends StatelessWidget {
                                         point: market.location,
                                         child: Row(
                                           children: [
-                                            if (market.name == "location")
                                               IconButton(
                                                   onPressed: () {},
                                                   tooltip: market.name,
@@ -105,7 +104,7 @@ class CustomAddressMap extends StatelessWidget {
                                                   Colors.deepPurpleAccent,
                                                   color: Colors.blue,
                                                   icon: const Icon(
-                                                    Icons.my_location_outlined,
+                                                    FontAwesomeIcons.locationDot,
                                                     size: 25,
                                                   ))
                                           ],
@@ -141,7 +140,7 @@ class CustomAddressMap extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Center(
-                                  child: Label(title: 'Address'),
+                                  child: Label(title: 'address'.tr),
                                 ),
                               ],
                             ),
@@ -210,7 +209,7 @@ class CustomAddressMap extends StatelessWidget {
                                       width: 5,
                                     ),
                                     Text(
-                                      'Use my current location',
+                                      'useMyCurrentPosition'.tr,
                                       style: TextStyle(
                                           color: Constants.defaultHeaderColor,
                                           fontSize: 18,
@@ -227,8 +226,8 @@ class CustomAddressMap extends StatelessWidget {
                                 },
                                 disable: selectedValue.value.displayName==null,
                                 text: _userCurrentPosition.value
-                                    ? 'Choose location'
-                                    : 'Apply',
+                                    ? 'chooseLocation'.tr
+                                    : 'apply'.tr,
                                 backgroundColor: Constants.buttonColor)
                           ],
                         ),

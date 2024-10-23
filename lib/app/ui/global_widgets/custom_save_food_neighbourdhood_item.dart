@@ -70,9 +70,9 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            Text(
-                              'Collect Day:',
-                              style: const TextStyle(
+                            const Text(
+                              'pickUp:',
+                              style: TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey,
                               ),
@@ -97,7 +97,7 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
                             Row(
                               children: [
                                 Text(
-                                  '${distance}',
+                                  distance,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w900,
                                       fontSize: 15,

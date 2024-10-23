@@ -20,6 +20,7 @@ class AppWriteCollection{
   static String bagOrderCollections ="670d8c120016e44c7ba4";
   static String foodInventories ="670daa4800315d542ca3";
   static String mealPlanCollection='670e07220006629e1425';
+  static String foodBankCollection='67190fd200379c43e72f';
 }
 
 

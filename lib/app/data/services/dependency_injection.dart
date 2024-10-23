@@ -25,10 +25,10 @@ class DependecyInjection {
     await LanguageService.instance.initLanguage();
     //await logoutUser();
     await dotenv.load();
+    Get.put<SaveFoodAppWriteController>(SaveFoodAppWriteController());
     Get.put<FindAroundController>(FindAroundController());
     Get.put<NavigationController>(NavigationController());
     Get.put<MainController>(MainController());
-    Get.put<SaveFoodAppWriteController>(SaveFoodAppWriteController());
     Get.put<HomeController>(HomeController());
     Get.put<OffersController>(OffersController());
   }

@@ -4,6 +4,7 @@ import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/custom_location_choose.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -13,7 +14,6 @@ class CustomPositionNotSet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   int distance = 0;
     return Scaffold(
       backgroundColor: Colors.white,
       body: Column(
@@ -21,7 +21,7 @@ class CustomPositionNotSet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
-            padding: EdgeInsets.symmetric(horizontal: 20 , vertical: 20),
+            padding: const EdgeInsets.symmetric(horizontal: 20 , vertical: 20),
             width: MediaQuery.sizeOf(context).width,
             color: Colors.white,
             child: Column(
@@ -30,20 +30,20 @@ class CustomPositionNotSet extends StatelessWidget {
                   'assets/image/position.png',
                   height: 100,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text('Nessuna posizione selectionata',
+                Text('noPositionSet'.tr,
                     style: TextStyle(
                       fontWeight: FontWeight.w900,
                       color: Constants.defaultBorderColor,
                     )),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                Text('facci sapere dove vorresti salvare cibo invenduto',
-                    style: TextStyle()),
-                SizedBox(
+                 Text('noPositionSetDescription'.tr,
+                    style: const TextStyle()),
+                const SizedBox(
                   height: 10,
                 ),
                 SizedBox(
@@ -53,16 +53,23 @@ class CustomPositionNotSet extends StatelessWidget {
                       isScrollControlled: true,
                       context: context,
                       builder: (context) => CustomLocationChoose(onChange: (onPositionChanged) async{
-                        FindInService.instance.findIn = onPositionChanged;
-                        await GlobalService.updateUserLocation(LatLng(double.parse(onPositionChanged.lat!), double.parse(onPositionChanged.lon!)), onPositionChanged.distance??0);
-                        refresh();
-                        Get.back();
+                        EasyLoading.show();
+                       try{
+                         FindInService.instance.findIn = onPositionChanged;
+                         await GlobalService.updateUserLocation(LatLng(double.parse(onPositionChanged.lat!), double.parse(onPositionChanged.lon!)), onPositionChanged.distance??0);
+                         refresh();
+                         Get.back();
+                       }catch(e){
+                         print(e);
+                       }finally{
+                         EasyLoading.dismiss();
+                       }
                       }, onClose: (){
                         Get.back();
                       },),
                     );
 
-                  }, text: 'Scegli la posizione', backgroundColor: Constants.buttonColor),
+                  }, text: 'chooseLocation'.tr, backgroundColor: Constants.buttonColor),
                 )
               ],
             ),

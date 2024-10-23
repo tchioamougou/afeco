@@ -3,6 +3,7 @@ import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/custom_checkbox.dart';
 import 'package:afeco/app/ui/global_widgets/custom_input.dart';
 import 'package:afeco/app/ui/global_widgets/custom_select_item.dart';
+import 'package:afeco/app/ui/global_widgets/inputs/custom_input_password.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -40,26 +41,43 @@ class StoreLoginPage extends GetView<StoreLoginController> {
         backgroundColor: Colors.white,
         body: Obx(() => SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     CustomInput(
                       controller: controller.emailController.value,
                       label: 'email'.tr,
-                      hintText: 'email',
+                      hintText: 'email'.tr,
                       onValueChanged: (String value) {},
                     ),
-                    CustomInput(
+                    CustomInputPassword(
                       controller: controller.passController.value,
                       label: 'Password'.tr,
-                      hintText: '',
-                      keyboardType: TextInputType.visiblePassword,
+                      hintText: '*******',
                       onValueChanged: (String value) {},
                     ),
-                    SizedBox(
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    InkWell(
+                        onTap: () {
+                          //  Get.back();
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              'youForgotPassword'.tr,
+                              style: TextStyle(
+                                  color: Constants.defaultHeaderColor,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.normal),
+                            )
+                          ],
+                        )),
+                    const SizedBox(
                       height: 40,
                     ),
                     CustomButton(

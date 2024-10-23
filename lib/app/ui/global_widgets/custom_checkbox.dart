@@ -6,10 +6,10 @@ class CustomCheckbox extends StatefulWidget {
   final Function(bool isChecked) onChanged;
 
   const CustomCheckbox({
-    Key? key,
+    super.key,
     required this.label,
     required this.onChanged,
-  }) : super(key: key);
+  });
 
   @override
   _CustomCheckboxState createState() => _CustomCheckboxState();

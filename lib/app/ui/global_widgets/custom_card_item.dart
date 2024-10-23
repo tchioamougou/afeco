@@ -63,7 +63,7 @@ class CustomCardItem extends StatelessWidget {
                       top: 0,
                       right: 0,
                       child: IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           false ? Icons.favorite : Icons.favorite_border,
                           color: Colors.grey,
                         ),
@@ -166,7 +166,7 @@ class CustomCardItem extends StatelessWidget {
                                       color: Constants.defaultHeaderColor),
                                   const Text('5.0'),
                                   const SizedBox(width: 8),
-                                  Text('${distance}'),
+                                  Text(distance),
                                 ],
                               ),
                               Row(

@@ -12,6 +12,7 @@ import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../layouts/main/main_layout.dart';
 
@@ -110,6 +111,7 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
               ),
               CustomAddressPick(
                 label: 'address'.tr,
+                defaultValue: controller.address,
                 onValueChanged: (val) {
                   controller.address = val;
                 },
@@ -258,7 +260,7 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
                   }),
               CustomInput(
                 controller: controller.reasonController,
-                label: 'reasonForGiving',
+                label: 'reasonForGiving'.tr,
                 onValueChanged: (va) {},
                 hintText: 'reasonForGivingHint'.tr,
                 helper: 'reasonForGivingHelper'.tr,

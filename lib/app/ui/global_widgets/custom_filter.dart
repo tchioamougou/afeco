@@ -5,11 +5,12 @@ import 'package:afeco/app/ui/global_widgets/label.dart';
 import 'package:afeco/app/ui/layouts/main/main_layout.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CustomFilter extends StatefulWidget {
-  VoidCallback onClose;
-  VoidCallback onPress;
-  CustomFilter({super.key, required this.onClose, required this.onPress});
+  final VoidCallback onClose;
+  final VoidCallback onPress;
+  const CustomFilter({super.key, required this.onClose, required this.onPress});
 
   @override
   State<CustomFilter> createState() => _CustomFilterState();
@@ -21,7 +22,7 @@ class _CustomFilterState extends State<CustomFilter> {
   Widget build(BuildContext context) {
     List<String> bagTypes = ['Meals', "Bread & Pastries", "Groceries", "Other"];
     List<String> pickupDays = ['Today', "Tomorrow"];
-    List<String> dietPreferences =['Vegetarian',"Vegan"];
+    List<String> dietPreferences = ['Vegetarian', "Vegan"];
     return Container(
       width: MediaQuery.sizeOf(context).width,
       color: Colors.white,
@@ -32,10 +33,11 @@ class _CustomFilterState extends State<CustomFilter> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  IconButton(onPressed: widget.onClose, icon: Icon(Icons.close))
+                  IconButton(
+                      onPressed: widget.onClose, icon: const Icon(Icons.close))
                 ],
               ),
-              Text(
+              const Text(
                 'Filters',
                 textAlign: TextAlign.center,
                 style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
@@ -43,9 +45,9 @@ class _CustomFilterState extends State<CustomFilter> {
               SizedBox(
                 height: 5.h,
               ),
-              Divider(),
+              const Divider(),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
+                padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,14 +59,14 @@ class _CustomFilterState extends State<CustomFilter> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Label(
-                          title: 'Show sold out',
+                          title: 'showSoldOut'.tr,
                           color: Colors.black,
                         ),
                         Switch(
                           value: fm.showSoldHow,
                           onChanged: (val) {
                             setState(() {
-                              fm.showSoldHow = !fm.showSoldHow ;
+                              fm.showSoldHow = !fm.showSoldHow;
                             });
                           },
                           activeColor: Constants.buttonColor,
@@ -75,22 +77,22 @@ class _CustomFilterState extends State<CustomFilter> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Label(
-                          title: 'Show waste for biogas',
+                          title: 'showBioGaz'.tr,
                           color: Colors.black,
                         ),
                         Switch(
                           value: fm.showWasterForBiogas,
                           onChanged: (val) {
-                           setState(() {
-                             fm.showWasterForBiogas = val;
-                           });
+                            setState(() {
+                              fm.showWasterForBiogas = val;
+                            });
                           },
                           activeColor: Constants.buttonColor,
                         )
                       ],
                     ),
                     Label(
-                      title: "Pickup day",
+                      title: "pickupDay".tr,
                       color: Colors.black87,
                     ),
                     Row(
@@ -112,20 +114,19 @@ class _CustomFilterState extends State<CustomFilter> {
                                   isSelected: fm.pickupDay.contains(e),
                                 ))
                             .toList()),
-                    const Label(
-                      title: "Pickup window",
+                    Label(
+                      title: "pickupWindow".tr,
                       color: Colors.black87,
                     ),
-                    if(fm.pickupWindow.start==0 && fm.pickupWindow.end==24)
-                    Text('All day')
+                    if (fm.pickupWindow.start == 0 && fm.pickupWindow.end == 24)
+                      Text('allDay'.tr)
                     else
-                      Text('${fm.pickupWindow.start.toInt()}h - ${fm.pickupWindow.end.toInt()}h'),
+                      Text(
+                          '${fm.pickupWindow.start.toInt()}h - ${fm.pickupWindow.end.toInt()}h'),
                     RangeSlider(
-
                       activeColor: Constants.buttonColor,
                       values: fm.pickupWindow,
                       divisions: 24,
-
                       onChanged: (val) {
                         setState(() {
                           fm.pickupWindow = val;
@@ -135,7 +136,7 @@ class _CustomFilterState extends State<CustomFilter> {
                       min: 0,
                     ),
                     Label(
-                      title: "Bag types",
+                      title: "bagTypes".tr,
                       color: Colors.black87,
                     ),
                     SingleChildScrollView(
@@ -146,46 +147,47 @@ class _CustomFilterState extends State<CustomFilter> {
                             children: bagTypes
                                 .map((e) => CustomFilterBtn(
                                       title: e,
-                              onChange: (val) {
-                                setState(() {
-                                  if (fm.bagTypes.contains(e)) {
-                                    fm.bagTypes.remove(e);
-                                  } else {
-                                    fm.bagTypes.add(e);
-                                  }
-                                });
-                              },
-                              isSelected: fm.bagTypes.contains(e),                                    ))
+                                      onChange: (val) {
+                                        setState(() {
+                                          if (fm.bagTypes.contains(e)) {
+                                            fm.bagTypes.remove(e);
+                                          } else {
+                                            fm.bagTypes.add(e);
+                                          }
+                                        });
+                                      },
+                                      isSelected: fm.bagTypes.contains(e),
+                                    ))
                                 .toList()),
                       ),
                     ),
                     Label(
-                      title: "Dietary preferences",
+                      title: "dietaryPreference".tr,
                       color: Colors.black87,
                     ),
-                Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children:
-                    dietPreferences.map((e) => CustomFilterBtn(
-                      title: e,
-                      maxHeight:
-                      MediaQuery.sizeOf(context).width * 0.45,
-                      onChange: (val) {
-                        setState(() {
-                          if (fm.dietaryPreferences.contains(e)) {
-                            fm.dietaryPreferences.remove(e);
-                          } else {
-                            fm.dietaryPreferences.add(e);
-                          }
-                        });
-                      },
-                      isSelected: fm.dietaryPreferences.contains(e),
-                    ))
-                        .toList()),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: dietPreferences
+                            .map((e) => CustomFilterBtn(
+                                  title: e,
+                                  maxHeight:
+                                      MediaQuery.sizeOf(context).width * 0.45,
+                                  onChange: (val) {
+                                    setState(() {
+                                      if (fm.dietaryPreferences.contains(e)) {
+                                        fm.dietaryPreferences.remove(e);
+                                      } else {
+                                        fm.dietaryPreferences.add(e);
+                                      }
+                                    });
+                                  },
+                                  isSelected: fm.dietaryPreferences.contains(e),
+                                ))
+                            .toList()),
                   ],
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 100,
               )
             ],
@@ -201,8 +203,9 @@ class _CustomFilterState extends State<CustomFilter> {
                           width: 1),
                     )),
                 width: MediaQuery.sizeOf(context).width,
-                margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: Row(
                   children: [
                     Container(
@@ -213,8 +216,8 @@ class _CustomFilterState extends State<CustomFilter> {
                           FilterService.instance.reset();
                           widget.onPress();
                         },
-                        child: Text('Clear all',
-                            style: TextStyle(
+                        child: Text('clearAll'.tr,
+                            style: const TextStyle(
                                 color: Colors.grey,
                                 fontWeight: FontWeight.bold)),
                       ),
@@ -227,7 +230,7 @@ class _CustomFilterState extends State<CustomFilter> {
                             FilterService.instance.filter = fm;
                             widget.onPress();
                           },
-                          text: 'Apply',
+                          text: 'apply'.tr,
                           backgroundColor: Constants.buttonColor),
                     )
                   ],
@@ -240,11 +243,11 @@ class _CustomFilterState extends State<CustomFilter> {
 }
 
 class CustomFilterBtn extends StatefulWidget {
-  double? maxHeight;
-  String title;
+  final double? maxHeight;
+  final String title;
   bool isSelected;
-  Icon? icon;
-  Function(bool val) onChange;
+  final Icon? icon;
+  final Function(bool val) onChange;
   CustomFilterBtn(
       {super.key,
       this.maxHeight,
