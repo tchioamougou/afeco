@@ -23,13 +23,14 @@ class CustomCategoryAction extends StatelessWidget {
         children: [
           Container(
             margin: const EdgeInsets.symmetric(horizontal: 5,vertical: 10),
-            padding: const EdgeInsets.symmetric(horizontal: 5,vertical: 5),
+            padding: const EdgeInsets.symmetric(horizontal: 10,vertical: 10),
             width: 70,
             height: 70,
             decoration: BoxDecoration(borderRadius: const BorderRadius.all(Radius.circular(200)),
                 color: Constants.defaultBorderColor.withOpacity(0.2)),
             child: ClipRRect(
-              child: Image.asset(image, height: 100,width: 50,fit: BoxFit.cover,),
+              borderRadius: BorderRadius.circular(5),
+              child: Image.asset(image, height: 70,width: 50,fit: BoxFit.cover,),
             ),
           ),
           Center(

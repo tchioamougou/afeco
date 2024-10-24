@@ -24,20 +24,23 @@ class SaveController extends GetxController {
     await EasyLoading.show();
     try {
       Bag gp = Bag(
-        name: 'Surprise Bags',
-        originalPrice: double.parse(originalPriceController.value.text),
-        price: double.parse(newPriceController.value.text),
-        quantity: int.parse(quantityPriceController.value.text),
-        pickupDateStart:
-            Utils.setDateTime(pickupDate.value, pickupDateFrom.value),
-        pickupDateEnd: Utils.setDateTime(pickupDate.value, pickupDateTo.value),
-        rest: int.parse(quantityPriceController.value.text),
-        createdDate: DateTime.now(),
-        lastModifyDate: DateTime.now(),
-        stores: StoreService.instance.store!.documentId,
-        documentId: "",
-        status: BagStatus.available.name
-      );
+          name: 'Surprise Bags',
+          originalPrice: double.parse(originalPriceController.value.text),
+          price: double.parse(newPriceController.value.text),
+          quantity: int.parse(quantityPriceController.value.text),
+          pickupDateStart:
+              Utils.setDateTime(pickupDate.value, pickupDateFrom.value),
+          pickupDateEnd:
+              Utils.setDateTime(pickupDate.value, pickupDateTo.value),
+          rest: int.parse(quantityPriceController.value.text),
+          createdDate: DateTime.now(),
+          lastModifyDate: DateTime.now(),
+          stores: StoreService.instance.store!.documentId,
+          documentId: "",
+          status: BagStatus.available.name,
+          storesLat: StoreService.instance.store!.lat,
+          storesLong: StoreService.instance.store!.long,
+          storesName: StoreService.instance.store!.businessName);
       await _appWriteController.createDocument(
           AppWriteCollection.bagsCollections, gp.toJson());
       EasyLoading.dismiss();

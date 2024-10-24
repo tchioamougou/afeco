@@ -9,6 +9,7 @@ import 'package:afeco/app/ui/global_widgets/custom_save_food_neighbourdhood_item
 import 'package:afeco/app/ui/global_widgets/donate_Widget.dart';
 import 'package:afeco/app/ui/global_widgets/header_custom.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
+import 'package:afeco/app/ui/global_widgets/no_elements/custom_alert.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -29,22 +30,32 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     // TODO: implement initState
-    controller.getGivingPacks();
+    if(FilterService.instance.filter.showNeighborPackages){
+      controller.getGivingPacks();
+    }
     controller.getBags();
     if (FilterService.instance.filter.showSoldHow) {
       controller.getBagsSoldOut();
     }
     super.initState();
   }
-
+   void refresh(){
+     if(FilterService.instance.filter.showNeighborPackages){
+       controller.getGivingPacks();
+     }
+     controller.getBags();
+     if (FilterService.instance.filter.showSoldHow) {
+       controller.getBagsSoldOut();
+     }
+   }
   @override
   Widget build(BuildContext context) {
     InitPageController initPageController = Get.find();
     return MainLayout(
       child: Obx(() {
         if (!controller.hasPosition.value) {
-          return  CustomPositionNotSet(
-            refresh: (){
+          return CustomPositionNotSet(
+            refresh: () {
               Get.delete<HomeController>();
               Get.put(HomeController());
             },
@@ -104,10 +115,20 @@ class _HomePageState extends State<HomePage> {
                               SizedBox(
                                 width: MediaQuery.sizeOf(context).width * 0.67,
                                 child: TextField(
+                                  controller: controller.searchController,
+                                  onSubmitted: (value) {
+                                    if (value.isNotEmpty) {
+                                      controller.isSearching.value = true;
+                                      controller.getSearchBags();
+                                    } else {
+                                      controller.isSearching.value = false;
+                                    }
+                                  },
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: "searchHere".tr,
                                   ),
+                                  textInputAction: TextInputAction.search,
                                 ),
                               ),
                               IconButton(
@@ -117,6 +138,9 @@ class _HomePageState extends State<HomePage> {
                                       Get.back();
                                     },
                                     onPress: () {
+                                      setState(() {
+                                        refresh();
+                                      });
                                       Get.back();
                                     },
                                   ));
@@ -138,141 +162,151 @@ class _HomePageState extends State<HomePage> {
                     const SizedBox(
                       height: 20,
                     ),
-                    Container(
-                      decoration: const BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30))),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-                            child: Label(title: 'categories'.tr),
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: controller.quickActions
-                                  .map((e) => CustomCategoryAction(
-                                        onPress: () {
-                                          if (e['title'] == 'Planning') {
-                                            Get.toNamed(
-                                                AppRoutes.FOOD_PLANNING);
-                                          } else if (e['title'] == 'Orders') {
-                                            Get.toNamed(AppRoutes.MY_ORDERS);
-                                          } else if (e['title'] ==
-                                              'C20 Views') {
-                                            initPageController.selectedTab(3);
-                                          } else {
-                                            Get.toNamed(AppRoutes.MY_SAVE_FOOD);
-                                          }
-                                        },
-                                        title: e['title']!,
-                                        image: e['image']!,
-                                      ))
-                                  .toList(),
+                    if (controller.isSearching.value)
+                      Container(
+                        child: Column(
+                          children: [
+                            if (controller.isSearchError.value)
+                              CustomAlert(
+                                  image: 'assets/image/angry.png',
+                                  title: 'errorOccur'.tr,
+                                  actionLabel: 'Find Again',
+                                  onPress: () {
+                                    controller.getSearchBags();
+                                  })
+                            else if (!controller.isLoading.value)
+                              if (controller.searchBags.isEmpty)
+                                CustomAlert(
+                                    image: 'assets/image/angry.png',
+                                    title: 'noStore'.tr,
+                                    actionLabel: 'Clear search',
+                                    onPress: () {
+                                      controller.searchController.text = '';
+                                      controller.isSearching.value = false;
+                                    })
+                              else
+                                ...controller.searchBags
+                                    .map((f) => CustomCardItem(
+                                          bg: f,
+                                          width: 0.97,
+                                        ))
+                          ],
+                        ),
+                      )
+                    else
+                      Container(
+                        decoration: const BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(30),
+                                topRight: Radius.circular(30))),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                              child: Label(title: 'quickActions'.tr),
                             ),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Label(title: 'forYou'.tr),
-                                SeeAll(onPress: () {
-                                  controller.viewAllNei(
-                                      'forYou'.tr, controller.givingPackages);
-                                })
-                              ],
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: controller.quickActions
+                                    .map((e) => CustomCategoryAction(
+                                          onPress: () {
+                                            if (e['title'] == 'Planning') {
+                                              Get.toNamed(
+                                                  AppRoutes.FOOD_PLANNING);
+                                            } else if (e['title'] == 'Orders') {
+                                              Get.toNamed(AppRoutes.MY_ORDERS);
+                                            } else if (e['title'] ==
+                                                'C20 Views') {
+                                              initPageController.selectedTab(3);
+                                            } else {
+                                              Get.toNamed(
+                                                  AppRoutes.MY_SAVE_FOOD);
+                                            }
+                                          },
+                                          title: e['title']!,
+                                          image: e['image']!,
+                                        ))
+                                    .toList(),
+                              ),
                             ),
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: controller.givingPackages
-                                  .map((i) => CustomSaveFoodNeighbourdhoodItem(
-                                        gp: i,
-                                      ))
-                                  .toList(),
+                            const SizedBox(
+                              height: 20,
                             ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Label(title: 'recommendForYou'.tr),
-                                SeeAll(onPress: () {
-                                  controller.viewAll(
-                                      'recommendForYou'.tr, controller.bags);
-                                })
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: controller.bags.value
-                                  .map((i) => CustomCardItem(
-                                        bg: i,
-                                      ))
-                                  .toList(),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Label(title: 'collectNow'.tr),
-                                SeeAll(onPress: () {
-                                  controller.viewAll(
-                                      'collectNow'.tr, controller.bags);
-                                })
-                              ],
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: controller.bags.value
-                                  .map((i) => CustomCardItem(
-                                        bg: i,
-                                      ))
-                                  .toList(),
-                            ),
-                          ),
-                          const DonateWidget(),
-                          if (FilterService.instance.filter.showSoldHow)
+                            if(FilterService.instance.filter.showNeighborPackages && controller.givingPackages.isNotEmpty)
                             Column(
                               children: [
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(10, 0, 20, 0),
+                                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Label(title: 'soldOut'.tr),
+                                      Label(title: 'forYou'.tr),
+                                      SeeAll(onPress: () {
+                                        controller.viewAllNei(
+                                            'forYou'.tr, controller.givingPackages);
+                                      })
+                                    ],
+                                  ),
+                                ),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: controller.givingPackages
+                                        .map(
+                                            (i) => CustomSaveFoodNeighbourdhoodItem(
+                                                  gp: i,
+                                                ))
+                                        .toList(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Label(title: 'recommendForYou'.tr),
+                                  SeeAll(onPress: () {
+                                    controller.viewAll(
+                                        'recommendForYou'.tr, controller.bags);
+                                  })
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: controller.bags.value
+                                    .map((i) => CustomCardItem(
+                                          bg: i,
+                                        ))
+                                    .toList(),
+                              ),
+                            ),
+                            /// Save before it's too late
+                            Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Label(title: 'saveBeforeTooLate'.tr),
                                       SeeAll(onPress: () {
                                         controller.viewAll(
-                                            'soldOut'.tr, controller.soldOuts);
+                                            'saveBeforeTooLate'.tr, controller.bags);
                                       })
                                     ],
                                   ),
@@ -283,18 +317,121 @@ class _HomePageState extends State<HomePage> {
                                 SingleChildScrollView(
                                   scrollDirection: Axis.horizontal,
                                   child: Row(
-                                    children: controller.soldOuts
+                                    children: controller.bags.value
                                         .map((i) => CustomCardItem(
-                                              bg: i,
-                                            ))
+                                      bg: i,
+                                    ))
                                         .toList(),
                                   ),
                                 ),
                               ],
                             ),
-                        ],
+                            ///--- ends
+                            ///New bags
+                            Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Label(title: 'newsBags'.tr),
+                                      SeeAll(onPress: () {
+                                        controller.viewAll(
+                                            'newsBags'.tr, controller.bags);
+                                      })
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: Row(
+                                    children: controller.bags.value
+                                        .map((i) => CustomCardItem(
+                                      bg: i,
+                                    ))
+                                        .toList(),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            ///--- ends
+                            const SizedBox(
+                              height: 15,
+                            ),
+                            const DonateWidget(),
+
+                            /// There where popular today
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                              child: Row(
+                                mainAxisAlignment:
+                                MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Label(title: 'popularToday'.tr),
+                                  SeeAll(onPress: () {
+                                    controller.viewAll(
+                                        'popularToday'.tr, controller.bags);
+                                  })
+                                ],
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                children: controller.bags.value
+                                    .map((i) => CustomCardItem(
+                                  bg: i,
+                                ))
+                                    .toList(),
+                              ),
+                            ),
+                            /// end
+                            /// Sold out
+                            if (FilterService.instance.filter.showSoldHow)
+                              Column(
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(10, 0, 20, 0),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Label(title: 'soldOut'.tr),
+                                        SeeAll(onPress: () {
+                                          controller.viewAll('soldOut'.tr,
+                                              controller.soldOuts);
+                                        })
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: controller.soldOuts
+                                          .map((i) => CustomCardItem(
+                                                bg: i,
+                                              ))
+                                          .toList(),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            /// --- End
+                          ],
+                        ),
                       ),
-                    ),
                   ],
                 )
               ],

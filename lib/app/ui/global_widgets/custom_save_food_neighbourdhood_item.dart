@@ -70,9 +70,9 @@ class CustomSaveFoodNeighbourdhoodItem extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            const Text(
-                              'pickUp:',
-                              style: TextStyle(
+                             Text(
+                              '${"pickUp".tr}:',
+                              style: const TextStyle(
                                 fontSize: 14,
                                 color: Colors.grey,
                               ),

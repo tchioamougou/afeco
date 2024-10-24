@@ -48,6 +48,7 @@ dependencies:
   panara_dialogs:
   url_launcher:
   intl:
+  internet_connection_checker: ^1.0.0+1
 
 
 dev_dependencies:
@@ -83,5 +84,7 @@ flutter:
     - assets/image/
     - assets/animation/
     - assets/data/
+    - assets/image/foods/
+    - assets/image/avatars/
     - .env
   uses-material-design: true

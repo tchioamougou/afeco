@@ -8,6 +8,7 @@ import 'package:afeco/app/ui/layouts/main/main_layout.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:afeco/app/ui/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
@@ -35,7 +36,8 @@ class CustomCardItem extends StatelessWidget {
         Get.toNamed(AppRoutes.OFFER_DETAILS, arguments: bg);
       },
       child: Card(
-        elevation: 1,
+        elevation: 5,
+        shadowColor: Constants.defaultHeaderColor.withOpacity(0.4),
         child: Container(
           width:
               MediaQuery.sizeOf(context).width * (width != null ? width! : 0.7),
@@ -63,9 +65,14 @@ class CustomCardItem extends StatelessWidget {
                       top: 0,
                       right: 0,
                       child: IconButton(
+                        padding: EdgeInsets.zero,
+                       style: IconButton.styleFrom(
+                         backgroundColor:Colors.transparent.withOpacity(0.4)
+                       ),
                         icon: const Icon(
-                          false ? Icons.favorite : Icons.favorite_border,
-                          color: Colors.grey,
+                          true ? FontAwesomeIcons.solidHeart : Icons.favorite_border,
+                          color: Colors.white,
+                          size: 20,
                         ),
                         onPressed: () {},
                       )),
@@ -103,9 +110,9 @@ class CustomCardItem extends StatelessWidget {
                       top: 10,
                       left: 5,
                       child: Tag(
-                        backgroundColor: Constants.buttonColor.withOpacity(0.2),
-                        color: Colors.yellow,
-                        content: '${bg.rest} left',
+                        backgroundColor: Colors.yellow,
+                        color: Constants.buttonColor,
+                        content: '${bg.rest} ${'left'.tr}',
                       ))
                 ],
               ),
@@ -121,41 +128,35 @@ class CustomCardItem extends StatelessWidget {
                           Text(
                             bg.name,
                             style: const TextStyle(
-                                fontSize: 14, fontWeight: FontWeight.bold),
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           SizedBox(
                             height: 5.h,
                           ),
                           Row(
                             children: [
-                              const Text(
-                                'Pick up:',
+                              Text(
+                                '${"pickUp".tr} ${times['day']}:',
                                 style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
+                                  fontSize: 13,
                                 ),
                               ),
                               SizedBox(
                                 width: 5.w,
                               ),
-                              Tag(
-                                  content: '${times['day']}',
-                                  color: Colors.white,
-                                  backgroundColor:bg.status==BagStatus.soldOut.name?Colors.grey: Constants.buttonColor),
                               SizedBox(
                                 width: 4.w,
                               ),
                               Text(
                                 '${times['time']}',
                                 style: const TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.grey,
+                                  fontSize: 13,
                                 ),
                               ),
                             ],
                           ),
                           SizedBox(
-                            height: 3.h,
+                            height: 10.h,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -163,10 +164,27 @@ class CustomCardItem extends StatelessWidget {
                               Row(
                                 children: [
                                   Icon(Icons.star,
+                                      size: 17,
                                       color: Constants.defaultHeaderColor),
-                                  const Text('5.0'),
-                                  const SizedBox(width: 8),
-                                  Text(distance),
+                                  const Text(
+                                    '5.0',
+                                    style: const TextStyle(
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    '|',
+                                    style:
+                                        TextStyle(color: Colors.grey.shade400),
+                                  ),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    distance,
+                                    style: const TextStyle(
+                                      fontSize: 13,
+                                    ),
+                                  ),
                                 ],
                               ),
                               Row(
@@ -174,8 +192,8 @@ class CustomCardItem extends StatelessWidget {
                                   Text(
                                     "XAF ${bg.price}",
                                     style: TextStyle(
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 18,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: 15,
                                         color: Constants.defaultHeaderColor),
                                   ),
                                   const SizedBox(width: 8),

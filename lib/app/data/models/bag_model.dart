@@ -13,6 +13,9 @@ class Bag {
   String stores;
   String documentId;
   String status;
+  String storesName;
+  double storesLat;
+  double storesLong;
   Bag(
       {required this.name,
       required this.originalPrice,
@@ -25,7 +28,10 @@ class Bag {
       required this.lastModifyDate,
       required this.stores,
       required this.documentId,
-      required this.status});
+      required this.status,
+      required this.storesLat,
+      required this.storesLong,
+      required this.storesName});
 
   factory Bag.fromJson(Map<String, dynamic> json) {
     return Bag(
@@ -41,6 +47,9 @@ class Bag {
       stores: json['stores'],
       documentId: json['documentId'],
       status: json['status'],
+      storesLat: json['storesLat'],
+      storesLong: json['storesLong'],
+      storesName: json['storesName'],
     );
   }
 
@@ -57,7 +66,10 @@ class Bag {
       'lastModifyDate': lastModifyDate.toIso8601String(),
       'stores': stores,
       'documentId': documentId,
-      "status": status
+      "status": status,
+      'storesLat': storesLat,
+      'storesLong': storesLong,
+      'storesName': storesName,
     };
   }
 }
@@ -75,6 +87,9 @@ class BagRelation {
   StoreModel stores;
   String documentId;
   String status;
+  String storesName;
+  double storesLat;
+  double storesLong;
   BagRelation(
       {required this.name,
       required this.originalPrice,
@@ -87,22 +102,29 @@ class BagRelation {
       required this.lastModifyDate,
       required this.stores,
       required this.documentId,
-      required this.status});
+      required this.status,
+      required this.storesLat,
+      required this.storesLong,
+      required this.storesName});
 
   factory BagRelation.fromJson(Map<String, dynamic> json) {
     return BagRelation(
-        name: json['name'],
-        originalPrice: json['originalPrice'].toDouble(),
-        price: json['price'].toDouble(),
-        quantity: json['quantity'],
-        pickupDateStart: DateTime.parse(json['pickupDateStart']),
-        pickupDateEnd: DateTime.parse(json['pickupDateEnd']),
-        rest: json['rest'],
-        createdDate: DateTime.parse(json['createdDate']),
-        lastModifyDate: DateTime.parse(json['lastModifyDate']),
-        stores: StoreModel.fromJson(json['stores']),
-        documentId: json['documentId'],
-        status: json['status']);
+      name: json['name'],
+      originalPrice: json['originalPrice'].toDouble(),
+      price: json['price'].toDouble(),
+      quantity: json['quantity'],
+      pickupDateStart: DateTime.parse(json['pickupDateStart']),
+      pickupDateEnd: DateTime.parse(json['pickupDateEnd']),
+      rest: json['rest'],
+      createdDate: DateTime.parse(json['createdDate']),
+      lastModifyDate: DateTime.parse(json['lastModifyDate']),
+      stores: StoreModel.fromJson(json['stores']),
+      documentId: json['documentId'],
+      status: json['status'],
+      storesLat: json['storesLat'],
+      storesLong: json['storesLong'],
+      storesName: json['storesName'],
+    );
   }
 
   Map<String, dynamic> toJson() {
@@ -118,7 +140,10 @@ class BagRelation {
       'lastModifyDate': lastModifyDate.toIso8601String(),
       'stores': stores,
       'documentId': documentId,
-      "status": "status"
+      "status": status,
+      'storesLat': storesLat,
+      'storesLong': storesLong,
+      'storesName': storesName,
     };
   }
 }

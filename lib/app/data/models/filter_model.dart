@@ -3,24 +3,26 @@ import 'package:flutter/material.dart';
 class FilterModel {
   bool showSoldHow;
   bool showWasterForBiogas;
+  bool showNeighborPackages;
   List<String> pickupDay;
   RangeValues pickupWindow;
   List<String> bagTypes;
   List<String> dietaryPreferences;
 
-  FilterModel({
-    required this.showSoldHow,
-    required this.showWasterForBiogas,
-    required this.pickupDay,
-    required this.pickupWindow,
-    required this.bagTypes,
-    required this.dietaryPreferences,
-  });
+  FilterModel(
+      {required this.showSoldHow,
+      required this.showWasterForBiogas,
+      required this.pickupDay,
+      required this.pickupWindow,
+      required this.bagTypes,
+      required this.dietaryPreferences,
+      required this.showNeighborPackages});
 
   factory FilterModel.fromJson(Map<String, dynamic> json) {
     return FilterModel(
       showSoldHow: json['showSoldHow'] ?? false,
       showWasterForBiogas: json['showWasterForBiogas'] ?? false,
+      showNeighborPackages: json['showNeighborPackages'] ?? false,
       pickupDay: List<String>.from(json['pickupDay'] ?? []),
       pickupWindow: RangeValues(
         json['pickupWindow']['start'] ?? 0.0,
@@ -42,6 +44,7 @@ class FilterModel {
       },
       'bagTypes': bagTypes,
       'dietaryPreferences': dietaryPreferences,
+      "showNeighborPackages": showNeighborPackages
     };
   }
 }

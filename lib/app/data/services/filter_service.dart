@@ -18,7 +18,7 @@ class FilterService {
     if (storage != null) {
       return FilterModel.fromJson(jsonDecode(storage) as Map<String, dynamic>);
     } else {
-      return FilterModel(showSoldHow: false, showWasterForBiogas: false, pickupDay: [], pickupWindow: RangeValues(0,24), bagTypes: [], dietaryPreferences: []);
+      return FilterModel(showSoldHow: false, showWasterForBiogas: false, pickupDay: [], pickupWindow: RangeValues(0,24), bagTypes: [], dietaryPreferences: [],showNeighborPackages: false);
     }
   }
 
@@ -26,6 +26,6 @@ class FilterService {
     _getStorage.remove(_storageKey);
   }
   void reset(){
-    filter=  FilterModel(showSoldHow: false, showWasterForBiogas: false, pickupDay: [], pickupWindow: RangeValues(0,24), bagTypes: [], dietaryPreferences: []);
+    filter=  FilterModel(showSoldHow: false, showWasterForBiogas: false, pickupDay: [], pickupWindow: RangeValues(0,24), bagTypes: [], dietaryPreferences: [],showNeighborPackages: false);
   }
 }

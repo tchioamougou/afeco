@@ -185,6 +185,17 @@ const Map<String, String> en = {
   "createAccountStep3Description":"You need your e-mail address to log in to your account.",
   "password":"Password",
   "confirmPassword":"Confirm Password",
-  "allowStoreMessage":"I agree to receive SaveFood newsletters and information by e-mail, sms and push notification. I can unsubscribe at any time."
+  "allowStoreMessage":"I agree to receive SaveFood newsletters and information by e-mail, sms and push notification. I can unsubscribe at any time.",
+  "errorOccur":"Something going wrong. Please try Again",
+  "noStore":"No stores matching your search",
+  "quickActions":"Quick Actions",
+  "showNeighborPackages":"Show neighbor packages",
+  "filters":"Filters",
+  "saveBeforeTooLate":"Save before it's to late",
+  "popularToday":"There where popular today",
+  "newsBags":"New Bags",
+  "letSaveFoodToday":"Let save food today",
+  "nothingShareWithNei":"You haven't shared anything with your neighbors",
+  "saveFood":"Save Food"
 
 };

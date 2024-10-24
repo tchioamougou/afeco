@@ -28,169 +28,189 @@ class _CustomFilterState extends State<CustomFilter> {
       color: Colors.white,
       child: Stack(
         children: [
-          Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  IconButton(
-                      onPressed: widget.onClose, icon: const Icon(Icons.close))
-                ],
-              ),
-              const Text(
-                'Filters',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
-              ),
-              SizedBox(
-                height: 5.h,
-              ),
-              const Divider(),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Label(
-                          title: 'showSoldOut'.tr,
-                          color: Colors.black,
-                        ),
-                        Switch(
-                          value: fm.showSoldHow,
-                          onChanged: (val) {
-                            setState(() {
-                              fm.showSoldHow = !fm.showSoldHow;
-                            });
-                          },
-                          activeColor: Constants.buttonColor,
-                        )
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Label(
-                          title: 'showBioGaz'.tr,
-                          color: Colors.black,
-                        ),
-                        Switch(
-                          value: fm.showWasterForBiogas,
-                          onChanged: (val) {
-                            setState(() {
-                              fm.showWasterForBiogas = val;
-                            });
-                          },
-                          activeColor: Constants.buttonColor,
-                        )
-                      ],
-                    ),
-                    Label(
-                      title: "pickupDay".tr,
-                      color: Colors.black87,
-                    ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: pickupDays
-                            .map((e) => CustomFilterBtn(
-                                  title: e,
-                                  maxHeight:
-                                      MediaQuery.sizeOf(context).width * 0.45,
-                                  onChange: (val) {
-                                    setState(() {
-                                      if (fm.pickupDay.contains(e)) {
-                                        fm.pickupDay.remove(e);
-                                      } else {
-                                        fm.pickupDay.add(e);
-                                      }
-                                    });
-                                  },
-                                  isSelected: fm.pickupDay.contains(e),
-                                ))
-                            .toList()),
-                    Label(
-                      title: "pickupWindow".tr,
-                      color: Colors.black87,
-                    ),
-                    if (fm.pickupWindow.start == 0 && fm.pickupWindow.end == 24)
-                      Text('allDay'.tr)
-                    else
-                      Text(
-                          '${fm.pickupWindow.start.toInt()}h - ${fm.pickupWindow.end.toInt()}h'),
-                    RangeSlider(
-                      activeColor: Constants.buttonColor,
-                      values: fm.pickupWindow,
-                      divisions: 24,
-                      onChanged: (val) {
-                        setState(() {
-                          fm.pickupWindow = val;
-                        });
-                      },
-                      max: 24,
-                      min: 0,
-                    ),
-                    Label(
-                      title: "bagTypes".tr,
-                      color: Colors.black87,
-                    ),
-                    SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Container(
-                        width: MediaQuery.sizeOf(context).width,
-                        child: Row(
-                            children: bagTypes
-                                .map((e) => CustomFilterBtn(
-                                      title: e,
-                                      onChange: (val) {
-                                        setState(() {
-                                          if (fm.bagTypes.contains(e)) {
-                                            fm.bagTypes.remove(e);
-                                          } else {
-                                            fm.bagTypes.add(e);
-                                          }
-                                        });
-                                      },
-                                      isSelected: fm.bagTypes.contains(e),
-                                    ))
-                                .toList()),
-                      ),
-                    ),
-                    Label(
-                      title: "dietaryPreference".tr,
-                      color: Colors.black87,
-                    ),
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: dietPreferences
-                            .map((e) => CustomFilterBtn(
-                                  title: e,
-                                  maxHeight:
-                                      MediaQuery.sizeOf(context).width * 0.45,
-                                  onChange: (val) {
-                                    setState(() {
-                                      if (fm.dietaryPreferences.contains(e)) {
-                                        fm.dietaryPreferences.remove(e);
-                                      } else {
-                                        fm.dietaryPreferences.add(e);
-                                      }
-                                    });
-                                  },
-                                  isSelected: fm.dietaryPreferences.contains(e),
-                                ))
-                            .toList()),
+                    IconButton(
+                        onPressed: widget.onClose, icon: const Icon(Icons.close))
                   ],
                 ),
-              ),
-              const SizedBox(
-                height: 100,
-              )
-            ],
+                Text(
+                  'Filters'.tr,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontWeight: FontWeight.w900, fontSize: 18),
+                ),
+                SizedBox(
+                  height: 5.h,
+                ),
+                const Divider(),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 5.h,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Label(
+                            title: 'showSoldOut'.tr,
+                            color: Colors.black,
+                          ),
+                          Switch(
+                            value: fm.showSoldHow,
+                            onChanged: (val) {
+                              setState(() {
+                                fm.showSoldHow = !fm.showSoldHow;
+                              });
+                            },
+                            activeColor: Constants.buttonColor,
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Label(
+                            title: 'showBioGaz'.tr,
+                            color: Colors.black,
+                          ),
+                          Switch(
+                            value: fm.showWasterForBiogas,
+                            onChanged: (val) {
+                              setState(() {
+                                fm.showWasterForBiogas = val;
+                              });
+                            },
+                            activeColor: Constants.buttonColor,
+                          )
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Label(
+                            title: 'showNeighborPackages'.tr,
+                            color: Colors.black,
+                          ),
+                          Switch(
+                            value: fm.showNeighborPackages,
+                            onChanged: (val) {
+                              setState(() {
+                                fm.showNeighborPackages = val;
+                              });
+                            },
+                            activeColor: Constants.buttonColor,
+                          )
+                        ],
+                      ),
+                      Label(
+                        title: "pickupDay".tr,
+                        color: Colors.black87,
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: pickupDays
+                              .map((e) => CustomFilterBtn(
+                            title: e,
+                            maxHeight:
+                            MediaQuery.sizeOf(context).width * 0.45,
+                            onChange: (val) {
+                              setState(() {
+                                if (fm.pickupDay.contains(e)) {
+                                  fm.pickupDay.remove(e);
+                                } else {
+                                  fm.pickupDay.add(e);
+                                }
+                              });
+                            },
+                            isSelected: fm.pickupDay.contains(e),
+                          ))
+                              .toList()),
+                      Label(
+                        title: "pickupWindow".tr,
+                        color: Colors.black87,
+                      ),
+                      if (fm.pickupWindow.start == 0 && fm.pickupWindow.end == 24)
+                        Text('allDay'.tr)
+                      else
+                        Text(
+                            '${fm.pickupWindow.start.toInt()}h - ${fm.pickupWindow.end.toInt()}h'),
+                      RangeSlider(
+                        activeColor: Constants.buttonColor,
+                        values: fm.pickupWindow,
+                        divisions: 24,
+                        onChanged: (val) {
+                          setState(() {
+                            fm.pickupWindow = val;
+                          });
+                        },
+                        max: 24,
+                        min: 0,
+                      ),
+                      Label(
+                        title: "bagTypes".tr,
+                        color: Colors.black87,
+                      ),
+                      SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Container(
+                          width: MediaQuery.sizeOf(context).width,
+                          child: Row(
+                              children: bagTypes
+                                  .map((e) => CustomFilterBtn(
+                                title: e,
+                                onChange: (val) {
+                                  setState(() {
+                                    if (fm.bagTypes.contains(e)) {
+                                      fm.bagTypes.remove(e);
+                                    } else {
+                                      fm.bagTypes.add(e);
+                                    }
+                                  });
+                                },
+                                isSelected: fm.bagTypes.contains(e),
+                              ))
+                                  .toList()),
+                        ),
+                      ),
+                      Label(
+                        title: "dietaryPreference".tr,
+                        color: Colors.black87,
+                      ),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: dietPreferences
+                              .map((e) => CustomFilterBtn(
+                            title: e,
+                            maxHeight:
+                            MediaQuery.sizeOf(context).width * 0.45,
+                            onChange: (val) {
+                              setState(() {
+                                if (fm.dietaryPreferences.contains(e)) {
+                                  fm.dietaryPreferences.remove(e);
+                                } else {
+                                  fm.dietaryPreferences.add(e);
+                                }
+                              });
+                            },
+                            isSelected: fm.dietaryPreferences.contains(e),
+                          ))
+                              .toList()),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 100,
+                )
+              ],
+            ),
           ),
           Positioned(
               bottom: 0,

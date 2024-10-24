@@ -58,7 +58,9 @@ class EmailConfirmationController extends GetxController {
               bagsSaved: 0,
               carboneImpact: 0,
               excessFoodSaved: 0,
-              moneySaved: 0);
+              moneySaved: 0,
+            image: Constants.defaultImage
+          );
           Document dc = await _appWriteController.createDocument(
               AppWriteCollection.userCollections, um.toJson());
           UserService.instance.user = UserModel.fromJson(dc.data);

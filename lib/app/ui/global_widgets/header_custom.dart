@@ -2,70 +2,143 @@ import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/ui/layouts/main/main_layout.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class HeaderCustom extends StatelessWidget {
+class HeaderCustom extends StatefulWidget {
   final Icon icon;
   final VoidCallback onPress;
-   HeaderCustom({super.key, required this.icon, required this.onPress});
-  final List<String> profileIcons =['user',"heat",'face-smile',"solid-face-smile","sun","user-secret","nmug-saucer"];
+  String? image;
+  HeaderCustom(
+      {super.key, required this.icon, required this.onPress, this.image});
+
+  @override
+  State<HeaderCustom> createState() => _HeaderCustomState();
+}
+
+class _HeaderCustomState extends State<HeaderCustom> {
+  final List<String> profileIcons = [
+    'user',
+    "heat",
+    'face-smile',
+    "solid-face-smile",
+    "sun",
+    "user-secret",
+    "nmug-saucer"
+  ];
+
   @override
   Widget build(BuildContext context) {
-
     return Row(
       children: [
         InkWell(
-          onTap: (){
+          onTap: () {
             Get.dialog(
-              barrierDismissible: false,
-              AlertDialog(
-                backgroundColor: Constants.buttonColor,
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    IconButton(onPressed: (){
-                      Get.back();
-                    }, icon: Icon(Icons.close,color: Colors.white,))
-                  ],
-                ),
-                content:Container(
-                  width: double.maxFinite,
-                  child: GridView.builder(
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 4,
-                      childAspectRatio: 1.0,
-                    ),
-                    itemCount: profileIcons.length,
-                    itemBuilder: (context, index) {
-                      return IconButton(
-                        onPressed: (){},
-                        icon: Icon(FontAwesomeIcons.arrowPointer,color: Colors.white,),
-                      );
-                    },
+                barrierDismissible: false,
+                AlertDialog(
+                  backgroundColor: Constants.buttonColor,
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      IconButton(
+                          onPressed: () {
+                            Get.back();
+                          },
+                          icon: const Icon(
+                            Icons.close,
+                            color: Colors.white,
+                          ))
+                    ],
                   ),
-                ),
-              )
-              )
-             ;
+                  content: Container(
+                    width: double.maxFinite,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        InkWell(
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(300),
+                                border: Border.all(
+                                    color: Constants.defaultBorderColor,
+                                    width: 1)),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(300),
+                              child: Image.asset(
+                                'assets/image/avatars/happy.png',
+                              ),
+                            ),
+                          ),
+                          onTap: () {
+                            widget.image = 'assets/image/avatars/happy.png';
+                            setState(() {});
+                          },
+                        ),
+                        InkWell(
+                          onTap: () {
+                            widget.image =
+                                'assets/image/avatars/happy-face.png';
+                            setState(() {});
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(300),
+                                border: Border.all(
+                                    color: Constants.defaultBorderColor,
+                                    width: 1)),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(300),
+                              child: Image.asset(
+                                'assets/image/avatars/happy-face.png',
+                              ),
+                            ),
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {
+                            widget.image = 'assets/image/avatars/smile.png';
+                            setState(() {});
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(300),
+                                border: Border.all(
+                                    color: Constants.defaultBorderColor,
+                                    width: 1)),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(300),
+                              child: Image.asset(
+                                'assets/image/avatars/smile.png',
+                              ),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ));
           },
           child: Container(
-            width: 70,
-            height: 70,
+            width: 50,
+            height: 50,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(300),
-                border: Border.all(color: Constants.defaultBorderColor,width: 1)
-            ),
-            child:ClipRRect(
-              child: Image.asset(
-                'assets/image/planet.png',
-              ),
+                border:
+                    Border.all(color: Constants.defaultBorderColor, width: 1)),
+            child: ClipRRect(
               borderRadius: BorderRadius.circular(300),
-            ) ,
+              child: Image.asset(
+                widget.image ?? Constants.defaultImage,
+              ),
+            ),
           ),
-        )
-        ,
+        ),
         const SizedBox(
           width: 10,
         ),
@@ -89,7 +162,7 @@ class HeaderCustom extends StatelessWidget {
               Container(
                 width: 200.w,
                 child: Text(
-                  'Let save food today',
+                  'letSaveFoodToday'.tr,
                   style: TextStyle(
                       fontSize: 15.sp,
                       fontWeight: FontWeight.bold,
@@ -107,26 +180,32 @@ class HeaderCustom extends StatelessWidget {
               Stack(
                 children: [
                   IconButton.outlined(
-                    onPressed: onPress,
-                    icon: icon,
+                    onPressed: widget.onPress,
+                    icon: widget.icon,
                     style: ElevatedButton.styleFrom(
-                        backgroundColor:Constants.defaultBorderColor,
+                        backgroundColor: Constants.defaultBorderColor,
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100),
                         ),
-                        padding:
-                        const EdgeInsets.symmetric(horizontal: 17, vertical: 15)),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 13, vertical: 13)),
                   ),
                   Positioned(
-                      top: 5,
+                      top: 4,
                       right: 10,
                       child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 2,vertical: 2),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(300),
                           color: Colors.white,
-
                         ),
-                        child: Text('20',style: GoogleFonts.poppins(fontSize: 14, color: Colors.red, fontWeight: FontWeight.bold),),
+                        child: Text(
+                          '20',
+                          style: GoogleFonts.poppins(
+                              fontSize: 12,
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold),
+                        ),
                       ))
                 ],
               )
