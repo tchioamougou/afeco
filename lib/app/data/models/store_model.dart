@@ -17,7 +17,10 @@ class StoreModel {
   String documentId;
   String profileCoverId;
   String profileLogoId;
-  List<String>raisonOfJoining;
+  int totalLikes;
+  int totalReviews;
+  double rating;
+  List<String> raisonOfJoining;
   StoreModel({
     required this.businessName,
     required this.typeBusiness,
@@ -35,28 +38,34 @@ class StoreModel {
     required this.documentId,
     required this.profileCoverId,
     required this.profileLogoId,
-    required this.raisonOfJoining
+    required this.raisonOfJoining,
+    required this.totalLikes,
+    required this.totalReviews,
+    required this.rating,
   });
 
   factory StoreModel.fromJson(Map<String, dynamic> json) {
     return StoreModel(
-        businessName: json['businessName'],
-        typeBusiness: json['typeBusiness'],
-        streetNameNumber: json['streetNameNumber'],
-        postalCode: json['postalCode'],
-        city: json['city'],
-        country: json['country'],
-        phoneNumber: json['phoneNumber'],
-        email: json['email'],
-        allow: json['allow'],
-        createdDate: DateTime.parse(json['createdDate']),
-        userId: json['userId'],
-        lat: json['lat'],
-        long: json['long'],
-        documentId: json['documentId'] ?? "",
-        profileCoverId: json['profileCoverId'] ?? "",
-        profileLogoId: json['profileLogoId'] ?? "",
-        raisonOfJoining: List<String>.from(json['raisonOfJoining']),
+      businessName: json['businessName'],
+      typeBusiness: json['typeBusiness'],
+      streetNameNumber: json['streetNameNumber'],
+      postalCode: json['postalCode'],
+      city: json['city'],
+      country: json['country'],
+      phoneNumber: json['phoneNumber'],
+      email: json['email'],
+      allow: json['allow'],
+      createdDate: DateTime.parse(json['createdDate']),
+      userId: json['userId'],
+      lat: json['lat'],
+      long: json['long'],
+      totalLikes: json['totalLikes']??0,
+      totalReviews: json['totalReviews']??0,
+      rating: json['rating']??0.0,
+      documentId: json['documentId'] ?? "",
+      profileCoverId: json['profileCoverId'] ?? "",
+      profileLogoId: json['profileLogoId'] ?? "",
+      raisonOfJoining: List<String>.from(json['raisonOfJoining']),
     );
   }
 
@@ -78,7 +87,10 @@ class StoreModel {
       "documentId": documentId,
       "profileCoverId": profileCoverId,
       "profileLogoId": profileLogoId,
-      "raisonOfJoining":raisonOfJoining
+      "raisonOfJoining": raisonOfJoining,
+      "totalLikes": totalLikes,
+      "totalReviews": totalReviews,
+      "rating": rating,
     };
   }
 

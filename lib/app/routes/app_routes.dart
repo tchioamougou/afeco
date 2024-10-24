@@ -34,4 +34,5 @@ class AppRoutes {
   static const MY_SAVE_FOOD = '/my-save-food';
   static const DONATION = '/donation';
   static const STORE_LOGIN = '/store-login';
+  static const DONATION_THANKING = '/donation-thanking';
 }

@@ -17,24 +17,29 @@ class UserModel {
   int bagsSaved;
   int excessFoodSaved;
   String image;
+  int distance;
+  List<String> storesLiked;
 
-  UserModel(
-      {required this.userId,
-      required this.name,
-      required this.countryCode,
-      required this.countryName,
-      required this.allow,
-      required this.email,
-      required this.acceptEmailAlert,
-      required this.acceptNotification,
-      required this.lat,
-      required this.long,
-      required this.documentId,
-      required this.moneySaved,
-      required this.carboneImpact,
-      required this.bagsSaved,
-      required this.excessFoodSaved,
-      required this.image});
+  UserModel({
+    required this.userId,
+    required this.name,
+    required this.countryCode,
+    required this.countryName,
+    required this.allow,
+    required this.email,
+    required this.acceptEmailAlert,
+    required this.acceptNotification,
+    required this.lat,
+    required this.long,
+    required this.documentId,
+    required this.moneySaved,
+    required this.carboneImpact,
+    required this.bagsSaved,
+    required this.excessFoodSaved,
+    required this.image,
+    required this.distance,
+    required this.storesLiked,
+  });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
       userId: json['userId'],
@@ -51,8 +56,11 @@ class UserModel {
       moneySaved: double.parse('${json['moneySaved'] ?? 0}'),
       carboneImpact: json['carboneImpact'] ?? 0,
       bagsSaved: json['bagsSaved'] ?? 0,
+      distance: json['distance'] ?? 2,
       excessFoodSaved: json['excessFoodSaved'] ?? 0,
-      image: json['image'] ?? Constants.defaultImage);
+      image: json['image'] ?? Constants.defaultImage,
+      storesLiked: List<String>.from(json['storesLiked'] ?? []),
+  );
 
   Map<String, dynamic> toJson() => {
         'userId': userId,
@@ -70,6 +78,8 @@ class UserModel {
         'carboneImpact': carboneImpact,
         'bagsSaved': bagsSaved,
         'excessFoodSaved': excessFoodSaved,
-        "image": image
+        "image": image,
+        'distance': distance,
+        "storesLiked": storesLiked,
       };
 }

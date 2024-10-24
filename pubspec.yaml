@@ -87,4 +87,5 @@ flutter:
     - assets/image/foods/
     - assets/image/avatars/
     - .env
+    - assets/image/gifs/
   uses-material-design: true

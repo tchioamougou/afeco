@@ -37,9 +37,10 @@ class EmailConfirmationController extends GetxController {
         if (dls.total > 0) {
           print(dls.documents[0].data.toString());
           UserService.instance.user = UserModel.fromJson(dls.documents[0].data);
-          if(UserService.instance.user!.long!=0 && UserService.instance.user!.lat!=0){
+          if (UserService.instance.user!.long != 0 &&
+              UserService.instance.user!.lat != 0) {
             Get.offAllNamed(AppRoutes.INIT_PAGE);
-          }else{
+          } else {
             Get.offAllNamed(AppRoutes.SET_LOCATION);
           }
         } else {
@@ -59,8 +60,9 @@ class EmailConfirmationController extends GetxController {
               carboneImpact: 0,
               excessFoodSaved: 0,
               moneySaved: 0,
-            image: Constants.defaultImage
-          );
+              distance: 2,
+              image: Constants.defaultImage,
+              storesLiked: []);
           Document dc = await _appWriteController.createDocument(
               AppWriteCollection.userCollections, um.toJson());
           UserService.instance.user = UserModel.fromJson(dc.data);
@@ -68,16 +70,18 @@ class EmailConfirmationController extends GetxController {
         }
       } catch (e) {
         logoutUser();
-        EasyLoading.showError("An Error Occur");
+        EasyLoading.showError("errorOccur".tr);
         print(e);
       } finally {
         EasyLoading.dismiss();
       }
     }
   }
+
   Future<void> resendEmail() async {
     EasyLoading.show();
-    await _appWriteController.createEmail(_signLogController.emailController.value.text);
+    await _appWriteController
+        .createEmail(_signLogController.emailController.value.text);
     EasyLoading.dismiss();
   }
 }

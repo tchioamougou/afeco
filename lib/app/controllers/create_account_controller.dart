@@ -55,8 +55,11 @@ class CreateAccountController extends GetxController {
       await EasyLoading.show();
       try {
         /// start by creating the new user in the database and login the user
-        User us = await _appWriteController.createStoreAccount(emailController.value.text,
-            passwordController.value.text, businessController.value.text);
+        User us = await _appWriteController.createStoreAccount(
+            emailController.value.text,
+            passwordController.value.text,
+            businessController.value.text);
+
         /// After the user is created, create the store related to the user
         StoreModel sm = StoreModel(
             businessName: businessController.value.text,
@@ -75,10 +78,14 @@ class CreateAccountController extends GetxController {
             documentId: "",
             profileCoverId: "",
             profileLogoId: "",
-            raisonOfJoining: raisonJoinedSaveFoods.value);
+            raisonOfJoining: raisonJoinedSaveFoods.value,
+            rating: 0.0,
+            totalLikes: 0,
+            totalReviews: 0);
         Document dc = await _appWriteController.createDocument(
             AppWriteCollection.storeCollections, sm.toJson());
         StoreService.instance.store = StoreModel.fromJson(dc.data);
+
         /// After the store is created send a verification Code to the user to verify her identity
         await _appWriteController.sendEmailVerificationCode();
         Get.toNamed(AppRoutes.EMAIL_CONFIRMATION);

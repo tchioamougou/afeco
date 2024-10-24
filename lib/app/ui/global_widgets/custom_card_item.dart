@@ -1,4 +1,5 @@
 import 'package:afeco/app/data/models/bag_model.dart';
+import 'package:afeco/app/data/models/global_service.dart';
 import 'package:afeco/app/data/services/session_service.dart';
 import 'package:afeco/app/data/services/store_service.dart';
 import 'package:afeco/app/data/services/user_service.dart';
@@ -8,6 +9,7 @@ import 'package:afeco/app/ui/layouts/main/main_layout.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:afeco/app/ui/utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
@@ -22,12 +24,14 @@ class CustomCardItem extends StatelessWidget {
     Map<String, String> times =
         Utils.formatDates(bg.pickupDateStart, bg.pickupDateEnd);
     LatLng point1;
+    bool like = false;
     if (SessionService.instance.isStore()) {
       point1 = LatLng(
           StoreService.instance.store!.lat, StoreService.instance.store!.long);
     } else {
       point1 = LatLng(
           UserService.instance.user!.lat, UserService.instance.user!.long);
+      like =  UserService.instance.user!.storesLiked.contains(bg.stores.documentId);
     }
     LatLng point2 = LatLng(bg.stores.lat, bg.stores.long);
     String distance = Utils.distanceToText(point1, point2);
@@ -66,15 +70,21 @@ class CustomCardItem extends StatelessWidget {
                       right: 0,
                       child: IconButton(
                         padding: EdgeInsets.zero,
+                       visualDensity: VisualDensity.compact,
                        style: IconButton.styleFrom(
                          backgroundColor:Colors.transparent.withOpacity(0.4)
                        ),
-                        icon: const Icon(
-                          true ? FontAwesomeIcons.solidHeart : Icons.favorite_border,
+                        icon:  Icon(
+                          like ? FontAwesomeIcons.solidHeart : Icons.favorite_border,
                           color: Colors.white,
                           size: 20,
                         ),
-                        onPressed: () {},
+                        onPressed: () async {
+                          like = !like;
+                          EasyLoading.show();
+                         await GlobalService.updateUserLikes(bg.stores.documentId);
+                          EasyLoading.dismiss();
+                        },
                       )),
                   Positioned(
                       bottom: 5,

@@ -29,7 +29,7 @@ class LandingPage extends GetView<LandingController> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('assets/image/save_food.png',width: MediaQuery.sizeOf(context).width*0.9,),
+                    Image.asset('assets/image/gifs/healthy-food.gif',width: MediaQuery.sizeOf(context).width*0.9,),
                   ],
                 ),
                 Column(

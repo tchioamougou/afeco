@@ -1,3 +1,4 @@
+import 'package:afeco/app/data/models/food_bank_model.dart';
 import 'package:afeco/app/ui/global_widgets/custom_bottom_action.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
@@ -128,96 +129,16 @@ class DonationPage extends GetView<DonationController> {
                                   SizedBox(
                                     height: 20,
                                   ),
-                                  ...controller.foodBanks.value.map((i) => Stack(
-                                        children: [
-                                          Container(
-                                            margin: EdgeInsets.fromLTRB(
-                                                0, 10, 0, 10),
-                                            child: Card(
-                                              color: Color.fromRGBO(
-                                                  220, 238, 247, 1),
-                                              elevation: 1,
-                                              child: Container(
-                                                width:
-                                                    MediaQuery.sizeOf(context)
-                                                            .width *
-                                                        0.95,
-                                                padding: EdgeInsets.symmetric(
-                                                    horizontal: 20,
-                                                    vertical: 20),
-                                                child: Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text(
-                                                      i.name,
-                                                      style: TextStyle(
-                                                          fontWeight:
-                                                              FontWeight.w900,
-                                                          fontSize: 17),
-                                                    ),
-                                                    SizedBox(
-                                                      height: 10,
-                                                    ),
-                                                    Text(
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        i.description),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                              top: 0,
-                                              left: MediaQuery.sizeOf(context)
-                                                      .width *
-                                                  0.45,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            100.0),
-                                                    child: Image.asset(
-                                                      'assets/image/img.png',
-                                                      height: 30,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  )
-                                                ],
-                                              )),
-                                          Positioned(
-                                              top: 0,
-                                              left: MediaQuery.sizeOf(context)
-                                                      .width *
-                                                  0.38,
-                                              child: Column(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            100.0),
-                                                    child: Image.network(
-                                                      Utils.imageLoader(i.profileId),
-                                                      height: 30,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  )
-                                                ],
-                                              )),
-                                        ],
-                                      ))
+                                  ...controller.foodBanks.value
+                                      .map((i) => FoodBankCard(
+                                            donation: i,
+                                            isSelected: i.documentId ==
+                                                controller
+                                                    .selectFoodBand.value?.documentId,
+                                            onSelected: (f) {
+                                              controller.selectFoodBand.value = f;
+                                            },
+                                          ))
                                 ],
                               ),
                             )
@@ -232,7 +153,8 @@ class DonationPage extends GetView<DonationController> {
                           children: [
                             CustomBottomAction(
                                 onPressed: () {
-                                  Get.bottomSheet(Obx(() => Container(
+                                  if(controller.selectFoodBand.value!=null) {
+                                    Get.bottomSheet(Obx(() => Container(
                                         width: MediaQuery.sizeOf(context).width,
                                         decoration: BoxDecoration(
                                           color: Colors.white,
@@ -267,13 +189,22 @@ class DonationPage extends GetView<DonationController> {
                                                       BorderRadius.circular(
                                                           300),
                                                 ),
+                                                ClipRRect(
+                                                  child: Image.network(
+                                                    Utils.imageLoader(controller.selectFoodBand.value!.profileId),
+                                                    height: 50,
+                                                  ),
+                                                  borderRadius:
+                                                  BorderRadius.circular(
+                                                      300),
+                                                ),
                                               ],
                                             ),
                                             Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                Text('Banque du cameroun',
+                                                Text('${controller.selectFoodBand.value!.name}',
                                                     style: GoogleFonts.roboto(
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -390,7 +321,7 @@ class DonationPage extends GetView<DonationController> {
                                                 ],
                                               ),
                                             ),
-                                            SizedBox(
+                                            const SizedBox(
                                               height: 15,
                                             ),
                                             CustomButton(
@@ -403,6 +334,7 @@ class DonationPage extends GetView<DonationController> {
                                           ],
                                         ),
                                       )));
+                                  }
                                 },
                                 text: 'Donate',
                                 backgroundColor: Constants.buttonColor)
@@ -465,5 +397,117 @@ class _CustomFilterBtnState extends State<CustomFilterBtn> {
                 ),
               ],
             )));
+  }
+}
+
+class FoodBankCard extends StatefulWidget {
+  final FoodBankModel
+      donation; // Assuming 'Donation' class from previous response
+  final bool isSelected;
+  final Function(FoodBankModel) onSelected;
+  const FoodBankCard(
+      {Key? key,
+      required this.donation,
+      required this.isSelected,
+      required this.onSelected})
+      : super(key: key);
+
+  @override
+  State<FoodBankCard> createState() => _FoodBankCardState();
+}
+
+class _FoodBankCardState extends State<FoodBankCard> {
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        // Main card with tap detection
+        GestureDetector(
+          onTap: () {
+            setState(() {
+              //_isSelected = !_isSelected; // Toggle selection state
+              widget.onSelected(widget.donation);
+            });
+          },
+          child: Container(
+            margin: EdgeInsets.fromLTRB(0, 10, 0, 10),
+            child: Card(
+              color: widget.isSelected
+                  ? Constants.defaultHeaderColor
+                  : Color.fromRGBO(220, 238, 247, 1), // Change color on tap
+              elevation: 1,
+              child: Container(
+                width: MediaQuery.sizeOf(context).width * 0.95,
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      widget.donation.name,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w900,
+                        fontSize: 17,
+                        color: widget.isSelected
+                            ? Colors.white
+                            : Colors.black, // Change text color on tap
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      widget.donation.description,
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: widget.isSelected
+                            ? Colors.white70
+                            : Colors.black54, // Change text color on tap
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ),
+        Positioned(
+          top: 0,
+          left: MediaQuery.sizeOf(context).width * 0.45,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(100.0),
+                child: Image.asset(
+                  'assets/image/img.png',
+                  height: 30,
+                  fit: BoxFit.cover,
+                ),
+              )
+            ],
+          ),
+        ),
+        Positioned(
+          top: 0,
+          left: MediaQuery.sizeOf(context).width * 0.38,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(100.0),
+                child: Image.network(
+                  Utils.imageLoader(widget.donation.profileId),
+                  height: 30,
+                  fit: BoxFit.cover,
+                ),
+              )
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }

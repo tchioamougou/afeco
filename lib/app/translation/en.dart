@@ -196,6 +196,8 @@ const Map<String, String> en = {
   "newsBags":"New Bags",
   "letSaveFoodToday":"Let save food today",
   "nothingShareWithNei":"You haven't shared anything with your neighbors",
-  "saveFood":"Save Food"
+  "saveFood":"Save Food",
+  "thankYouFoodDonation":"Thank You for Your Donation",
+  "thankYouTitleDonation":"Thank you for your generous donation"
 
 };
