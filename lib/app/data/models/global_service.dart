@@ -5,9 +5,12 @@ import 'package:afeco/app/data/models/user_model.dart';
 import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:appwrite/models.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
+import 'package:share_plus/share_plus.dart';
 
 SaveFoodAppWriteController _appWriteController = Get.find();
 
@@ -53,5 +56,23 @@ class GlobalService extends GetxService {
       print('this is the response ${response.reasonPhrase}');
     if (response.statusCode == 201) {
     } else {}
+  }
+  static Future<bool> inviteFriend() async {
+    final files = <XFile>[];
+    final data = await rootBundle.load('assets/image/save_food.png');
+    final buffer = data.buffer;
+    files.add(
+      XFile.fromData(
+        buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
+        name: 'flutter_logo.png',
+        mimeType: 'image/png',
+      ),
+    );
+    dynamic shareResult = await Share.shareXFiles(
+      files,
+      subject: "shareToSave".tr,
+      text: "shareToSaveMessage".tr,
+    );
+    return shareResult.status == ShareResultStatus.success;
   }
 }

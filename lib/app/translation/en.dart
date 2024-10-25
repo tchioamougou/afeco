@@ -223,5 +223,19 @@ const Map<String, String> en = {
   "shareToSaveMessage":
       "Every year, tons of food end up in the garbage can. ❌ By inviting your friends to join [Name of your app], we can change that. Download the app https://afgriot.com and join the movement against food waste! #StopGaspi #FoodForAll",
   "togetherAgainst":"Together against waste",
-  "deleteAccount":"Delete Account"
+  "deleteAccount":"Delete Account",
+  "personalInformation":"Personal Information",
+  'optional':"(optional)",
+  "by1":"We're sad to see you go! Your contributions have helped save food and protect our planet",
+  "by2":"If you're certain, please click the Delete Account button below. Otherwise, click Cancel to stay with us",
+  "byeTitle":"Leave so soon?",
+  "privacyPolicy":"privacy Policy",
+  'doNotShareOrSellData':"Do not sell or share my personal information",
+  "legal":"Legal",
+  "joinUs":"Join Save Food",
+  "howSaveFoodWorks":"How save food works",
+  "helpWithOrder":"Help with Order",
+  "others":"Others",
+  "proceedMessage":"Are you sure you want to proceed?",
+  "manageAccount":"Manage Account"
 };

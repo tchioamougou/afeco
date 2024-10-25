@@ -7,8 +7,8 @@ class CustomListStile extends StatelessWidget {
   final String title;
   final IconData icon;
   final VoidCallback onPress;
-  final Widget? trailing;
   final Widget? subtitle;
+  final IconData? trailing;
   const CustomListStile({
     super.key,
     required this.title,
@@ -21,15 +21,15 @@ class CustomListStile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return     ListTile(
-    dense: false,
+    dense: true,
     onTap: onPress,
     subtitle: subtitle,
     title: Text(title,style: TextStyle(
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w400,
     color: Colors.black87,
-    fontSize: 20.sp),),
-    leading: FaIcon(icon, color: Constants.defaultHeaderColor,size: 22,),
-    trailing:trailing,
+    fontSize: 18.sp),),
+    leading: FaIcon(icon, color: Constants.defaultHeaderColor,size: 18,),
+    trailing:trailing!=null?FaIcon(trailing, color: Colors.black,size: 18,):null,
     )
     ;
   }

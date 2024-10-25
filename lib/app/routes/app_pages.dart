@@ -1,4 +1,12 @@
-import '../bindings/donation_thanking_binding.dart';
+import '../bindings/web_display_binding.dart';
+import '../ui/pages/web_display_page/web_display_page.dart';
+      import '../bindings/legal_binding.dart';
+import '../ui/pages/legal_page/legal_page.dart';
+      import '../bindings/delete_account_binding.dart';
+import '../ui/pages/delete_account_page/delete_account_page.dart';
+      import '../bindings/user_account_details_binding.dart';
+import '../ui/pages/user_account_details_page/user_account_details_page.dart';
+      import '../bindings/donation_thanking_binding.dart';
 import '../ui/pages/donation_thanking_page/donation_thanking_page.dart';
       import '../bindings/store_login_binding.dart';
 import '../ui/pages/store_login_page/store_login_page.dart';
@@ -277,6 +285,30 @@ class AppPages {
       name: AppRoutes.DONATION_THANKING,
       page: () => const DonationThankingPage(),
       binding: DonationThankingBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.USER_ACCOUNT_DETAILS,
+      page: () => const UserAccountDetailsPage(),
+      binding: UserAccountDetailsBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.DELETE_ACCOUNT,
+      page: () => const DeleteAccountPage(),
+      binding: DeleteAccountBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.LEGAL,
+      page: () => const LegalPage(),
+      binding: LegalBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.WEB_DISPLAY,
+      page: () => const WebDisplayPage(),
+      binding: WebDisplayBinding(),
       transition: _defaultTransition,
     ), 
 ];

@@ -35,4 +35,8 @@ class AppRoutes {
   static const DONATION = '/donation';
   static const STORE_LOGIN = '/store-login';
   static const DONATION_THANKING = '/donation-thanking';
+  static const USER_ACCOUNT_DETAILS = '/user-account-details';
+  static const DELETE_ACCOUNT = '/delete-account';
+  static const LEGAL = '/legal';
+  static const WEB_DISPLAY = '/web-display';
 }
