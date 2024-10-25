@@ -18,12 +18,67 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
   Widget build(BuildContext context) {
     return MainLayout(
       child: Scaffold(
-        appBar: CustomAppBar(title: 'accountDetails'.tr,),
+        appBar: CustomAppBar(
+          title: 'accountDetails'.tr,
+        ),
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
+                CustomListStile(
+                    title: 'Profile'.tr,
+                    icon: FontAwesomeIcons.user,
+                    trailing: FaIcon(
+                      FontAwesomeIcons.chevronRight,
+                      color: Constants.defaultHeaderColor,
+                    ),
+                    onPress: () {}),
+                CustomListStile(
+                    title: 'language'.tr,
+                    icon: FontAwesomeIcons.globe,
+                    trailing: FaIcon(
+                      FontAwesomeIcons.chevronRight,
+                      color: Constants.defaultHeaderColor,
+                    ),
+                    subtitle: Text(LanguageService.instance.language.name.tr),
+                    onPress: () {
+                      Get.toNamed(AppRoutes.LANGUAGE);
+                    }),
+                CustomListStile(
+                    title: 'notification'.tr,
+                    icon: FontAwesomeIcons.bell,
+                    trailing: FaIcon(
+                      FontAwesomeIcons.chevronRight,
+                      color: Constants.defaultHeaderColor,
+                    ),
+                    onPress: () {
+                      AppSettings.openAppSettings(
+                          type: AppSettingsType.notification);
+                    }),
+                CustomListStile(
+                    title: 'position'.tr,
+                    icon: FontAwesomeIcons.mapLocation,
+                    trailing: FaIcon(
+                      FontAwesomeIcons.chevronRight,
+                      color: Constants.defaultHeaderColor,
+                    ),
+                    onPress: () {
+                      AppSettings.openAppSettings(
+                          type: AppSettingsType.location);
+                    }),
+                CustomListStile(
+                    title: 'security'.tr,
+                    icon: FontAwesomeIcons.key,
+                    trailing: FaIcon(
+                      FontAwesomeIcons.chevronRight,
+                      color: Constants.defaultHeaderColor,
+                    ),
+                    onPress: () {
+                      AppSettings.openAppSettings(
+                          type: AppSettingsType.security);
+                    }),
                 Card(
                   elevation: 30,
                   child: Container(
@@ -46,7 +101,7 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "youAreHero".tr,
+                                      "inviteFriendTitle".tr,
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
                                           fontWeight: FontWeight.w900,
@@ -58,9 +113,9 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                                     ),
                                     Center(
                                       child: Text(
-                                        "accountDetailsCardDetails".tr,
+                                        "inviteFriendMessage".tr,
                                         style: TextStyle(
-                                            fontWeight: FontWeight.w900,
+                                            fontWeight: FontWeight.w400,
                                             color: Colors.white,
                                             fontSize: 15.sp),
                                       ),
@@ -69,10 +124,15 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                                       height: 10.h,
                                     ),
                                     ElevatedButton(
-                                        onPressed: () {
-                                          Get.toNamed(AppRoutes.FOOD_PLANNING);
+                                        onPressed: () async {
+                                          bool shared =
+                                              await controller.inviteFriend();
+                                          if (shared) {
+                                            Get.snackbar('youAreHero'.tr,
+                                                'togetherAgainst'.tr);
+                                          }
                                         },
-                                        child:  Text('foodPlanning'.tr)),
+                                        child: Text('inviteFriends'.tr)),
                                   ],
                                 ),
                               ),
@@ -102,56 +162,43 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                   ),
                 ),
                 CustomListStile(
-                    title: 'Profile'.tr,
-                    icon: FontAwesomeIcons.user,
-                    trailing:  FaIcon(FontAwesomeIcons.chevronRight, color: Constants.defaultHeaderColor,),
-                    onPress: () {}),
-                CustomListStile(
-                    title: 'notification'.tr,
-                    icon: FontAwesomeIcons.bell,
-                    trailing:  FaIcon(FontAwesomeIcons.chevronRight, color: Constants.defaultHeaderColor,),
-                    onPress: () {
-                      AppSettings.openAppSettings(type: AppSettingsType.notification);
-                    }),
-                CustomListStile(
-                    title: 'position'.tr,
-                    icon: FontAwesomeIcons.mapLocation,
-                    trailing:  FaIcon(FontAwesomeIcons.chevronRight, color: Constants.defaultHeaderColor,),
-                    onPress: () {
-                      AppSettings.openAppSettings(type: AppSettingsType.location);
-                    }),
-                CustomListStile(
-                    title: 'security'.tr,
-                    icon: FontAwesomeIcons.key,
-                    trailing:  FaIcon(FontAwesomeIcons.chevronRight, color: Constants.defaultHeaderColor,),
-                    onPress: () {
-                      AppSettings.openAppSettings(type: AppSettingsType.security);
-                    }),
-                CustomListStile(
-                    title: 'language'.tr,
-                    icon: FontAwesomeIcons.globe,
-                    trailing:  FaIcon(FontAwesomeIcons.chevronRight, color: Constants.defaultHeaderColor,),
-                    subtitle: Text(LanguageService.instance.language.name.tr),
-                    onPress: () {
-                      Get.toNamed(AppRoutes.LANGUAGE);
-                    }),
-                CustomListStile(
                     title: 'darkMode'.tr,
                     icon: FontAwesomeIcons.eye,
-                    trailing:  FaIcon(FontAwesomeIcons.toggleOff, color: Constants.defaultHeaderColor,),
+                    trailing: FaIcon(
+                      FontAwesomeIcons.toggleOff,
+                      color: Constants.defaultHeaderColor,
+                    ),
                     onPress: () {}),
                 CustomListStile(
-                    title: 'Logout'.tr, icon: FontAwesomeIcons.close, onPress: () async{
-                 try{
-                   EasyLoading.show();
-                   await logoutUser();
-                   EasyLoading.dismiss();
-                   Get.offAllNamed(AppRoutes.LANDING);
-                 }catch(e){
-                   EasyLoading.dismiss();
-                    print(e);
-                 }
-                })
+                    title: 'Actions History'.tr,
+                    icon: FontAwesomeIcons.history,
+                    onPress: () {}),
+                CustomListStile(
+                    title: 'helpsCenter'.tr,
+                    icon: FontAwesomeIcons.message,
+                    onPress: () {}),
+                CustomListStile(
+                    title: 'privacy'.tr,
+                    icon: FontAwesomeIcons.keybase,
+                    onPress: () {}),
+                CustomListStile(
+                    title: 'Logout'.tr,
+                    icon: FontAwesomeIcons.close,
+                    onPress: () async {
+                      try {
+                        EasyLoading.show();
+                        await logoutUser();
+                        EasyLoading.dismiss();
+                        Get.offAllNamed(AppRoutes.LANDING);
+                      } catch (e) {
+                        EasyLoading.dismiss();
+                      }
+                    }),
+                CustomListStile(
+                    title: 'deleteAccount'.tr,
+                    icon: FontAwesomeIcons.deleteLeft,
+                    onPress: () async {
+                    })
               ],
             ),
           ),

@@ -20,23 +20,17 @@ class CustomListStile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(7.0),
-        side: const BorderSide(color: Colors.grey,width: 0.001),
-      ),
-      color: Colors.white,
-      child: ListTile(
-        dense: false,
-        onTap: onPress,
-        subtitle: subtitle,
-        title: Text(title,style: TextStyle(
-            fontWeight: FontWeight.w900,
-            color: Constants.defaultHeaderColor,
-            fontSize: 20.sp),),
-        leading: FaIcon(icon, color: Constants.defaultHeaderColor,),
-        trailing:trailing,
-      ),
-    );
+    return     ListTile(
+    dense: false,
+    onTap: onPress,
+    subtitle: subtitle,
+    title: Text(title,style: TextStyle(
+    fontWeight: FontWeight.w700,
+    color: Colors.black87,
+    fontSize: 20.sp),),
+    leading: FaIcon(icon, color: Constants.defaultHeaderColor,size: 22,),
+    trailing:trailing,
+    )
+    ;
   }
 }

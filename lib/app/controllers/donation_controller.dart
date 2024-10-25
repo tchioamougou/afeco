@@ -6,7 +6,6 @@ import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:appwrite/models.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 
