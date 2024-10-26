@@ -6,6 +6,7 @@ import 'package:afeco/app/ui/global_widgets/custom_category_action.dart';
 import 'package:afeco/app/ui/global_widgets/custom_filter.dart';
 import 'package:afeco/app/ui/global_widgets/custom_position_not_set.dart';
 import 'package:afeco/app/ui/global_widgets/custom_save_food_neighbourdhood_item.dart';
+import 'package:afeco/app/ui/global_widgets/custom_select_payment_method.dart';
 import 'package:afeco/app/ui/global_widgets/donate_Widget.dart';
 import 'package:afeco/app/ui/global_widgets/header_custom.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';

@@ -39,3 +39,6 @@ enum GivingPackageStatus{
 enum BagStatus{
   available, soldOut,canceled
 }
+enum SelectPaymentMethod{
+  creditCard, mobile
+}

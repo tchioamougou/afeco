@@ -265,5 +265,11 @@ const Map<String, String> en = {
   'question11': 'I have contacted you, but have not received an answer yet', 'question11_description': 'We apologize for the delay. Please try contacting us again.',
   'question12': 'What is the Save Food widget and how does it work?', 'question12_description': 'The widget shows you nearby stores with available meals.',
   'question13': 'What is "Dynamic price"?', 'question13_description': 'Dynamic pricing adjusts the price based on the remaining time and demand.',
-  'question14': 'Can someone else pick up my meal for me?', 'question14_description': 'Yes, you can authorize someone else to pick up your meal.'
+  'question14': 'Can someone else pick up my meal for me?', 'question14_description': 'Yes, you can authorize someone else to pick up your meal.',
+  "supportCharity":"Support a local charity",
+  "saveFoodSharityText": "Save Food, Save Lives Partnering with local charities and non-profits, we're committed to fighting hunger in your community. Donate directly through the app to support those in need.",
+  "donationAmount":"Donation Amount",
+  "donateNow":"Donate Now",
+  "donate":"Donate"
+
 };

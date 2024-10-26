@@ -17,8 +17,9 @@ class CinetPayService extends GetxService {
         titleBackgroundColor: Constants.defaultHeaderColor,
         configData: <String, dynamic>{
           'apikey': Constants.cinetApiKey,
-         'site_id': int.parse(Constants.cinetSiteId!),
-          'notify_url': Constants.cinetNotifyUrl
+          'site_id': int.parse(Constants.cinetSiteId!),
+          'notify_url': Constants.cinetNotifyUrl,
+          "type": "MOBILE"
         },
         paymentData: <String, dynamic>{
           'transaction_id': Utils.generateTransactionID(),
