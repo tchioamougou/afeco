@@ -53,10 +53,11 @@ class GlobalService extends GetxService {
           "action": action,
           // "userId": 1,
         }));
-      print('this is the response ${response.reasonPhrase}');
+    print('this is the response ${response.reasonPhrase}');
     if (response.statusCode == 201) {
     } else {}
   }
+
   static Future<bool> inviteFriend() async {
     final files = <XFile>[];
     final data = await rootBundle.load('assets/image/save_food.png');
@@ -74,5 +75,23 @@ class GlobalService extends GetxService {
       text: "shareToSaveMessage".tr,
     );
     return shareResult.status == ShareResultStatus.success;
+  }
+
+  static Future<void> updateUserNotification() async {
+    Document dc = await _appWriteController.updateDocument(
+        AppWriteCollection.userCollections,
+        UserService.instance.user!.documentId, {
+      "isEmailNotificationsEnabled":
+          UserService.instance.user!.isEmailNotificationsEnabled,
+      "isCalendarRemindersEnabled":
+          UserService.instance.user!.isCalendarRemindersEnabled,
+      "isImportantUpdatesEnabled":
+          UserService.instance.user!.isImportantUpdatesEnabled,
+      "isPushNotification": UserService.instance.user!.isPushNotification,
+      "isAnnouncementsEnabled":
+          UserService.instance.user!.isAnnouncementsEnabled,
+      "reminderDays": UserService.instance.user!.reminderDays,
+    });
+    UserService.instance.user = UserModel.fromJson(dc.data);
   }
 }

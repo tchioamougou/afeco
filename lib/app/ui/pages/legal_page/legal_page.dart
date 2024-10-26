@@ -26,7 +26,7 @@ class LegalPage extends GetView<LegalController> {
                   title: Text("termsAndConditions".tr),
                   trailing: Icon(Icons.chevron_right),
                   onTap: () {
-                    Get.toNamed(AppRoutes.WEB_DISPLAY,arguments: ['termsAndConditions'.tr,'https://savefoodweb.vercel.app/']);
+                    Get.toNamed(AppRoutes.WEB_DISPLAY,arguments: ['termsAndConditions'.tr,'https://www.iubenda.com/conditions-generales/49709492']);
                   },
                 ),
                 ListTile(
@@ -34,7 +34,7 @@ class LegalPage extends GetView<LegalController> {
                   title: Text("privacyPolicy".tr),
                   trailing: Icon(Icons.chevron_right),
                   onTap: (){
-                    Get.toNamed(AppRoutes.WEB_DISPLAY,arguments: ['privacyPolicy'.tr,'https://savefoodweb.vercel.app/']);
+                    Get.toNamed(AppRoutes.WEB_DISPLAY,arguments: ['privacyPolicy'.tr,'https://www.iubenda.com/privacy-policy/49709492']);
                   },
                 ),
                 ListTile(
@@ -42,7 +42,7 @@ class LegalPage extends GetView<LegalController> {
                   title: Text("doNotShareOrSellData".tr),
                   trailing: Icon(Icons.chevron_right),
                   onTap: (){
-                    Get.toNamed(AppRoutes.WEB_DISPLAY,arguments: ['doNotShareOrSellData'.tr.tr,'https://savefoodweb.vercel.app/']);
+                    Get.toNamed(AppRoutes.WEB_DISPLAY,arguments: ['doNotShareOrSellData'.tr.tr,'https://www.iubenda.com/privacy-policy/49709492/cookie-policy']);
                   },
                 ),
               ],

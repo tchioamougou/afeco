@@ -39,4 +39,7 @@ class AppRoutes {
   static const DELETE_ACCOUNT = '/delete-account';
   static const LEGAL = '/legal';
   static const WEB_DISPLAY = '/web-display';
+  static const NOTIFICATION_SETTINGS = '/notification-settings';
+  static const HOW_IT_WORKS_SETTINGS = '/how-it-works-settings';
+  static const HOW_IT_WORKS_SHOW_SETTINGS ='/how-it-works-show-settings';
 }

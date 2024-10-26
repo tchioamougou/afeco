@@ -32,13 +32,13 @@ class DeleteAccountPage extends GetView<DeleteAccountController> {
                       child: Column(
                         children: [
                           Image.asset(
-                            'assets/image/angry.png',
+                            'assets/image/gifs/angry.gif',
                             height: 100,
                           ),
                           SizedBox(
                             height: 40,
                           ),
-                          Text('byeTitle',
+                          Text('byeTitle'.tr,
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontWeight: FontWeight.w900,

@@ -52,8 +52,7 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                     icon: FontAwesomeIcons.bell,
                     trailing: Icons.chevron_right,
                     onPress: () {
-                      AppSettings.openAppSettings(
-                          type: AppSettingsType.notification);
+                    Get.toNamed(AppRoutes.NOTIFICATION_SETTINGS);
                     }),
                 CustomListStile(
                     title: 'position'.tr,
@@ -81,7 +80,9 @@ class AccountDetailsPage extends GetView<AccountDetailsController> {
                     title: 'howSaveFoodWorks'.tr,
                     icon: Icons.help_outline_outlined,
                     trailing: Icons.chevron_right,
-                    onPress: () {}),
+                    onPress: () {
+                      Get.toNamed(AppRoutes.HOW_IT_WORKS_SETTINGS);
+                    }),
                 CustomListStile(
                     title: 'joinUs'.tr,
                     icon: Icons.person_add_alt_outlined,

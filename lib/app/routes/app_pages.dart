@@ -1,4 +1,9 @@
-import '../bindings/web_display_binding.dart';
+import 'package:afeco/app/ui/pages/account_details_page/how_it_works.dart';
+import 'package:afeco/app/ui/pages/account_details_page/how_it_works_show.dart';
+
+import '../bindings/notification_settings_binding.dart';
+import '../ui/pages/notification_settings_page/notification_settings_page.dart';
+      import '../bindings/web_display_binding.dart';
 import '../ui/pages/web_display_page/web_display_page.dart';
       import '../bindings/legal_binding.dart';
 import '../ui/pages/legal_page/legal_page.dart';
@@ -310,6 +315,24 @@ class AppPages {
       page: () => const WebDisplayPage(),
       binding: WebDisplayBinding(),
       transition: _defaultTransition,
-    ), 
-];
+    ),
+    GetPage(
+      name: AppRoutes.NOTIFICATION_SETTINGS,
+      page: () =>  NotificationSettingsPage(),
+      binding: NotificationSettingsBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.HOW_IT_WORKS_SETTINGS,
+      page: () =>  HowItWorks(),
+      binding: AccountDetailsBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.HOW_IT_WORKS_SHOW_SETTINGS,
+      page: () =>  HowItWorksShow(),
+      binding: AccountDetailsBinding(),
+      transition: _defaultTransition,
+    ),
+  ];
 }

@@ -1,6 +1,7 @@
 import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_profile_header.dart';
+import 'package:afeco/app/ui/global_widgets/custom_share_app.dart';
 import 'package:afeco/app/ui/pages/profile_page/custom_card_default.dart';
 import 'package:afeco/app/ui/pages/profile_page/custom_card_imp.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
@@ -44,7 +45,7 @@ class ProfilePage extends GetView<ProfileController> {
                   const SizedBox(height: 10,),
                   CustomCardDefault(title: 'yourExcessFoodSaved'.tr, description: '${UserService.instance.user!.excessFoodSaved}', imageUrl: 'imageUrl'),
                   const SizedBox(height: 10,),
-
+              CustomShareApp()
                 ]),
               ),
 
