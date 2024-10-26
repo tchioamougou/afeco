@@ -10,6 +10,7 @@ class Constants{
   static String? cinetApiKey = dotenv.env['CINET_API_KEY'];
   static String? cinetSiteId = dotenv.env['CINET_SITE_ID'];
   static String? cinetNotifyUrl = dotenv.env['CINET_NOTIFY_URL'];
+  static String stripePublicKey = dotenv.env['STRIPE_PUBLIC_KEY']!;
   static String defaultImage ='assets/image/avatars/smile.png';
 }
 

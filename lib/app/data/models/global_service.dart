@@ -7,7 +7,6 @@ import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:http/http.dart' as http;
 import 'package:share_plus/share_plus.dart';
@@ -45,7 +44,7 @@ class GlobalService extends GetxService {
   }
 
   static Future<void> updateStoresLikes(String storeId, String action) async {
-    final url = Uri.parse('http://6711c129c34a0ce00e30.appwrite.global');
+    final url = Uri.https('6711c129c34a0ce00e30.appwrite.global');
     var response = await http.post(url,
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({
@@ -55,7 +54,9 @@ class GlobalService extends GetxService {
         }));
     print('this is the response ${response.reasonPhrase}');
     if (response.statusCode == 201) {
-    } else {}
+    } else {
+      print(response);
+    }
   }
 
   static Future<bool> inviteFriend() async {
