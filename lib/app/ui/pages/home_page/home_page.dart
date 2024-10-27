@@ -1,12 +1,13 @@
 import 'package:afeco/app/controllers/init_page_controller.dart';
 import 'package:afeco/app/data/services/filter_service.dart';
+import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_card_item.dart';
 import 'package:afeco/app/ui/global_widgets/custom_category_action.dart';
 import 'package:afeco/app/ui/global_widgets/custom_filter.dart';
 import 'package:afeco/app/ui/global_widgets/custom_position_not_set.dart';
 import 'package:afeco/app/ui/global_widgets/custom_save_food_neighbourdhood_item.dart';
-import 'package:afeco/app/ui/global_widgets/custom_select_payment_method.dart';
+import 'package:afeco/app/ui/global_widgets/custom_store_view.dart';
 import 'package:afeco/app/ui/global_widgets/donate_Widget.dart';
 import 'package:afeco/app/ui/global_widgets/header_custom.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
@@ -38,6 +39,9 @@ class _HomePageState extends State<HomePage> {
     if (FilterService.instance.filter.showSoldHow) {
       controller.getBagsSoldOut();
     }
+    if(UserService.instance.user!.storesLiked.isNotEmpty){
+      controller.getLikedStore();
+    }
     super.initState();
   }
    void refresh(){
@@ -47,6 +51,9 @@ class _HomePageState extends State<HomePage> {
      controller.getBags();
      if (FilterService.instance.filter.showSoldHow) {
        controller.getBagsSoldOut();
+     }
+     if(UserService.instance.user!.storesLiked.isNotEmpty){
+       controller.getLikedStore();
      }
    }
   @override
@@ -223,7 +230,7 @@ class _HomePageState extends State<HomePage> {
                                             } else if (e['title'] == 'Orders') {
                                               Get.toNamed(AppRoutes.MY_ORDERS);
                                             } else if (e['title'] ==
-                                                'C20 Views') {
+                                                'C02 Views') {
                                               initPageController.selectedTab(3);
                                             } else {
                                               Get.toNamed(
@@ -400,7 +407,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     /// end
                                     /// Sold out
-                                    if (FilterService.instance.filter.showSoldHow)
+                                    if (FilterService.instance.filter.showSoldHow && controller.soldOuts.isNotEmpty)
                                       Column(
                                         children: [
                                           Padding(
@@ -427,6 +434,42 @@ class _HomePageState extends State<HomePage> {
                                               children: controller.soldOuts
                                                   .map((i) => CustomCardItem(
                                                 bg: i,
+                                              ))
+                                                  .toList(),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    /// --- End
+
+                                    /// Sold out
+                                    if (controller.likedStores.isNotEmpty)
+                                      Column(
+                                        children: [
+                                          Padding(
+                                            padding:
+                                            const EdgeInsets.fromLTRB(10, 0, 20, 0),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                              children: [
+                                                Label(title: 'Your Favorite'.tr),
+                                                SeeAll(onPress: () {
+                                                  controller.viewAllFavorite('Your Favorite'.tr,
+                                                     controller.likedStores);
+                                                })
+                                              ],
+                                            ),
+                                          ),
+                                          const SizedBox(
+                                            height: 10,
+                                          ),
+                                          SingleChildScrollView(
+                                            scrollDirection: Axis.horizontal,
+                                            child: Row(
+                                              children: controller.likedStores
+                                                  .map((i) => CustomStoreView(
+                                                store: i,
                                               ))
                                                   .toList(),
                                             ),

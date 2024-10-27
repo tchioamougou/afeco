@@ -1,5 +1,7 @@
+import 'package:afeco/app/data/models/global_service.dart';
 import 'package:afeco/app/ui/global_widgets/custom_bottom_action.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
+import 'package:afeco/app/ui/global_widgets/custom_select_payment_method.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
 import 'package:afeco/app/ui/global_widgets/position_display.dart';
 import 'package:afeco/app/ui/global_widgets/quantity_selector.dart';
@@ -24,54 +26,42 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
         backgroundColor: Colors.white,
         isDismissible: false,
         Obx(() => Container(
-              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
               child: Stack(
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text('paymentMethod'.tr.toUpperCase()),
-                      TextButton(
-                          onPressed: () {
-                            //  Get.back();
-                          },
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.add,
-                                color: Constants.defaultHeaderColor,
-                              ),
-                              Text(
-                                'selectPaymentMethod'.tr,
-                                style: TextStyle(
-                                    color: Constants.defaultHeaderColor,
-                                    fontWeight: FontWeight.bold),
-                              )
-                            ],
-                          )),
+                      CustomSelectPaymentMethod(onChanged: (val) {
+                        controller.selectPaymentMethod.value = val;
+                      }),
+                      const SizedBox(
+                        height: 10,
+                      ),
                       Container(
                         decoration: BoxDecoration(
                             color: Colors.grey.shade300,
                             borderRadius: BorderRadius.circular(10)),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
                               'total'.toUpperCase(),
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontWeight: FontWeight.w900, fontSize: 20),
                             ),
                             Text(
                               '${controller.bag.value!.price * controller.selectQuantity.value}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                   fontWeight: FontWeight.w900, fontSize: 20),
                             )
                           ],
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 15,
                       ),
                       Row(
@@ -98,10 +88,11 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                         height: 15,
                       ),
                       CustomButton(
-                          onPressed: () {
-                            controller.createOrder();
+                          onPressed: () async {
+                            controller.payNow();
                             Get.back();
                           },
+                          disable: controller.selectPaymentMethod.isEmpty,
                           text: 'reserve'.tr,
                           backgroundColor: Constants.buttonColor),
                       Row(
@@ -130,8 +121,8 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text('termsNotify'.tr),
-                            TextButton(
-                                onPressed: () {},
+                            InkWell(
+                                onTap: () {},
                                 child: Text(
                                   'termsAndConditions'.tr,
                                   style: TextStyle(
@@ -154,7 +145,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
           body: Obx(() => Stack(
                 children: [
                   if (!controller.loading.value)
-                    Container(
+                    SizedBox(
                       height: MediaQuery.sizeOf(context).height,
                       child: SingleChildScrollView(
                         child: Column(
@@ -188,10 +179,13 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                               Get.back();
                                             },
                                             icon: const FaIcon(
-                                                Icons.arrow_back_ios_new),
+                                              Icons.arrow_back_ios_new,
+                                              color: Colors.white,
+                                            ),
                                             style: ElevatedButton.styleFrom(
-                                                backgroundColor: Colors.white
-                                                    .withOpacity(0.6),
+                                                backgroundColor: Colors
+                                                    .transparent
+                                                    .withOpacity(0.4),
                                                 shape: RoundedRectangleBorder(
                                                   borderRadius:
                                                       BorderRadius.circular(
@@ -205,12 +199,17 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                           Row(
                                             children: [
                                               IconButton(
-                                                onPressed: () {},
-                                                icon: const FaIcon(Icons.share),
+                                                onPressed: () {
+                                                  GlobalService.shareBag(controller.bag.value!);
+                                                },
+                                                icon: const FaIcon(
+                                                  Icons.share,
+                                                  color: Colors.white,
+                                                ),
                                                 style: ElevatedButton.styleFrom(
                                                     backgroundColor: Colors
-                                                        .white
-                                                        .withOpacity(0.6),
+                                                        .transparent
+                                                        .withOpacity(0.4),
                                                     shape:
                                                         RoundedRectangleBorder(
                                                       borderRadius:
@@ -223,13 +222,18 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                                         vertical: 9)),
                                               ),
                                               IconButton(
-                                                onPressed: () {},
-                                                icon: const FaIcon(
-                                                    Icons.favorite_border),
+                                                onPressed: () async {
+                                                  controller.like.value = !controller.like.value;
+                                                  await GlobalService.updateUserLikes(controller.bag.value!.stores.documentId);
+                                                },
+                                                icon:  FaIcon(
+                                                  controller.like.value? Icons.favorite: Icons.favorite_border,
+                                                  color: Colors.white,
+                                                ),
                                                 style: ElevatedButton.styleFrom(
                                                     backgroundColor: Colors
-                                                        .white
-                                                        .withOpacity(0.6),
+                                                        .transparent
+                                                        .withOpacity(0.4),
                                                     shape:
                                                         RoundedRectangleBorder(
                                                       borderRadius:
@@ -284,6 +288,8 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                                         .defaultBorderColor,
                                                     width: 1)),
                                             child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(300),
                                               child: Image.network(
                                                 Utils.imageLoader(controller
                                                     .bag
@@ -291,17 +297,15 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                                     .stores
                                                     .profileLogoId),
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(300),
                                             ),
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 10,
                                           ),
                                           Text(
                                             controller
                                                 .bag.value!.stores.businessName,
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.white,
                                                 fontSize: 20),
@@ -330,7 +334,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                             size: 20,
                                             color: Constants.buttonColor,
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 5,
                                           ),
                                           Text(
@@ -338,7 +342,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                           )
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       ),
                                       Row(
@@ -348,23 +352,23 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                             size: 20,
                                             color: Constants.buttonColor,
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 5,
                                           ),
-                                          Text(
+                                          const Text(
                                             '4.9',
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 5,
                                           ),
-                                          Text(
+                                          const Text(
                                             '(41)',
                                             style:
                                                 TextStyle(color: Colors.grey),
                                           ),
                                         ],
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       ),
                                       Row(
@@ -374,13 +378,13 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                             size: 20,
                                             color: Constants.buttonColor,
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 5,
                                           ),
                                           Text(
                                             '${"pickUp".tr}: ${controller.times['time']}',
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             width: 5,
                                           ),
                                           Tag(
@@ -397,18 +401,18 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                   Column(
                                     children: [
                                       Text(
-                                        '${controller.bag.value!.originalPrice}\$',
-                                        style: TextStyle(
+                                        '${ Constants.oCameroon.format(controller.bag.value!.originalPrice)}',
+                                        style: const TextStyle(
                                             fontSize: 15,
                                             decoration:
                                                 TextDecoration.lineThrough,
                                             color: Colors.grey),
                                       ),
                                       Text(
-                                        '${controller.bag.value!.price}',
+                                        '${ Constants.oCameroon.format(controller.bag.value!.price)}',
                                         style: TextStyle(
                                             fontWeight: FontWeight.w900,
-                                            fontSize: 18,
+                                            fontSize: 16,
                                             color:
                                                 Constants.defaultHeaderColor),
                                       )
@@ -429,6 +433,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                               .withOpacity(0.3),
                                           width: 1))),
                               child: ListTile(
+                                dense: true,
                                 onTap: () {},
                                 leading: FaIcon(
                                   Icons.location_on_outlined,
@@ -440,7 +445,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                       color: Constants.defaultHeaderColor,
-                                      fontSize: 17),
+                                      fontSize: 14),
                                 ),
                                 subtitle: Text('moreAboutStore'.tr),
                                 trailing: Icon(
@@ -450,7 +455,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                               ),
                             ),
                             Padding(
-                              padding: EdgeInsets.symmetric(
+                              padding: const EdgeInsets.symmetric(
                                   vertical: 10, horizontal: 10),
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
@@ -459,11 +464,11 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                   Text(
                                     'whatYouCouldGet'.tr,
                                     textAlign: TextAlign.left,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w900),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 15,
                                   ),
                                   Row(
@@ -505,16 +510,16 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                                 color: Constants.buttonColor,
                                                 size: 70,
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 30,
                                               ),
                                               Text(
                                                 "surpriseIsSurprise".tr,
-                                                style: TextStyle(
+                                                style: const TextStyle(
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 height: 10,
                                               ),
                                               Text(
@@ -532,8 +537,9 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                               backgroundColor:
                                                   Constants.buttonColor)
                                         ],
-                                        insetPadding: EdgeInsets.symmetric(
-                                            horizontal: 10),
+                                        insetPadding:
+                                            const EdgeInsets.symmetric(
+                                                horizontal: 10),
                                       ));
                                 },
                                 leading: FaIcon(
@@ -565,7 +571,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                               .withOpacity(0.15),
                                           width: 1))),
                               child: Padding(
-                                padding: EdgeInsets.symmetric(
+                                padding: const EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 10),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
@@ -574,11 +580,11 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                     Text(
                                       'whatOtherSay'.tr,
                                       textAlign: TextAlign.left,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontSize: 15,
                                           fontWeight: FontWeight.w900),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 15,
                                     ),
                                   ],
@@ -597,7 +603,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                                 .withOpacity(0.3),
                                             width: 1))),
                                 child: Padding(
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       vertical: 10, horizontal: 10),
                                   child: Column(
                                     mainAxisAlignment: MainAxisAlignment.start,
@@ -607,11 +613,11 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                       Text(
                                         'whatYouNeedToKnow'.tr,
                                         textAlign: TextAlign.left,
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.w900),
                                       ),
-                                      SizedBox(
+                                      const SizedBox(
                                         height: 10,
                                       ),
                                       Text('whatYouNeedToKnowAlert'.tr),
@@ -651,7 +657,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                         barrierDismissible: false,
                                         AlertDialog(
                                           backgroundColor: Colors.white,
-                                          title: Row(
+                                          title: const Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
@@ -662,7 +668,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                           ),
                                           content: Container(
                                             height: 150,
-                                            child: Column(
+                                            child: const Column(
                                               children: [
                                                 Text(
                                                   'Your surprise Bags is a surprise',
@@ -676,7 +682,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                                 Text(
                                                     textAlign:
                                                         TextAlign.justify,
-                                                    "We wish we could tell you what exactly will be in your Surprise Bag - but it's always a surprise! The store wil fill it with a selection of their unsold items. if you have a question abouy allergens or ingredients, please ask to the store."),
+                                                    "We wish we could tell you what exactly will be in your Surprise Bag - but it's always a surprise! The store wil fill it with a selection of their unsold items. if you have a question about allergens or ingredients, please ask to the store."),
                                               ],
                                             ),
                                           ),
@@ -708,8 +714,9 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                               ],
                                             )
                                           ],
-                                          insetPadding: EdgeInsets.symmetric(
-                                              horizontal: 10),
+                                          insetPadding:
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 10),
                                         ));
                                   },
                                   text: 'reserve'.tr,

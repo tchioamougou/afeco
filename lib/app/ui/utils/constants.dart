@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:intl/intl.dart';
 
 
 class Constants{
@@ -12,6 +13,7 @@ class Constants{
   static String? cinetNotifyUrl = dotenv.env['CINET_NOTIFY_URL'];
   static String stripePublicKey = dotenv.env['STRIPE_PUBLIC_KEY']!;
   static String defaultImage ='assets/image/avatars/smile.png';
+  static final oCameroon =  NumberFormat.currency(locale: 'en_CM',name: 'CFA');
 }
 
 class AppWriteCollection{

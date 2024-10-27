@@ -2,11 +2,13 @@ import 'package:afeco/app/data/appwrite/appwrite_controllers.dart';
 import 'package:afeco/app/data/models/bag_model.dart';
 import 'package:afeco/app/data/models/giving_package.dart';
 import 'package:afeco/app/data/models/place_model.dart';
+import 'package:afeco/app/data/models/store_model.dart';
 import 'package:afeco/app/data/services/find_in_service.dart';
 import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/ui/global_widgets/custom_app_bar.dart';
 import 'package:afeco/app/ui/global_widgets/custom_card_item.dart';
 import 'package:afeco/app/ui/global_widgets/custom_save_food_neighbourdhood_item.dart';
+import 'package:afeco/app/ui/global_widgets/custom_store_view.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:afeco/app/ui/utils/utils.dart';
 import 'package:appwrite/appwrite.dart';
@@ -20,7 +22,7 @@ class HomeController extends GetxController {
   List<Map<String, String>> quickActions = [
     {'title': 'Save food', 'image': "assets/image/foods/healthy-foodview.png"},
     {'title': 'Orders', 'image': "assets/image/foods/grocery.png"},
-    {'title': 'C20 Views', 'image': "assets/image/foods/energy.png"},
+    {'title': 'C02 Views', 'image': "assets/image/foods/energy.png"},
     {'title': 'Planning', 'image': "assets/image/healthy-food.png"}
   ];
   RxList<GivingPackage> givingPackages = <GivingPackage>[].obs;
@@ -28,6 +30,7 @@ class HomeController extends GetxController {
   RxList<BagRelation> bags = <BagRelation>[].obs;
   RxList<BagRelation> searchBags = <BagRelation>[].obs;
   RxList<BagRelation> soldOuts = <BagRelation>[].obs;
+  RxList<StoreModel> likedStores = <StoreModel>[].obs;
   TextEditingController searchController = TextEditingController();
   RxBool hasPosition = true.obs;
   RxBool isSearching = false.obs;
@@ -95,6 +98,21 @@ class HomeController extends GetxController {
       ]);
       givingPackages.value =
           dls.documents.map((e) => GivingPackage.fromJson(e.data)).toList();
+    } catch (e) {
+      print(e);
+    } finally {
+      EasyLoading.dismiss();
+    }
+  }
+
+  Future<void> getLikedStore() async {
+    EasyLoading.show();
+    try {
+      DocumentList dls = await _appWriteController.getDocuments(
+          AppWriteCollection.storeCollections,
+          [Query.equal('documentId', UserService.instance.user!.storesLiked)]);
+      likedStores.value =
+          dls.documents.map((e) => StoreModel.fromJson(e.data)).toList();
     } catch (e) {
       print(e);
     } finally {
@@ -171,6 +189,40 @@ class HomeController extends GetxController {
               ),
             )));
   }
+  void viewAllFavorite(String title, RxList<StoreModel> store) {
+    Get.bottomSheet(
+        backgroundColor: Colors.white,
+        isDismissible: false,
+        isScrollControlled: true,
+        Obx(() => Container(
+          padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+          child: Scaffold(
+            appBar: CustomAppBar(
+              title: title,
+            ),
+            backgroundColor: Colors.white,
+            body: SingleChildScrollView(
+              child: Container(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ...likedStores.value
+                        .map((e) => CustomStoreView(
+                      store: e,
+                      width: 0.9,
+                    ))
+                        .toList()
+                  ],
+                ),
+              ),
+            ),
+          ),
+        )));
+  }
 
   // this functions is used to find food by the name of the store
   Future<void> getSearchBags() async {
@@ -191,7 +243,7 @@ class HomeController extends GetxController {
           maxMin['minLong'],
           maxMin['maxLong'],
         ),
-       // Query.contains('storesName', searchController.value.text)
+        // Query.contains('storesName', searchController.value.text)
       ]);
       searchBags.value =
           dls.documents.map((e) => BagRelation.fromJson(e.data)).toList();

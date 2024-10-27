@@ -51,7 +51,6 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   share_plus: ^10.1.1
   flutter_stripe:
-  webview_flutter:
 
 
 dev_dependencies:

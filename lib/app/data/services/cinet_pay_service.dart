@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CinetPayService extends GetxService {
-  static Future<bool> handleCinetPayPayment(
+  static Future<void> handleCinetPayPayment(
     int amount,
     String description,
+  {required Function(Map<String,dynamic>) waitResponse,
+    required Function(Map<String,dynamic>) onError,}
   ) async {
-    bool isError = true;
     await Get.to(() => CinetPayCheckout(
         title: 'Save Food',
         titleStyle: const TextStyle(
@@ -29,11 +30,9 @@ class CinetPayService extends GetxService {
           'description': 'information abpit idr'
         },
         waitResponse: (response) {
-          isError = false;
         },
         onError: (error) {
           Get.back();
         }));
-    return isError;
   }
 }

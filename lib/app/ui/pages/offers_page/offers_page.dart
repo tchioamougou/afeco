@@ -1,6 +1,8 @@
 import 'package:afeco/app/routes/app_routes.dart';
+import 'package:afeco/app/ui/global_widgets/custom_card_item.dart';
 import 'package:afeco/app/ui/global_widgets/custom_filter.dart';
 import 'package:afeco/app/ui/global_widgets/header_custom.dart';
+import 'package:afeco/app/ui/global_widgets/no_elements/custom_alert.dart';
 import 'package:afeco/app/ui/pages/offers_page/custom_offer_item.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +33,7 @@ class _OffersPageState extends State<OffersPage> {
     return MainLayout(
         child: Obx(
       () => Scaffold(
+        backgroundColor: Colors.white,
         body: Container(
           color: Constants.defaultHeaderColor,
           child: SafeArea(
@@ -85,10 +88,20 @@ class _OffersPageState extends State<OffersPage> {
                               SizedBox(
                                 width: MediaQuery.sizeOf(context).width * 0.67,
                                 child:  TextField(
+                                  controller: controller.searchController,
+                                  onSubmitted: (value) {
+                                    if (value.isNotEmpty) {
+                                      controller.isSearching.value = true;
+                                      controller.getSearchBags();
+                                    } else {
+                                      controller.isSearching.value = false;
+                                    }
+                                  },
                                   decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintText: "searchHere".tr,
                                   ),
+                                  textInputAction: TextInputAction.search,
                                 ),
                               ),
                               IconButton(
@@ -119,6 +132,38 @@ class _OffersPageState extends State<OffersPage> {
                     const SizedBox(
                       height: 20,
                     ),
+                    if (controller.isSearching.value)
+                      Container(
+                        child: Column(
+                          children: [
+                            if (controller.isSearchError.value)
+                              CustomAlert(
+                                  image: 'assets/image/angry.png',
+                                  title: 'errorOccur'.tr,
+                                  actionLabel: 'Find Again',
+                                  onPress: () {
+                                    controller.getSearchBags();
+                                  })
+                            else if (!controller.isLoading.value)
+                              if (controller.searchBags.isEmpty)
+                                CustomAlert(
+                                    image: 'assets/image/angry.png',
+                                    title: 'noStore'.tr,
+                                    actionLabel: 'Clear search',
+                                    onPress: () {
+                                      controller.searchController.text = '';
+                                      controller.isSearching.value = false;
+                                    })
+                              else
+                                ...controller.searchBags
+                                    .map((f) => CustomCardItem(
+                                  bg: f,
+                                  width: 0.97,
+                                ))
+                          ],
+                        ),
+                      )
+                    else
                     Column(
                       children: controller.bags.value
                           .map((i) => CustomOfferItem(

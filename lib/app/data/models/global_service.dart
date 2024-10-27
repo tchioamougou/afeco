@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:afeco/app/data/appwrite/appwrite_controllers.dart';
+import 'package:afeco/app/data/models/bag_model.dart';
+import 'package:afeco/app/data/models/order_model.dart';
 import 'package:afeco/app/data/models/user_model.dart';
 import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
@@ -25,17 +27,18 @@ class GlobalService extends GetxService {
 
   static Future<void> updateUserLikes(String store) async {
     String action;
-    if (UserService.instance.user!.storesLiked.contains(store)) {
-      UserService.instance.user!.storesLiked.remove(store);
+    UserModel us = UserService.instance.user!;
+    if (us.storesLiked.contains(store)) {
+      us.storesLiked.remove(store);
       action = 'unLike';
     } else {
-      UserService.instance.user!.storesLiked.add(store);
+      us.storesLiked.add(store);
       action = 'like';
     }
     Document dc = await _appWriteController.updateDocument(
         AppWriteCollection.userCollections,
         UserService.instance.user!.documentId, {
-      "storesLiked": UserService.instance.user!.storesLiked,
+      "storesLiked": us.storesLiked,
     });
     UserService.instance.user = UserModel.fromJson(dc.data);
 
@@ -94,5 +97,23 @@ class GlobalService extends GetxService {
       "reminderDays": UserService.instance.user!.reminderDays,
     });
     UserService.instance.user = UserModel.fromJson(dc.data);
+  }
+
+  static Future<void> shareBag(BagRelation osm)async {
+      final files = <XFile>[];
+      final data = await rootBundle.load('assets/image/gifs/charity.gif');
+      final buffer = data.buffer;
+      files.add(
+        XFile.fromData(
+          buffer.asUint8List(data.offsetInBytes, data.lengthInBytes),
+          name: 'flutter_logo.png',
+          mimeType: 'image/png',
+        ),
+      );
+       await Share.shareXFiles(
+        files,
+        subject:osm.name ,
+        text: "shareToSaveMessage".tr,
+      );
   }
 }

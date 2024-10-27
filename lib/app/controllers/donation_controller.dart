@@ -19,7 +19,7 @@ class DonationController extends GetxController {
   RxList<FoodBankModel> foodBanks = <FoodBankModel>[].obs;
   Rx<FoodBankModel?> selectFoodBand = Rx<FoodBankModel?>(null);
   final SaveFoodAppWriteController _appWriteController = Get.find();
-  RxString selectPaymentMethod =''.obs;
+  RxString selectPaymentMethod = ''.obs;
   @override
   void onInit() {
     // TODO: implement onInit
@@ -37,15 +37,18 @@ class DonationController extends GetxController {
             // Set to true for custom flow or keep it false
             customFlow: false,
             // Main params
-            merchantDisplayName: '${"Donation to".tr} ${selectFoodBand.value!.name}',
+            merchantDisplayName:
+                '${"Donation to".tr} ${selectFoodBand.value!.name}',
             paymentIntentClientSecret: result['paymentIntent'],
 
             //setupIntentClientSecret: result['setupIntent'],
             // Customer keys
             customerEphemeralKeySecret: result['ephemeralKey'],
             customerId: result['customer'],
-            billingDetails: BillingDetails(name:us.name, email: us.email,),
-
+            billingDetails: BillingDetails(
+              name: us.name,
+              email: us.email,
+            ),
             style: ThemeMode.system,
             appearance: PaymentSheetAppearance(
                 colors: PaymentSheetAppearanceColors(
@@ -61,17 +64,16 @@ class DonationController extends GetxController {
   }
 
   Future<void> donateNow() async {
-    if(selectPaymentMethod.value== SelectPaymentMethod.creditCard.name){
+    if (selectPaymentMethod.value == SelectPaymentMethod.creditCard.name) {
       await stripePay();
-    }else if(selectPaymentMethod.value== SelectPaymentMethod.mobile.name){
+    } else if (selectPaymentMethod.value == SelectPaymentMethod.mobile.name) {
       await mobilePayment();
     }
   }
 
   Future<void> mobilePayment() async {
-    bool isError = await CinetPayService.handleCinetPayPayment(
-        price.value.toInt(), '${"Donation to".tr} ${selectFoodBand.value!.name}' );
-    if (isError) {
+    await CinetPayService.handleCinetPayPayment(price.value.toInt(),
+        '${"Donation to".tr} ${selectFoodBand.value!.name}', onError: (val) {
       Get.showSnackbar(
         GetSnackBar(
           title: 'paymentFailed'.tr,
@@ -81,9 +83,10 @@ class DonationController extends GetxController {
           duration: const Duration(seconds: 5),
         ),
       );
-    } else {
+    }, waitResponse: (response) async {
+      await saveDonation();
       Get.back();
-    }
+    });
   }
 
   Future<void> saveDonation() async {

@@ -23,4 +23,19 @@ class StripeService extends GetxService {
      return Future.error(response.body);
     }
   }
+  static Future<Map<String, dynamic>> getPaymentItemStatus(String id) async {
+    final url = Uri.https('671cd02121e33273d582.appwrite.global','/payment_intents');
+    var response = await http.post(url,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({
+          "id": id,
+          // "userId": 1,
+        }));
+    if (response.statusCode == 201||response.statusCode == 200) {
+      print(response.body);
+      return jsonDecode(response.body) as Map<String, dynamic>;
+    } else {
+      return Future.error(response.body);
+    }
+  }
 }

@@ -140,4 +140,5 @@ class Utils {
       "maxLong": center.longitude + deltaLon, // Longitude maximale
     };
   }
+
 }

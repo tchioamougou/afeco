@@ -26,65 +26,55 @@ class DonationThankingPage extends GetView<TankingController> {
             ),
           ],
         ),
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-
-                Image.asset(
-                  "assets/image/food-africa.webp",
-                  height: 200,
-                  width: 300,
-                ),
-                Text(
-                  'thankYouFoodDonation'.tr,
-                  style: GoogleFonts.sassyFrass(
-                      fontSize: 60,
-                      color: Colors.deepOrangeAccent,
-                      fontWeight: FontWeight.w900),
-                ),
-                Text('thankYouTitleDonation'.tr.toUpperCase(),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Image.asset(
+                "assets/image/gifs/charity.gif",
+                height: 300,
+                width: 300,
+              ),
+              Text('thankYouTitleDonation'.tr.toUpperCase(),
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.sansita(
+                    fontSize: 25,
+                    color: Constants.defaultHeaderColor,
+                    fontWeight: FontWeight.w900,
+                  )),
+              const SizedBox(height: 20,),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 45),
+                child: Text(
+                    'thankYouShareMessage'.tr,
                     textAlign: TextAlign.center,
                     style: GoogleFonts.sansita(
-                      fontSize: 25,
+                      fontSize: 17,
                       color: Constants.defaultHeaderColor,
-                      fontWeight: FontWeight.w900,
+                      fontWeight: FontWeight.w100,
                     )),
-                const SizedBox(height: 20,),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 45),
-                  child: Text(
-                      'thankYouShareMessage'.tr,
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.sansita(
-                        fontSize: 17,
-                        color: Constants.defaultHeaderColor,
-                        fontWeight: FontWeight.w100,
-                      )),
-                ),
-                Text('#SaveFood',style: GoogleFonts.sansita(
-                  fontSize: 17,
-                  color: Constants.defaultHeaderColor,
-                  fontWeight: FontWeight.w100,
-                )),
-                const SizedBox(height: 20,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    FaIcon(FontAwesomeIcons.facebook,color: Constants.buttonColor,),
-                    const SizedBox(width: 20,),
-                    FaIcon(FontAwesomeIcons.telegram,color: Constants.buttonColor,),
-                    const SizedBox(width: 20,),
-                    FaIcon(FontAwesomeIcons.whatsapp,color: Constants.buttonColor,),
-                    const SizedBox(width: 20,),
-                    FaIcon(FontAwesomeIcons.snapchat,color: Constants.buttonColor,),
-                  ],
-                )
-              ],
-            ),
+              ),
+              Text('#SaveFood',style: GoogleFonts.sansita(
+                fontSize: 17,
+                color: Constants.defaultHeaderColor,
+                fontWeight: FontWeight.w100,
+              )),
+              const SizedBox(height: 20,),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  FaIcon(FontAwesomeIcons.facebook,color: Constants.buttonColor,),
+                  const SizedBox(width: 20,),
+                  FaIcon(FontAwesomeIcons.telegram,color: Constants.buttonColor,),
+                  const SizedBox(width: 20,),
+                  FaIcon(FontAwesomeIcons.whatsapp,color: Constants.buttonColor,),
+                  const SizedBox(width: 20,),
+                  FaIcon(FontAwesomeIcons.snapchat,color: Constants.buttonColor,),
+                ],
+              )
+            ],
           ),
         ),
       ),
