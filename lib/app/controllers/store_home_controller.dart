@@ -1,7 +1,6 @@
 
 import 'package:afeco/app/data/appwrite/appwrite_controllers.dart';
 import 'package:afeco/app/data/models/bag_model.dart';
-import 'package:afeco/app/data/models/giving_package.dart';
 import 'package:afeco/app/data/services/store_service.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:appwrite/appwrite.dart';
@@ -11,7 +10,7 @@ import 'package:get/get.dart';
 class StoreHomeController extends GetxController {
 
   RxList<BagRelation> bags = <BagRelation>[].obs;
-  SaveFoodAppWriteController _appWriteController = Get.find();
+ final SaveFoodAppWriteController _appWriteController = Get.find();
 
   @override
   void onInit() {

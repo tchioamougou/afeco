@@ -1,6 +1,3 @@
-import 'dart:ffi';
-
-import 'package:afeco/app/data/services/find_in_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_filter.dart';
 import 'package:afeco/app/ui/global_widgets/custom_select_position.dart';

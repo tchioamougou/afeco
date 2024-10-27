@@ -1,16 +1,9 @@
-import 'package:afeco/app/data/models/bag_model.dart';
-import 'package:afeco/app/data/services/session_service.dart';
-import 'package:afeco/app/data/services/store_service.dart';
-import 'package:afeco/app/data/services/user_service.dart';
+
 import 'package:afeco/app/routes/app_routes.dart';
-import 'package:afeco/app/ui/global_widgets/tag.dart';
-import 'package:afeco/app/ui/layouts/main/main_layout.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
-import 'package:afeco/app/ui/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:latlong2/latlong.dart';
 
 class DonateWidget extends StatelessWidget {
   const DonateWidget({

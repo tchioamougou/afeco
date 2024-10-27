@@ -1,10 +1,7 @@
-library cinetpay;
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:panara_dialogs/panara_dialogs.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class CinetPayCheckout extends StatefulWidget {
@@ -55,17 +52,6 @@ class CinetPayCheckoutState extends State<CinetPayCheckout> {
     super.initState();
   }
 
-  Future playStore(InAppWebViewController controller) async {
-    controller.goBack();
-    await PanaraInfoDialog.show(context,
-        title: "WAVE",
-        message:
-        "Vous allez être redirigé sur Play Store. Installez l'application WAVE, connectez-vous et revenez pour effectuer votre paiement.",
-        buttonText: "Ok", onTapDismiss: () async {
-          Navigator.pop(context);
-          await launchUrl(wave, mode: LaunchMode.externalApplication);
-        }, panaraDialogType: PanaraDialogType.normal, barrierDismissible: false);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -176,9 +162,7 @@ class CinetPayCheckoutState extends State<CinetPayCheckout> {
                   ConsoleMessage message) async {
                 String response = message.message.toString();
                 print("console : $response");
-                if (response.contains('https://play.google.com/')) {
-                  await playStore(controller);
-                }
+
               },
               shouldOverrideUrlLoading: (controller, navigationAction) async {
                 Uri url = navigationAction.request.url!;
@@ -188,7 +172,7 @@ class CinetPayCheckoutState extends State<CinetPayCheckout> {
                   print("Redirect to : " + url.toString());
                 } catch (exception) {
                   print("Exception to redirect : " + exception.toString());
-                  await playStore(controller);
+
                 }
                 return NavigationActionPolicy.ALLOW;
               }),

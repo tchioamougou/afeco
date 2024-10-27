@@ -1,8 +1,5 @@
 import 'dart:io';
-import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:flutter/material.dart';
-import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -15,7 +12,7 @@ class ImageService {
     if (status) {
       final pickedFile = await _picker.pickImage(source: ImageSource.gallery, imageQuality: 50);
       if (pickedFile != null) {
-        return _cropImage(File(pickedFile.path));
+        return File(pickedFile.path);
       }
     }
     return null;
@@ -26,13 +23,13 @@ class ImageService {
     if (status) {
       final pickedFile = await _picker.pickImage(source: ImageSource.camera, imageQuality: 50);
       if (pickedFile != null) {
-        return _cropImage(File(pickedFile.path));
+        //return _cropImage(File(pickedFile.path));
       }
     }
     return null;
   }
 
-  Future<File?> _cropImage(File imageFile) async {
+  /*Future<File?> _cropImage(File imageFile) async {
     final croppedFile = await ImageCropper().cropImage(
       sourcePath: imageFile.path,
       aspectRatio: CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
@@ -74,7 +71,7 @@ class ImageService {
       return File(croppedFile.path);
     }
     return null;
-  }
+  }*/
 
   Future<bool> requestPermissions() async {
     if (Platform.isAndroid) {
@@ -96,7 +93,7 @@ class ImageService {
     return false;
   }
 }
-
+/*
 class CropAspectRatioPresetCustom implements CropAspectRatioPresetData {
   @override
   (int, int)? get data => (2, 3);
@@ -104,4 +101,4 @@ class CropAspectRatioPresetCustom implements CropAspectRatioPresetData {
   @override
   String get name => '2x3 (customized)';
 }
-
+*/

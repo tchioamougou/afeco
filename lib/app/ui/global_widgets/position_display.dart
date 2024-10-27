@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:afeco/app/data/models/market.dart';
 import 'package:afeco/app/ui/layouts/main/main_layout.dart';

@@ -4,7 +4,6 @@ import 'package:afeco/app/data/appwrite/appwrite_controllers.dart';
 import 'package:afeco/app/data/models/option.dart';
 import 'package:afeco/app/data/models/place_model.dart';
 import 'package:afeco/app/data/models/store_model.dart';
-import 'package:afeco/app/data/services/session_service.dart';
 import 'package:afeco/app/data/services/store_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/utils/constants.dart';

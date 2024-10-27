@@ -17,15 +17,12 @@ class WebDisplayPage extends GetView<WebDisplayController> {
     return Scaffold(
       appBar:CustomAppBar(title: controller.title.value,),
       body: InAppWebView(
-        initialUrlRequest: URLRequest(url: Uri.parse(controller.url.value)),
-        initialOptions:  InAppWebViewGroupOptions(
-        ),
+        initialUrlRequest: URLRequest(url: WebUri(controller.url.value)),
         onWebViewCreated: (controller) {
           controller = controller;
         },
         onLoadStart: (controller, url) {},
         onLoadStop: (controller, url) {},
-        onLoadError: (controller, url, code, message) {},
         onProgressChanged: (controller, progress) {},
       ),
     );

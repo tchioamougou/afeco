@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
    return ScreenUtilInit(
       builder: (_,__) {
         return GetMaterialApp(
-          title: 'EcoBit',
+          title: 'Save Food',
           debugShowCheckedModeBanner: false,
          // theme: Themes().lightTheme,
           //darkTheme: Themes().darkTheme,

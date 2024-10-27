@@ -1,5 +1,4 @@
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
-import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

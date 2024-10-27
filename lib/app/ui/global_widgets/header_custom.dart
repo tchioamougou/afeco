@@ -17,15 +17,6 @@ class HeaderCustom extends StatefulWidget {
 }
 
 class _HeaderCustomState extends State<HeaderCustom> {
-  final List<String> profileIcons = [
-    'user',
-    "heat",
-    'face-smile',
-    "solid-face-smile",
-    "sun",
-    "user-secret",
-    "nmug-saucer"
-  ];
 
   @override
   Widget build(BuildContext context) {

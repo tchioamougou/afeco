@@ -1,5 +1,4 @@
 import 'package:afeco/app/routes/app_routes.dart';
-import 'package:afeco/app/ui/global_widgets/custom_location_choose.dart';
 import 'package:afeco/app/ui/pages/find_around_page/find_around_page.dart';
 import 'package:afeco/app/ui/pages/home_page/home_page.dart';
 import 'package:afeco/app/ui/pages/offers_page/offers_page.dart';

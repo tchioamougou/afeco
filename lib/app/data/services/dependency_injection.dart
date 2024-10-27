@@ -8,8 +8,6 @@ import 'package:afeco/app/data/appwrite/appwrite_controllers.dart';
 import 'package:afeco/app/data/services/language_service.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 
-import 'package:firebase_core/firebase_core.dart';
-import 'package:afeco/app/../firebase_options.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
@@ -18,10 +16,6 @@ import 'package:get_storage/get_storage.dart';
 
 class DependecyInjection {
   static Future<void> init() async {
-// firebase init
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
     await dotenv.load();
     try {
       Stripe.publishableKey = Constants.stripePublicKey;
