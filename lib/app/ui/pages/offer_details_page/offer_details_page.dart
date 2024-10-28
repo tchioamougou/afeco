@@ -200,7 +200,8 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                             children: [
                                               IconButton(
                                                 onPressed: () {
-                                                  GlobalService.shareBag(controller.bag.value!);
+                                                  GlobalService.shareBag(
+                                                      controller.bag.value!);
                                                 },
                                                 icon: const FaIcon(
                                                   Icons.share,
@@ -223,11 +224,20 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                               ),
                                               IconButton(
                                                 onPressed: () async {
-                                                  controller.like.value = !controller.like.value;
-                                                  await GlobalService.updateUserLikes(controller.bag.value!.stores.documentId);
+                                                  controller.like.value =
+                                                      !controller.like.value;
+                                                  await GlobalService
+                                                      .updateUserLikes(
+                                                          controller
+                                                              .bag
+                                                              .value!
+                                                              .stores
+                                                              .documentId);
                                                 },
-                                                icon:  FaIcon(
-                                                  controller.like.value? Icons.favorite: Icons.favorite_border,
+                                                icon: FaIcon(
+                                                  controller.like.value
+                                                      ? Icons.favorite
+                                                      : Icons.favorite_border,
                                                   color: Colors.white,
                                                 ),
                                                 style: ElevatedButton.styleFrom(
@@ -401,7 +411,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                   Column(
                                     children: [
                                       Text(
-                                        '${ Constants.oCameroon.format(controller.bag.value!.originalPrice)}',
+                                        '${Constants.oCameroon.format(controller.bag.value!.originalPrice)}',
                                         style: const TextStyle(
                                             fontSize: 15,
                                             decoration:
@@ -409,7 +419,7 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                             color: Colors.grey),
                                       ),
                                       Text(
-                                        '${ Constants.oCameroon.format(controller.bag.value!.price)}',
+                                        '${Constants.oCameroon.format(controller.bag.value!.price)}',
                                         style: TextStyle(
                                             fontWeight: FontWeight.w900,
                                             fontSize: 16,

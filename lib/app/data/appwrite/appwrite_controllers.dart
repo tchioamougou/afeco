@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:afeco/app/data/services/filter_service.dart';
 import 'package:afeco/app/data/services/language_service.dart';
 import 'package:afeco/app/data/services/session_service.dart';
@@ -5,6 +7,7 @@ import 'package:afeco/app/data/services/store_service.dart';
 import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:appwrite/appwrite.dart';
+import 'package:appwrite/enums.dart';
 import 'package:appwrite/models.dart';
 import 'package:get/get.dart';
 
@@ -16,6 +19,9 @@ String databaseId = "6708112a0007abf9bef1";
 Account account = Account(client);
 final databases = Databases(client);
 final storage = Storage(client);
+final realTime = Realtime(client);
+Functions functions = Functions(client);
+final subscription =  realTime.subscribe(["databases.6708112a0007abf9bef1.collections.${AppWriteCollection.bagsCollections}.documents"]);
 
 class SaveFoodAppWriteController extends GetxController {
   String userId = '';
@@ -124,6 +130,18 @@ class SaveFoodAppWriteController extends GetxController {
     );
     return fl.$id;
   }
+  Future<dynamic> confirmOrder(Map<String,String> params) async {
+    dynamic result = await functions.createExecution(
+      functionId: '671f359ea32e4b1c1c3d',
+      body: jsonEncode(params), // optional
+      xasync: false, // optional
+      path: 'confirmation', // optional
+      method: ExecutionMethod.pOST, // optional
+      headers: {}, // optional
+    );
+    print(result);
+    return result;
+  }
 }
 
 Future logoutUser() async {
@@ -140,3 +158,4 @@ Future logoutUser() async {
   StoreService.instance.removeStore();
   UserService.instance.removeUser();
 }
+

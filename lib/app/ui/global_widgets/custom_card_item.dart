@@ -1,3 +1,4 @@
+import 'package:afeco/app/data/appwrite/appwrite_controllers.dart';
 import 'package:afeco/app/data/models/bag_model.dart';
 import 'package:afeco/app/data/models/global_service.dart';
 import 'package:afeco/app/data/services/session_service.dart';
@@ -24,10 +25,18 @@ class CustomCardItem extends StatefulWidget {
 }
 
 class _CustomCardItemState extends State<CustomCardItem> {
+  late BagRelation bg;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    bg = widget.bg;
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     Map<String, String> times =
-        Utils.formatDates(widget.bg.pickupDateStart, widget.bg.pickupDateEnd);
+        Utils.formatDates(bg.pickupDateStart, bg.pickupDateEnd);
     LatLng point1;
     bool like = false;
     if (SessionService.instance.isStore()) {
@@ -36,14 +45,27 @@ class _CustomCardItemState extends State<CustomCardItem> {
     } else {
       point1 = LatLng(
           UserService.instance.user!.lat, UserService.instance.user!.long);
-      like =  UserService.instance.user!.storesLiked.contains(widget.bg.stores.documentId);
+      like =  UserService.instance.user!.storesLiked.contains(bg.stores.documentId);
     }
-    LatLng point2 = LatLng(widget.bg.stores.lat, widget.bg.stores.long);
+    LatLng point2 = LatLng(bg.stores.lat, bg.stores.long);
     String distance = Utils.distanceToText(point1, point2);
-    bool isSoldOut = widget.bg.status==BagStatus.soldOut.name;
+    bool isSoldOut = bg.status==BagStatus.soldOut.name;
+    if(!isSoldOut){
+     subscription.stream.listen((response) {
+       if(response.channels.contains("databases.6708112a0007abf9bef1.collections.${AppWriteCollection.bagsCollections}.documents.${bg.documentId}")){
+         print('this the response ${response.payload}');
+         setState(() {
+           Bag bgS = Bag.fromJson(response.payload);
+           bg.status = bgS.status;
+           bg.rest = bgS.rest;
+         });
+       }
+      });
+    }
+    
     return InkWell(
       onTap: () {
-        Get.toNamed(AppRoutes.OFFER_DETAILS, arguments: widget.bg);
+        Get.toNamed(AppRoutes.OFFER_DETAILS, arguments: bg);
       },
       child: Card(
         elevation: 5,
@@ -88,7 +110,7 @@ class _CustomCardItemState extends State<CustomCardItem> {
                         onPressed: () async {
 
                           EasyLoading.show();
-                         await GlobalService.updateUserLikes(widget.bg.stores.documentId);
+                         await GlobalService.updateUserLikes(bg.stores.documentId);
                           setState(() {
                             like = !like;
                           });
@@ -109,14 +131,14 @@ class _CustomCardItemState extends State<CustomCardItem> {
                                 borderRadius: const BorderRadius.all(
                                     Radius.circular(300)),
                                 child: Image.network(
-                                  Utils.imageLoader(widget.bg.stores.profileLogoId),
+                                  Utils.imageLoader(bg.stores.profileLogoId),
                                   width: 35,
                                   height: 35,
                                   fit: BoxFit.cover,
                                 ),
                               ),
                               Text(
-                                widget.bg.stores.businessName,
+                                bg.stores.businessName,
                                 style: const TextStyle(
                                     fontWeight: FontWeight.bold,
                                     fontSize: 16,
@@ -126,7 +148,7 @@ class _CustomCardItemState extends State<CustomCardItem> {
                           ),
                         ],
                       )),
-                  if(widget.bg.status==BagStatus.soldOut.name)
+                  if(bg.status==BagStatus.soldOut.name)
                     Positioned(
                         top: 10,
                         left: 5,
@@ -142,7 +164,7 @@ class _CustomCardItemState extends State<CustomCardItem> {
                       child: Tag(
                         backgroundColor: Colors.yellow,
                         color: Constants.buttonColor,
-                        content: '${widget.bg.rest} ${'left'.tr}',
+                        content: '${bg.rest} ${'left'.tr}',
                       ))
                 ],
               ),
@@ -156,7 +178,7 @@ class _CustomCardItemState extends State<CustomCardItem> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            widget.bg.name,
+                            bg.name,
                             style: const TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           ),
@@ -220,7 +242,7 @@ class _CustomCardItemState extends State<CustomCardItem> {
                               Row(
                                 children: [
                                   Text(
-                                    Constants.oCameroon.format(widget.bg.price),
+                                    Constants.oCameroon.format(bg.price),
                                     style: TextStyle(
                                         fontWeight: FontWeight.w700,
                                         fontSize: 15,

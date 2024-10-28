@@ -8,6 +8,7 @@ class Constants{
   static Color buttonColor =const Color.fromRGBO(17,77,77,1);
   static Color defaultHeaderColor =const Color.fromRGBO(17,77,77,1);
   static Color defaultBorderColor= const Color.fromRGBO(17,77,77,1);
+  static  Color defaultBackGround = const Color.fromRGBO(243, 241, 226,1);
   static String? cinetApiKey = dotenv.env['CINET_API_KEY'];
   static String? cinetSiteId = dotenv.env['CINET_SITE_ID'];
   static String? cinetNotifyUrl = dotenv.env['CINET_NOTIFY_URL'];

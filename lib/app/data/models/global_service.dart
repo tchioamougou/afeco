@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:afeco/app/data/appwrite/appwrite_controllers.dart';
 import 'package:afeco/app/data/models/bag_model.dart';
-import 'package:afeco/app/data/models/order_model.dart';
 import 'package:afeco/app/data/models/user_model.dart';
 import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
@@ -47,7 +46,7 @@ class GlobalService extends GetxService {
   }
 
   static Future<void> updateStoresLikes(String storeId, String action) async {
-    final url = Uri.https('6711c129c34a0ce00e30.appwrite.global');
+    final url = Uri.https('6711c129c34a0ce00e30.appwrite.global','likes');
     var response = await http.post(url,
         headers: {"Content-Type": "application/json"},
         body: jsonEncode({

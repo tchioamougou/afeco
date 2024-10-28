@@ -61,13 +61,14 @@ class _OffersPageState extends State<OffersPage> {
                     Padding(
                         padding: const EdgeInsets.fromLTRB(10, 1, 10, 0),
                         child: Container(
-                          padding:
-                          const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 5),
                           decoration: BoxDecoration(
                               border: Border.all(
-                                  width: 0.1, color: Constants.defaultBorderColor),
+                                  width: 0.1,
+                                  color: Constants.defaultBorderColor),
                               borderRadius:
-                              const BorderRadius.all(Radius.circular(30))),
+                                  const BorderRadius.all(Radius.circular(30))),
                           child: Row(
                             children: [
                               IconButton(
@@ -87,7 +88,7 @@ class _OffersPageState extends State<OffersPage> {
                               ),
                               SizedBox(
                                 width: MediaQuery.sizeOf(context).width * 0.67,
-                                child:  TextField(
+                                child: TextField(
                                   controller: controller.searchController,
                                   onSubmitted: (value) {
                                     if (value.isNotEmpty) {
@@ -157,20 +158,30 @@ class _OffersPageState extends State<OffersPage> {
                               else
                                 ...controller.searchBags
                                     .map((f) => CustomCardItem(
-                                  bg: f,
-                                  width: 0.97,
-                                ))
+                                          bg: f,
+                                          width: 0.97,
+                                        ))
                           ],
                         ),
                       )
+                    else if (controller.bags.isNotEmpty)
+                      Column(
+                        children: controller.bags.value
+                            .map((i) => CustomCardItem(
+                                  bg: i,
+                                  width: 0.97,
+                                ))
+                            .toList(),
+                      )
                     else
-                    Column(
-                      children: controller.bags.value
-                          .map((i) => CustomOfferItem(
-                        bg: i,
-                      ))
-                          .toList(),
-                    ),
+                      CustomAlert(
+                          image: 'assets/image/angry.png',
+                          title: 'noAvailable'.tr,
+                          isAction: false,
+                          actionLabel: '',
+                          onPress: () {
+                            controller.getSearchBags();
+                          })
                   ],
                 ),
               ),

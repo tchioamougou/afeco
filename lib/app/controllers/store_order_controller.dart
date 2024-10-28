@@ -22,10 +22,9 @@ class StoreOrderController extends GetxController {
   Future<void> getOrders() async {
     EasyLoading.show();
     try {
-      DocumentList dls = await _appWriteController
-          .getDocuments(AppWriteCollection.bagOrderCollections, [
-            Query.equal('stores', StoreService.instance.store!.documentId)
-      ]);
+      DocumentList dls = await _appWriteController.getDocuments(
+          AppWriteCollection.bagOrderCollections,
+          [Query.equal('stores', StoreService.instance.store!.documentId)]);
       bags.value =
           dls.documents.map((e) => OrderShowModel.fromJson(e.data)).toList();
     } catch (e) {
@@ -39,7 +38,7 @@ class StoreOrderController extends GetxController {
       Map<String, dynamic> data, OrderShowModel osm) async {
     String orderId = data['orderId'] as String;
     String storeId = data['storeId'] as String;
-
+    String userId = data['userId'] as String;
     if (storeId == StoreService.instance.store?.documentId &&
         orderId == osm.documentId) {
       EasyLoading.show();
@@ -48,6 +47,8 @@ class StoreOrderController extends GetxController {
             AppWriteCollection.bagOrderCollections,
             orderId,
             {"status": OrderStatus.closed.name});
+        await _appWriteController.confirmOrder(
+            {'orderId': orderId, 'storeId': storeId, "userId": userId});
         Get.toNamed(AppRoutes.TANKING);
       } catch (e) {
         print(e);

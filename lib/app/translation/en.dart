@@ -270,6 +270,7 @@ const Map<String, String> en = {
   "saveFoodSharityText": "Save Food, Save Lives Partnering with local charities and non-profits, we're committed to fighting hunger in your community. Donate directly through the app to support those in need.",
   "donationAmount":"Donation Amount",
   "donateNow":"Donate Now",
-  "donate":"Donate"
+  "donate":"Donate",
+  "noAvailable": "No Available Bag in your area"
 
 };

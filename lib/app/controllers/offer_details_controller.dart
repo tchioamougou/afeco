@@ -8,6 +8,7 @@ import 'package:afeco/app/data/stripe/stripe_service.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:afeco/app/ui/utils/utils.dart';
+import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -22,14 +23,14 @@ class OfferDetailsController extends GetxController {
   final SaveFoodAppWriteController _appWriteController = Get.find();
   RxBool like = false.obs;
 
-
   @override
   void onInit() {
     // TODO: implement onInit
     EasyLoading.show();
     loadData();
-    if(UserService.instance.user!=null){
-      like.value =  UserService.instance.user!.storesLiked.contains(bag.value!.stores.documentId);
+    if (UserService.instance.user != null) {
+      like.value = UserService.instance.user!.storesLiked
+          .contains(bag.value!.stores.documentId);
     }
 
     super.onInit();
@@ -40,6 +41,20 @@ class OfferDetailsController extends GetxController {
     times =
         Utils.formatDates(bag.value!.pickupDateStart, bag.value!.pickupDateEnd);
     loading.value = false;
+    print('here bro');
+    RealtimeSubscription ts = subscription;
+    ts.stream.listen((response) {
+      print("I'm here");
+      if (response.channels.contains(
+          "databases.6708112a0007abf9bef1.collections.${AppWriteCollection.bagsCollections}.documents.${bag.value!.documentId}")) {
+        BagRelation bg = bag.value!;
+        Bag bgS = Bag.fromJson(response.payload);
+        bg.status = bgS.status;
+        bg.rest = bgS.rest;
+        bag = BagRelation.fromJson(bg.toJson()).obs;
+      }
+    });
+
     EasyLoading.dismiss();
   }
 
@@ -83,7 +98,8 @@ class OfferDetailsController extends GetxController {
       dynamic paymentItem =
           await StripeService.getPaymentItemStatus(result['paymentIntentId']);
       print(paymentItem.toString());
-      await createOrder(paymentItem['id'],double.parse( '${paymentItem['amount']}'));
+      await createOrder(
+          paymentItem['id'], double.parse('${paymentItem['amount']}'));
     } catch (e) {
       print('error$e');
       EasyLoading.dismiss();
@@ -95,19 +111,19 @@ class OfferDetailsController extends GetxController {
       await CinetPayService.handleCinetPayPayment(
           (selectQuantity.value * bag.value!.price).toInt(), 'Description',
           onError: (val) {
-            Get.showSnackbar(
-              GetSnackBar(
-                title: 'paymentFailed'.tr,
-                message: 'paymentFailedMessage'.tr,
-                icon: const Icon(Icons.error),
-                backgroundColor: Colors.red,
-                duration: const Duration(seconds: 5),
-              ),
-            );
-          }, waitResponse: (response) {
-        createOrder(response['transaction_id'], double.parse('${response['amount']}'));
+        Get.showSnackbar(
+          GetSnackBar(
+            title: 'paymentFailed'.tr,
+            message: 'paymentFailedMessage'.tr,
+            icon: const Icon(Icons.error),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      }, waitResponse: (response) {
+        createOrder(
+            response['transaction_id'], double.parse('${response['amount']}'));
       });
-
     } catch (e) {
       print(e);
     }
