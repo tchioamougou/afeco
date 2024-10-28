@@ -20,18 +20,15 @@ class StoreOrderController extends GetxController {
   }
 
   Future<void> getOrders() async {
-    EasyLoading.show();
     try {
       DocumentList dls = await _appWriteController.getDocuments(
           AppWriteCollection.bagOrderCollections,
-          [Query.equal('stores', StoreService.instance.store!.documentId)]);
+          [Query.equal('store', StoreService.instance.store!.documentId)]);
       bags.value =
           dls.documents.map((e) => OrderShowModel.fromJson(e.data)).toList();
     } catch (e) {
       print(e);
-    } finally {
-      EasyLoading.dismiss();
-    }
+    } finally {}
   }
 
   Future<void> confirmOrder(
@@ -43,10 +40,10 @@ class StoreOrderController extends GetxController {
         orderId == osm.documentId) {
       EasyLoading.show();
       try {
-        await _appWriteController.updateDocument(
+        /*await _appWriteController.updateDocument(
             AppWriteCollection.bagOrderCollections,
             orderId,
-            {"status": OrderStatus.closed.name});
+            {"status": OrderStatus.closed.name});*/
         await _appWriteController.confirmOrder(
             {'orderId': orderId, 'storeId': storeId, "userId": userId});
         Get.toNamed(AppRoutes.TANKING);

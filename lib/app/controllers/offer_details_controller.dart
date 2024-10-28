@@ -132,13 +132,15 @@ class OfferDetailsController extends GetxController {
   Future<void> createOrder(String transactionId, double amount) async {
     try {
       OrderModel om = OrderModel(
-          status: OrderStatus.payed.name,
-          documentId: "",
-          bags: bag.value!.documentId,
-          price: bag.value!.price,
-          quantity: selectQuantity.value,
-          unitePrice: bag.value!.price,
-          users: UserService.instance.user!.documentId);
+        status: OrderStatus.payed.name,
+        documentId: "",
+        bags: bag.value!.documentId,
+        price: bag.value!.price,
+        quantity: selectQuantity.value,
+        unitePrice: bag.value!.price,
+        users: UserService.instance.user!.documentId,
+        store: bag.value!.stores.documentId,
+      );
       await EasyLoading.show();
       await _appWriteController.createDocument(
           AppWriteCollection.bagOrderCollections, om.toJson());

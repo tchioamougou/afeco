@@ -271,6 +271,9 @@ const Map<String, String> en = {
   "donationAmount":"Donation Amount",
   "donateNow":"Donate Now",
   "donate":"Donate",
-  "noAvailable": "No Available Bag in your area"
+  "noAvailable": "No Available Bag in your area",
+  "noOrder": "You Have no reservation",
+  "continueShop":"Continue Shop",
+  "tryAgain":"Try again"
 
 };

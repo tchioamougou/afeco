@@ -9,6 +9,8 @@ class OrderModel {
   double price;
   int quantity;
   double unitePrice;
+  String store;
+
 
   OrderModel({
     required this.users,
@@ -18,6 +20,7 @@ class OrderModel {
     required this.price,
     required this.quantity,
     required this.unitePrice,
+    required this.store,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
@@ -29,6 +32,7 @@ class OrderModel {
       price: json['price'].toDouble(),
       quantity: json['quantity'].toInt(),
       unitePrice: json['unitePrice'].toDouble(),
+        store:json['store'],
     );
   }
 
@@ -41,6 +45,7 @@ class OrderModel {
       'price': price,
       'quantity': quantity,
       'unitePrice': unitePrice,
+      "store":store
     };
   }
 }

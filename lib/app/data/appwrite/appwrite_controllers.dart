@@ -21,7 +21,10 @@ final databases = Databases(client);
 final storage = Storage(client);
 final realTime = Realtime(client);
 Functions functions = Functions(client);
-final subscription =  realTime.subscribe(["databases.6708112a0007abf9bef1.collections.${AppWriteCollection.bagsCollections}.documents"]);
+final subscription =  realTime.subscribe([
+  "databases.6708112a0007abf9bef1.collections.${AppWriteCollection.bagsCollections}.documents",
+  "databases.6708112a0007abf9bef1.collections.${AppWriteCollection.bagOrderCollections}.documents"
+]);
 
 class SaveFoodAppWriteController extends GetxController {
   String userId = '';
@@ -131,15 +134,16 @@ class SaveFoodAppWriteController extends GetxController {
     return fl.$id;
   }
   Future<dynamic> confirmOrder(Map<String,String> params) async {
-    dynamic result = await functions.createExecution(
-      functionId: '671f359ea32e4b1c1c3d',
+    Execution result = await functions.createExecution(
+      functionId: '671f2df40026f6b142f1',
       body: jsonEncode(params), // optional
       xasync: false, // optional
       path: 'confirmation', // optional
       method: ExecutionMethod.pOST, // optional
       headers: {}, // optional
     );
-    print(result);
+    print(result.status.toString());
+    print(result.responseBody.toString());
     return result;
   }
 }

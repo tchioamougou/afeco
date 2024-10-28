@@ -1,8 +1,6 @@
 import 'package:afeco/app/controllers/store_login_controller.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
-import 'package:afeco/app/ui/global_widgets/custom_checkbox.dart';
 import 'package:afeco/app/ui/global_widgets/custom_input.dart';
-import 'package:afeco/app/ui/global_widgets/custom_select_item.dart';
 import 'package:afeco/app/ui/global_widgets/inputs/custom_input_password.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';

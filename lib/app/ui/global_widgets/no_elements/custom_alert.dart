@@ -3,14 +3,14 @@ import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomAlert extends StatelessWidget {
-  final String image;
+  final String? image;
   final String title;
   final String actionLabel;
   final VoidCallback onPress;
   final bool isAction;
   const CustomAlert(
       {super.key,
-        required this.image,
+        this.image ='assets/image/angry.png',
         required this.title,
         required this.actionLabel,
         required this.onPress,
@@ -29,7 +29,7 @@ class CustomAlert extends StatelessWidget {
           child: Column(
             children: [
               Image.asset(
-                image,
+                image!,
                 height: 100,
               ),
               SizedBox(

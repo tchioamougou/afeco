@@ -31,7 +31,7 @@ class StoreLoginController extends GetxController {
         if (dls.total > 0) {
           StoreService.instance.store =
               StoreModel.fromJson(dls.documents[0].data);
-          Get.toNamed(AppRoutes.STORE_INIT);
+          Get.offAllNamed(AppRoutes.STORE_INIT);
         } else {}
       } catch (e) {
         ///

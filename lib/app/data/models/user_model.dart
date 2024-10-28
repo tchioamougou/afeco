@@ -13,7 +13,7 @@ class UserModel {
   double long;
   String documentId;
   double moneySaved;
-  int carboneImpact;
+  double carboneImpact;
   int bagsSaved;
   int excessFoodSaved;
   String image;
@@ -66,7 +66,7 @@ class UserModel {
         long: double.parse('${json['long']}'),
         documentId: json['documentId'],
         moneySaved: double.parse('${json['moneySaved'] ?? 0}'),
-        carboneImpact: json['carboneImpact'] ?? 0,
+        carboneImpact: double.parse('${json['carboneImpact'] ?? 0}'),
         bagsSaved: json['bagsSaved'] ?? 0,
         distance: json['distance'] ?? 2,
         excessFoodSaved: json['excessFoodSaved'] ?? 0,

@@ -61,7 +61,7 @@ class StoreModel {
       long: json['long'],
       totalLikes: json['totalLikes']??0,
       totalReviews: json['totalReviews']??0,
-      rating: json['rating']??0.0,
+      rating: double.parse('${json['rating']??0.0}'),
       documentId: json['documentId'] ?? "",
       profileCoverId: json['profileCoverId'] ?? "",
       profileLogoId: json['profileLogoId'] ?? "",

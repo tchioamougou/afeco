@@ -23,24 +23,27 @@ class StoreOrderPage extends GetView<StoreOrderController> {
                 style: GoogleFonts.poppins(
                     fontSize: 20, color: Colors.white),
               )),
-          body:Obx((){
-            if(controller.bags.isNotEmpty)
-             {
-               return SingleChildScrollView(
-                 child:  Padding(
-                   padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                   child: Column(
-                     children: controller.bags.map((e)=>MyOrderItem(osm: e,)).toList(),
-                   ),
-                 ),
-               );
-             }
-            else{
-              return CustomNoElement(image: 'assets/image/position.png', title: "No Order received for the moment", description: "Description", actionLabel: "Add New Food", onPress: (){
-                Get.toNamed(AppRoutes.SAVE);
-              });
-            }
-          }),
+          body:RefreshIndicator(
+            onRefresh: controller.getOrders,
+            child: Obx((){
+              if(controller.bags.isNotEmpty)
+              {
+                return SingleChildScrollView(
+                  child:  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    child: Column(
+                      children: controller.bags.map((e)=>MyOrderItem(osm: e,)).toList(),
+                    ),
+                  ),
+                );
+              }
+              else{
+                return CustomNoElement(image: 'assets/image/position.png', title: "No Order received for the moment", description: "Description", actionLabel: "Add New Food", onPress: (){
+                  Get.toNamed(AppRoutes.SAVE);
+                });
+              }
+            }),
+          ),
         ),
       );
   }

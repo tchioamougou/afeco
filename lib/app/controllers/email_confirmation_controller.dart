@@ -57,7 +57,7 @@ class EmailConfirmationController extends GetxController {
               long: 0.0,
               documentId: "",
               bagsSaved: 0,
-              carboneImpact: 0,
+              carboneImpact: 0.0,
               excessFoodSaved: 0,
               moneySaved: 0,
               distance: 2,
