@@ -1,5 +1,4 @@
 import 'package:afeco/app/data/services/user_service.dart';
-import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_profile_header.dart';
 import 'package:afeco/app/ui/global_widgets/custom_share_app.dart';
 import 'package:afeco/app/ui/pages/profile_page/custom_card_default.dart';
@@ -18,11 +17,12 @@ class ProfilePage extends GetView<ProfileController> {
     return MainLayout(
       child: Scaffold(
         body: SingleChildScrollView(
-          child:Column(
+          child: Column(
             children: [
               CustomProfileHeader(),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: Column(children: [
                   Center(
                     child: Text(
@@ -33,22 +33,44 @@ class ProfilePage extends GetView<ProfileController> {
                           fontSize: 30.sp),
                     ),
                   ),
-                  const SizedBox(height: 20,),
+                  const SizedBox(
+                    height: 20,
+                  ),
                   Row(
                     children: [
-                      CustomCardImp(title: 'moneySaved'.tr, description: 'XAF ${UserService.instance.user!.moneySaved}', imageUrl: ''),
-                      CustomCardImp(title: 'co2Saved'.tr, description: '${UserService.instance.user!.carboneImpact} IBS', imageUrl: '')
+                      CustomCardImp(
+                          title: 'moneySaved'.tr,
+                          description:
+                              Constants.oCameroon.format(UserService.instance.user!.moneySaved),
+                          icon: Icon(Icons.monetization_on, size: 50,color: Constants.buttonColor,),),
+                      CustomCardImp(
+                          title: 'co2Saved'.tr,
+                          description:
+                              '${UserService.instance.user!.carboneImpact} IBS',
+                          icon: Icon(Icons.co2, size: 50,color: Constants.buttonColor,))
                     ],
                   ),
-                  const SizedBox(height: 20,),
-                  CustomCardDefault(title: 'bagsSaved'.tr, description: '${UserService.instance.user!.bagsSaved}', imageUrl: 'imageUrl'),
-                  const SizedBox(height: 10,),
-                  CustomCardDefault(title: 'yourExcessFoodSaved'.tr, description: '${UserService.instance.user!.excessFoodSaved}', imageUrl: 'imageUrl'),
-                  const SizedBox(height: 10,),
-              CustomShareApp()
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  CustomCardDefault(
+                      title: 'bagsSaved'.tr,
+                      description: '${UserService.instance.user!.bagsSaved}',
+                      imageUrl: 'imageUrl'),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomCardDefault(
+                      title: 'yourExcessFoodSaved'.tr,
+                      description:
+                          '${UserService.instance.user!.excessFoodSaved}',
+                      imageUrl: 'imageUrl'),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  CustomShareApp()
                 ]),
               ),
-
             ],
           ),
         ),

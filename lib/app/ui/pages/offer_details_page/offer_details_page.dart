@@ -1,4 +1,5 @@
 import 'package:afeco/app/data/models/global_service.dart';
+import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_bottom_action.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/custom_select_payment_method.dart';
@@ -444,7 +445,9 @@ class OfferDetailsPage extends GetView<OfferDetailsController> {
                                           width: 1))),
                               child: ListTile(
                                 dense: true,
-                                onTap: () {},
+                                onTap: () {
+                                  Get.toNamed(AppRoutes.STORE_DETAIL,arguments: controller.bag.value!.stores);
+                                },
                                 leading: FaIcon(
                                   Icons.location_on_outlined,
                                   color: Constants.buttonColor,

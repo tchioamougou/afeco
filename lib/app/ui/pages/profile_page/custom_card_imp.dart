@@ -7,13 +7,13 @@ import 'package:get/get.dart';
 class CustomCardImp extends StatelessWidget {
   final String title;
   final String description;
-  final String imageUrl;
+  final Icon icon;
 
   const CustomCardImp({
     super.key,
     required this.title,
     required this.description,
-    required this.imageUrl,
+    required this.icon,
   });
 
   @override
@@ -54,7 +54,7 @@ class CustomCardImp extends StatelessWidget {
                             height: 10.h,
                           ),
                           Center(
-                           child: Icon(Icons.access_time_rounded, size: 50,color: Constants.buttonColor,),
+                           child:icon
                           ),
                           SizedBox(
                             height: 10.h,
@@ -64,8 +64,8 @@ class CustomCardImp extends StatelessWidget {
                               description,
                               style: TextStyle(
                                   fontWeight: FontWeight.w900,
-                                  color: Constants.defaultHeaderColor,
-                                  fontSize: 25.sp),
+                                  color: Colors.black87,
+                                  fontSize: 18.sp),
                             ),
                           ),
                         ],

@@ -1,21 +1,22 @@
 import 'package:afeco/app/data/models/global_service.dart';
 import 'package:afeco/app/ui/layouts/main/main_layout.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomShareApp extends StatelessWidget{
+  const CustomShareApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: 30,
       child: Container(
-        width: MediaQuery.sizeOf(context).width * 0.97,
+        width: MediaQuery.sizeOf(context).width * 0.91,
         padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10.0),
-          color: Constants.buttonColor,
+          color:Colors.deepOrange,
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,6 +54,9 @@ class CustomShareApp extends StatelessWidget{
                           height: 10.h,
                         ),
                         ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Constants.defaultBorderColor
+                          ),
                             onPressed: () async {
                               bool shared =
                               await GlobalService.inviteFriend();
@@ -61,25 +65,7 @@ class CustomShareApp extends StatelessWidget{
                                     'togetherAgainst'.tr);
                               }
                             },
-                            child: Text('inviteFriends'.tr)),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 5, vertical: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Center(
-                          child: Image.asset(
-                            'assets/image/save_food.png',
-                            height: 120,
-                            width: 120,
-                          ),
-                        ),
+                            child: Text('inviteFriends'.tr, style: TextStyle(color:  Colors.white,))),
                       ],
                     ),
                   ),

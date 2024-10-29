@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:afeco/app/data/models/user_model.dart';
 import 'package:afeco/app/data/services/filter_service.dart';
 import 'package:afeco/app/data/services/language_service.dart';
 import 'package:afeco/app/data/services/session_service.dart';
@@ -23,7 +24,8 @@ final realTime = Realtime(client);
 Functions functions = Functions(client);
 final subscription =  realTime.subscribe([
   "databases.6708112a0007abf9bef1.collections.${AppWriteCollection.bagsCollections}.documents",
-  "databases.6708112a0007abf9bef1.collections.${AppWriteCollection.bagOrderCollections}.documents"
+  "databases.6708112a0007abf9bef1.collections.${AppWriteCollection.bagOrderCollections}.documents",
+  "databases.6708112a0007abf9bef1.collections.${AppWriteCollection.userCollections}.documents"
 ]);
 
 class SaveFoodAppWriteController extends GetxController {
@@ -32,6 +34,13 @@ class SaveFoodAppWriteController extends GetxController {
   @override
   void onInit() {
     super.onInit();
+    if(UserService.instance.user!=null){
+      subscription.stream.listen((response) {
+        if(response.channels.contains("databases.6708112a0007abf9bef1.collections.${AppWriteCollection.userCollections}.documents.${UserService.instance.user!.documentId}")){
+          UserService.instance.user = UserModel.fromJson(response.payload);
+        }
+      });
+    }
   }
 
   Future<void> createEmail(email) async {

@@ -150,7 +150,7 @@ class _HeaderCustomState extends State<HeaderCustom> {
                   ),
                 ],
               ),
-              Container(
+              SizedBox(
                 width: 200.w,
                 child: Text(
                   'letSaveFoodToday'.tr,
@@ -181,7 +181,7 @@ class _HeaderCustomState extends State<HeaderCustom> {
                         padding: const EdgeInsets.symmetric(
                             horizontal: 13, vertical: 13)),
                   ),
-                  Positioned(
+                 /* Positioned(
                       top: 4,
                       right: 10,
                       child: Container(
@@ -197,7 +197,7 @@ class _HeaderCustomState extends State<HeaderCustom> {
                               color: Colors.red,
                               fontWeight: FontWeight.bold),
                         ),
-                      ))
+                      ))*/
                 ],
               )
             ],

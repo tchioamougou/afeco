@@ -6,22 +6,23 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class CustomProfileHeader extends StatefulWidget {
-  CustomProfileHeader({super.key});
+  const CustomProfileHeader({super.key});
 
   @override
   State<CustomProfileHeader> createState() => _HeaderCustomState();
 }
 
 class _HeaderCustomState extends State<CustomProfileHeader> {
+  String image = UserService.instance.user!.image;
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 25),
       decoration: BoxDecoration(
           color: Constants.defaultHeaderColor,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               bottomLeft: Radius.circular(20),
-              bottomRight: Radius.circular(20))),
+              bottomRight:  Radius.circular(20))),
       child: Row(
         children: [
           InkWell(
@@ -43,7 +44,7 @@ class _HeaderCustomState extends State<CustomProfileHeader> {
                             ))
                       ],
                     ),
-                    content: Container(
+                    content: SizedBox(
                       width: double.maxFinite,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -65,13 +66,13 @@ class _HeaderCustomState extends State<CustomProfileHeader> {
                               ),
                             ),
                             onTap: () {
-                              //widget.image = 'assets/image/avatars/happy.png';
+                              image = 'assets/image/avatars/happy.png';
                               setState(() {});
                             },
                           ),
                           InkWell(
                             onTap: () {
-                              //  widget.image = 'assets/image/avatars/happy-face.png';
+                              image = 'assets/image/avatars/happy-face.png';
                               setState(() {});
                             },
                             child: Container(
@@ -92,7 +93,7 @@ class _HeaderCustomState extends State<CustomProfileHeader> {
                           ),
                           InkWell(
                             onTap: () {
-                              // widget.image = 'assets/image/avatars/smile.png';
+                            image = 'assets/image/avatars/smile.png';
                               setState(() {});
                             },
                             child: Container(
@@ -126,7 +127,7 @@ class _HeaderCustomState extends State<CustomProfileHeader> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(300),
                 child: Image.asset(
-                  Constants.defaultImage,
+                  image,
                 ),
               ),
             ),
@@ -143,7 +144,7 @@ class _HeaderCustomState extends State<CustomProfileHeader> {
                   children: [
                     Text(
                       'Hi!,${UserService.instance.user!.name}'.tr,
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'poppins-light',
@@ -151,7 +152,7 @@ class _HeaderCustomState extends State<CustomProfileHeader> {
                     ),
                   ],
                 ),
-                Container(
+                SizedBox(
                   width: 200.w,
                   child: Text(
                     'letSaveFoodToday'.tr,
@@ -175,7 +176,7 @@ class _HeaderCustomState extends State<CustomProfileHeader> {
                       onPressed: () {
                         Get.toNamed(AppRoutes.ACCOUNT_DETAILS);
                       },
-                      icon: Icon(Icons.settings,color: Colors.white,),
+                      icon: const Icon(Icons.settings,color: Colors.white,),
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Constants.defaultBorderColor,
                           shape: RoundedRectangleBorder(

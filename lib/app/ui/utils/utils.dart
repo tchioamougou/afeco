@@ -140,5 +140,19 @@ class Utils {
       "maxLong": center.longitude + deltaLon, // Longitude maximale
     };
   }
+  static String calculateSince(DateTime date) {
+    final now = DateTime.now();
+    final difference = now.difference(date);
+  print(difference.inDays);
+    if (difference.inDays < 7) {
+      return '1 week';
+    } else if (difference.inDays < 30) {
+      return '${difference.inDays ~/ 7}+ weeks';
+    } else if (difference.inDays < 365) {
+      return '${difference.inDays ~/ 30}+ months';
+    } else {
+      return '${difference.inDays ~/ 365}+ years';
+    }
+  }
 
 }

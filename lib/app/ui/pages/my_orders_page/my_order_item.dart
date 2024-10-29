@@ -70,8 +70,8 @@ class _MyOrderItemState extends State<MyOrderItem> {
         Get.toNamed(AppRoutes.OFFER_DETAILS, arguments: osmL.bags);
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 0),
+        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 0),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: Constants.defaultHeaderColor, width: 1)),
@@ -100,7 +100,7 @@ class _MyOrderItemState extends State<MyOrderItem> {
                     ],
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Column(
@@ -112,11 +112,11 @@ class _MyOrderItemState extends State<MyOrderItem> {
                             color: Constants.defaultHeaderColor,
                             fontWeight: FontWeight.w900,
                             fontSize: 18)),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Text(widget.osm.bags.stores.businessName),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Row(
@@ -127,11 +127,11 @@ class _MyOrderItemState extends State<MyOrderItem> {
                               color: Constants.defaultHeaderColor,
                               fontWeight: FontWeight.w900),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 10,
                         ),
                         Text('x ${widget.osm.quantity}'),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Text(
@@ -153,13 +153,13 @@ class _MyOrderItemState extends State<MyOrderItem> {
                   size: 20,
                   color: Constants.buttonColor,
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 Text(
                   '${"pickUp".tr}: ${times['time']}',
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 5,
                 ),
                 Tag(
@@ -169,7 +169,7 @@ class _MyOrderItemState extends State<MyOrderItem> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             if (isStore)
@@ -192,11 +192,11 @@ class _MyOrderItemState extends State<MyOrderItem> {
                             color: Constants.defaultHeaderColor),
                         content: Column(
                           children: [
-                            Text(
+                            const Text(
                               "When the store scan This QRCODE That means to recieved the package",
                               textAlign: TextAlign.center,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 10,
                             ),
                             Container(

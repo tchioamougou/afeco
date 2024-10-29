@@ -42,4 +42,5 @@ class AppRoutes {
   static const NOTIFICATION_SETTINGS = '/notification-settings';
   static const HOW_IT_WORKS_SETTINGS = '/how-it-works-settings';
   static const HOW_IT_WORKS_SHOW_SETTINGS ='/how-it-works-show-settings';
+  static const STORE_DETAIL = '/store-detail';
 }

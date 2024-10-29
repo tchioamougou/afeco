@@ -104,7 +104,7 @@ const Map<String, String> en = {
       "Avoid waste, find new recipes and support solidarity projects. Our app accompanies you on a daily basis for more responsible consumption.",
   "yourImpact": "Your Impact",
   "moneySaved": "Money saved",
-  "co2Saved": "CO2E saved",
+  "co2Saved": "Planet action",
   "bagsSaved": "Bags Saved",
   "yourExcessFoodSaved": "Your Excess food saved",
   "actionsHistory": "Actions History",
@@ -274,6 +274,18 @@ const Map<String, String> en = {
   "noAvailable": "No Available Bag in your area",
   "noOrder": "You Have no reservation",
   "continueShop":"Continue Shop",
-  "tryAgain":"Try again"
+  "tryAgain":"Try again",
+  "findAgain":"Find Again",
+  "clearSearch":"Clear search",
+  "yourFavorite":"Your Favorite",
+  "today":"Today",
+  "tomorrow":"Tomorrow",
+  "yesterday":'Yesterday',
+  "howToGetHere":"how to get there",
+  "bagFromStore":"Bag from this store",
+  "othersInfo":"Others info",
+  "ofFighting":"Of fighting against waste",
+  "bagSaved":"bag Saved",
+  "year":"year",
 
 };

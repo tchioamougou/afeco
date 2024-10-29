@@ -3,11 +3,13 @@ import 'package:afeco/app/data/models/store_model.dart';
 import 'package:afeco/app/data/services/session_service.dart';
 import 'package:afeco/app/data/services/store_service.dart';
 import 'package:afeco/app/data/services/user_service.dart';
+import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:afeco/app/ui/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
 class CustomStoreView extends StatefulWidget {
@@ -36,6 +38,7 @@ class _CustomStoreViewState extends State<CustomStoreView> {
     String distance = Utils.distanceToText(point1, point2);
     return InkWell(
       onTap: () {
+        Get.toNamed(AppRoutes.STORE_DETAIL, arguments: widget.store);
       },
       child: Card(
         elevation: 5,

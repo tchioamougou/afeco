@@ -1,4 +1,6 @@
-import 'package:afeco/app/ui/pages/account_details_page/how_it_works.dart';
+import '../bindings/store_detail_binding.dart';
+import '../ui/pages/store_detail_page/store_detail_page.dart';
+      import 'package:afeco/app/ui/pages/account_details_page/how_it_works.dart';
 import 'package:afeco/app/ui/pages/account_details_page/how_it_works_show.dart';
 
 import '../bindings/notification_settings_binding.dart';
@@ -334,5 +336,11 @@ class AppPages {
       binding: AccountDetailsBinding(),
       transition: _defaultTransition,
     ),
-  ];
+    GetPage(
+      name: AppRoutes.STORE_DETAIL,
+      page: () => const StoreDetailPage(),
+      binding: StoreDetailBinding(),
+      transition: _defaultTransition,
+    ), 
+];
 }

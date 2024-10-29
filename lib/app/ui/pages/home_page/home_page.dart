@@ -177,35 +177,33 @@ class _HomePageState extends State<HomePage> {
                                 height: 20,
                               ),
                               if (controller.isSearching.value)
-                                Container(
-                                  child: Column(
-                                    children: [
-                                      if (controller.isSearchError.value)
+                                Column(
+                                  children: [
+                                    if (controller.isSearchError.value)
+                                      CustomAlert(
+                                          image: 'assets/image/angry.png',
+                                          title: 'errorOccur'.tr,
+                                          actionLabel: 'findAgain'.tr,
+                                          onPress: () {
+                                            controller.getSearchBags();
+                                          })
+                                    else if (!controller.isLoading.value)
+                                      if (controller.searchBags.isEmpty)
                                         CustomAlert(
                                             image: 'assets/image/angry.png',
-                                            title: 'errorOccur'.tr,
-                                            actionLabel: 'Find Again',
+                                            title: 'noStore'.tr,
+                                            actionLabel: 'clearSearch'.tr,
                                             onPress: () {
-                                              controller.getSearchBags();
+                                              controller.searchController.text = '';
+                                              controller.isSearching.value = false;
                                             })
-                                      else if (!controller.isLoading.value)
-                                        if (controller.searchBags.isEmpty)
-                                          CustomAlert(
-                                              image: 'assets/image/angry.png',
-                                              title: 'noStore'.tr,
-                                              actionLabel: 'Clear search',
-                                              onPress: () {
-                                                controller.searchController.text = '';
-                                                controller.isSearching.value = false;
-                                              })
-                                        else
-                                          ...controller.searchBags
-                                              .map((f) => CustomCardItem(
-                                            bg: f,
-                                            width: 0.97,
-                                          ))
-                                    ],
-                                  ),
+                                      else
+                                        ...controller.searchBags
+                                            .map((f) => CustomCardItem(
+                                          bg: f,
+                                          width: 0.97,
+                                        ))
+                                  ],
                                 )
                               else
                                 Container(
@@ -455,9 +453,9 @@ class _HomePageState extends State<HomePage> {
                                                 mainAxisAlignment:
                                                 MainAxisAlignment.spaceBetween,
                                                 children: [
-                                                  Label(title: 'Your Favorite'.tr),
+                                                  Label(title: 'yourFavorite'.tr),
                                                   SeeAll(onPress: () {
-                                                    controller.viewAllFavorite('Your Favorite'.tr,
+                                                    controller.viewAllFavorite('yourFavorite'.tr,
                                                         controller.likedStores);
                                                   })
                                                 ],

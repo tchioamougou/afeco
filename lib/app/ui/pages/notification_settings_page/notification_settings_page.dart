@@ -4,12 +4,14 @@ import 'package:afeco/app/data/services/user_service.dart';
 import 'package:afeco/app/ui/global_widgets/custom_app_bar.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class NotificationSettingsPage extends StatefulWidget {
+  const NotificationSettingsPage({super.key});
+
   @override
   _NotificationSettingsPageState createState() =>
       _NotificationSettingsPageState();
@@ -58,7 +60,21 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
       EasyLoading.dismiss();
     }
   }
-
+  Future<bool> requestCalendarPermission() async {
+    var status = await Permission.calendarFullAccess.status;
+    if (status.isDenied) {
+      final result = await Permission.calendarFullAccess.request();
+      if (result.isGranted) {
+        return true;
+      } else {
+        return false;
+      }
+    } else if (status.isPermanentlyDenied) {
+      openAppSettings();
+      return false;
+    }
+    return true;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,9 +104,13 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                 title: 'calenderReminder'.tr,
                 subtitle: 'calendarReminderText'.tr,
                 value: _isCalendarRemindersEnabled,
-                onChanged: (value) {
-                  setState(() {
+                onChanged: (value) async{
+                  if(value){
+                    _isCalendarRemindersEnabled = await requestCalendarPermission();
+                  }else{
                     _isCalendarRemindersEnabled = value;
+                  }
+                  setState(() {
                     haveChange();
                   });
                 },
@@ -132,7 +152,6 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
                 subtitle: Text("dailyReminderText".tr),
-                dense: true,
               ),
               Padding(
                 padding:
@@ -195,7 +214,6 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
     Widget? trailing,
   }) {
     return ListTile(
-      dense: true,
       title: Text(
         title,
         style: const TextStyle(fontWeight: FontWeight.bold),
@@ -222,7 +240,6 @@ class _NotificationSettingsPageState extends State<NotificationSettingsPage> {
     required ValueChanged<bool?> onChanged,
   }) {
     return ListTile(
-      dense: true,
       title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
       subtitle: Text(subtitle),
       trailing: Row(

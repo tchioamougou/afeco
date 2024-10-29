@@ -33,8 +33,8 @@ class StoreInpactPage extends GetView<ProfileController> {
               const SizedBox(height: 20,),
                Row(
                 children: [
-                  CustomCardImp(title: 'moneySaved'.tr, description: 'XAF 2000', imageUrl: ''),
-                  CustomCardImp(title: 'co2Saved'.tr, description: '20 IBS', imageUrl: '')
+                  CustomCardImp(title: 'moneySaved'.tr, description: 'XAF 2000',icon: Icon(Icons.monetization_on, size: 50,color: Constants.buttonColor,),),
+                  CustomCardImp(title: 'co2Saved'.tr, description: '20 IBS', icon: Icon(Icons.monetization_on, size: 50,color: Constants.buttonColor,))
                 ],
               ),
               const SizedBox(height: 20,),

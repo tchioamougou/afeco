@@ -1,7 +1,12 @@
 import 'package:afeco/app/controllers/user_account_details_controller.dart';
 import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_app_bar.dart';
+import 'package:afeco/app/ui/global_widgets/inputs/custom_input_country.dart';
+import 'package:afeco/app/ui/global_widgets/inputs/custom_phone_number.dart';
+import 'package:afeco/app/ui/utils/constants.dart';
+import 'package:country_code_picker_plus/country_code_picker_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../layouts/main/main_layout.dart';
 
@@ -74,10 +79,10 @@ class UserAccountDetailsPage extends GetView<UserAccountDetailsController> {
                   title: Text("Gender".tr),
                   subtitle: Text(controller.us.email),
                 ),*/
-
                 const SizedBox(
                   height: 20,
                 ),
+
                 ListTile(
                   onTap: () {
                     Get.toNamed(AppRoutes.DELETE_ACCOUNT);
