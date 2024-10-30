@@ -115,4 +115,12 @@ class GlobalService extends GetxService {
         text: "shareToSaveMessage".tr,
       );
   }
+  /// this function is used to update user information
+  static Future<void> updateUser(Map<String, String> data) async {
+
+    Document dc = await _appWriteController.updateDocument(
+        AppWriteCollection.userCollections,
+        UserService.instance.user!.documentId, data);
+    UserService.instance.user = UserModel.fromJson(dc.data);
+  }
 }

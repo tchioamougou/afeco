@@ -6,6 +6,7 @@ import 'package:afeco/app/ui/global_widgets/custom_date_pick.dart';
 import 'package:afeco/app/ui/global_widgets/custom_input.dart';
 import 'package:afeco/app/ui/global_widgets/custom_select_item.dart';
 import 'package:afeco/app/ui/global_widgets/custom_time.dart';
+import 'package:afeco/app/ui/global_widgets/inputs/custom_phone_number.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
 import 'package:afeco/app/ui/pages/save_food_form_page/product_item.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
@@ -100,12 +101,13 @@ class SaveFoodFormPage extends GetView<SaveFoodFormController> {
                   label: "packageName".tr,
                   onValueChanged: (val) {},
                   hintText: 'name'.tr),
-              CustomInput(
+              CustomPhoneNumber(
                 isRequired: true,
-                controller: controller.phoneController,
                 label: "phoneNumber".tr,
                 onValueChanged: (val) {},
-                hintText: 'phoneNumber'.tr,
+                controller: controller.phoneController,
+                onCountryChange: (va){},
+                hintText: '650 12 20 18'.tr,
                 helper: 'saveFoodPhoneDescription'.tr,
               ),
               CustomAddressPick(

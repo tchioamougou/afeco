@@ -2,6 +2,7 @@ import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/custom_checkbox.dart';
 import 'package:afeco/app/ui/global_widgets/custom_input.dart';
 import 'package:afeco/app/ui/global_widgets/custom_select_item.dart';
+import 'package:afeco/app/ui/global_widgets/inputs/custom_input_country.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -41,10 +42,10 @@ class SignLogPage extends GetView<SignLogController> {
         backgroundColor: Colors.white,
         body: Obx(() => SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: Column(
                   children: [
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     CustomInput(
@@ -53,21 +54,16 @@ class SignLogPage extends GetView<SignLogController> {
                       hintText: 'email',
                       onValueChanged: (String value) {},
                     ),
-                    CustomSelectItem(
-                      label: 'country'.tr,
-                      options: controller.countries,
-                      onChanged: (val) {
-                        controller.country.value = val;
-                      },
-                      defaultValue: controller.country.value,
-                    ),
+                    CustomInputCountry(label: 'country'.tr, isRequired: false, onValueChanged: (val){
+                      controller.country.value = val.code;
+                    }),
                     CustomCheckbox(
                         label:
                             'allowEmailMessage'.tr,
                         onChanged: (val) {
                           controller.allow.value = val;
                         }),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     CustomButton(

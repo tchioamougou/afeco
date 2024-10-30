@@ -3,7 +3,9 @@ import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/custom_checkbox.dart';
 import 'package:afeco/app/ui/global_widgets/custom_input.dart';
 import 'package:afeco/app/ui/global_widgets/custom_select_item.dart';
+import 'package:afeco/app/ui/global_widgets/inputs/custom_input_country.dart';
 import 'package:afeco/app/ui/global_widgets/inputs/custom_input_password.dart';
+import 'package:afeco/app/ui/global_widgets/inputs/custom_phone_number.dart';
 import 'package:afeco/app/ui/global_widgets/label.dart';
 import 'package:afeco/app/ui/global_widgets/position_display.dart';
 import 'package:afeco/app/ui/global_widgets/tag.dart';
@@ -116,20 +118,12 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                                   ),
                                 ],
                               ),
-                              CustomSelectItem(
-                                  label: 'country'.tr,
-                                  options: controller.countries.value,
-                                  defaultValue: controller.country.value,
-                                  onChanged: (val) {
-                                    controller.country.value = val;
-                                  }),
+                              CustomInputCountry(label: 'country'.tr,isRequired: false, onValueChanged: (val){
+                                controller.country.value = val.code;
+                              }),
                               Label(title: 'contactInformation'.tr),
-                              CustomInput(
-                                  controller: controller.phoneController.value,
-                                  label: 'phoneNumber'.tr,
-                                  onValueChanged: (val) {},
-                                  keyboardType: TextInputType.number,
-                                  hintText: ''),
+                              CustomPhoneNumber(label: 'phoneNumber'.tr, isRequired: false, onValueChanged: (val){}, controller: controller.phoneController.value, onCountryChange: (val){
+                              }),
                               CustomButton(
                                   onPressed: () {
                                     if (controller

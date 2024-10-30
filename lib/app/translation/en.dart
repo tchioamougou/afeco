@@ -287,5 +287,7 @@ const Map<String, String> en = {
   "ofFighting":"Of fighting against waste",
   "bagSaved":"bag Saved",
   "year":"year",
+  "changeName":"Change Name",
+"changePhone":"Change Phone"
 
 };

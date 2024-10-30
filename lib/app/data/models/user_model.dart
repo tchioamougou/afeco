@@ -25,6 +25,7 @@ class UserModel {
   bool isPushNotification;
   bool isAnnouncementsEnabled;
   List<int> reminderDays;
+  String? phoneNumber;
 
   UserModel({
     required this.userId,
@@ -51,6 +52,7 @@ class UserModel {
     this.isPushNotification = false,
     this.isAnnouncementsEnabled = false,
     this.reminderDays = const [],
+    this.phoneNumber
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -79,6 +81,7 @@ class UserModel {
         isImportantUpdatesEnabled: json['isImportantUpdatesEnabled'] ?? false,
         isPushNotification: json['isPushNotification'] ?? false,
         isAnnouncementsEnabled: json['isAnnouncementsEnabled'] ?? false,
+      phoneNumber:json['phoneNumber']
       );
 
   Map<String, dynamic> toJson() => {
@@ -106,5 +109,6 @@ class UserModel {
         "isPushNotification": isPushNotification,
         "isAnnouncementsEnabled": isAnnouncementsEnabled,
         "reminderDays": reminderDays,
+    'phoneNumber':phoneNumber
       };
 }
