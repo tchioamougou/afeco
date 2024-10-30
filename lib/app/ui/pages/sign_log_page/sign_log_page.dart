@@ -1,7 +1,6 @@
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/custom_checkbox.dart';
 import 'package:afeco/app/ui/global_widgets/custom_input.dart';
-import 'package:afeco/app/ui/global_widgets/custom_select_item.dart';
 import 'package:afeco/app/ui/global_widgets/inputs/custom_input_country.dart';
 import 'package:afeco/app/ui/utils/constants.dart';
 import 'package:flutter/material.dart';
@@ -43,42 +42,52 @@ class SignLogPage extends GetView<SignLogController> {
         body: Obx(() => SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    CustomInput(
-                      controller: controller.emailController.value,
-                      label: 'email'.tr,
-                      hintText: 'email',
-                      onValueChanged: (String value) {},
-                    ),
-                    CustomInputCountry(label: 'country'.tr, isRequired: false, onValueChanged: (val){
-                      controller.country.value = val.code;
-                    }),
-                    CustomCheckbox(
-                        label:
-                            'allowEmailMessage'.tr,
-                        onChanged: (val) {
-                          controller.allow.value = val;
-                        }),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    CustomButton(
-                        onPressed: () {
-                          controller.signLog();
-                          //Get.toNamed(AppRoutes.EMAIL_CONFIRMATION);
-                        },
-                        text: 'continue'.tr,
-                        disable: !controller.allow.value,
-                        backgroundColor: Constants.buttonColor)
-                  ],
+                child: Form(
+                  key: controller.formKey,
+                  autovalidateMode: AutovalidateMode.always,
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      CustomInput(
+                        controller: controller.emailController.value,
+                        label: 'email'.tr,
+                        hintText: 'email',
+                        isRequired: true,
+                        isEmail: true,
+                        keyboardType: TextInputType.emailAddress,
+                        onValueChanged: (String value) {},
+                      ),
+                      CustomInputCountry(label: 'country'.tr, isRequired: false,
+                          initValue: controller.country.value,
+                          onValueChanged: (val){
+                        controller.country.value = val.code;
+                      }),
+                      CustomCheckbox(
+                          label:
+                          'allowEmailMessage'.tr,
+                          onChanged: (val) {
+                            controller.allow.value = val;
+                          }),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      CustomButton(
+                          onPressed: () {
+                            controller.signLog();
+                            //Get.toNamed(AppRoutes.EMAIL_CONFIRMATION);
+                          },
+                          text: 'continue'.tr,
+                          disable: !controller.allow.value,
+                          backgroundColor: Constants.buttonColor)
+                    ],
+                  ),
                 ),
               ),
             )),
       ),
     );
   }
+
 }

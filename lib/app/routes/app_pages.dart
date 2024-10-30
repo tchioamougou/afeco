@@ -1,4 +1,6 @@
-import '../bindings/store_detail_binding.dart';
+import '../bindings/store_forgot_password_binding.dart';
+import '../ui/pages/store_forgot_password_page/store_forgot_password_page.dart';
+      import '../bindings/store_detail_binding.dart';
 import '../ui/pages/store_detail_page/store_detail_page.dart';
       import 'package:afeco/app/ui/pages/account_details_page/how_it_works.dart';
 import 'package:afeco/app/ui/pages/account_details_page/how_it_works_show.dart';
@@ -340,6 +342,12 @@ class AppPages {
       name: AppRoutes.STORE_DETAIL,
       page: () => const StoreDetailPage(),
       binding: StoreDetailBinding(),
+      transition: _defaultTransition,
+    ),
+    GetPage(
+      name: AppRoutes.STORE_FORGOT_PASSWORD,
+      page: () => const StoreForgotPasswordPage(),
+      binding: StoreForgotPasswordBinding(),
       transition: _defaultTransition,
     ), 
 ];

@@ -6,7 +6,8 @@ class CustomInputCountry extends StatelessWidget {
   final String label;
   final bool isRequired;
   final ValueChanged<Country> onValueChanged;
-  const CustomInputCountry({super.key, required this.label, required this.isRequired, required this.onValueChanged});
+  final String? initValue;
+  const CustomInputCountry({super.key, required this.label, required this.isRequired, required this.onValueChanged, this.initValue});
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +33,14 @@ class CustomInputCountry extends StatelessWidget {
           decoration: BoxDecoration(
             border: Border.all(color: Colors.grey),
             borderRadius: BorderRadius.circular(8),
-            color: Colors.grey.withOpacity(0.1),
+            color: Colors.white.withOpacity(0.1),
           ),
           child: CountryCodePicker(
             mode: CountryCodePickerMode.bottomSheet,
             onChanged: (country) {
               onValueChanged(country);
             },
-            initialSelection: 'CM',
+            initialSelection: initValue,
             showFlag: true,
             showDropDownButton: false,
             showCountryOnly: true,

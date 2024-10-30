@@ -1,4 +1,5 @@
 import 'package:afeco/app/controllers/store_login_controller.dart';
+import 'package:afeco/app/routes/app_routes.dart';
 import 'package:afeco/app/ui/global_widgets/custom_buttom.dart';
 import 'package:afeco/app/ui/global_widgets/custom_input.dart';
 import 'package:afeco/app/ui/global_widgets/inputs/custom_input_password.dart';
@@ -40,51 +41,59 @@ class StoreLoginPage extends GetView<StoreLoginController> {
         body: Obx(() => SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                child: Column(
-                  children: [
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    CustomInput(
-                      controller: controller.emailController.value,
-                      label: 'email'.tr,
-                      hintText: 'email'.tr,
-                      onValueChanged: (String value) {},
-                    ),
-                    CustomInputPassword(
-                      controller: controller.passController.value,
-                      label: 'Password'.tr,
-                      hintText: '*******',
-                      onValueChanged: (String value) {},
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    InkWell(
-                        onTap: () {
-                          //  Get.back();
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              'youForgotPassword'.tr,
-                              style: TextStyle(
-                                  color: Constants.defaultHeaderColor,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.normal),
-                            )
-                          ],
-                        )),
-                    const SizedBox(
-                      height: 40,
-                    ),
-                    CustomButton(
-                        onPressed: () {
-                          controller.login();
-                        },
-                        text: 'Login'.tr,
-                        backgroundColor: Constants.buttonColor)
-                  ],
+                child: Form(
+                  key: controller.formKey,
+                  autovalidateMode: AutovalidateMode.always,
+                  child: Column(
+                    children: [
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      CustomInput(
+                        controller: controller.emailController.value,
+                        label: 'email'.tr,
+                        hintText: 'email'.tr,
+                        isEmail: true,
+                        isRequired: true,
+                        keyboardType: TextInputType.emailAddress,
+                        onValueChanged: (String value) {},
+                      ),
+                      CustomInputPassword(
+                        controller: controller.passController.value,
+                        label: 'Password'.tr,
+                        hintText: '*******',
+                        isRequired: true,
+                        onValueChanged: (String value) {},
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      InkWell(
+                          onTap: () {
+                            Get.toNamed(AppRoutes.STORE_FORGOT_PASSWORD);
+                          },
+                          child: Row(
+                            children: [
+                              Text(
+                                'youForgotPassword'.tr,
+                                style: TextStyle(
+                                    color: Constants.defaultHeaderColor,
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.normal),
+                              )
+                            ],
+                          )),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      CustomButton(
+                          onPressed: () {
+                            controller.login();
+                          },
+                          text: 'Login'.tr,
+                          backgroundColor: Constants.buttonColor)
+                    ],
+                  ),
                 ),
               ),
             )),

@@ -28,11 +28,11 @@ class CreateAccountController extends GetxController {
   Rx<TextEditingController> streetController = TextEditingController().obs;
   RxString typeOfBusiness = ''.obs;
   RxString country = "CM".obs;
+  RxString countryCode ='+237'.obs;
   RxBool allow = false.obs;
   RxInt index = 0.obs;
   PlaceModel address = PlaceModel();
   RxList<String> raisonJoinedSaveFoods = <String>[].obs;
-  RxList<Option> countries = <Option>[].obs;
   RxList<Option> raisonJoinedSaveFoodOptions = <Option>[].obs;
   Future<List<Option>> readJsonData(String path) async {
     final String jsonString = await rootBundle.loadString(path);
@@ -43,7 +43,6 @@ class CreateAccountController extends GetxController {
   @override
   void onInit() async {
     typeBusiness.value = await readJsonData("assets/data/type_business.json");
-    countries.value = await readJsonData('assets/data/country.json');
     raisonJoinedSaveFoodOptions.value =
         await readJsonData('assets/data/reason.json');
     super.onInit();
@@ -67,7 +66,7 @@ class CreateAccountController extends GetxController {
             postalCode: postalCodeController.value.text,
             city: cityController.value.text,
             country: country.value,
-            phoneNumber: phoneController.value.text,
+            phoneNumber:'${countryCode.value} ${phoneController.value.text}' ,
             email: emailController.value.text,
             allow: allow.value,
             createdDate: DateTime.now(),

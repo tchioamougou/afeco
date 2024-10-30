@@ -43,4 +43,5 @@ class AppRoutes {
   static const HOW_IT_WORKS_SETTINGS = '/how-it-works-settings';
   static const HOW_IT_WORKS_SHOW_SETTINGS ='/how-it-works-show-settings';
   static const STORE_DETAIL = '/store-detail';
+  static const STORE_FORGOT_PASSWORD = '/store-forgot-password';
 }

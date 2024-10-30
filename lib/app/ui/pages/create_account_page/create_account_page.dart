@@ -52,13 +52,15 @@ class CreateAccountPage extends GetView<CreateAccountController> {
           children: [
             Obx(() => SingleChildScrollView(
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 10, horizontal: 10),
                     child: Column(
                       children: [
                         if (controller.index.value == 0)
                           Column(
                             children: [
                               Label(title: 'registerStoreInformationStore'.tr),
+                              const SizedBox(height: 10,),
                               CustomInput(
                                   controller:
                                       controller.businessController.value,
@@ -73,6 +75,7 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                                     controller.typeOfBusiness.value = val;
                                   }),
                               Label(title: 'businessAddress'.tr),
+                              const SizedBox(height: 10,),
                               CustomAddressPick(
                                   label: 'address'.tr,
                                   defaultValue: controller.address,
@@ -118,12 +121,23 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                                   ),
                                 ],
                               ),
-                              CustomInputCountry(label: 'country'.tr,isRequired: false, onValueChanged: (val){
-                                controller.country.value = val.code;
-                              }),
+                              CustomInputCountry(
+                                  label: 'country'.tr,
+                                  isRequired: false,
+                                  initValue: controller.country.value,
+                                  onValueChanged: (val) {
+                                    controller.country.value = val.code;
+                                  }),
                               Label(title: 'contactInformation'.tr),
-                              CustomPhoneNumber(label: 'phoneNumber'.tr, isRequired: false, onValueChanged: (val){}, controller: controller.phoneController.value, onCountryChange: (val){
-                              }),
+                              const SizedBox(height: 10,),
+                              CustomPhoneNumber(
+                                  label: 'phoneNumber'.tr,
+                                  isRequired: false,
+                                  onValueChanged: (val) {},
+                                  controller: controller.phoneController.value,
+                                  onCountryChange: (val) {
+                                        controller.countryCode.value=val.dialCode;
+                                  }),
                               CustomButton(
                                   onPressed: () {
                                     if (controller
@@ -175,10 +189,9 @@ class CreateAccountPage extends GetView<CreateAccountController> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Expanded(
-
                                             child: Text(
-                                              controller
-                                                  .businessController.value.text,
+                                              controller.businessController
+                                                  .value.text,
                                               style: GoogleFonts.poppins(
                                                   fontWeight: FontWeight.bold,
                                                   fontSize: 15,
